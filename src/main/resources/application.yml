@@ -1,0 +1,33 @@
+server:
+  port: 8089
+  max-http-header-size: 52428800
+#  ssl:
+#    key-store: 3985137.pfx
+#    key-store-password: 9787MqgC
+#    keyStoreType: PKCS12
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.cloud.api.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+spring:
+  datasource:
+    url: jdbc:mysql://47.95.221.79:3306/ocr?serverTimezone=GMT&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: naonao123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  redis:
+    host: 47.95.221.79
+    port: 6379
+
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          client-id: gold
+          client-secret: 123456
