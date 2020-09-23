@@ -1,6 +1,8 @@
 server:
   port: 8089
   max-http-header-size: 52428800
+  servlet:
+    context-path: /justyou
 #  ssl:
 #    key-store: 3985137.pfx
 #    key-store-password: 9787MqgC

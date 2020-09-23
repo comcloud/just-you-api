@@ -1,5 +1,9 @@
 package com.cloud.api.bean.dto;
 
+/**
+ * @author HP
+ */
+
 public enum EventType {
     /**
      * 点赞
