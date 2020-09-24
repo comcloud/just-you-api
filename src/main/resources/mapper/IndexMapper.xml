@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.IndexMapper">
+
+    <select id="selectAdmin" resultType="java.lang.Boolean">
+        select count(*) from admin where admin_email = #{email} and admin_password = #{password}
+    </select>
+</mapper>

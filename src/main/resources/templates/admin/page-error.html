@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="icon" type="image/x-icon" th:href="@{/images/icon.svg}"/>
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
@@ -135,7 +136,7 @@
     <main class="app-content">
       <div class="page-error tile">
         <h1><i class="fa fa-exclamation-circle"></i> Error 404: Page not found</h1>
-        <p>The page you have requested is not found.</p>
+        <p th:text="${message}"></p>
         <p><a class="btn btn-primary" href="javascript:window.history.back();">Go Back</a></p>
       </div>
     </main>
