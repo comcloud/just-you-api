@@ -25,17 +25,18 @@
             <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>登录</h3>
             <div class="form-group">
                 <label class="control-label">用户名</label>
-                <input class="form-control" type="text" id="email" placeholder="邮箱" autofocus>
+                <input class="form-control" type="text" id="email" name="email" placeholder="邮箱" autofocus>
             </div>
             <div class="form-group">
                 <label class="control-label">密码</label>
-                <input class="form-control" type="password" id="password" placeholder="密码">
+                <input class="form-control" type="password" id="password" name="password
+" placeholder="密码">
             </div>
             <div class="form-group">
                 <div class="utility">
                     <div class="animated-checkbox">
                         <label>
-                            <input type="checkbox"><span class="label-text">保持登陆</span>
+                            <input type="checkbox" name="remember"><span class="label-text">保持登陆</span>
                         </label>
                     </div>
                     <p class="semibold-text mb-2"><a href="#" data-toggle="flip">忘记密码 ?</a></p>
@@ -82,11 +83,11 @@
             dataType: 'json',
             contentType: 'application/json',
             success: data => {
-                if(data.success){
-                    alert("登录成功");
+                if(data.success){x
                     location.href = "/justyou/admin"
                 }else{
-                    alert("登录失败")
+                    alert("登录失败");
+                    location.reload()
                 }
             },
             error: data => {

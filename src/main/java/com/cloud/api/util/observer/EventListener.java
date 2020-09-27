@@ -1,4 +1,4 @@
-package com.cloud.api.observer;
+package com.cloud.api.util.observer;
 
 import com.cloud.api.bean.dto.EventType;
 
