@@ -1,10 +1,10 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
@@ -30,18 +31,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //这里使用一种简单的方式
-        //有一种对应方式，登录的
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/").hasRole("ADMIN")
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                //loginPage的参数是要跳转的地址，这个地址是直接请求接口中的value
-                //usernameParameter用来对应前端登录页面的用户名的name属性值，默认值是username，这里使用这个可以进行更改，passwordParameter同理
-                //loginProcessingUrl用来定制跳往的页面，比如前端登录的form表单的action中写toLogin,这里就要写toLogin
-                //logoutSuccessUrl指定登出之后跳往的页面
                 .formLogin()
                     .loginPage("/login")
                     .usernameParameter("email")
@@ -49,8 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login")
-                .permitAll();
+                .logout()
+                    .logoutSuccessUrl("/login")
+                    .permitAll();
         //开启记住我功能，这个实际上是保存用户信息到cookie中，后面的remberMeParameter中的参数对应着前端选择框的name值
         http.rememberMe().rememberMeParameter("remember");
         http.csrf().disable();//关闭csrf功能，登录失败的原因所在
