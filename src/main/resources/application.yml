@@ -53,10 +53,9 @@ spring:
   redis:
     host: 47.95.221.79
     port: 6379
-
-  security:
-    oauth2:
-      resourceserver:
-        opaquetoken:
-          client-id: gold
-          client-secret: 123456
+#  security:
+#    oauth2:
+#      resourceserver:
+#        opaquetoken:
+#          client-id: gold
+#          client-secret: 123456

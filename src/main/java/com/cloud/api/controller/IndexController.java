@@ -8,12 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,15 +33,16 @@ public class IndexController {
     @Autowired
     private IndexService indexService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin")
     public String admin(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Optional<Object> admin = Optional.ofNullable(session.getAttribute("admin"));
-        if (admin.isPresent()) {
+//        HttpSession session = request.getSession();
+//        Optional<Object> admin = Optional.ofNullable(session.getAttribute("admin"));
+//        if (admin.isPresent()) {
             return "/admin/dashboard";
-        } else {
-            return "/admin/page-login";
-        }
+//        } else {
+//            return "/admin/page-login";
+//        }
 
     }
     /**
@@ -67,17 +70,19 @@ public class IndexController {
         return objectNode.toPrettyString();
     }
 
+    @PermitAll
     @RequestMapping(value = "/login")
     public String login() {
         return "/admin/page-login";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"/","index"})
     public String index(){
         return "/admin/dashboard";
     }
 
+    @PermitAll
     @RequestMapping(value = "logout")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("admin");
