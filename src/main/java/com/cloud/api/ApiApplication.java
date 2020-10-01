@@ -15,7 +15,6 @@ public class ApiApplication {
 
 		SpringApplication.run(ApiApplication.class, args);
 	}
-
 	@Bean
 	public HttpFirewall allowUrlSemicolonHttpFirewall() {
 		StrictHttpFirewall firewall = new StrictHttpFirewall();

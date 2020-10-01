@@ -1,7 +1,6 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -34,18 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //这里使用一种简单的方式
-        //有一种对应方式，登录的
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                //loginPage的参数是要跳转的地址，这个地址是直接请求接口中的value
-                //usernameParameter用来对应前端登录页面的用户名的name属性值，默认值是username，这里使用这个可以进行更改，passwordParameter同理
-                //loginProcessingUrl用来定制跳往的页面，比如前端登录的form表单的action中写toLogin,这里就要写toLogin
-                //logoutSuccessUrl指定登出之后跳往的页面
                 .formLogin()
                     .loginPage("/justyou/login")
                     .usernameParameter("email")

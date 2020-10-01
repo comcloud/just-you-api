@@ -45,8 +45,10 @@ public class IndexController {
 //        }
 
     }
+
     /**
      * 验证管理员登录
+     *
      * @param loginInfo 管理员登录信息
      * @return 验证信息
      * @throws JsonProcessingException
@@ -58,12 +60,12 @@ public class IndexController {
         String decode = URLDecoder.decode(loginInfo, StandardCharsets.UTF_8);
         JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("{")));
         ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
-        String email = node.findPath("email").toString().replace("\"","");
-        String password = node.findPath("password").toString().replace("\"","");
+        String email = node.findPath("email").toString().replace("\"", "");
+        String password = node.findPath("password").toString().replace("\"", "");
         boolean result = indexService.checkAdmin(email, password);
-        if(result){
-            request.getSession().setAttribute("admin",new Admin(0,email,password));
-        }else{
+        if (result) {
+            request.getSession().setAttribute("admin", new Admin(0, email, password));
+        } else {
             request.getSession().removeAttribute("admin");
         }
         objectNode.put("success", result);
@@ -71,6 +73,22 @@ public class IndexController {
     }
 
     @PermitAll
+    @RequestMapping(value = "/unlock")
+    public String unlock(HttpServletRequest request) {
+        String password = request.getParameter("password");
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (admin.getAdminPassword().equals(password)) {
+
+        } else {
+
+        }
+        return "";
+
+    }
+
+    /**
+     * @return 登录请求
+     */
     @RequestMapping(value = "/login")
     public String login() {
         return "/admin/page-login";
@@ -82,9 +100,15 @@ public class IndexController {
         return "/admin/dashboard";
     }
 
-    @PermitAll
+
+    /**
+     * 登出操作
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("admin");
         return "/admin/page-login";
     }
