@@ -38,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //有一种对应方式，登录的
         http
                 .authorizeRequests()
-                .antMatchers("/justyou/login").permitAll()
-                .antMatchers("/justyou/admin").hasRole("ADMIN")
+                .antMatchers("/login").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 //loginPage的参数是要跳转的地址，这个地址是直接请求接口中的value
