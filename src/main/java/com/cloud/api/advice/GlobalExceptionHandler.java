@@ -47,8 +47,6 @@ public class GlobalExceptionHandler {
         logger.error("发生空指针异常！原因是:", e);
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
-
-
     /**
      * 处理其他异常
      *

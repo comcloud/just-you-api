@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
@@ -35,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/").hasRole("ADMIN")
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 //loginPage的参数是要跳转的地址，这个地址是直接请求接口中的value
@@ -43,16 +47,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //loginProcessingUrl用来定制跳往的页面，比如前端登录的form表单的action中写toLogin,这里就要写toLogin
                 //logoutSuccessUrl指定登出之后跳往的页面
                 .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/justyou/login")
                     .usernameParameter("email")
                     .passwordParameter("password")
-                    .loginProcessingUrl("/login")
+                    .loginProcessingUrl("/justyou/login")
+                    .successForwardUrl("/justyou/admin")
                     .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login")
+                .logout().logoutSuccessUrl("/justyou/login")
                 .permitAll();
         //开启记住我功能，这个实际上是保存用户信息到cookie中，后面的remberMeParameter中的参数对应着前端选择框的name值
-        http.rememberMe().rememberMeParameter("remember");
+//        http.rememberMe().rememberMeParameter("remember");
         http.csrf().disable();//关闭csrf功能，登录失败的原因所在
     }
 
@@ -87,8 +92,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-
 
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

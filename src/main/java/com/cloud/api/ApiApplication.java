@@ -2,6 +2,9 @@ package com.cloud.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 /**
  * @author HP
@@ -9,6 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ApiApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(ApiApplication.class, args);
+	}
+
+	@Bean
+	public HttpFirewall allowUrlSemicolonHttpFirewall() {
+		StrictHttpFirewall firewall = new StrictHttpFirewall();
+		firewall.setAllowSemicolon(true);
+		return firewall;
 	}
 }
