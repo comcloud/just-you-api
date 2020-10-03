@@ -42,6 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Admin admin = new Admin();
         try {
+
             final List<Entity> all = Db.use().findAll(Entity.create("admin").set("admin_email", email));
             all.forEach(entity -> admin.setAdminEmail(email).setAdminPassword(entity.getStr("admin_password")));
         } catch (SQLException e) {
