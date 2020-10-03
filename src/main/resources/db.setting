@@ -1,0 +1,11 @@
+## db.setting文件
+url = jdbc:mysql://localhost:3306/just_you_api?serverTimezone=GMT&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+user = root
+pass = naonao
+## 可选配置
+# 是否在日志中显示执行的SQL
+showSql = true
+# 是否格式化显示的SQL
+formatSql = false
+# 是否显示SQL参数
+showParams = true

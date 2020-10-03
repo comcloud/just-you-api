@@ -5,6 +5,7 @@ import com.cloud.api.bean.dto.ResultBody;
 import com.cloud.api.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,6 +48,13 @@ public class GlobalExceptionHandler {
         logger.error("发生空指针异常！原因是:", e);
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
+
+
+    public ResultBody exceptionHandler(HttpServletRequest req, AccessDeniedException e) {
+        logger.error("权限禁止访问:", e);
+        return ResultBody.error(CommonEnum.N0_ACCESS);
+    }
+
     /**
      * 处理其他异常
      *
@@ -60,4 +68,6 @@ public class GlobalExceptionHandler {
         logger.error("未知异常！原因是:", e);
         return ResultBody.error(CommonEnum.INTERNAL_SERVER_ERROR);
     }
+
+
 }

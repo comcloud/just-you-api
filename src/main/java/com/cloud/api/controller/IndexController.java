@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.security.PermitAll;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 /**
  * @author HP
@@ -34,15 +33,9 @@ public class IndexController {
     private IndexService indexService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = "/admin")
+    @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
     public String admin(HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        Optional<Object> admin = Optional.ofNullable(session.getAttribute("admin"));
-//        if (admin.isPresent()) {
-            return "/admin/dashboard";
-//        } else {
-//            return "/admin/page-login";
-//        }
+        return "/admin/dashboard";
 
     }
 
@@ -56,7 +49,7 @@ public class IndexController {
     @ResponseBody
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public String loginCheck(@RequestBody String loginInfo,
-                             HttpServletRequest request) throws JsonProcessingException {
+                             HttpServletRequest request) throws IOException {
         String decode = URLDecoder.decode(loginInfo, StandardCharsets.UTF_8);
         JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("{")));
         ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
@@ -86,20 +79,31 @@ public class IndexController {
 
     }
 
+    @RequestMapping(value = "/login/error")
+    public void loginError(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("text/html;charset=utf-8");
+        AuthenticationException exception =
+                (AuthenticationException) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+        try {
+            response.getWriter().write(exception.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @return 登录请求
      */
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/toLogin")
     public String login() {
         return "/admin/page-login";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = {"/","index"})
-    public String index(){
+    @RequestMapping(value = {"/", "index"})
+    public String index() {
         return "/admin/dashboard";
     }
-
 
     /**
      * 登出操作

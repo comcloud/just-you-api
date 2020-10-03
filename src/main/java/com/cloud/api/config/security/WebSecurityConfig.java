@@ -1,7 +1,7 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -9,10 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /**
@@ -23,8 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsServiceImpl userDetailsService = new UserDetailsServiceImpl();
-
+    private UserDetailsService userDetailsService = new UserDetailsServiceImpl();
     /**
      * 请求配置
      *
@@ -37,21 +34,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/global/js/**","/global/css/**","/global/images/*","/global/fonts/**","/global/**/*.png","/global/**/*.jpg").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/justyou/login")
-                    .usernameParameter("email")
+                    //要前往的登录页面路径
+                    .loginPage("/toLogin")
+                    .usernameParameter("username")
                     .passwordParameter("password")
-                    .loginProcessingUrl("/justyou/login")
-                    .successForwardUrl("/justyou/admin")
+                    //对应表单中的action中的值
+                    .loginProcessingUrl("/login")
+                    .failureUrl("/login/error")
+                    .successForwardUrl("/admin")
                     .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/justyou/login")
-                .permitAll();
-        //开启记住我功能，这个实际上是保存用户信息到cookie中，后面的remberMeParameter中的参数对应着前端选择框的name值
-//        http.rememberMe().rememberMeParameter("remember");
-        http.csrf().disable();//关闭csrf功能，登录失败的原因所在
+                .logout()
+                    .logoutSuccessUrl("/justyou/login")
+                    .permitAll();
+        http.rememberMe().rememberMeParameter("remember");
+        http.csrf().disable();
     }
 
     /**
@@ -62,35 +63,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.
-                // <X> 使用内存中的 InMemoryUserDetailsManager
-//                        inMemoryAuthentication()
-                // <Y> 不使用 PasswordEncoder 密码编码器
-//                .passwordEncoder(new BCryptPasswordEncoder())
-                // <Z> 配置 admin 用户
-//                .withUser("admin").password(new BCryptPasswordEncoder().encode("admin")).roles("ADMIN")
-                // <Z> 配置 normal 用户
-//                .and().withUser("normal").password(new BCryptPasswordEncoder().encode("normal")).roles("NORMAL");
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
     }
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        //防止拦截静态文件
-        web.ignoring().antMatchers("/**");
+        super.configure(web);
     }
-
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//            .inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER");
-//    }
-
 }

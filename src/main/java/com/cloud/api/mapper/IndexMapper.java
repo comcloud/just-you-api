@@ -8,7 +8,8 @@ import org.apache.ibatis.annotations.Param;
  * @author HP
  */
 @Mapper
-public interface IndexMapper {
+public interface
+IndexMapper {
     boolean selectAdmin(@Param("email") String email, @Param("password") String password);
 
 
