@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/global/js/**","/global/css/**","/global/images/*","/global/fonts/**","/global/**/*.png","/global/**/*.jpg").permitAll()
+                .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -68,7 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/x-admin/js/**","/x-admin/css/**",
+                "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**");
     }
 }

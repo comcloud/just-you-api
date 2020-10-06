@@ -35,7 +35,7 @@ public class IndexController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
     public String admin(HttpServletRequest request) {
-        return "/admin/dashboard";
+        return "/X-admin/index";
 
     }
 
@@ -65,19 +65,6 @@ public class IndexController {
         return objectNode.toPrettyString();
     }
 
-    @PermitAll
-    @RequestMapping(value = "/unlock")
-    public String unlock(HttpServletRequest request) {
-        String password = request.getParameter("password");
-        Admin admin = (Admin) request.getSession().getAttribute("admin");
-        if (admin.getAdminPassword().equals(password)) {
-
-        } else {
-
-        }
-        return "";
-
-    }
 
     @RequestMapping(value = "/login/error")
     public void loginError(HttpServletRequest request, HttpServletResponse response) {
@@ -96,13 +83,13 @@ public class IndexController {
      */
     @RequestMapping(value = "/toLogin")
     public String login() {
-        return "/admin/page-login";
+        return "/X-admin/login";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"/", "index"})
     public String index() {
-        return "/admin/dashboard";
+        return "/X-admin/index";
     }
 
     /**
@@ -114,6 +101,6 @@ public class IndexController {
     @RequestMapping(value = "logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("admin");
-        return "/admin/page-login";
+        return "/X-admin/login";
     }
 }
