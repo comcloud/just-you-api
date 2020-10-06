@@ -1,0 +1,19 @@
+package com.cloud.api.mapper;
+
+import com.cloud.api.bean.entity.Task;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * @author 成都犀牛
+ * @version version 1.0
+ * @date 2020/10/6 18:35
+ */
+@Mapper
+public interface ProjectMapper {
+    List<Task> selectAllTask();
+
+    String selectUsernameByUserId(@Param("userId") Long userId);
+}

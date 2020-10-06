@@ -49,11 +49,13 @@ public class GlobalExceptionHandler {
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
 
+//    @ExceptionHandler(value = AccessDeniedException.class)
+//    @ResponseBody
+//    public ResultBody exceptionHandler(HttpServletRequest req, AccessDeniedException e) {
+//        logger.error("权限禁止访问:", e);
+//        return ResultBody.error(CommonEnum.N0_ACCESS);
+//    }
 
-    public ResultBody exceptionHandler(HttpServletRequest req, AccessDeniedException e) {
-        logger.error("权限禁止访问:", e);
-        return ResultBody.error(CommonEnum.N0_ACCESS);
-    }
 
     /**
      * 处理其他异常

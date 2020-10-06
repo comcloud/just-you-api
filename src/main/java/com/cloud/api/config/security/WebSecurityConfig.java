@@ -49,10 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                 .logout()
-                    .logoutSuccessUrl("/justyou/login")
+                    .logoutSuccessUrl("/toLogin")
                     .permitAll();
         http.rememberMe().rememberMeParameter("remember");
         http.csrf().disable();
+        //解决Refused to display '' in a frame because it set 'X-Frame-Options' to 'deny'问题
+        http.headers().frameOptions().disable();
     }
 
     /**

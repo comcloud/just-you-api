@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.ProjectMapper">
+
+    <select id="selectAllTask" resultType="com.cloud.api.bean.entity.Task">
+        select * from task
+    </select>
+    <select id="selectUsernameByUserId" resultType="java.lang.String">
+        select user_name from user where user_id = #{userId}
+    </select>
+</mapper>
