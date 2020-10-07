@@ -92,9 +92,13 @@ public class IndexController {
         return "/X-admin/index";
     }
 
+    @RequestMapping(value = "/exception")
+    public String exception(){
+        return "/X-admin/error";
+    }
+
     /**
      * 登出操作
-     *
      * @param request
      * @return
      */

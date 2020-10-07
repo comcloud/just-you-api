@@ -13,7 +13,10 @@ import java.util.List;
  */
 @Mapper
 public interface ProjectMapper {
+
     List<Task> selectAllTask();
 
     String selectUsernameByUserId(@Param("userId") Long userId);
+
+    String selectSortNameByClassId(@Param("classId") Long classId);
 }

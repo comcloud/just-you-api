@@ -17,9 +17,9 @@ spring:
   datasource:
     #druid基本属性
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/just_you_api?serverTimezone=GMT&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://47.95.221.79:3306/justyou?serverTimezone=GMT&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: naonao
+    password: naonao123
     driver-class-name: com.mysql.cj.jdbc.Driver
     #druid相关配置
     druid:

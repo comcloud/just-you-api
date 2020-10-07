@@ -20,13 +20,16 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
     @Override
-    public List<ModelUtil<Task, String>> getAllTaskData() {
+    public List<ModelUtil<Task, ModelUtil<String,String>>> getAllTaskData() {
         List<Task> tasks = projectMapper.selectAllTask();
-        List<ModelUtil<Task,String>> modelUtilList = new ArrayList<>();
+        List<ModelUtil<Task,ModelUtil<String,String>>> modelUtilList = new ArrayList<>();
         tasks.forEach(task -> {
-            ModelUtil<Task, String> taskStringModelUtil = new ModelUtil<>();
-            taskStringModelUtil.setObjectValue(task).setNormalValue(projectMapper.selectUsernameByUserId(task.getUserId()));
-            modelUtilList.add(taskStringModelUtil);
+            ModelUtil<Task, ModelUtil<String,String>> first = new ModelUtil<>();
+            ModelUtil<String, String> last = new ModelUtil<>();
+            last.setFirstValue(projectMapper.selectSortNameByClassId(task.getClassId()))
+                .setLastValue(projectMapper.selectUsernameByUserId(task.getUserId()));
+            first.setFirstValue(task).setLastValue(last);
+            modelUtilList.add(first);
         });
         return modelUtilList;
     }

@@ -74,4 +74,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/x-admin/js/**","/x-admin/css/**",
                 "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**");
     }
+
 }

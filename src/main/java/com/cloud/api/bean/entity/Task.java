@@ -51,6 +51,19 @@ public class Task implements Serializable {
      */
     private Integer taskComment;
 
+    /**
+     * 任务描述
+     * */
+    private String taskDescription;
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public Task setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+        return this;
+    }
 
     public Long getId() {
         return id;

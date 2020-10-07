@@ -1,13 +1,10 @@
 package com.cloud.api.controller;
 
-import com.cloud.api.bean.entity.Task;
 import com.cloud.api.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 /**
  * @author 成都犀牛

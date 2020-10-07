@@ -1,31 +1,29 @@
 package com.cloud.api.util;
 
-import cn.hutool.core.lang.Pair;
-
 /**
  * @author 成都犀牛
  * @version version 1.0
  * @date 2020/10/6 18:30
  */
 public class ModelUtil<T,R> {
-    private T objectValue;
-    private R normalValue;
+    private T firstValue;
+    private R lastValue;
 
-    public T getObjectValue() {
-        return objectValue;
+    public T getFirstValue() {
+        return firstValue;
     }
 
-    public ModelUtil<T, R> setObjectValue(T objectValue) {
-        this.objectValue = objectValue;
+    public ModelUtil<T, R> setFirstValue(T firstValue) {
+        this.firstValue = firstValue;
         return this;
     }
 
-    public R getNormalValue() {
-        return normalValue;
+    public R getLastValue() {
+        return lastValue;
     }
 
-    public ModelUtil<T, R> setNormalValue(R normalValue) {
-        this.normalValue = normalValue;
+    public ModelUtil<T, R> setLastValue(R lastValue) {
+        this.lastValue = lastValue;
         return this;
     }
 }

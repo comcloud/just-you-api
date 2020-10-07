@@ -11,5 +11,5 @@ import java.util.List;
  * @date 2020/10/6 18:06
  */
 public interface ProjectService {
-    List<ModelUtil<Task,String>> getAllTaskData();
+    List<ModelUtil<Task,ModelUtil<String,String>>> getAllTaskData();
 }
