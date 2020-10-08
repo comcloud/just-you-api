@@ -2,6 +2,7 @@ package com.cloud.api.service;
 
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface ProjectService {
     List<ModelUtil<Task,ModelUtil<String,String>>> getAllTaskData();
+
+    List<ModelUtil<Task, ModelUtil<String, String>>> searchData(JsonNode search);
 }

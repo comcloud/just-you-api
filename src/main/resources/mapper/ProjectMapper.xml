@@ -5,12 +5,38 @@
 <mapper namespace="com.cloud.api.mapper.ProjectMapper">
 
     <select id="selectAllTask" resultType="com.cloud.api.bean.entity.Task">
-        select * from task
+        select *
+        from task
     </select>
     <select id="selectUsernameByUserId" resultType="java.lang.String">
-        select user_name from user where user_id = #{userId}
+        select user_name
+        from user
+        where user_id = #{userId}
     </select>
     <select id="selectSortNameByClassId" resultType="java.lang.String">
-        select name from task_classification where id=#{classId}
+        select name
+        from task_classification
+        where id=#{classId}
+    </select>
+    <select id="selectTaskBySearch" resultType="com.cloud.api.bean.entity.Task">
+        select *
+        from task
+        <where>
+            <if test="searchObject.start != null">
+                release_time &gt; #{searchObject.start}
+            </if>
+            <if test="searchObject.end != null">
+                AND release_time &lt; #{searchObject.end}
+            </if>
+            <if test="searchObject.charge != null">
+                AND charge=#{searchObject.charge}
+            </if>
+            <if test="searchObject.projectState">
+                and state = #{searchObject.projectState}
+            </if>
+            <if test="searchObject.projectId != null">
+                and id = #{searchObject.projectId}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -32,7 +32,7 @@
 <body>
 <div class="x-nav">
             <span class="layui-breadcrumb">
-                <a href="">首页</a>
+                <a th:href="@{/project/project_list}">首页</a>
                 <a href="">演示</a>
                 <a>
                     <cite>导航元素</cite></a>
@@ -53,14 +53,14 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
-                                <option>是否收费</option>
-                                <option>收费</option>
-                                <option>不收费</option>
+                            <select id="charge" name="contrller">
+                                <option value="">是否收费</option>
+                                <option value="0">不收费</option>
+                                <option value="1">收费</option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
+                            <select id="projectState" name="contrller">
                                 <option value="">项目状态</option>
                                 <option value="0">草稿</option>
                                 <option value="1">待审核</option>
@@ -71,7 +71,7 @@
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入项目编号" autocomplete="off"
+                            <input type="text" name="username" id="projectId" placeholder="请输入项目编号" autocomplete="off"
                                    class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button class="layui-btn" lay-submit="" lay-filter="sreach">
@@ -83,28 +83,28 @@
                     <button class="layui-btn layui-btn-danger" onclick="delAll()">
                         <i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+                    <button class="layui-btn" onclick="xadmin.open('添加用户','/justyou/project/project_add',800,600)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
-                <div class="layui-card-body ">
-                    <table class="layui-table layui-form">
+                <div class="layui-card-body " th:fragment="table_fragement">
+                    <table id="table" class="layui-table layui-form">
                         <thead>
                         <tr>
                             <th>
                                 <input type="checkbox" name="" lay-skin="primary">
                             </th>
-                            <th>任务编号</th>
-                            <th>任务分类名</th>
-                            <th>用户名</th>
-                            <th>任务状态</th>
-                            <th>收费项目</th>
-                            <th>发布时间</th>
-                            <th>任务需要人数</th>
-                            <th>任务招募人数</th>
-                            <th>任务内容</th>
-                            <th>任务描述</th>
-                            <th>操作</th>
+                            <th class="ths">任务编号</th>
+                            <th class="ths">任务分类名</th>
+                            <th class="ths">用户名</th>
+                            <th class="ths">任务状态</th>
+                            <th class="ths">收费项目</th>
+                            <th class="ths">发布时间</th>
+                            <th class="ths">任务需要人数</th>
+                            <th class="ths">任务招募人数</th>
+                            <th class="ths">任务内容</th>
+                            <th class="ths">任务描述</th>
+                            <th class="ths">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -113,8 +113,17 @@
                             <td th:text="${model.firstValue.id}">2017009171822298053</td>
                             <td th:text="${model.lastValue.firstValue}">老王:18925139194</td>
                             <td th:text="${model.lastValue.lastValue}">7829.10</td>
-                            <td th:text="${model.firstValue.state}">7854.10</td>
-                            <td th:text="${model.firstValue.charge}">待确认</td>
+
+                            <td th:switch="${model.firstValue.state}">
+                                <p th:case="1">草稿</p>
+                                <p th:case="2">待审核</p>
+                                <p th:case="3">已发布</p>
+                                <p th:case="4">已接单</p>
+                                <p th:case="5">已完成</p>
+                                <p th:case="6">已超时</p>
+                            </td>
+
+                            <td th:text="${model.firstValue.charge}==1?'收费':'不收费'">待确认</td>
                             <td th:text="${model.firstValue.releaseTime}">未支付</td>
                             <td th:text="${model.firstValue.needNumber}">未发货</td>
                             <td th:text="${model.firstValue.recruitingNumber}">申通物流</td>
@@ -146,77 +155,105 @@
     </div>
 </div>
 </body>
-<script>layui.use(['laydate', 'form'],
-    function () {
-        var laydate = layui.laydate;
+<script>
+    layui.use(['laydate', 'form'],
+        function () {
+            var laydate = layui.laydate;
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
+            });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
         });
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
+    /*用户-停用*/
+    function member_stop(obj, id) {
+        layer.confirm('确认要停用吗？',
+            function (index) {
+
+                if ($(obj).attr('title') == '启用') {
+
+                    //发异步把用户状态进行更改
+                    $(obj).attr('title', '停用');
+                    $(obj).find('i').html('&#xe62f;');
+
+                    $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                    layer.msg('已停用!', {
+                        icon: 5,
+                        time: 1000
+                    });
+
+                } else {
+                    $(obj).attr('title', '启用');
+                    $(obj).find('i').html('&#xe601;');
+
+                    $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                    layer.msg('已启用!', {
+                        icon: 5,
+                        time: 1000
+                    });
+                }
+
+            });
+    }
+
+    // 搜索功能
+    $('.layui-btn').click(function () {
+        let search = {
+            start: $('#start').val(),
+            end: $('#end').val(),
+            charge: $('#charge').val(),
+            projectState: $('#projectState').val(),
+            projectId: $('#projectId').val()
+        }
+        $.ajax({
+            async: false,
+            url: '/justyou/project/search_data',
+            type: 'post',
+            data: {'search': JSON.stringify(search)},
+            // dataType: 'json',
+            // contentType: 'application/json',
+            success: function (data) {
+                // $('.table_fragment').load('http://localhost:8089/justyou/project/search_data')
+                $('.table_fragment').html(data)
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+                console.log(XMLHttpRequest.toString())
+            }
+        })
     });
 
-/*用户-停用*/
-function member_stop(obj, id) {
-    layer.confirm('确认要停用吗？',
-        function (index) {
-
-            if ($(obj).attr('title') == '启用') {
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title', '停用');
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', {
-                    icon: 5,
+    /*用户-删除*/
+    function member_del(obj, id) {
+        layer.confirm('确认要删除吗？',
+            function (index) {
+                //发异步删除数据
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!', {
+                    icon: 1,
                     time: 1000
                 });
+            });
+    }
 
-            } else {
-                $(obj).attr('title', '启用');
-                $(obj).find('i').html('&#xe601;');
+    function delAll(argument) {
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', {
-                    icon: 5,
-                    time: 1000
+        var data = tableCheck.getData();
+
+        layer.confirm('确认要删除吗？' + data,
+            function (index) {
+                //捉到所有被选中的，发异步进行删除
+                layer.msg('删除成功', {
+                    icon: 1
                 });
-            }
-
-        });
-}
-
-/*用户-删除*/
-function member_del(obj, id) {
-    layer.confirm('确认要删除吗？',
-        function (index) {
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {
-                icon: 1,
-                time: 1000
+                $(".layui-form-checked").not('.header').parents('tr').remove();
             });
-        });
-}
-
-function delAll(argument) {
-
-    var data = tableCheck.getData();
-
-    layer.confirm('确认要删除吗？' + data,
-        function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {
-                icon: 1
-            });
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-}</script>
+    }</script>
 
 </html>

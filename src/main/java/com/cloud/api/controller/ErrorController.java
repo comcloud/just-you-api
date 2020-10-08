@@ -36,7 +36,10 @@ public class ErrorController implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) {
         if (response.getStatus() != 200) {
-            modelAndView.setViewName("/X-admin/error");
+            try {
+                modelAndView.setViewName("/X-admin/error");
+            }catch (NullPointerException ignored){
+            }
         }
     }
 
