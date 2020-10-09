@@ -2,6 +2,7 @@ package com.cloud.api.mapper;
 
 import com.cloud.api.bean.dto.SearchObject;
 import com.cloud.api.bean.entity.Task;
+import com.cloud.api.bean.entity.TaskClassification;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,4 +23,6 @@ public interface ProjectMapper {
     String selectSortNameByClassId(@Param("classId") Long classId);
 
     List<Task> selectTaskBySearch(@Param("searchObject") SearchObject searchObject);
+
+    List<TaskClassification> selectAllTaskClassification();
 }

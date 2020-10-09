@@ -1,6 +1,7 @@
 package com.cloud.api.service;
 
 import com.cloud.api.bean.entity.Task;
+import com.cloud.api.bean.entity.TaskClassification;
 import com.cloud.api.util.ModelUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -15,4 +16,7 @@ public interface ProjectService {
     List<ModelUtil<Task,ModelUtil<String,String>>> getAllTaskData();
 
     List<ModelUtil<Task, ModelUtil<String, String>>> searchData(JsonNode search);
+
+    List<TaskClassification> getAllTaskClassification();
+
 }

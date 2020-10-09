@@ -83,7 +83,7 @@
                     <button class="layui-btn layui-btn-danger" onclick="delAll()">
                         <i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','/justyou/project/project_add',800,600)">
+                    <button class="layui-btn" id="addBtn" onclick="xadmin.open('添加用户','/justyou/project/project_add',800,600)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -228,6 +228,17 @@
             }
         })
     });
+
+    //点击添加之后，将一些数据存储到Model之中
+    $('#addBtn').click(function () {
+        $.ajax({
+            async:false,
+            url:'/justyou/project/sort_data',
+            type:'post',
+            success:function (data) {
+            }
+        })
+    })
 
     /*用户-删除*/
     function member_del(obj, id) {

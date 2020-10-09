@@ -2,6 +2,7 @@ package com.cloud.api.service.impl;
 
 import com.cloud.api.bean.dto.SearchObject;
 import com.cloud.api.bean.entity.Task;
+import com.cloud.api.bean.entity.TaskClassification;
 import com.cloud.api.mapper.ProjectMapper;
 import com.cloud.api.service.ProjectService;
 import com.cloud.api.util.ModelUtil;
@@ -60,6 +61,11 @@ public class ProjectServiceImpl implements ProjectService {
         searchObject.setStart(start).setEnd(end).setCharge(charge).setProjectState(projectState).setProjectId(projectId);
         List<Task> tasks = projectMapper.selectTaskBySearch(searchObject);
         return packing(tasks);
+    }
+
+    @Override
+    public List<TaskClassification> getAllTaskClassification() {
+        return projectMapper.selectAllTaskClassification();
     }
 
     /**

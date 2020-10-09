@@ -1,6 +1,7 @@
 package com.cloud.api.controller;
 
 import com.cloud.api.bean.entity.Task;
+import com.cloud.api.bean.entity.TaskClassification;
 import com.cloud.api.service.ProjectService;
 import com.cloud.api.util.ModelUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -53,6 +54,14 @@ public class ProjectController {
     @RequestMapping(value = "/project_add",method = RequestMethod.GET)
     public String orderAdd(){
         return "/X-admin/order/order-add";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/sort_data",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public String sortData(Model model){
+        List<TaskClassification> classifications =  projectService.getAllTaskClassification();
+        model.addAttribute("classifications",classifications);
+        return JsonNodeFactory.instance.objectNode().put("success", true).toPrettyString();
     }
 
     @RequestMapping(value = "/order_list")

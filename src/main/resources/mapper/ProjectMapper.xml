@@ -39,4 +39,7 @@
             </if>
         </where>
     </select>
+    <select id="selectAllTaskClassification" resultType="com.cloud.api.bean.entity.TaskClassification">
+        select id,name from task_classification
+    </select>
 </mapper>
