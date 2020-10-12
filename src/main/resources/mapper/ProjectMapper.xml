@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.api.mapper.ProjectMapper">
+    <insert id="insertOneTask">
+        insert into task values(#{task.id},#{task.classId},#{task.data},#{task.state},#{task.charge},#{task.releaseTime},#{task.userId},#{task.needNumber},#{task.recruitingNumber},#{task.taskComment},#{task.taskDescription})
+    </insert>
+    <delete id="deleteTaskById">
+        delete from task where id = #{id}
+    </delete>
 
     <select id="selectAllTask" resultType="com.cloud.api.bean.entity.Task">
         select *

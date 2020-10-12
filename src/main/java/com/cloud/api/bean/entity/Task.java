@@ -1,6 +1,7 @@
 package com.cloud.api.bean.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * (Task)实体类
@@ -33,7 +34,7 @@ public class Task implements Serializable {
     /**
      * 发布时间
      */
-    private Object releaseTime;
+    private LocalDateTime releaseTime;
     /**
      * 发布用户id
      */
@@ -65,84 +66,97 @@ public class Task implements Serializable {
         return this;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Task setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getClassId() {
         return classId;
     }
 
-    public void setClassId(Long classId) {
+    public Task setClassId(Long classId) {
         this.classId = classId;
+        return this;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public Task setData(String data) {
         this.data = data;
+        return this;
     }
 
     public Integer getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public Task setState(Integer state) {
         this.state = state;
+        return this;
     }
 
     public Integer getCharge() {
         return charge;
     }
 
-    public void setCharge(Integer charge) {
+    public Task setCharge(Integer charge) {
         this.charge = charge;
+        return this;
     }
 
-    public Object getReleaseTime() {
+    public LocalDateTime getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(Object releaseTime) {
+    public Task setReleaseTime(LocalDateTime releaseTime) {
         this.releaseTime = releaseTime;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public Task setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public Integer getNeedNumber() {
         return needNumber;
     }
 
-    public void setNeedNumber(Integer needNumber) {
+    public Task setNeedNumber(Integer needNumber) {
         this.needNumber = needNumber;
+        return this;
     }
 
     public Integer getRecruitingNumber() {
         return recruitingNumber;
     }
 
-    public void setRecruitingNumber(Integer recruitingNumber) {
+    public Task setRecruitingNumber(Integer recruitingNumber) {
         this.recruitingNumber = recruitingNumber;
+        return this;
     }
 
     public Integer getTaskComment() {
         return taskComment;
     }
 
-    public void setTaskComment(Integer taskComment) {
+    public Task setTaskComment(Integer taskComment) {
         this.taskComment = taskComment;
+        return this;
     }
-
 }

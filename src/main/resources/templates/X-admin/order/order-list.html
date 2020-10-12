@@ -83,7 +83,8 @@
                     <button class="layui-btn layui-btn-danger" onclick="delAll()">
                         <i class="layui-icon"></i>批量删除
                     </button>
-                    <button class="layui-btn" id="addBtn" onclick="xadmin.open('添加用户','/justyou/project/project_add',800,600)">
+                    <button class="layui-btn" id="addBtn"
+                            onclick="xadmin.open('添加用户','/justyou/project/project_add',800,600)">
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
@@ -92,7 +93,7 @@
                         <thead>
                         <tr>
                             <th>
-                                <input type="checkbox" name="" lay-skin="primary">
+                                <input type="checkbox" name="" lay-filter="allChoose" lay-skin="primary">
                             </th>
                             <th class="ths">任务编号</th>
                             <th class="ths">任务分类名</th>
@@ -107,10 +108,12 @@
                             <th class="ths">操作</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                         <tr th:each="model : ${modelObject}">
                             <td><input type="checkbox" name="" lay-skin="primary"></td>
-                            <td th:text="${model.firstValue.id}">2017009171822298053</td>
+                            <td id="taskId" th:text="${model.firstValue.id}" th:value="${model.firstValue.id}">
+                                2017009171822298053
+                            </td>
                             <td th:text="${model.lastValue.firstValue}">老王:18925139194</td>
                             <td th:text="${model.lastValue.lastValue}">7829.10</td>
 
@@ -156,10 +159,17 @@
 </div>
 </body>
 <script>
-    layui.use(['laydate', 'form'],
+    layui.use(['laydate', 'form', 'table'],
         function () {
             var laydate = layui.laydate;
-
+            //点击全选, 勾选
+            table.on('checkbox(allChoose)', function (data) {
+                var child = $("#tbody input[type='checkbox']");
+                child.each(function (index, item) {
+                    item.checked = data.elem.checked;
+                });
+                form.render('checkbox');
+            });
             //执行一个laydate实例
             laydate.render({
                 elem: '#start' //指定元素
@@ -230,26 +240,33 @@
     });
 
     //点击添加之后，将一些数据存储到Model之中
-    $('#addBtn').click(function () {
-        $.ajax({
-            async:false,
-            url:'/justyou/project/sort_data',
-            type:'post',
-            success:function (data) {
-            }
-        })
+    $.post('/justyou/project/sort_data', null, (data, status) => {
+        console.log('已经把分类数据保存到model中');
     })
 
     /*用户-删除*/
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？',
             function (index) {
+                var value = $(obj).parent().parent().children('#taskId').attr('value');
                 //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', {
-                    icon: 1,
-                    time: 1000
-                });
+                $.ajax({
+                    async: false,
+                    url: '/justyou/project/delete_task',
+                    type:'post',
+                    data: JSON.stringify(value),
+                    contentType: 'application/json',
+                    success: data => {
+                        if (data.success) {
+                            $(obj).parents("tr").remove();
+                            layer.msg('已删除!', {
+                                icon: 1,
+                                time: 1000
+                            });
+                        }
+                    }
+                })
+
             });
     }
 

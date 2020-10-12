@@ -19,4 +19,7 @@ public interface ProjectService {
 
     List<TaskClassification> getAllTaskClassification();
 
+    boolean saveNewProject(JsonNode node);
+
+    boolean removeTaskById(Integer id);
 }

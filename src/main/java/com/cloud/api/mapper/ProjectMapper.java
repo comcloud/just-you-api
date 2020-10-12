@@ -25,4 +25,8 @@ public interface ProjectMapper {
     List<Task> selectTaskBySearch(@Param("searchObject") SearchObject searchObject);
 
     List<TaskClassification> selectAllTaskClassification();
+
+    boolean insertOneTask(@Param("task") Task task);
+
+    boolean deleteTaskById(@Param("id") Integer id);
 }

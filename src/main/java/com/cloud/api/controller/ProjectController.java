@@ -33,6 +33,13 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
+    /**
+     * 跳转到projectList页面
+     * 存储任务列表
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/project_list")
     public String projectList(Model model) {
         final List<ModelUtil<Task, ModelUtil<String, String>>> allTaskData = projectService.getAllTaskData();
@@ -40,10 +47,17 @@ public class ProjectController {
         return "/X-admin/order/order-list";
     }
 
+    /**
+     * 查询数据
+     *
+     * @param requestBody 存储搜索的依据
+     * @param model
+     * @return 查询结果
+     * @throws JsonProcessingException json解析异常
+     */
     @RequestMapping(value = "/search_data", method = RequestMethod.POST)
     public String searchData(@RequestBody String requestBody,
                              Model model) throws JsonProcessingException {
-
         String decode = URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
         JsonNode search = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
         List<ModelUtil<Task, ModelUtil<String, String>>> modelObject = projectService.searchData(search);
@@ -51,21 +65,49 @@ public class ProjectController {
         return "/X-admin/order/order-list::table_fragment";
     }
 
-    @RequestMapping(value = "/project_add",method = RequestMethod.GET)
-    public String orderAdd(){
+    /**
+     * @return 跳转到任务添加页面
+     */
+    @RequestMapping(value = "/project_add", method = RequestMethod.GET)
+    public String orderAdd(Model model) {
+        List<TaskClassification> classifications = projectService.getAllTaskClassification();
+        model.addAttribute("classifications", classifications);
         return "/X-admin/order/order-add";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/sort_data",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public String sortData(Model model){
-        List<TaskClassification> classifications =  projectService.getAllTaskClassification();
-        model.addAttribute("classifications",classifications);
+    @RequestMapping(value = "/delete_task",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public String deleteTask(@RequestBody Integer id){
+        return JsonNodeFactory.instance.objectNode().put("success",projectService.removeTaskById(id)).toPrettyString();
+    }
+
+    /**
+     * 保存任务数据到数据库中
+     *
+     * @param requestBody 请求体
+     * @return 保存任务结果
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
+    @RequestMapping(value = "/add_project", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String addProject(@RequestBody String requestBody) throws JsonProcessingException {
+        final String decode = URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
+        final JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
+        return JsonNodeFactory.instance.objectNode().put("success", projectService.saveNewProject(node)).toPrettyString();
+    }
+
+    /**
+     * 将分类数据存储到model中
+     * @param model 存储模型
+     * @return 结果
+     */
+    @ResponseBody
+    @RequestMapping(value = "/sort_data", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String sortData(Model model) {
+        List<TaskClassification> classifications = projectService.getAllTaskClassification();
+        model.addAttribute("classifications", classifications);
         return JsonNodeFactory.instance.objectNode().put("success", true).toPrettyString();
     }
 
-    @RequestMapping(value = "/order_list")
-    public String orderList() {
-        return "/X-admin/order/order-list1";
-    }
+
 }

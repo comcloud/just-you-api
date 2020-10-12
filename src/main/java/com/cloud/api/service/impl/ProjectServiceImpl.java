@@ -24,10 +24,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
 
+    /**
+     * @return 任务数据列表
+     */
     @Override
     public List<ModelUtil<Task, ModelUtil<String, String>>> getAllTaskData() {
-        List<Task> tasks = projectMapper.selectAllTask();
-        return packing(tasks);
+        return packing(projectMapper.selectAllTask());
     }
 
     @Override
@@ -69,10 +71,38 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /**
+     * 管理员保存新的任务
+     * @param node 任务数据
+     * @return 保存结果
+     */
+    @Override
+    public boolean saveNewProject(JsonNode node) {
+        Task task = new Task();
+        task.setId((long) 0)
+            .setCharge(Integer.parseInt(node.findPath("charge").toString().replace("\"","")))
+            .setClassId((long) Integer.parseInt(node.findPath("sort").toString().replace("\"","")))
+            .setData(node.findPath("projectData").toString().replace("\"",""))
+            .setNeedNumber(Integer.parseInt(node.findPath("needNumber").toString().replace("\"","")))
+            .setRecruitingNumber(Integer.parseInt(node.findPath("recruitingNumber").toString().replace("\"","")))
+            .setReleaseTime(LocalDateTime.parse(node.findPath("releaseTime").toString().replace("\"","")))
+            .setState(Integer.parseInt(node.findPath("state").toString().replace("\"","")))
+            .setTaskComment(Integer.parseInt(node.findPath("comment").toString().replace("\"","")))
+            .setTaskDescription(node.findPath("desc").toString().replace("\"",""))
+                //表示是管理员保存
+            .setUserId((long) 1);
+        return projectMapper.insertOneTask(task);
+
+    }
+
+    @Override
+    public boolean removeTaskById(Integer id) {
+        return projectMapper.deleteTaskById(id);
+    }
+
+    /**
      * 将指定的任务以及分类名和用户名打包
-     *
      * @param tasks 任务列表
-     * @return
+     * @return 打包列表
      */
     private List<ModelUtil<Task, ModelUtil<String, String>>> packing(List<Task> tasks) {
         List<ModelUtil<Task, ModelUtil<String, String>>> modelUtilList = new ArrayList<>();
