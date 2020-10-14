@@ -53,12 +53,40 @@ public class Task implements Serializable {
     private Integer taskComment;
 
     /**
+     * 任务开始时间
+     */
+    private LocalDateTime startTime;
+
+    /**
+     * 任务结束时间
+     */
+    private LocalDateTime endTime;
+
+    /**
      * 任务描述
      * */
     private String taskDescription;
 
     public String getTaskDescription() {
         return taskDescription;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public Task setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public Task setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+        return this;
     }
 
     public Task setTaskDescription(String taskDescription) {

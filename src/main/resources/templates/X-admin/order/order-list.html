@@ -89,28 +89,29 @@
                     </button>
                 </div>
                 <div class="layui-card-body " th:fragment="table_fragement">
-                    <table id="table" class="layui-table layui-form">
+                    <table id="tableId" class="layui-table layui-form">
                         <thead>
                         <tr>
                             <th>
-                                <input type="checkbox" name="" lay-filter="allChoose" lay-skin="primary">
+                                <input type="checkbox" id="checkbox_head" name="checkbox_head" lay-filter="allChoose"
+                                       lay-skin="primary">
                             </th>
                             <th class="ths">任务编号</th>
-                            <th class="ths">任务分类名</th>
+                            <th class="ths">分类名</th>
                             <th class="ths">用户名</th>
                             <th class="ths">任务状态</th>
                             <th class="ths">收费项目</th>
                             <th class="ths">发布时间</th>
-                            <th class="ths">任务需要人数</th>
-                            <th class="ths">任务招募人数</th>
-                            <th class="ths">任务内容</th>
-                            <th class="ths">任务描述</th>
+                            <th class="ths">需要人数</th>
+                            <th class="ths">招募人数</th>
+                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务内容</th>
+                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务描述</th>
                             <th class="ths">操作</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
                         <tr th:each="model : ${modelObject}">
-                            <td><input type="checkbox" name="" lay-skin="primary"></td>
+                            <td><input type="checkbox" name="content" lay-skin="primary"></td>
                             <td id="taskId" th:text="${model.firstValue.id}" th:value="${model.firstValue.id}">
                                 2017009171822298053
                             </td>
@@ -133,7 +134,9 @@
                             <td th:text="${model.firstValue.data}"></td>
                             <td th:text="${model.firstValue.taskDescription}">2017-08-17 18:22</td>
                             <td class="td-manage">
-                                <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
+                                <a title="查看任务内容" id="lookId"
+                                   onclick="xadmin.open('查看任务内容','/justyou/project/project_view?id='+$(this).parent().parent().children('#taskId').attr('value'))"
+                                   href="javascript:;">
                                     <i class="layui-icon">&#xe63c;</i></a>
                                 <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                     <i class="layui-icon">&#xe640;</i></a>
@@ -159,22 +162,27 @@
 </div>
 </body>
 <script>
+    var tableData;
+
     layui.use(['laydate', 'form', 'table'],
         function () {
             var laydate = layui.laydate;
-            //点击全选, 勾选
-            table.on('checkbox(allChoose)', function (data) {
-                var child = $("#tbody input[type='checkbox']");
+            var $ = layui.jquery, table = layui.table, layer = layui.layer, form = layui.form; //独立版的layer无需执行这一句
+            form.on('checkbox(allChoose)', function (data) {
+                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+                tableData = child;
                 child.each(function (index, item) {
-                    item.checked = data.elem.checked;
+                    item.checked = !item.checked;
                 });
                 form.render('checkbox');
             });
+            table.render({
+                id: 'tableId'
+            })
             //执行一个laydate实例
             laydate.render({
                 elem: '#start' //指定元素
             });
-
             //执行一个laydate实例
             laydate.render({
                 elem: '#end' //指定元素
@@ -212,6 +220,7 @@
             });
     }
 
+
     // 搜索功能
     $('.layui-btn').click(function () {
         let search = {
@@ -236,6 +245,7 @@
                 console.log(textStatus);
                 console.log(XMLHttpRequest.toString())
             }
+
         })
     });
 
@@ -253,7 +263,7 @@
                 $.ajax({
                     async: false,
                     url: '/justyou/project/delete_task',
-                    type:'post',
+                    type: 'post',
                     data: JSON.stringify(value),
                     contentType: 'application/json',
                     success: data => {
@@ -271,16 +281,39 @@
     }
 
     function delAll(argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？' + data,
+        if (tableData === undefined) {
+            alert('需要先点击一键反选复选框');
+            return;
+        }
+        //存在问题
+        let deleteList = [];
+        let count = 0;
+        tableData.each(function (index, item) {
+            if (item.checked) {
+                deleteList[count] = $(item).parent().parent().children('#taskId').attr('value');
+                count++
+            }
+        });
+        layui.form.render('checkbox');
+        layer.confirm('确认要删除吗？' + deleteList,
             function (index) {
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {
-                    icon: 1
-                });
-                $(".layui-form-checked").not('.header').parents('tr').remove();
+                $.ajax({
+                    async: false,
+                    url: '/justyou/project/deleteList',
+                    type: 'post',
+                    data: JSON.stringify(deleteList),
+                    contentType: 'application/json',
+                    success: data => {
+                        if (data.success) {
+                            //捉到所有被选中的，发异步进行删除
+                            layer.msg('删除成功', {
+                                icon: 1
+                            });
+                            $(".layui-form-checked").not('.header').parents('tr').remove();
+                        }
+                    }
+                })
+
             });
     }</script>
 

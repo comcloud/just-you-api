@@ -8,14 +8,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -65,6 +61,12 @@ public class ProjectController {
         return "/X-admin/order/order-list::table_fragment";
     }
 
+
+    @RequestMapping(value = "/project_view",method = RequestMethod.GET)
+    public String lookProject(Model model, @RequestParam(value = "id") int id){
+        model.addAttribute("taskMap",projectService.getContentById(id));
+        return "/X-admin/members/member-add";
+    }
     /**
      * @return 跳转到任务添加页面
      */
@@ -94,6 +96,12 @@ public class ProjectController {
         final String decode = URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
         final JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
         return JsonNodeFactory.instance.objectNode().put("success", projectService.saveNewProject(node)).toPrettyString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteList",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public String deleteList(@RequestBody Integer[] list){
+        return JsonNodeFactory.instance.objectNode().put("success",projectService.removeList(list)).toPrettyString();
     }
 
     /**

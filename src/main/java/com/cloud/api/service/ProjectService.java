@@ -6,6 +6,7 @@ import com.cloud.api.util.ModelUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 成都犀牛
@@ -22,4 +23,8 @@ public interface ProjectService {
     boolean saveNewProject(JsonNode node);
 
     boolean removeTaskById(Integer id);
+
+    boolean removeList(Integer[] list);
+
+    Map<String,String> getContentById(int id);
 }

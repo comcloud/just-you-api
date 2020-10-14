@@ -29,4 +29,6 @@ public interface ProjectMapper {
     boolean insertOneTask(@Param("task") Task task);
 
     boolean deleteTaskById(@Param("id") Integer id);
+
+    String selectTaskDataById(@Param("id") int id);
 }

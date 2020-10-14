@@ -6,13 +6,16 @@ import com.cloud.api.bean.entity.TaskClassification;
 import com.cloud.api.mapper.ProjectMapper;
 import com.cloud.api.service.ProjectService;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 成都犀牛
@@ -23,6 +26,9 @@ import java.util.List;
 public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
+
+    private Logger log = LoggerFactory.getLogger(ProjectServiceImpl.class);
+
 
     /**
      * @return 任务数据列表
@@ -97,6 +103,31 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public boolean removeTaskById(Integer id) {
         return projectMapper.deleteTaskById(id);
+    }
+
+    @Override
+    public boolean removeList(Integer[] list) {
+        for (Integer integer : list) {
+            projectMapper.deleteTaskById(integer);
+        }
+        return true;
+    }
+
+    @Override
+    public Map<String, String> getContentById(int id) {
+        String data = projectMapper.selectTaskDataById(id);
+        Map<String,String> result = new HashMap<>(15);
+        try {
+            final JsonNode node = new ObjectMapper().readTree(data);
+            final Iterator<String> stringIterator = node.fieldNames();
+            while (stringIterator.hasNext()) {
+                String key = stringIterator.next();
+                result.put(key,node.get(key).toString());
+            }
+        } catch (JsonProcessingException e) {
+            log.error("id为{},出现"+e.getMessage().substring(0,e.getMessage().indexOf("at")),id);
+        }
+        return result;
     }
 
     /**
