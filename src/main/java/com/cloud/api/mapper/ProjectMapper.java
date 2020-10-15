@@ -3,6 +3,7 @@ package com.cloud.api.mapper;
 import com.cloud.api.bean.dto.SearchObject;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskClassification;
+import com.cloud.api.util.ModelUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,5 +31,5 @@ public interface ProjectMapper {
 
     boolean deleteTaskById(@Param("id") Integer id);
 
-    String selectTaskDataById(@Param("id") int id);
+    Task selectTaskDataById(@Param("id") int id);
 }

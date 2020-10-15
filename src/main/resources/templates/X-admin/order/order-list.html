@@ -27,6 +27,11 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        td {
+
+        }
+    </style>
 </head>
 
 <body>
@@ -131,7 +136,7 @@
                             <td th:text="${model.firstValue.releaseTime}">未支付</td>
                             <td th:text="${model.firstValue.needNumber}">未发货</td>
                             <td th:text="${model.firstValue.recruitingNumber}">申通物流</td>
-                            <td th:text="${model.firstValue.data}"></td>
+                            <td th:text="${model.firstValue.data}" ></td>
                             <td th:text="${model.firstValue.taskDescription}">2017-08-17 18:22</td>
                             <td class="td-manage">
                                 <a title="查看任务内容" id="lookId"
@@ -315,6 +320,11 @@
                 })
 
             });
-    }</script>
+    }
+
+    $(function () {
+
+    })
+</script>
 
 </html>

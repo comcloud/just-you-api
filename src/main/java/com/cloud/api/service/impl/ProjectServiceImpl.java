@@ -56,13 +56,13 @@ public class ProjectServiceImpl implements ProjectService {
         Integer charge = null;
         Integer projectState = null;
         Integer projectId = null;
-        if(!"".equals(chargeStr)){
+        if (!"".equals(chargeStr)) {
             charge = Integer.parseInt(chargeStr);
         }
-        if(!"".equals(projectStateStr)){
+        if (!"".equals(projectStateStr)) {
             projectState = Integer.parseInt(projectStateStr);
         }
-        if(!"".equals(projectIdStr)){
+        if (!"".equals(projectIdStr)) {
             projectId = Integer.parseInt(projectIdStr);
         }
         SearchObject searchObject = new SearchObject();
@@ -78,6 +78,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 管理员保存新的任务
+     *
      * @param node 任务数据
      * @return 保存结果
      */
@@ -85,17 +86,17 @@ public class ProjectServiceImpl implements ProjectService {
     public boolean saveNewProject(JsonNode node) {
         Task task = new Task();
         task.setId((long) 0)
-            .setCharge(Integer.parseInt(node.findPath("charge").toString().replace("\"","")))
-            .setClassId((long) Integer.parseInt(node.findPath("sort").toString().replace("\"","")))
-            .setData(node.findPath("projectData").toString().replace("\"",""))
-            .setNeedNumber(Integer.parseInt(node.findPath("needNumber").toString().replace("\"","")))
-            .setRecruitingNumber(Integer.parseInt(node.findPath("recruitingNumber").toString().replace("\"","")))
-            .setReleaseTime(LocalDateTime.parse(node.findPath("releaseTime").toString().replace("\"","")))
-            .setState(Integer.parseInt(node.findPath("state").toString().replace("\"","")))
-            .setTaskComment(Integer.parseInt(node.findPath("comment").toString().replace("\"","")))
-            .setTaskDescription(node.findPath("desc").toString().replace("\"",""))
+                .setCharge(Integer.parseInt(node.findPath("charge").toString().replace("\"", "")))
+                .setClassId((long) Integer.parseInt(node.findPath("sort").toString().replace("\"", "")))
+                .setData(node.findPath("projectData").toString().replace("\"", ""))
+                .setNeedNumber(Integer.parseInt(node.findPath("needNumber").toString().replace("\"", "")))
+                .setRecruitingNumber(Integer.parseInt(node.findPath("recruitingNumber").toString().replace("\"", "")))
+                .setReleaseTime(LocalDateTime.parse(node.findPath("releaseTime").toString().replace("\"", "")))
+                .setState(Integer.parseInt(node.findPath("state").toString().replace("\"", "")))
+                .setTaskComment(Integer.parseInt(node.findPath("comment").toString().replace("\"", "")))
+                .setTaskDescription(node.findPath("desc").toString().replace("\"", ""))
                 //表示是管理员保存
-            .setUserId((long) 1);
+                .setUserId((long) 1);
         return projectMapper.insertOneTask(task);
 
     }
@@ -115,23 +116,25 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Map<String, String> getContentById(int id) {
-        String data = projectMapper.selectTaskDataById(id);
-        Map<String,String> result = new HashMap<>(15);
+        Task task = projectMapper.selectTaskDataById(id);
+        Map<String, String> result = new HashMap<>(15);
         try {
-            final JsonNode node = new ObjectMapper().readTree(data);
+            final JsonNode node = new ObjectMapper().readTree(task.getData());
             final Iterator<String> stringIterator = node.fieldNames();
             while (stringIterator.hasNext()) {
                 String key = stringIterator.next();
-                result.put(key,node.get(key).toString());
+                result.put(key, node.get(key).toString());
             }
+            result.put("任务描述", task.getTaskDescription());
         } catch (JsonProcessingException e) {
-            log.error("id为{},出现"+e.getMessage().substring(0,e.getMessage().indexOf("at")),id);
+            log.error("任务id为{},出现" + e.getMessage().substring(0, e.getMessage().indexOf("at")), id);
         }
         return result;
     }
 
     /**
      * 将指定的任务以及分类名和用户名打包
+     *
      * @param tasks 任务列表
      * @return 打包列表
      */

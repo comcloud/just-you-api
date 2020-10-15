@@ -49,7 +49,7 @@
     <select id="selectAllTaskClassification" resultType="com.cloud.api.bean.entity.TaskClassification">
         select id,name from task_classification
     </select>
-    <select id="selectTaskDataById" resultType="java.lang.String">
-        select data from task where id = #{id}
+    <select id="selectTaskDataById" resultType="com.cloud.api.bean.entity.Task">
+        select data,task_description from task where id = #{id}
     </select>
 </mapper>

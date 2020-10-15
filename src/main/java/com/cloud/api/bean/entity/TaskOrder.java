@@ -32,7 +32,7 @@ public class TaskOrder implements Serializable {
      */
     private Integer orderState;
 
-    private Date orderIme;
+    private Date orderTime;
 
 
     public String getTaskOrderId() {
@@ -75,12 +75,12 @@ public class TaskOrder implements Serializable {
         this.orderState = orderState;
     }
 
-    public Date getOrderIme() {
-        return orderIme;
+    public Date getOrderTime() {
+        return orderTime;
     }
 
-    public void setOrderIme(Date orderIme) {
-        this.orderIme = orderIme;
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
     }
 
 }

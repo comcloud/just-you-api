@@ -67,8 +67,22 @@ public class Task implements Serializable {
      * */
     private String taskDescription;
 
+    /**
+     * 任务赏金
+     */
+    private double money;
+
     public String getTaskDescription() {
         return taskDescription;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public Task setMoney(double money) {
+        this.money = money;
+        return this;
     }
 
     public LocalDateTime getStartTime() {

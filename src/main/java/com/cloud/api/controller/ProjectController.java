@@ -62,6 +62,11 @@ public class ProjectController {
     }
 
 
+    /**
+     * @param model 存储任务数据
+     * @param id 要查看的任务id
+     * @return 查看任务view
+     */
     @RequestMapping(value = "/project_view",method = RequestMethod.GET)
     public String lookProject(Model model, @RequestParam(value = "id") int id){
         model.addAttribute("taskMap",projectService.getContentById(id));
