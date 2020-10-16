@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.UserMapper">
+        <resultMap id="UserMap" type="com.cloud.api.bean.entity.User">
+            <id column="user_id" jdbcType="INTEGER" property="userId" />
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="attention" jdbcType="VARCHAR" property="attention" />
+            <result column="fans" jdbcType="VARCHAR" property="fans" />
+            <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+            <result column="open_id" jdbcType="VARCHAR" property="open_id" />
+            <result column="address" jdbcType="VARCHAR" property="address" />
+            <result column="state" jdbcType="INTEGER" property="state" />
+            <result column="registration_time"  property="registration_time" />
+            <result column="delete"  property="delete" />
+        </resultMap>
+    <sql id="User_List">
+        user_id,user_name,attention,fans,open_id,mobile,gender,address,state,registration_time
+    </sql>
+    <update id="updateUserStateTo0">
+        update justyou.user SET state=0 where user_id=#{UserId} and `delete`=0
+    </update>
+    <update id="updateUserStateTo1">
+                update justyou.user SET state=1 where user_id=#{UserId}
+    </update>
+    <update id="deleteUserByUserId">
+        update justyou.user SET `delete` =1 , state=0 where user_id=#{UserId}
+    </update>
+    <update id="PermanentDeleteUserByUserId">
+        update justyou.user SET `delete` =2   where user_id=#{UserId}
+    </update>
+    <update id="replyUserByUserId">
+         update justyou.user SET `delete` =0 where user_id=#{UserId}
+    </update>
+    <update id="updateUserDeleteAll">
+                update justyou.user SET  `delete` = 1 where user_id in
+                <foreach item="user_id" collection="array" open="(" separator="," close=")">
+                    #{user_id}
+                </foreach>
+    </update>
+    <update id="updateUserStateTo1All">
+        update justyou.user SET `delete`=1 where  user_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <update id="replyAllUserByUserId">
+        update justyou.user SET `delete`=0 where  user_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <select id="selectAllUser" resultMap="UserMap">
+        select
+        <include refid="User_List"/>
+        from justyou.user where
+        <if test="id==0">
+            `delete`=0
+        </if>
+          <if test="id==1">
+              `delete`=1
+        </if>
+    </select>
+    <select id="selectUserStateByUserId" resultType="java.lang.Integer">
+        select state from justyou.user
+         where  user_id= #{UserId}
+    </select>
+    <select id="searchUserByOpenId" resultMap="UserMap">
+         select
+          <include refid="User_List"/>
+          from justyou.user
+              where open_id = #{Open_id}   and `delete`=0
+    </select>
+    <select id="searchUserByTimeQuantum" resultMap="UserMap">
+        select
+        <include refid="User_List"/>
+        from justyou.user
+        <where>
+            `delete`=0
+            <if test="ByTheTime!=null and StartingTime!=null">
+                and  UNIX_TIMESTAMP(registration_time) BETWEEN  UNIX_TIMESTAMP(#{StartingTime}) AND  UNIX_TIMESTAMP(#{ByTheTime})
+            </if>
+            <if test="ByTheTime!=null and StartingTime==null">
+                and UNIX_TIMESTAMP(registration_time)   &lt; UNIX_TIMESTAMP(#{ByTheTime})
+            </if>
+            <if test="ByTheTime==null and StartingTime!=null">
+                and   UNIX_TIMESTAMP(registration_time) &gt; UNIX_TIMESTAMP(#{StartingTime})
+            </if>
+        </where>
+
+    </select>
+    <select id="searchDelUserByOpenId" resultMap="UserMap">
+        select
+        <include refid="User_List"/>
+        from justyou.user
+        where open_id = #{Open_id}   and `delete`=1
+    </select>
+    <select id="searchUserDelByTimeQuantum" resultMap="UserMap">
+        select
+        *
+        from justyou.user
+        <where>
+            `delete`=1
+            <if test="ByTheTime!=null and StartingTime!=null">
+                and  UNIX_TIMESTAMP(registration_time) BETWEEN  UNIX_TIMESTAMP(#{StartingTime}) AND  UNIX_TIMESTAMP(#{ByTheTime})
+            </if>
+            <if test="ByTheTime!=null and StartingTime==null">
+                and UNIX_TIMESTAMP(registration_time)   &lt; UNIX_TIMESTAMP(#{ByTheTime})
+            </if>
+            <if test="ByTheTime==null and StartingTime!=null">
+                and   UNIX_TIMESTAMP(registration_time) &gt; UNIX_TIMESTAMP(#{StartingTime})
+            </if>
+        </where>
+    </select>
+    <select id="text" resultType="java.lang.String">
+                select UNIX_TIMESTAMP(#{a}) ,  UNIX_TIMESTAMP(#{b})
+    </select>
+
+</mapper>

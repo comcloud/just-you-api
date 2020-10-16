@@ -35,7 +35,6 @@
                         <div class="layui-card-header">最新一周新增用户</div>
                         <div class="layui-card-body" style="min-height: 280px;">
                             <div id="main1" class="layui-col-sm12" style="height: 300px;"></div>
-
                         </div>
                     </div>
                 </div>
@@ -68,39 +67,58 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     
         <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
         <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main1'));
-
+        var a=[];
+        var b=[];
+            $.ajax(
+            {
+                async:false,
+                type:"POST",
+                url : "/justyou/members/recently7CountUser",
+                success(r) {
+                    if (r.resultCode == 200) {
+                        a=r.data['datecount'];
+                        b=r.data['dates'];
+                    } else {
+                        layer.msg(r.message, {
+                            icon: "error",
+                        });
+                    }
+                }
+            });
         // 指定图表的配置项和数据
         var option = {
-            grid: {
-                top: '5%',
-                right: '1%',
-                left: '1%',
-                bottom: '10%',
-                containLabel: true
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            xAxis: {
-                type: 'category',
-                data: ['周一','周二','周三','周四','周五','周六','周日']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                name:'用户量',
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
-                type: 'line',
-                smooth: true
-            }]
-        };
+                        grid: {
+                            top: '5%',
+                            right: '1%',
+                            left: '1%',
+                            bottom: '10%',
+                            containLabel: true
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: b
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            name:'用户量',
+                            // data: r.data,
+                            data: a,
+                            type: 'line',
+                            smooth: true
+                        }]
+                    };
 
 
         // 使用刚指定的配置项和数据显示图表。
@@ -108,7 +126,6 @@
 
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main2'));
-
         // 指定图表的配置项和数据
         var option = {
             tooltip : {
@@ -157,8 +174,6 @@
                 }
             ]
         };
-
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
 
@@ -225,15 +240,16 @@
         };
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
-    </script>
-    <script>
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
           hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
+          var s = document.getElementsByTagName("script")[0];
           s.parentNode.insertBefore(hm, s);
+
+
         })();
-        </script>
+
+    </script>
     </body>
 </html>
