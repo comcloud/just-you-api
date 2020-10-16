@@ -3,15 +3,23 @@
 <mapper namespace="com.cloud.api.mapper.OrderMapper">
 
     <select id="selectTaskData" resultType="com.cloud.api.bean.entity.Task">
-        select money,start_time,end_time from task
+        select id, money,start_time,end_time from task
     </select>
     <select id="selectOrderData" resultType="com.cloud.api.bean.entity.TaskOrder">
-        select task_id,order_state,order_time from task_order;
+        select * from task_order;
     </select>
     <select id="selectNumberFromTaskId" resultType="java.lang.Integer">
-        select count (select * from task_order where task_id = #{id});
+        select count(task_order_id) from task_order where task_id = #{id};
     </select>
     <select id="selectOpenIdFromUserId" resultType="java.lang.String">
-        select open_id from task_order where order_user_id = #{orderUserId}
+        select open_id from user where user_id = #{orderUserId}
+    </select>
+    <select id="selectTaskIdFromOpenId" resultType="java.lang.Long">
+        select task_id from task_order where task_id = #{openId}
+    </select>
+    <select id="selectTaskIdFromId" resultType="com.cloud.api.bean.entity.Task">
+        select  id,start_time,end_time,money
+        from task
+        where id = #{taskId}
     </select>
 </mapper>

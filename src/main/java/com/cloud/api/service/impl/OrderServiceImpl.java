@@ -32,33 +32,23 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> getAllOrderData() {
-        List<Task> tasks = orderMapper.selectTaskData();
         List<TaskOrder> taskOrders = orderMapper.selectOrderData();
         List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> modelUtil = new ArrayList<>();
-        //第一步把task存起来
-        tasks.forEach(task -> {
+        taskOrders.forEach(taskOrder -> {
+            Task task = orderMapper.selectTaskIdFromId(taskOrder.getTaskId());
             Integer numberOfApplicants = orderMapper.selectNumberFromTaskId(task.getId());
             final Duration between = Duration.between(task.getEndTime(), task.getStartTime());
             Integer developmentCycle = Math.toIntExact(between.toHours() / 24);
-            ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>> tempTaskOrderNull = new ModelUtil<>();
-            ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>> value = new ModelUtil<>();
-            ModelUtil<String, ModelUtil<Integer, Integer>> tempOpenIdNull = new ModelUtil<>();
+            ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>> onlyTaskOrder = new ModelUtil<>();
+            ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>> orderAndTask = new ModelUtil<>();
+            ModelUtil<String, ModelUtil<Integer, Integer>> orderAndTaskAndOpenId = new ModelUtil<>();
             ModelUtil<Integer, Integer> integerModel = new ModelUtil<>();
             integerModel.setFirstValue(numberOfApplicants).setLastValue(developmentCycle);
-            tempOpenIdNull.setFirstValue("").setLastValue(integerModel);
-            value.setFirstValue(task).setLastValue(tempOpenIdNull);
-            tempTaskOrderNull.setFirstValue(null).setLastValue(value);
-            modelUtil.add(tempTaskOrderNull);
-        });
-        //第二步将task order值存入
-        taskOrders.forEach(taskOrder -> {
-            for (int i = 0; i < taskOrders.size(); i++) {
-                if (modelUtil.get(i).getLastValue().getFirstValue().getId().equals(taskOrder.getTaskId())){
-                    modelUtil.get(i).setFirstValue(taskOrder);
-                    modelUtil.get(i).getLastValue().getLastValue().setFirstValue(orderMapper.selectOpenIdFromUserId(taskOrder.getOrderUserId()));
-                    break;
-                }
-            }
+            String openId = orderMapper.selectOpenIdFromUserId(taskOrder.getOrderUserId());
+            orderAndTaskAndOpenId.setFirstValue(openId).setLastValue(integerModel);
+            orderAndTask.setFirstValue(task).setLastValue(orderAndTaskAndOpenId);
+            onlyTaskOrder.setFirstValue(taskOrder).setLastValue(orderAndTask);
+            modelUtil.add(onlyTaskOrder);
         });
         return modelUtil;
     }

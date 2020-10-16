@@ -22,4 +22,8 @@ public interface OrderMapper {
     Integer selectNumberFromTaskId(Long id);
 
     String selectOpenIdFromUserId(@Param("orderUserId") Long orderUserId);
+
+    Long selectTaskIdFromOpenId(@Param("openId") String openId);
+
+    Task selectTaskIdFromId(Long taskId);
 }
