@@ -45,10 +45,10 @@ public class ProjectServiceImpl implements ProjectService {
         final String startStr = search.findPath("start").toString().replace("\"", "").trim();
         final String endStr = search.findPath("end").toString().replace("\"", "").trim();
         if (!"".equals(startStr)) {
-            start = LocalDateTime.parse(startStr);
+            start = LocalDateTime.parse(startStr+"T00:00:00");
         }
         if (!"".equals(endStr)) {
-            end = LocalDateTime.parse(endStr);
+            end = LocalDateTime.parse(endStr+"T00:00:00");
         }
         String chargeStr = search.findPath("charge").toString().replace("\"", "").trim();
         String projectStateStr = search.findPath("projectState").toString().replace("\"", "").trim();

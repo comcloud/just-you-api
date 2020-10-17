@@ -27,11 +27,6 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        td {
-
-        }
-    </style>
 </head>
 
 <body>
@@ -52,7 +47,7 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
+                    <form class="layui-form layui-col-space5" onsubmit="return false;">
                         <div class="layui-input-inline layui-show-xs-block">
                             <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
                         <div class="layui-input-inline layui-show-xs-block">
@@ -79,7 +74,7 @@
                             <input type="text" name="username" id="projectId" placeholder="请输入项目编号" autocomplete="off"
                                    class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                            <button class="layui-btn">
                                 <i class="layui-icon">&#xe615;</i></button>
                         </div>
                     </form>
@@ -93,7 +88,7 @@
                         <i class="layui-icon"></i>添加
                     </button>
                 </div>
-                <div class="layui-card-body " th:fragment="table_fragement">
+                <div class="layui-card-body " id="table_div" th:fragment="table_fragment">
                     <table id="tableId" class="layui-table layui-form">
                         <thead>
                         <tr>
@@ -109,8 +104,10 @@
                             <th class="ths">发布时间</th>
                             <th class="ths">需要人数</th>
                             <th class="ths">招募人数</th>
-                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务内容</th>
-                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务描述</th>
+                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务内容
+                            </th>
+                            <th class="ths" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">任务描述
+                            </th>
                             <th class="ths">操作</th>
                         </tr>
                         </thead>
@@ -122,7 +119,6 @@
                             </td>
                             <td th:text="${model.lastValue.firstValue}">老王:18925139194</td>
                             <td th:text="${model.lastValue.lastValue}">7829.10</td>
-
                             <td th:switch="${model.firstValue.state}">
                                 <p th:case="1">草稿</p>
                                 <p th:case="2">待审核</p>
@@ -131,12 +127,11 @@
                                 <p th:case="5">已完成</p>
                                 <p th:case="6">已超时</p>
                             </td>
-
                             <td th:text="${model.firstValue.charge}==1?'收费':'不收费'">待确认</td>
                             <td th:text="${model.firstValue.releaseTime}">未支付</td>
                             <td th:text="${model.firstValue.needNumber}">未发货</td>
                             <td th:text="${model.firstValue.recruitingNumber}">申通物流</td>
-                            <td th:text="${model.firstValue.data}" ></td>
+                            <td th:text="${model.firstValue.data}"></td>
                             <td th:text="${model.firstValue.taskDescription}">2017-08-17 18:22</td>
                             <td class="td-manage">
                                 <a title="查看任务内容" id="lookId"
@@ -225,7 +220,6 @@
             });
     }
 
-
     // 搜索功能
     $('.layui-btn').click(function () {
         let search = {
@@ -236,15 +230,11 @@
             projectId: $('#projectId').val()
         }
         $.ajax({
-            async: false,
             url: '/justyou/project/search_data',
             type: 'post',
             data: {'search': JSON.stringify(search)},
-            // dataType: 'json',
-            // contentType: 'application/json',
             success: function (data) {
-                // $('.table_fragment').load('http://localhost:8089/justyou/project/search_data')
-                $('.table_fragment').html(data)
+                $('#table_div').html($(data).html())
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(textStatus);
