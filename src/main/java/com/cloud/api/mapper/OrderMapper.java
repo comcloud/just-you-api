@@ -26,4 +26,6 @@ public interface OrderMapper {
     Long selectTaskIdFromOpenId(@Param("openId") String openId);
 
     Task selectTaskIdFromId(Long taskId);
+
+    boolean deleteTaskOrderById(Integer id);
 }

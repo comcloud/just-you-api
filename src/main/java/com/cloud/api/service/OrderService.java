@@ -13,4 +13,8 @@ import java.util.List;
  */
 public interface OrderService {
     List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> getAllOrderData();
+
+    boolean removeTaskOrderById(Integer id);
+
+    boolean removeList(Integer[] list);
 }

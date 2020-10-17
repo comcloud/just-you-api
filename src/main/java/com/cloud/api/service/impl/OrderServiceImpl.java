@@ -37,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
         taskOrders.forEach(taskOrder -> {
             Task task = orderMapper.selectTaskIdFromId(taskOrder.getTaskId());
             Integer numberOfApplicants = orderMapper.selectNumberFromTaskId(task.getId());
-            final Duration between = Duration.between(task.getEndTime(), task.getStartTime());
-            Integer developmentCycle = Math.toIntExact(between.toHours() / 24);
+            final Duration between = Duration.between(task.getStartTime(), task.getEndTime());
+            Integer developmentCycle = Math.toIntExact(between.toDays());
             ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>> onlyTaskOrder = new ModelUtil<>();
             ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>> orderAndTask = new ModelUtil<>();
             ModelUtil<String, ModelUtil<Integer, Integer>> orderAndTaskAndOpenId = new ModelUtil<>();
@@ -50,6 +50,20 @@ public class OrderServiceImpl implements OrderService {
             onlyTaskOrder.setFirstValue(taskOrder).setLastValue(orderAndTask);
             modelUtil.add(onlyTaskOrder);
         });
+
         return modelUtil;
+    }
+
+    @Override
+    public boolean removeTaskOrderById(Integer id) {
+        return orderMapper.deleteTaskOrderById(id);
+    }
+
+    @Override
+    public boolean removeList(Integer[] list) {
+        for (Integer integer : list) {
+            orderMapper.deleteTaskOrderById(integer);
+        }
+        return true;
     }
 }

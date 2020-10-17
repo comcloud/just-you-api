@@ -64,14 +64,15 @@ public class ProjectController {
 
     /**
      * @param model 存储任务数据
-     * @param id 要查看的任务id
+     * @param id    要查看的任务id
      * @return 查看任务view
      */
-    @RequestMapping(value = "/project_view",method = RequestMethod.GET)
-    public String lookProject(Model model, @RequestParam(value = "id") int id){
-        model.addAttribute("taskMap",projectService.getContentById(id));
+    @RequestMapping(value = "/project_view", method = RequestMethod.GET)
+    public String lookProject(Model model, @RequestParam(value = "id") int id) {
+        model.addAttribute("taskMap", projectService.getContentById(id));
         return "/X-admin/members/member-add";
     }
+
     /**
      * @return 跳转到任务添加页面
      */
@@ -83,9 +84,9 @@ public class ProjectController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delete_task",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public String deleteTask(@RequestBody Integer id){
-        return JsonNodeFactory.instance.objectNode().put("success",projectService.removeTaskById(id)).toPrettyString();
+    @RequestMapping(value = "/delete_task", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String deleteTask(@RequestBody Integer id) {
+        return JsonNodeFactory.instance.objectNode().put("success", projectService.removeTaskById(id)).toPrettyString();
     }
 
     /**
@@ -104,13 +105,14 @@ public class ProjectController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/deleteList",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public String deleteList(@RequestBody Integer[] list){
-        return JsonNodeFactory.instance.objectNode().put("success",projectService.removeList(list)).toPrettyString();
+    @RequestMapping(value = "/deleteList", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String deleteList(@RequestBody Integer[] list) {
+        return JsonNodeFactory.instance.objectNode().put("success", projectService.removeList(list)).toPrettyString();
     }
 
     /**
      * 将分类数据存储到model中
+     *
      * @param model 存储模型
      * @return 结果
      */

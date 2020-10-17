@@ -4,10 +4,14 @@ import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskOrder;
 import com.cloud.api.service.OrderService;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -37,5 +41,17 @@ public class OrderController {
         List<ModelUtil<TaskOrder,ModelUtil<Task,ModelUtil<String, ModelUtil<Integer,Integer>>>>> modelUtil = orderService.getAllOrderData();
         model.addAttribute("orderObject", modelUtil);
         return "/X-admin/order/order-list1";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteList", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String deleteList(@RequestBody Integer[] list) {
+        return JsonNodeFactory.instance.objectNode().put("success", orderService.removeList(list)).toPrettyString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteTaskOrder", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public String deleteTask(@RequestBody Integer id) {
+        return JsonNodeFactory.instance.objectNode().put("success", orderService.removeTaskOrderById(id)).toPrettyString();
     }
 }
