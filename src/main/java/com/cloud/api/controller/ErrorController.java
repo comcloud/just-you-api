@@ -37,7 +37,7 @@ public class ErrorController implements HandlerInterceptor {
                            ModelAndView modelAndView) {
         if (response.getStatus() != 200) {
             try {
-                modelAndView.setViewName("/X-admin/error");
+                modelAndView.setViewName("X-admin/error");
             }catch (NullPointerException ignored){
             }
         }

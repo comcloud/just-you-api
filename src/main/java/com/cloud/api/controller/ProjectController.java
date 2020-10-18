@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ProjectController {
     public String projectList(Model model) {
         final List<ModelUtil<Task, ModelUtil<String, String>>> allTaskData = projectService.getAllTaskData();
         model.addAttribute("modelObject", allTaskData);
-        return "/X-admin/order/order-list";
+        return "X-admin/order/order-list";
     }
 
     /**
@@ -53,12 +54,12 @@ public class ProjectController {
      */
     @RequestMapping(value = "/search_data", method = RequestMethod.POST)
     public String searchData(@RequestBody String requestBody,
-                             Model model) throws JsonProcessingException {
-        String decode = URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
+                             Model model) throws JsonProcessingException, UnsupportedEncodingException {
+        String decode = URLDecoder.decode(requestBody, "utf-8");
         JsonNode search = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
         List<ModelUtil<Task, ModelUtil<String, String>>> modelObject = projectService.searchData(search);
         model.addAttribute("modelObject", modelObject);
-        return "/X-admin/order/order-list::table_fragment";
+        return "X-admin/order/order-list::table_fragment";
     }
 
 
@@ -70,7 +71,7 @@ public class ProjectController {
     @RequestMapping(value = "/project_view", method = RequestMethod.GET)
     public String lookProject(Model model, @RequestParam(value = "id") int id) {
         model.addAttribute("taskMap", projectService.getContentById(id));
-        return "/X-admin/members/member-add";
+        return "X-admin/members/member-add";
     }
 
     /**
@@ -80,7 +81,7 @@ public class ProjectController {
     public String orderAdd(Model model) {
         List<TaskClassification> classifications = projectService.getAllTaskClassification();
         model.addAttribute("classifications", classifications);
-        return "/X-admin/order/order-add";
+        return "X-admin/order/order-add";
     }
 
     @ResponseBody
@@ -98,8 +99,8 @@ public class ProjectController {
      */
     @ResponseBody
     @RequestMapping(value = "/add_project", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public String addProject(@RequestBody String requestBody) throws JsonProcessingException {
-        final String decode = URLDecoder.decode(requestBody, StandardCharsets.UTF_8);
+    public String addProject(@RequestBody String requestBody) throws JsonProcessingException, UnsupportedEncodingException {
+        final String decode = URLDecoder.decode(requestBody, "utf-8");
         final JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
         return JsonNodeFactory.instance.objectNode().put("success", projectService.saveNewProject(node)).toPrettyString();
     }

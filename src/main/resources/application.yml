@@ -4,8 +4,8 @@ server:
   servlet:
     context-path: /justyou
 #  ssl:
-#    key-store: 3985137.pfx
-#    key-store-password: 9787MqgC
+#    key-store: 4637519_www.mrkleo.top.pfx
+#    key-store-password: t17NhCxA
 #    keyStoreType: PKCS12
 
 mybatis:

@@ -40,7 +40,7 @@ public class OrderController {
     public String orderList(Model model) {
         List<ModelUtil<TaskOrder,ModelUtil<Task,ModelUtil<String, ModelUtil<Integer,Integer>>>>> modelUtil = orderService.getAllOrderData();
         model.addAttribute("orderObject", modelUtil);
-        return "/X-admin/order/order-list1";
+        return "X-admin/order/order-list1";
     }
 
     @ResponseBody

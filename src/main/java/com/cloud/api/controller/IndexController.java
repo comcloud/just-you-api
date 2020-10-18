@@ -35,7 +35,7 @@ public class IndexController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
     public String admin(HttpServletRequest request) {
-        return "/X-admin/index";
+        return "X-admin/index";
 
     }
 
@@ -50,7 +50,7 @@ public class IndexController {
     @RequestMapping(value = "/loginCheck", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public String loginCheck(@RequestBody String loginInfo,
                              HttpServletRequest request) throws IOException {
-        String decode = URLDecoder.decode(loginInfo, StandardCharsets.UTF_8);
+        String decode = URLDecoder.decode(loginInfo, "utf-8");
         JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("{")));
         ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
         String email = node.findPath("email").toString().replace("\"", "");
@@ -83,18 +83,18 @@ public class IndexController {
      */
     @RequestMapping(value = "/toLogin")
     public String login() {
-        return "/X-admin/login";
+        return "X-admin/login";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = {"/", "index"})
     public String index() {
-        return "/X-admin/index";
+        return "X-admin/index";
     }
 
     @RequestMapping(value = "/exception")
     public String exception(){
-        return "/X-admin/error";
+        return "X-admin/error";
     }
 
     /**
@@ -105,6 +105,6 @@ public class IndexController {
     @RequestMapping(value = "logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("admin");
-        return "/X-admin/login";
+        return "X-admin/login";
     }
 }

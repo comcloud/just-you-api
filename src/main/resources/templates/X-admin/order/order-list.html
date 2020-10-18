@@ -113,19 +113,19 @@
                         </thead>
                         <tbody id="tbody">
                         <tr th:each="model : ${modelObject}">
-                            <td><input type="checkbox" name="content" lay-skin="primary"></td>
+                            <td><input type="checkbox" id="content" name="content" lay-skin="primary"></td>
                             <td id="taskId" th:text="${model.firstValue.id}" th:value="${model.firstValue.id}">
                                 2017009171822298053
                             </td>
                             <td th:text="${model.lastValue.firstValue}">老王:18925139194</td>
                             <td th:text="${model.lastValue.lastValue}">7829.10</td>
                             <td th:switch="${model.firstValue.state}">
-                                <p th:case="1">草稿</p>
-                                <p th:case="2">待审核</p>
-                                <p th:case="3">已发布</p>
-                                <p th:case="4">已接单</p>
-                                <p th:case="5">已完成</p>
-                                <p th:case="6">已超时</p>
+                                <p th:case="0">草稿</p>
+                                <p th:case="1">待审核</p>
+                                <p th:case="2">已发布</p>
+                                <p th:case="3">已接单</p>
+                                <p th:case="4">已完成</p>
+                                <p th:case="5">已超时</p>
                             </td>
                             <td th:text="${model.firstValue.charge}==1?'收费':'不收费'">待确认</td>
                             <td th:text="${model.firstValue.releaseTime}">未支付</td>
@@ -159,6 +159,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </body>
 <script>
@@ -234,8 +235,36 @@
             type: 'post',
             data: {'search': JSON.stringify(search)},
             success: function (data) {
+                let styleString = `<div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <i class="layui-icon layui-icon-ok"></i>
+                                    </div>`
                 $('#table_div').html($(data).html())
+                let findEle = $('#table_div').find('table input[type="checkbox"]');
+                findEle.each(function (index, item) {
+                    $(item).parent().append(styleString)
+                    $(item).next().on('click', function () {
+                        if ($(item).checked) {
+                            $(item).next().attr('class', 'layui-unselect layui-form-checkbox')
+                        } else {
+                            $(item).next().attr('class', 'layui-unselect layui-form-checkbox layui-form-checked')
+                        }
+                    })
+                })
+                let head = $('#tableId').find('thead input[type="checkbox"]');
+                head.each(function (index, item) {
+                    $(item).on('change', function () {
+                        // if($(item).checked)
+                        let child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+                        tableData = child;
+                        child.each(function (index, item) {
+                            item.checked = !item.checked;
+                        });
+                        layui.form.render('checkbox');
+                    })
+                })
             },
+
+            //
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(textStatus);
                 console.log(XMLHttpRequest.toString())

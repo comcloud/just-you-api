@@ -67,8 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
     }
-
-
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/x-admin/js/**","/x-admin/css/**",
