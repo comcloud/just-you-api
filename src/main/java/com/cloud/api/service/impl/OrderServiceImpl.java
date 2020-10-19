@@ -1,14 +1,17 @@
 package com.cloud.api.service.impl;
 
+import com.cloud.api.bean.dto.OrderSearchObject;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskOrder;
 import com.cloud.api.mapper.OrderMapper;
 import com.cloud.api.service.OrderService;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,51 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> getAllOrderData() {
         List<TaskOrder> taskOrders = orderMapper.selectOrderData();
+        return packing(taskOrders);
+    }
+
+    @Override
+    public boolean removeTaskOrderById(Integer id) {
+        return orderMapper.deleteTaskOrderById(id);
+    }
+
+    @Override
+    public boolean removeList(Integer[] list) {
+        for (Integer integer : list) {
+            orderMapper.deleteTaskOrderById(integer);
+        }
+        return true;
+    }
+
+    @Override
+    public List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> search(JsonNode node) {
+        final String firstMoneyStr = node.findPath("firstMoney").toString().replace("\"", "").trim();
+        final String lastMoneyStr = node.findPath("lastMoney").toString().replace("\"", "").trim();
+        final String releaseTimeStr = node.findPath("releaseTime").toString().replace("\"", "").trim();
+        final String statusStr = node.findPath("status").toString().replace("\"", "").trim();
+        LocalDateTime releaseTime = null;
+        if (!"".equals(releaseTimeStr)) {
+            releaseTime = LocalDateTime.parse(releaseTimeStr+"T00:00:00");
+        }
+        Double firstMoney = null;
+        Double lastMoney = null;
+        Integer status = null;
+        if(!"".equals(firstMoneyStr)){
+            firstMoney = Double.parseDouble(firstMoneyStr);
+        }
+        if(!"".equals(lastMoneyStr)){
+            lastMoney = Double.parseDouble(lastMoneyStr);
+        }
+        if(!"".equals(statusStr)){
+            status = Integer.parseInt(statusStr);
+        }
+        OrderSearchObject orderSearchObject = new OrderSearchObject();
+        orderSearchObject.setFirstMoney(firstMoney).setLastMoney(lastMoney).setReleaseTime(releaseTime).setStatus(status);
+        List<TaskOrder> taskOrders = orderMapper.selectOrderDataBySearch(orderSearchObject);
+        return packing(taskOrders);
+    }
+
+    private List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> packing(List<TaskOrder> taskOrders){
         List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> modelUtil = new ArrayList<>();
         taskOrders.forEach(taskOrder -> {
             Task task = orderMapper.selectTaskIdFromId(taskOrder.getTaskId());
@@ -50,20 +98,6 @@ public class OrderServiceImpl implements OrderService {
             onlyTaskOrder.setFirstValue(taskOrder).setLastValue(orderAndTask);
             modelUtil.add(onlyTaskOrder);
         });
-
         return modelUtil;
-    }
-
-    @Override
-    public boolean removeTaskOrderById(Integer id) {
-        return orderMapper.deleteTaskOrderById(id);
-    }
-
-    @Override
-    public boolean removeList(Integer[] list) {
-        for (Integer integer : list) {
-            orderMapper.deleteTaskOrderById(integer);
-        }
-        return true;
     }
 }

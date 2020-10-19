@@ -25,4 +25,22 @@
         from task
         where id = #{taskId}
     </select>
+    <select id="selectOrderDataBySearch" resultType="com.cloud.api.bean.entity.TaskOrder">
+        select *
+        from task_order
+        <where>
+            <if test="orderSearchObject.releaseTime!=null">
+                order_time=#{orderSearchObject.releaseTime}
+            </if>
+            <if test="orderSearchObject.status!=null">
+                and order_state = #{orderSearchObject.status}
+            </if>
+            <if test="orderSearchObject.firstMoney !=null">
+                and task_id in (select id from task where money>#{orderSearchObject.firstMoney})
+            </if>
+            <if test="orderSearchObject.lastMoney !=null">
+                and task_id in (select id from task where money &lt; #{orderSearchObject.lastMoney})
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.cloud.api.mapper;
 
+import com.cloud.api.bean.dto.OrderSearchObject;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskOrder;
 import org.apache.ibatis.annotations.Mapper;
@@ -28,4 +29,6 @@ public interface OrderMapper {
     Task selectTaskIdFromId(Long taskId);
 
     boolean deleteTaskOrderById(Integer id);
+
+    List<TaskOrder> selectOrderDataBySearch(OrderSearchObject orderSearchObject);
 }

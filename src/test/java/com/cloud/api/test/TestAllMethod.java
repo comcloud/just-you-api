@@ -17,6 +17,10 @@ import java.util.List;
 public class TestAllMethod {
     @Test
     public void test() throws SQLException {
+        double num1=(19/4%3);
+        double num2 = (19.0/4.0%3.0);
+        System.out.println(num1);
+        System.out.println(num2);
     }
 
     @Test

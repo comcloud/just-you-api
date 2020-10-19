@@ -3,6 +3,7 @@ package com.cloud.api.service;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskOrder;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface OrderService {
     boolean removeTaskOrderById(Integer id);
 
     boolean removeList(Integer[] list);
+
+    List<ModelUtil<TaskOrder, ModelUtil<Task, ModelUtil<String, ModelUtil<Integer, Integer>>>>> search(JsonNode node);
 }

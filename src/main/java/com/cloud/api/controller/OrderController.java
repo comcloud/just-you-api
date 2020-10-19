@@ -4,6 +4,9 @@ import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskOrder;
 import com.cloud.api.service.OrderService;
 import com.cloud.api.util.ModelUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -53,5 +58,16 @@ public class OrderController {
     @RequestMapping(value = "/deleteTaskOrder", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public String deleteTask(@RequestBody Integer id) {
         return JsonNodeFactory.instance.objectNode().put("success", orderService.removeTaskOrderById(id)).toPrettyString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/search_data",method = RequestMethod.POST,produces = "application/json;charst=utf-8")
+    public String searchData(@RequestBody String search,
+                             Model model) throws UnsupportedEncodingException, JsonProcessingException {
+        String decode = URLDecoder.decode(search, "utf-8");
+        final JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("=") + 1));
+        List<ModelUtil<TaskOrder,ModelUtil<Task,ModelUtil<String, ModelUtil<Integer,Integer>>>>> result = orderService.search(node);
+        model.addAttribute("orderObject",result);
+        return "X-admin/order/order-list1::table_fragment";
     }
 }
