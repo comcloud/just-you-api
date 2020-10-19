@@ -43,15 +43,15 @@
             <div class="layui-col-md12">
                 <div class="layui-card">
                     <div class="layui-card-body ">
-                        <form class="layui-form layui-col-space5">
+                        <form class="layui-form layui-col-space5" th:action="@{/members/searchDleUser}" method="post">
                             <div class="layui-inline layui-show-xs-block">
-                                <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                <input class="layui-input"  autocomplete="off" placeholder="开始日"  hidden="" name="start" id="start">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                                <input class="layui-input"  autocomplete="off" placeholder="截止日" hidden="" name="end" id="end">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off"  class="layui-input">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -59,16 +59,17 @@
                         </form>
                     </div>
                     <div class="layui-card-header">
-                        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量恢复</button>
+                        <button class="layui-btn layui-btn-danger" onclick="replayAll()"><i class="layui-icon"></i>批量恢复</button>
                     </div>
                     <div class="layui-card-body ">
                         <table class="layui-table layui-form">
                           <thead>
                             <tr>
                               <th>
-                                <input type="checkbox" name=""  lay-skin="primary">
+                                <input type="checkbox" lay-filter="checkall" name=""  lay-skin="primary">
                               </th>
                               <th>ID</th>
+                              <th>OPEN_ID</th>
                               <th>用户名</th>
                               <th>性别</th>
                               <th>手机</th>
@@ -78,51 +79,26 @@
                               <th>状态</th>
                               <th>操作</th></tr>
                           </thead>
-                          <tbody>
+                          <tbody th:each="users : ${pageInfo.list}">
                             <tr>
                               <td>
-                                <input type="checkbox" name=""  lay-skin="primary"> 
+                                <input id="ids" type="checkbox" name=""  lay-skin="primary" th:value="${users.userId}">
                               </td>
-                              <td>1</td>
-                              <td>小明</td>
-                              <td>男</td>
-                              <td>13000000000</td>
+                              <td th:text="${users.userId}">1</td>
+                              <td th:text="${users.open_id}">1</td>
+                              <td th:text="${users.userName}">小明</td>
+                              <td th:text="${users.gender==0? '女':'男'}">男</td>
+                              <td th:text="${users.mobile}">13000000000</td>
                               <td>admin@mail.com</td>
-                              <td>北京市 海淀区</td>
-                              <td>2017-01-01 11:11:42</td>
+                              <td th:text="${users.address}">
+                              <td th:text="${#dates.format(users.registration_time,'yyyy-MM-dd HH:mm:ss')}" >2017-01-01 11:11:42</td>
                               <td class="td-status">
-                                <span class="layui-btn layui-btn-danger layui-btn-mini">
-                                                  已删除
-                                              </span>
+                                <span class="layui-btn layui-btn-danger layui-btn-mini">已删除</span>
                               <td class="td-manage">
-                                <a title="恢复" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                <a title="恢复" onclick="replay(this,this.value)" th:value="${users.userId}" href="javascript:;">
                                   <i class="layui-icon">&#xe669;</i>
                                 </a>
-                                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                  <i class="layui-icon">&#xe640;</i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <input type="checkbox" name=""  lay-skin="primary"> 
-                              </td>
-                              <td>1</td>
-                              <td>小明</td>
-                              <td>男</td>
-                              <td>13000000000</td>
-                              <td>admin@mail.com</td>
-                              <td>北京市 海淀区</td>
-                              <td>2017-01-01 11:11:42</td>
-                              <td class="td-status">
-                                <span class="layui-btn layui-btn-danger layui-btn-mini">
-                                                  已删除
-                                              </span>
-                              <td class="td-manage">
-                                <a title="恢复" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                  <i class="layui-icon">&#xe669;</i>
-                                </a>
-                                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                <a title="删除" onclick="member_del(this,this.value)"  th:value="${users.userId}" href="javascript:;">
                                   <i class="layui-icon">&#xe640;</i>
                                 </a>
                               </td>
@@ -133,12 +109,11 @@
                     <div class="layui-card-body ">
                         <div class="page">
                             <div>
-                              <a class="prev" href="">&lt;&lt;</a>
-                              <a class="num" href="">1</a>
-                              <span class="current">2</span>
-                              <a class="num" href="">3</a>
-                              <a class="num" href="">489</a>
-                              <a class="next" href="">&gt;&gt;</a>
+                                <a class="prev" th:href="@{/members/member_list/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}" th:unless="${pageInfo.isFirstPage}">&lt;&lt;</a>
+                                <a class="num" th:href="@{/members/member_list/(pageNum=${pageInfo.pageNum}-1)} "  th:if="${pageInfo.pageNum}>1" th:text="${pageInfo.pageNum}-1">1</a>
+                                <span class="current" th:text="${pageInfo.pageNum}"></span>
+                                <a class="num" th:href="@{/members/member_list/(pageNum=${pageInfo.pageNum}+1)} " th:if="${pageInfo.pageNum}+1<=${pageInfo.pages}" th:text="${pageInfo.pageNum}+1">1</a>
+                                <a class="next" th:href="@{/members/member_list/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}" th:unless="${pageInfo.isLastPage}">&gt;&gt;</a>
                             </div>
                         </div>
                     </div>
@@ -147,25 +122,53 @@
         </div>
     </div> 
     <script>
-      layui.use(['laydate','form'], function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
 
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
+        layui.use(['laydate','form'], function(){
+            var laydate = layui.laydate;
+            var  form = layui.form;
+            // 监听全选
+            form.on('checkbox(checkall)', function(data){
+
+                if(data.elem.checked){
+                    $('tbody input').prop('checked',true);
+                }else{
+                    $('tbody input').prop('checked',false);
+                }
+                form.render('checkbox');
+            });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
+            });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
         });
-      });
 
 
       /*用户-删除*/
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
+          var UserId= $(obj).attr('value');
+          layer.confirm('确认要删除吗？',{btn: ['确定', '取消']},function(index){
+              $.ajax({
+                  type:"POST",
+                  url : "/justyou/members/permanentDeleteUser",
+                  contentType: "application/json",
+                  data: JSON.stringify(UserId),
+                  success(r) {
+                      if (r.resultCode == 200) {
+                          $(obj).parents("tr").remove();
+                          layer.msg('已删除!',{icon:1,time:1000})
+                      } else {
+                          layer.msg(r.message, {
+                              icon: "error",
+                          });
+                      }
+                  }
+              });
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
           });
@@ -173,16 +176,67 @@
 
 
 
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要恢复吗？'+data,function(index){
+      function replay (obj) {
+          var UserId= $(obj).attr('value');
+          layer.confirm('确认要恢复吗？'+UserId,
+            {btn: ['确定', '取消']},
+            function(){
             //捉到所有被选中的，发异步进行删除
+                $.ajax({
+                    type:"POST",
+                    url : "/justyou/members/replyUser",
+                    contentType: "application/json",
+                    data: JSON.stringify(UserId),
+                    success(r) {
+                        if (r.resultCode == 200) {
+                            layer.msg("修改成功！！", {
+                                icon:1,time: 200000000
+                            });
+                            location.reload();
+
+                        } else {
+                            layer.msg(r.message, {
+                                icon: "error",
+                            });
+                        }
+                    }
+                });
             layer.msg('恢复成功', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }
+
+        function replayAll (argument) {
+            var ids = [];
+            // 获取选中的id
+            $('tbody input').each(function(index, el) {
+                if($(this).prop('checked')){
+                    ids.push($(this).val())
+                }
+            });
+            layer.confirm('确认要删除吗？'+ids,function(index){
+                $.ajax({
+                    type:"POST",
+                    url : "/justyou/members/replyAllUser",
+                    contentType: "application/json",
+                    data: JSON.stringify(ids),
+                    success(r) {
+                        if (r.resultCode == 200) {
+                            layer.msg('删除成功', {icon: 1});
+                            $(".layui-form-checked").not('.header').parents('tr').remove();
+                            location.reload();
+                        } else {
+                            layer.msg(r.message, {
+                                icon: "error",
+                            });
+                        }
+                    }
+                });
+                //捉到所有被选中的，发异步进行删除
+            });
+        }
+
+
     </script>
     <script>var _hmt = _hmt || []; (function() {
         var hm = document.createElement("script");

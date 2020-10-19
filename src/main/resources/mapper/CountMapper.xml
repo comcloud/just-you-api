@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.countMapper">
+    <select id="sekectTaskOrder3" resultType="java.lang.Integer">
+        select count(*)  from  justyou.task_order
+        where order_state=3
+    </select>
+    <select id="SelecttaskCount" resultType="java.lang.Integer">
+        select count(*)  from  justyou.task
+        <if test="id==0">
+            where state = 0
+        </if>
+        <if test="id==1">
+            where 1=1
+        </if>
+    </select>
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        select count(*)  from  justyou.user
+    </select>
+    <select id="selectDynamiccount" resultType="java.lang.Integer">
+                select count(*)  from  justyou.dynamic
+    </select>
+
+    <select id="selectCountUserTime" resultType="java.lang.Integer">
+        select count(*)
+        from justyou.user where  <![CDATA[ registration_time < #{da0p0"? xcte} ]]>
+    </select>
+
+</mapper>

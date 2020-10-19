@@ -20,9 +20,9 @@
     <link rel="stylesheet" th:href="@{/x-admin/css/font.css}">
     <link rel="stylesheet" th:href="@{/x-admin/css/xadmin.css}">
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+    <script th:src="@{/x-admin/js/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{/x-admin/lib/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/x-admin/js/xadmin.js}"></script>
-    <script th:src="@{/x-admin/js/jquery.min.js}" type="text/javascript"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
@@ -90,22 +90,22 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('统计页面','members/welcome1.html')">
+                        <a onclick="xadmin.add_tab('统计页面','members/welcome1',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>统计页面</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('会员列表(静态表格)','members/member-list.html')">
+                        <a onclick="xadmin.add_tab('会员列表(静态表格)','members/member_list',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员列表(静态表格)</cite></a>
                     </li>
+<!--                    <li>-->
+<!--                        <a onclick="xadmin.add_tab('会员列表(动态表格)','members/member_list1')">-->
+<!--                            <i class="iconfont">&#xe6a7;</i>-->
+<!--                            <cite>会员列表(动态表格)</cite></a>-->
+<!--                    </li>-->
                     <li>
-                        <a onclick="xadmin.add_tab('会员列表(动态表格)','members/member-list1.html',true)">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表(动态表格)</cite></a>
-                    </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('会员删除','members/member-del.html')">
+                        <a onclick="xadmin.add_tab('会员删除','members/member_del',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>会员删除</cite></a>
                     </li>
@@ -116,12 +116,12 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('会员删除','members/member-del.html')">
+                                <a onclick="xadmin.add_tab('会员删除','members/member_del')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>会员删除</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('等级管理','members/member-list1.html')">
+                                <a onclick="xadmin.add_tab('等级管理','https://www.csdn.net/')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>等级管理</cite></a>
                             </li>
@@ -342,7 +342,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe th:src="@{members/welcome}" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>
