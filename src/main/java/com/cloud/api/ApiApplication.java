@@ -12,7 +12,6 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 @SpringBootApplication
 public class ApiApplication {
 	public static void main(String[] args) {
-
 		SpringApplication.run(ApiApplication.class, args);
 	}
 	@Bean

@@ -49,10 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                 .logout()
-                    .logoutSuccessUrl("/justyou/login")
+                    .logoutSuccessUrl("/toLogin")
                     .permitAll();
         http.rememberMe().rememberMeParameter("remember");
         http.csrf().disable();
+        //解决Refused to display '' in a frame because it set 'X-Frame-Options' to 'deny'问题
+        http.headers().frameOptions().disable();
     }
 
     /**
@@ -65,11 +67,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
     }
-
-
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/x-admin/js/**","/x-admin/css/**",
                 "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**");
     }
+
 }

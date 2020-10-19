@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.OrderMapper">
+    <delete id="deleteTaskOrderById">
+        delete from task_order where task_id = #{id}
+    </delete>
+
+    <select id="selectTaskData" resultType="com.cloud.api.bean.entity.Task">
+        select id, money,start_time,end_time from task
+    </select>
+    <select id="selectOrderData" resultType="com.cloud.api.bean.entity.TaskOrder">
+        select * from task_order;
+    </select>
+    <select id="selectNumberFromTaskId" resultType="java.lang.Integer">
+        select count(task_order_id) from task_order where task_id = #{id};
+    </select>
+    <select id="selectOpenIdFromUserId" resultType="java.lang.String">
+        select open_id from user where user_id = #{orderUserId}
+    </select>
+    <select id="selectTaskIdFromOpenId" resultType="java.lang.Long">
+        select task_id from task_order where task_id = #{openId}
+    </select>
+    <select id="selectTaskIdFromId" resultType="com.cloud.api.bean.entity.Task">
+        select  id,start_time,end_time,money
+        from task
+        where id = #{taskId}
+    </select>
+    <select id="selectOrderDataBySearch" resultType="com.cloud.api.bean.entity.TaskOrder">
+        select *
+        from task_order
+        <where>
+            <if test="orderSearchObject.releaseTime!=null">
+                order_time=#{orderSearchObject.releaseTime}
+            </if>
+            <if test="orderSearchObject.status!=null">
+                and order_state = #{orderSearchObject.status}
+            </if>
+            <if test="orderSearchObject.firstMoney !=null">
+                and task_id in (select id from task where money>#{orderSearchObject.firstMoney})
+            </if>
+            <if test="orderSearchObject.lastMoney !=null">
+                and task_id in (select id from task where money &lt; #{orderSearchObject.lastMoney})
+            </if>
+        </where>
+    </select>
+</mapper>

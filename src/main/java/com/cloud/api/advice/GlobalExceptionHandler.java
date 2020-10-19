@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author HP
@@ -23,7 +25,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理自定义的业务异常
-     *
      * @param req
      * @param e
      * @return
@@ -37,7 +38,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 处理空指针的异常
-     *
      * @param req
      * @param e
      * @return
@@ -49,23 +49,17 @@ public class GlobalExceptionHandler {
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
 
-
-    public ResultBody exceptionHandler(HttpServletRequest req, AccessDeniedException e) {
-        logger.error("权限禁止访问:", e);
-        return ResultBody.error(CommonEnum.N0_ACCESS);
-    }
-
     /**
      * 处理其他异常
-     *
      * @param req
      * @param e
      * @return
      */
-    @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public ResultBody exceptionHandler(HttpServletRequest req, Exception e) {
+    @ExceptionHandler(value = Exception.class)
+    public ResultBody exceptionHandler(HttpServletRequest req, HttpServletResponse response, Exception e) throws IOException {
         logger.error("未知异常！原因是:", e);
+        response.sendRedirect(req.getContextPath()+"/exception");
         return ResultBody.error(CommonEnum.INTERNAL_SERVER_ERROR);
     }
 

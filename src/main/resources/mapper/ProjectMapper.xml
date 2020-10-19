@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.ProjectMapper">
+    <insert id="insertOneTask">
+        insert into task values(#{task.id},#{task.classId},#{task.data},#{task.state},#{task.charge},#{task.releaseTime},#{task.userId},#{task.needNumber},#{task.recruitingNumber},#{task.taskComment},#{task.taskDescription})
+    </insert>
+    <delete id="deleteTaskById">
+        delete from task where id = #{id}
+    </delete>
+
+    <select id="selectAllTask" resultType="com.cloud.api.bean.entity.Task">
+        select *
+        from task
+    </select>
+    <select id="selectUsernameByUserId" resultType="java.lang.String">
+        select user_name
+        from user
+        where user_id = #{userId}
+    </select>
+    <select id="selectSortNameByClassId" resultType="java.lang.String">
+        select name
+        from task_classification
+        where class_id=#{classId}
+    </select>
+    <select id="selectTaskBySearch" resultType="com.cloud.api.bean.entity.Task">
+        select *
+        from task
+        <where>
+            <if test="searchObject.start != null">
+                release_time &gt; #{searchObject.start}
+            </if>
+            <if test="searchObject.end != null">
+                AND release_time &lt; #{searchObject.end}
+            </if>
+            <if test="searchObject.charge != null">
+                AND charge=#{searchObject.charge}
+            </if>
+            <if test="searchObject.projectState">
+                and state = #{searchObject.projectState}
+            </if>
+            <if test="searchObject.projectId != null">
+                and id = #{searchObject.projectId}
+            </if>
+        </where>
+
+    </select>
+    <select id="selectAllTaskClassification" resultType="com.cloud.api.bean.entity.TaskClassification">
+        select class_id,name from task_classification
+    </select>
+    <select id="selectTaskDataById" resultType="com.cloud.api.bean.entity.Task">
+        select data,task_description from task where id = #{id}
+    </select>
+</mapper>
