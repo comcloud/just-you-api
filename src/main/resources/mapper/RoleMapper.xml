@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.RoleMapper">
+    <update id="updateAdminStatus">
+        update justyou.admin set status = #{admin.status} where aid=#{admin.aid};
+    </update>
+
+    <select id="selectAllAdmin" resultType="com.cloud.api.bean.entity.Admin">
+        select * from justyou.admin;
+    </select>
+</mapper>

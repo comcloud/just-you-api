@@ -13,7 +13,7 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     private IndexMapper indexMapper;
     @Override
-    public boolean checkAdmin(String email, String password) {
-        return indexMapper.selectAdmin(email,password);
+    public boolean checkAdmin(String name, String password) {
+        return indexMapper.selectAdmin(name,password);
     }
 }
