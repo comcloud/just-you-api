@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @date 2020/10/7 9:02
  */
 @Configuration
-public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
+public class CustomWebAppConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ErrorController()).addPathPatterns("/**");
