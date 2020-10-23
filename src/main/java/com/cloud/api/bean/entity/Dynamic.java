@@ -1,8 +1,14 @@
 package com.cloud.api.bean.entity;
 
+import com.cloud.api.bean.vo.photoVo;
+import org.apache.ibatis.javassist.expr.NewArray;
+import org.springframework.security.core.parameters.P;
+
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * (Dynamic)实体类
@@ -51,9 +57,37 @@ public class Dynamic implements Serializable {
 
     private String dAbstract;
 
-    private Long userId;
+    private Long likeCount;
 
+    private String openId;
 
+    private List<photoVo> photo=new ArrayList<>();
+
+    private  List<DynamicTag> dynamicTags= new ArrayList<>();
+
+    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, Date dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags) {
+        this.dynamicId = dynamicId;
+        this.dynamicTitle = dynamicTitle;
+        this.dynamicContent = dynamicContent;
+        this.dynamicStatus = dynamicStatus;
+        this.dynamicViews = dynamicViews;
+        this.dynamicComment = dynamicComment;
+        this.dynamicDeleted = dynamicDeleted;
+        this.dynamicTime = dynamicTime;
+        this.dynamicUpdateTime = dynamicUpdateTime;
+        this.dAbstract = dAbstract;
+        this.likeCount = likeCount;
+        this.openId = openId;
+        this.photo = photo;
+        this.dynamicTags = dynamicTags;
+    }
+
+    public Dynamic() {
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Long getDynamicId() {
         return dynamicId;
@@ -127,20 +161,63 @@ public class Dynamic implements Serializable {
         this.dynamicUpdateTime = dynamicUpdateTime;
     }
 
-    public String getAbstract() {
+    public String getdAbstract() {
         return dAbstract;
     }
 
-    public void setAbstract(String dAbstract) {
-        this.dAbstract =dAbstract;
+    public void setdAbstract(String dAbstract) {
+        this.dAbstract = dAbstract;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getLikeCount() {
+        return likeCount;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public List<photoVo> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(List<photoVo> photo) {
+        this.photo = photo;
+    }
+
+    public List<DynamicTag> getDynamicTags() {
+        return dynamicTags;
+    }
+
+    public void setDynamicTags(List<DynamicTag> dynamicTags) {
+        this.dynamicTags = dynamicTags;
+    }
+
+    @Override
+    public String toString() {
+        return "Dynamic{" +
+                "dynamicId=" + dynamicId +
+                ", dynamicTitle='" + dynamicTitle + '\'' +
+                ", dynamicContent=" + dynamicContent +
+                ", dynamicStatus=" + dynamicStatus +
+                ", dynamicViews=" + dynamicViews +
+                ", dynamicComment=" + dynamicComment +
+                ", dynamicDeleted=" + dynamicDeleted +
+                ", dynamicTime=" + dynamicTime +
+                ", dynamicUpdateTime=" + dynamicUpdateTime +
+                ", dAbstract='" + dAbstract + '\'' +
+                ", likeCount=" + likeCount +
+                ", openId='" + openId + '\'' +
+                ", photo=" + photo +
+                ", dynamicTags=" + dynamicTags +
+                '}';
+    }
 }
