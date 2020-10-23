@@ -1,5 +1,4 @@
 package com.cloud.api.controller;
-
 import com.cloud.api.bean.entity.Admin;
 import com.cloud.api.service.IndexService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,14 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-
 /**
  * @author HP
  */
@@ -57,7 +52,7 @@ public class IndexController {
         String password = node.findPath("password").toString().replace("\"", "");
         boolean result = indexService.checkAdmin(email, password);
         if (result) {
-            request.getSession().setAttribute("admin", new Admin(0, email, password));
+            request.getSession().setAttribute("admin", new Admin(0, email, password,"","",null,true,1));
         } else {
             request.getSession().removeAttribute("admin");
         }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.TaskHall.TaskHallMapper">
+    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
+        <result column="task_title" jdbcType="VARCHAR" property="task_title" />
+        <result column="release_time" jdbcType="DATE" property="release_time" />
+        <result column="traffic" jdbcType="BIGINT" property="traffic" />
+        <association property="taskClassification" javaType="com.cloud.api.bean.entity.TaskClassification">
+            <id property="id" column="class_id"/>
+            <result property="name" column="name"/>
+            <result property="describe" column="describe"/>
+            <result property="picture" column="picture"/>
+        </association>
+        <association property="user" javaType="com.cloud.api.bean.vo.userVo">
+            <id property="user_id" column="user_id"/>
+            <result property="open_id" column="open_id"/>
+            <result property="user_name" column="user_name"/>
+        </association>
+    </resultMap>
+    <sql id="taskHallVo">
+        `id`,`recruiting_number`,`release_time`,`traffic`,`task_title`
+    </sql>
+    <sql id="task_classification">
+        `class_id`,`describe`,`Picture`,`name`
+    </sql>
+    <select id="SelectTask_HallList" resultMap="TaskHallMapper">
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id
+        from  justyou.task `t`,justyou.task_classification `c`, `user` u
+        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
+    </select>
+    <select id="SelectTaskListByClass" resultMap="TaskHallMapper">
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id
+        from  justyou.task `t`,justyou.task_classification `c`, `user` u
+        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.state=0  and start_time &lt; DATE_SUB(now(),interval  60 second) and  t.class_id=#{class_id}
+    </select>
+    <resultMap id="taskClass" type="com.cloud.api.bean.vo.task_classificationVo">
+        <id column="class_id"  property="class_id"/>
+        <result column="name"  property="name"/>
+    </resultMap>
+    <select id="selectClassNameList" resultMap="taskClass">
+        select class_id, `name` from justyou.task_classification  order by sort asc
+    </select>
+</mapper>
+
