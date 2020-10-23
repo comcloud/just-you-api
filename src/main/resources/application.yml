@@ -54,3 +54,12 @@ spring:
   redis:
     host: 47.95.221.79
     port: 6379
+  application:
+    name: justyou
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: just you后台
+  try-host: http://localhost:${server.port}

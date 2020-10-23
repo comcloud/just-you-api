@@ -18,7 +18,7 @@
     <link rel="stylesheet" th:href="@{/x-admin/css/theme5.css}"/>
     <link rel="stylesheet" th:href="@{/x-admin/css/font.css}">
     <link rel="stylesheet" th:href="@{/x-admin/css/xadmin.css}">
-     <link rel="stylesheet" th:href="@{/x-admin/css/theme5.css}">
+    <link rel="stylesheet" th:href="@{/x-admin/css/theme5.css}">
     <script th:src="@{/x-admin/lib/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/x-admin/js/xadmin.js}"></script>
     <script th:src="@{/x-admin/js/jquery.min.js}" type="text/javascript"></script>
@@ -29,7 +29,7 @@
     <![endif]-->
 
 </head>
-<body class="login-bg"  >
+<body class="login-bg">
 <img th:src="@{/x-admin/images/bg.png}">
 <div class="login layui-anim layui-anim-up">
     <div class="message">Just you-管理登录</div>
@@ -51,6 +51,97 @@
 
 <!-- 底部结束 -->
 <script>
+    var lockReconnect = false;//避免重复连接
+    var wsUrl = "ws://127.0.0.1:8089/justyou/websocket/111/222";
+
+    var websocket;
+    var tt;
+    createWebSocket();
+
+    function createWebSocket() {
+        try {
+            websocket = new WebSocket(wsUrl);
+            init();
+        } catch (e) {
+            console.log('catch' + e);
+            reconnect(wsUrl);
+        }
+    }
+
+    function init() {
+        websocket.onclose = function () {
+            console.log('链接关闭');
+            reconnect(wsUrl);
+        };
+        websocket.onerror = function () {
+            console.log('发生异常了');
+            reconnect(wsUrl);
+        };
+        websocket.onopen = function () {
+            console.log('建立连接');
+            //心跳检测重置
+            heartCheck.start();
+        };
+        websocket.onmessage = function (event) {
+            console.log('接收到消息');
+
+            if (event.data !== "123456789") {
+                console.log('收到消息：' + event.data);
+                //弹窗提醒, 播放音乐
+                $('#myModal').modal('show');
+                document.getElementById('notice').play();
+            }
+            heartCheck.start();
+
+            //拿到任何消息都说明当前连接是正常的
+
+        }
+    }
+
+    window.onbeforeunload = function () {
+        websocket.close();
+    }
+
+    var lockReconnect = false;//避免重复连接
+    function reconnect(url) {
+        if (lockReconnect) {
+            return;
+        }
+        lockReconnect = true;
+        //没连接上会一直重连，设置延迟避免请求过多
+        tt && clearTimeout(tt);
+        tt = setTimeout(function () {
+            createWebSocket(url);
+            lockReconnect = false;
+        }, 4000);
+    }
+
+    //心跳检测
+    var heartCheck = {
+        timeout: 60000,
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        start: function () {
+            console.log('start');
+            var self = this;
+            this.timeoutObj && clearTimeout(this.timeoutObj);
+            this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+            this.timeoutObj = setTimeout(function () {
+                //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                //onmessage拿到返回的心跳就说明连接正常
+                console.log('55555');
+                websocket.send("123456789");
+                self.serverTimeoutObj = setTimeout(function () {
+                    console.log(111);
+                    console.log(websocket);
+                    websocket.close();
+                    // createWebSocket();
+                }, self.timeout);
+
+            }, this.timeout)
+        }
+    }
+
     //百度统计可去掉
     var _hmt = _hmt || [];
     (function () {

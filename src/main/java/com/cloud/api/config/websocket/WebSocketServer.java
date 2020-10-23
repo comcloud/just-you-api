@@ -3,6 +3,7 @@ package com.cloud.api.config.websocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -15,8 +16,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 @Slf4j
 @Component
-@EnableWebSocket
-@ServerEndpoint(value = "/websocket/{openid}",configurator = CustomSpringConfigurator.class)
+@EnableWebSocketMessageBroker
+@ServerEndpoint(value = "/websocket/{openid}/{toOpenid}",configurator = CustomSpringConfigurator.class)
 public class WebSocketServer {
 
     /**
