@@ -1,6 +1,5 @@
 package com.cloud.api.config.security;
 
-import com.cloud.api.config.security.CustomPasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
