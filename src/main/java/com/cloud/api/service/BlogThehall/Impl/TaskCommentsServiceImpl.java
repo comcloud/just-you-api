@@ -3,6 +3,8 @@ import com.cloud.api.bean.vo.TaskCommentsVo;
 import com.cloud.api.mapper.BlogThehall.TaskCommentsMapper;
 import com.cloud.api.service.BlogThehall.TaskCommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 /**
  * @author hds
@@ -11,6 +13,7 @@ import java.util.List;
  * <p>描述:
  * @date 2020/10/24-10:54
  */
+@Service
 public class TaskCommentsServiceImpl implements TaskCommentsService {
     @Autowired
     private TaskCommentsMapper taskCommentsMapper;

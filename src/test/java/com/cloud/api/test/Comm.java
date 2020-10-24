@@ -1,7 +1,7 @@
 package com.cloud.api.test;
 
 import com.cloud.api.bean.vo.TaskCommentsVo;
-import com.cloud.api.service.BlogThehall.Impl.TaskCommentsServiceImpl;
+import com.cloud.api.mapper.BlogThehall.TaskCommentsMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,10 +18,9 @@ import java.util.List;
 @SpringBootTest
 public class Comm {
     @Autowired
-    TaskCommentsServiceImpl TaskCommentsMapper;
+   TaskCommentsMapper TaskCommentsMapper;
     @Test
     public void text(){
-        List<TaskCommentsVo> taskCommentsVos = TaskCommentsMapper.getAllTaskComm(2L);
-        System.out.println(taskCommentsVos);
+        System.out.println(TaskCommentsMapper.select1FComm(2L));
     }
 }
