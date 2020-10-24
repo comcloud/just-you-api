@@ -38,7 +38,7 @@
                 </foreach>
     </update>
     <update id="updateUserStateTo1All">
-        update justyou.user SET `delete`=1 where  user_id in
+        update justyou.user SET `delete`=1  where   user_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

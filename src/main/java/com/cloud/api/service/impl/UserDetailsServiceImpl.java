@@ -3,6 +3,7 @@ package com.cloud.api.service.impl;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import com.cloud.api.bean.entity.Admin;
+import org.springframework.security.core.userdetails.User;
 import com.cloud.api.config.security.CustomPasswordEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,11 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author 成都犀牛
- * @version version 1.0
- * @date 2020/9/27 11:40
- */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -39,7 +34,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-
         Admin admin = new Admin();
         try {
             final List<Entity> all = Db.use().findAll(Entity.create("admin").set("admin_name", name));
@@ -63,6 +57,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             logger.warn("请求登录用户名与密码出错{}",e.getMessage().substring(0,e.getMessage().indexOf("at")));
             return null;
         }
-
     }
 }
