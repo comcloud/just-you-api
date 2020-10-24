@@ -17,10 +17,6 @@ public class CountText {
     CountService configService;
     @Test
     public void test(){
-//        System.out.println(countMapper.SelecttaskCount(0));
-//        System.out.println(countMapper.sekectTaskOrder3());
-//        System.out.println(countMapper.selectUserCount());
-//        System.out.println(countMapper.selectDynamiccount());
             String a=null;
         System.out.println(a);
     }

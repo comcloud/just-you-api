@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/10/24-10:55
  */
 @Mapper
-public interface TaskCommentsMapper {
+public interface DynamicCommMapper {
     /**
      * 查看子评论个数
      * @return 子评论个数

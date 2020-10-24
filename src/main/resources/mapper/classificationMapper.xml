@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.api.mapper.classificationMapper">
     <resultMap id="TaskClassification" type="com.cloud.api.bean.entity.TaskClassification">
-        <id column="class_id"  property="id"/>
+        <id column="class_id"  property="class_id"/>
         <result column="describe"  property="describe"/>
         <result column="Picture"  property="picture"/>
         <result column="name"  property="name"/>
@@ -114,6 +114,5 @@
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
-
     </update>
 </mapper>

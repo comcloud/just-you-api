@@ -1,6 +1,6 @@
 package com.cloud.api.service.BlogThehall.Impl;
 import com.cloud.api.bean.vo.TaskCommentsVo;
-import com.cloud.api.mapper.BlogThehall.TaskCommentsMapper;
+import com.cloud.api.mapper.BlogThehall.DynamicCommMapper;
 import com.cloud.api.service.BlogThehall.TaskCommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class TaskCommentsServiceImpl implements TaskCommentsService {
     @Autowired
-    private TaskCommentsMapper taskCommentsMapper;
+    private DynamicCommMapper taskCommentsMapper;
     @Override
     public boolean ifSon(Long comm_id) {
         return taskCommentsMapper.selectSonCount(comm_id)>0;
