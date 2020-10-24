@@ -3,6 +3,7 @@ package com.cloud.api.config.websocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -16,7 +17,8 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Slf4j
 @Component
 @EnableWebSocket
-@ServerEndpoint(value = "/websocket/{openid}/{to_openid}")
+@EnableWebSocketMessageBroker
+@ServerEndpoint(value = "/websocket/{openid}/{toOpenid}")
 public class WebSocketServer {
 
     /**
@@ -34,10 +36,11 @@ public class WebSocketServer {
      */
     private Session session;
     /**
-     * 接收sid
+     * 接收openid
      */
     private String sid = "";
 
+    private String openid="";
     /**
      * 连接建立成功调用的方法
      **/
@@ -51,6 +54,8 @@ public class WebSocketServer {
         addOnlineCount();
         log.info("有新窗口开始监听:" + sid  + "," + toOpenId+ ",当前在线人数为" + getOnlineCount());
         this.sid = sid;
+        log.info("有新窗口开始监听:"+openid+",当前在线人数为" + getOnlineCount());
+        this.openid=openid;
         try {
             sendMessage("连接成功");
         } catch (IOException e) {
@@ -78,6 +83,7 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) {
         log.info("收到来自窗口" + sid + "的信息:" + message);
+        log.info("收到来自窗口"+openid+"的信息:"+message);
         //群发消息
         for (WebSocketServer item : webSocketSet) {
             try {
@@ -104,19 +110,20 @@ public class WebSocketServer {
      */
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
+
     }
 
     /**
      * 群发自定义消息
      */
-    public static void sendInfo(String message, @PathParam("sid") String sid) throws IOException {
-        log.info("推送消息到窗口" + sid + "，推送内容:" + message);
+    public static void sendInfo(String message,@PathParam("openid") String openid) throws IOException {
+        log.info("推送消息到窗口"+openid+"，推送内容:"+message);
         for (WebSocketServer item : webSocketSet) {
             try {
-                //这里可以设定只推送给这个sid的，为null则全部推送
-                if (sid == null) {
+                //这里可以设定只推送给这个openid的，为null则全部推送
+                if(openid==null) {
                     item.sendMessage(message);
-                } else if (item.sid.equals(sid)) {
+                }else if(item.openid.equals(openid)){
                     item.sendMessage(message);
                 }
             } catch (IOException e) {

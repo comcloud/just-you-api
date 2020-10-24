@@ -61,6 +61,11 @@ swagger:
   enable: true
   application-name: ${spring.application.name}
   application-version: 1.0
+<<<<<<< HEAD
   application-description: springfox swagger 3.0整合Demo
   try-host: http://localhost:${server.port}
 
+=======
+  application-description: just you后台
+  try-host: http://localhost:${server.port}
+>>>>>>> feature/swagger
