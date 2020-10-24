@@ -17,10 +17,12 @@ import java.util.Date;
 public class taskHallVo {
     public Long id;
     //任务分类 一对一
-    public TaskClassification taskClassification;
+    public TaskClassificationVo taskClassification;
     //标题
     //招募人数
     public Long recruiting_number;
+
+    private String task_description;
 
     public String task_title ;
     //发布日期
