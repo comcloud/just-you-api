@@ -3,10 +3,10 @@ server:
   max-http-header-size: 52428800
   servlet:
     context-path: /justyou
-#  ssl:
-#    key-store: 4637519_www.mrkleo.top.pfx
-#    key-store-password: t17NhCxA
-#    keyStoreType: PKCS12
+  ssl:
+    key-store: 4637519_www.mrkleo.top.pfx
+    key-store-password: t17NhCxA
+    keyStoreType: PKCS12
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -63,3 +63,7 @@ swagger:
   application-version: 1.0
   application-description: springfox swagger 3.0整合Demo
   try-host: http://localhost:${server.port}
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
