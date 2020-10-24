@@ -34,8 +34,6 @@ public class IndexController {
 
     }
 
-<<<<<<< HEAD
-=======
     /**
      * 验证管理员登录
      *
@@ -63,7 +61,6 @@ public class IndexController {
     }
 
 
->>>>>>> cf3be08fbb12c2b314e5bfab201e30fc6f9a7868
     @RequestMapping(value = "/login/error")
     public void loginError(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");

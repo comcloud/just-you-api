@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.IllegalFormatFlagsException;
 
 /**
@@ -55,6 +56,7 @@ public class TaskHallController {
      *          }
      */
     @ResponseBody
+    @PermitAll
     @RequestMapping("/TaskList")
     public Result TaskHallList( Model model,
                                 @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){

@@ -34,8 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/websocket").permitAll()
-                .antMatchers("/taskHall").permitAll()
+                .antMatchers("/websocket/**").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()
                 .anyRequest().authenticated()
@@ -72,8 +71,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/x-admin/js/**","/x-admin/css/**",
-                "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**");
+        web.ignoring()
+                .antMatchers("/x-admin/js/**","/x-admin/css/**",
+                    "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**")
+                .antMatchers("/taskHall/**")
+                .antMatchers("/websocket/**");
     }
-
 }

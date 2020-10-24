@@ -18,7 +18,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @EnableWebSocket
 @EnableWebSocketMessageBroker
-@ServerEndpoint(value = "/websocket/{openid}/{toOpenid}",configurator = CustomSpringConfigurator.class)
+@ServerEndpoint(value = "/websocket/{openid}/{toOpenid}")
 public class WebSocketServer {
 
     /**
@@ -37,21 +37,21 @@ public class WebSocketServer {
      */
     private Session session;
     /**
-     * 接收sid
+     * 接收openid
      */
-    private String sid="";
+    private String openid="";
     /**
      * 连接建立成功调用的方法
      **/
     @OnOpen
-    public void onOpen(Session session, @PathParam("sid") String sid) {
+    public void onOpen(Session session, @PathParam("openid") String openid) {
         this.session = session;
         //加入set中
         webSocketSet.add(this);
         //在线数加1
         addOnlineCount();
-        log.info("有新窗口开始监听:"+sid+",当前在线人数为" + getOnlineCount());
-        this.sid=sid;
+        log.info("有新窗口开始监听:"+openid+",当前在线人数为" + getOnlineCount());
+        this.openid=openid;
         try {
             sendMessage("连接成功");
         } catch (IOException e) {
@@ -75,7 +75,7 @@ public class WebSocketServer {
      **/
     @OnMessage
     public void onMessage(String message, Session session) {
-        log.info("收到来自窗口"+sid+"的信息:"+message);
+        log.info("收到来自窗口"+openid+"的信息:"+message);
         //群发消息
         for (WebSocketServer item : webSocketSet) {
             try {
@@ -104,14 +104,14 @@ public class WebSocketServer {
     /**
      * 群发自定义消息
      * */
-    public static void sendInfo(String message,@PathParam("sid") String sid) throws IOException {
-        log.info("推送消息到窗口"+sid+"，推送内容:"+message);
+    public static void sendInfo(String message,@PathParam("openid") String openid) throws IOException {
+        log.info("推送消息到窗口"+openid+"，推送内容:"+message);
         for (WebSocketServer item : webSocketSet) {
             try {
-                //这里可以设定只推送给这个sid的，为null则全部推送
-                if(sid==null) {
+                //这里可以设定只推送给这个openid的，为null则全部推送
+                if(openid==null) {
                     item.sendMessage(message);
-                }else if(item.sid.equals(sid)){
+                }else if(item.openid.equals(openid)){
                     item.sendMessage(message);
                 }
             } catch (IOException e) {

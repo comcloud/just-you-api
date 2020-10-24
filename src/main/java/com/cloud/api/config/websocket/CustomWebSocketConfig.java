@@ -18,20 +18,26 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  */
 @Configuration
 public class CustomWebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfigurer {
-    @Override
-    public void configureMessageBroker(final MessageBrokerRegistry config) {
-        // These are endpoints the client can subscribes to.
-        config.enableSimpleBroker("/websocket");
-        // Message received with one of those below destinationPrefixes will be automatically router to controllers @MessageMapping
-        config.setApplicationDestinationPrefixes("/websocket");
-    }
+//    @Override
+//    public void configureMessageBroker(final MessageBrokerRegistry config) {
+//        // These are endpoints the client can subscribes to.
+//        config.enableSimpleBroker("/websocket/**");
+//        // Message received with one of those below destinationPrefixes will be automatically router to controllers @MessageMapping
+//        config.setApplicationDestinationPrefixes("/websocket/**");
+//    }
+
 
     @Override
     public void registerStompEndpoints(final StompEndpointRegistry registry) {
         // Handshake endpoint
-        registry.addEndpoint("stomp");
+        registry.addEndpoint("stomp").withSockJS();
     }
 
+
+    /**
+     * @return 这个bean注解打包必须注释，否则就会报错
+     * 但是本地调试还是要
+     */
     @Bean
     public ServerEndpointExporter serverEndpointExporter(){
         return new ServerEndpointExporter();
