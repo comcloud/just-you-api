@@ -22,6 +22,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userDetailsService = new UserDetailsServiceImpl();
+
+    private static final String[] AUTH_WHITELIST = {
+
+            // -- swagger ui
+            "/swagger-ui.html",
+            "/swagger-ui/*",
+            "/swagger-resources/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/webjars/**"
+    };
+
     /**
      * 请求配置
      *
@@ -35,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/websocket").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()
                 .anyRequest().authenticated()

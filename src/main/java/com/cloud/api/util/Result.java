@@ -1,17 +1,21 @@
 package com.cloud.api.util;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
+ * @author HP
  */
-//继承了可序列化接口
+@ApiModel("api通用返回数据")
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
-    //结果代码 200 表示操作成功 500 表示操作失败
+    @ApiModelProperty("标识代码，200为成功，500为操作失败")
     private int resultCode;
-    //失败结果返回字符串
+    @ApiModelProperty("请求接口的调用信息")
     private String message;
-    //接收数据
+    @ApiModelProperty("返回的数据")
     private T data;
 
     public Result() {
