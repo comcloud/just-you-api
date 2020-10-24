@@ -36,4 +36,11 @@ public class DynamicTag implements Serializable {
         this.dynamicTagName = dynamicTagName;
     }
 
+    @Override
+    public String toString() {
+        return "DynamicTag{" +
+                "dynamicTagId=" + dynamicTagId +
+                ", dynamicTagName='" + dynamicTagName + '\'' +
+                '}';
+    }
 }

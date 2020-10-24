@@ -5,9 +5,10 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />
+        <result column="task_description" jdbcType="VARCHAR" property="task_description" />
         <result column="release_time" jdbcType="DATE" property="release_time" />
         <result column="traffic" jdbcType="BIGINT" property="traffic" />
-        <association property="taskClassification" javaType="com.cloud.api.bean.entity.TaskClassification">
+        <association property="taskClassification" javaType="com.cloud.api.bean.vo.TaskClassificationVo">
             <id property="id" column="class_id"/>
             <result property="name" column="name"/>
             <result property="describe" column="describe"/>
@@ -26,12 +27,12 @@
         `class_id`,`describe`,`Picture`,`name`
     </sql>
     <select id="SelectTask_HallList" resultMap="TaskHallMapper">
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description
         from  justyou.task `t`,justyou.task_classification `c`, `user` u
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
     </select>
     <select id="SelectTaskListByClass" resultMap="TaskHallMapper">
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,task_description
         from  justyou.task `t`,justyou.task_classification `c`, `user` u
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.state=0  and start_time &lt; DATE_SUB(now(),interval  60 second) and  t.class_id=#{class_id}
     </select>
