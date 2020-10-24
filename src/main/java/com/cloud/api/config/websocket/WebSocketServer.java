@@ -100,6 +100,7 @@ public class WebSocketServer {
      */
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
+
     }
     /**
      * 群发自定义消息
