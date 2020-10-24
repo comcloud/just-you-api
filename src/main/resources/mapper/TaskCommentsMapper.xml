@@ -18,8 +18,10 @@
         select  comm_id,open_id,comm_content,comm_father_id,comm_time
         from task_comments where comm_father_id=#{comm_father_id} and comm_delete=0
     </select>
-    <select id="select1FComm" resultType="com.cloud.api.bean.vo.TaskCommentsVo">
 
+    <select id="select1FComm" resultMap="Comm">
+         select  comm_id,open_id,comm_content,comm_father_id,comm_time
+        from task_comments where comm_father_id=null and comm_delete=0 and comm_id=#{comm_id}
     </select>
 
 </mapper>

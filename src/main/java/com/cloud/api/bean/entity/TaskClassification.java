@@ -21,15 +21,6 @@ public class TaskClassification implements Serializable {
      */
     private String describe;
 
-    @Override
-    public String toString() {
-        return "TaskClassification{" +
-                "id=" + class_id +
-                ", describe='" + describe + '\'' +
-                ", picture='" + picture + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
     /**
      * 配图
@@ -144,7 +135,7 @@ public class TaskClassification implements Serializable {
     }
 
     public TaskClassification(Long id, String describe, String picture, String name, List<TaskClassification> son, Long f_class_id, Integer class_state, Integer classSort, Date creation_time, Long class_count) {
-        this.id = id;
+        this.class_id = id;
         this.describe = describe;
         this.picture = picture;
         this.name = name;
@@ -157,21 +148,5 @@ public class TaskClassification implements Serializable {
     }
 
     public TaskClassification() {
-    }
-
-    @Override
-    public String toString() {
-        return "TaskClassification{" +
-                "id=" + id +
-                ", describe='" + describe + '\'' +
-                ", picture='" + picture + '\'' +
-                ", name='" + name + '\'' +
-                ", son=" + son +
-                ", f_class_id=" + f_class_id +
-                ", class_state=" + class_state +
-                ", classSort=" + classSort +
-                ", Creation_time=" + Creation_time +
-                ", class_count=" + class_count +
-                '}';
     }
 }
