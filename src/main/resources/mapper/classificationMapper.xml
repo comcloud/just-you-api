@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.classificationMapper">
+    <resultMap id="TaskClassification" type="com.cloud.api.bean.entity.TaskClassification">
+        <id column="class_id"  property="id"/>
+        <result column="describe"  property="describe"/>
+        <result column="Picture"  property="picture"/>
+        <result column="name"  property="name"/>
+        <result column="f_class_id"  property="f_class_id"/>
+        <result column="sort"  property="classSort"/>
+        <result column="class_state"  property="class_state"/>
+        <result column="creation_time"  property="creation_time"/>
+        <result column="class_count"  property="class_count"/>
+    </resultMap>
+    <sql id="classificationAll">
+        `class_id`,`describe`,`Picture`,`name`,`f_class_id`,`sort`,Creation_time,class_state,class_count
+    </sql>
+    <insert id="insertSonClass">
+        INSERT  INTO task_classification
+        <set>
+            <if test="describe!=null">
+                task_classification.`describe`=#{describe} ,
+            </if>
+            <if test="describe!=null">
+                task_classification.Picture=#{Picture}
+            </if>
+            <if test="name!=null">
+                task_classification.`name`=#{name}
+            </if>
+            <if test="f_class_id !=null">
+                task_classification.`f_class_id`=#{f_class_id}
+            </if>
+            <if test="class_state !=null">
+                task_classification.class_state=#{class_state}
+            </if>
+             <if test=" sort!=null">
+                 task_classification.sort=#{task_classification}
+             </if>
+               <if test=" class_count!=null">
+                 task_classification.class_count=#{class_count}
+             </if>
+        </set>
+    </insert>
+    <update id="updatestate0">
+        update task_classification
+               set task_classification.class_state=0 where class_id=#{class_id}
+    </update>
+    <update id="updatestate1">
+        update task_classification
+               set task_classification.class_state=1 where class_id=#{class_id}
+    </update>
+    <update id="updateClassification">
+        update  task_classification
+        <set>
+            <if test="describe!=null">
+                task_classification.`describe`=#{describe} ,
+            </if>
+            <if test="describe!=null">
+                task_classification.`Picture`=#{Picture}
+            </if>
+            <if test="name!=null">
+                task_classification.`name`=#{name}
+            </if>
+            <if test="f_class_id !=null">
+                task_classification.`f_class_id`=#{f_class_id}
+            </if>
+            <if test="class_state !=null">
+                task_classification.`class_state`=#{class_state}
+            </if>
+            <if test=" sort!=null">
+                task_classification.`sort`=#{task_classification}
+            </if>
+            <if test=" class_count!=null">
+                task_classification.class_count=#{class_count}
+            </if>
+        </set>
+        where class_id=#{class_id}
+    </update>
+    <update id="thoroughlyDeleteClassificationByClassId">
+         update  task_classification set `delete`=2 ,class_state=0 where class_id=#{class_id}
+    </update>
+    <update id="deleteClassificationByClassId">
+                 update  task_classification set `delete`=1 ,class_state=0 where class_id=#{class_id}
+    </update>
+    <update id="restoreClassificationByClassId">
+          update  task_classification set `delete`=0 where class_id=#{class_id}
+    </update>
+    <update id="updateSort">
+         update  task_classification set sort=#{sort} where class_id=#{class_id}
+    </update>
+    <select id="selectAllfTaskClassification" resultMap="TaskClassification">
+        select
+        <include refid="classificationAll"/>
+        from  justyou.task_classification where   `f_class_id`=0 and `delete`=0 and class_id != 0
+    </select>
+    <select id="selectAllSonByFId"  resultMap="TaskClassification">
+        select
+             <include refid="classificationAll"/>
+        from  justyou.task_classification where `f_class_id`=#{class_id} and `delete`=0 and class_id != 0
+    </select>
+    <select id="selectDelAllTaskClassification" resultMap="TaskClassification">
+        select
+        <include refid="classificationAll"/>
+        from  justyou.task_classification where `delete`=1
+    </select>
+    <update id="cateDeleteAll" >
+        update  task_classification set `delete`=1 , class_state=1  where class_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <update id="restoreDeleteAll">
+        update  task_classification set `delete`=0 , class_state=1 where class_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </update>
+</mapper>
