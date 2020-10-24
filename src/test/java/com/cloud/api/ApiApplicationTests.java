@@ -3,21 +3,18 @@ package com.cloud.api;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.security.RunAs;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApiApplicationTests {
 
     @Test
     void contextLoads() {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        eval(list,l -> {});
-
-        eval(list, () -> 3);
         // Predicate<Integer> predicate = n -> true
         // n 是一个参数传递到 Predicate 接口的 test 方法
         // n 如果存在则 test 方法返回 true

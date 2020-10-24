@@ -7,7 +7,7 @@
     <select id="selectAdmin" resultType="java.lang.Boolean">
         select count(*) from admin where admin_email = #{email} and admin_password = #{password}
     </select>
-    <select id="selectAdminByEmail" parameterType="java.lang.String" resultType="com.cloud.api.bean.entity.Admin">
-        select * from admin where email = #{email}
+    <select id="selectAdminByName" parameterType="java.lang.String" resultType="com.cloud.api.bean.entity.Admin">
+        select * from admin where admin_name = #{name}
     </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.cloud.api.config;
+package com.cloud.api.config.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;

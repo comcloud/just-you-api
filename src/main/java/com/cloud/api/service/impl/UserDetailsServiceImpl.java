@@ -5,6 +5,8 @@ import cn.hutool.db.Entity;
 import com.cloud.api.bean.entity.Admin;
 import org.springframework.security.core.userdetails.User;
 import com.cloud.api.config.security.CustomPasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +27,7 @@ import java.util.List;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder = new CustomPasswordEncoder();
@@ -48,6 +51,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             authentication = new UsernamePasswordAuthenticationToken(this.getClass().getName(), "ROLE_ADMIN", authorities);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new User(admin.getAdminName(), passwordEncoder.encode(admin.getAdminPassword()), authorities);
+        try {
+            return new User(admin.getAdminName(), passwordEncoder.encode(admin.getAdminPassword()), authorities);
+        }catch (Exception e){
+            logger.warn("请求登录用户名与密码出错{}",e.getMessage().substring(0,e.getMessage().indexOf("at")));
+            return null;
+        }
     }
 }

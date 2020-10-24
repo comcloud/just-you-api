@@ -170,7 +170,7 @@
             var laydate = layui.laydate;
             var $ = layui.jquery, table = layui.table, layer = layui.layer, form = layui.form; //独立版的layer无需执行这一句
             form.on('checkbox(allChoose)', function (data) {
-                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+                let child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
                 tableData = child;
                 child.each(function (index, item) {
                     item.checked = !item.checked;
