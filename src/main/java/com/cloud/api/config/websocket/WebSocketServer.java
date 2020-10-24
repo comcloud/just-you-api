@@ -16,6 +16,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 @Slf4j
 @Component
+@EnableWebSocket
 @EnableWebSocketMessageBroker
 @ServerEndpoint(value = "/websocket/{openid}/{toOpenid}",configurator = CustomSpringConfigurator.class)
 public class WebSocketServer {

@@ -2,14 +2,10 @@ package com.cloud.api.config.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
-
-import static org.springframework.messaging.simp.SimpMessageType.MESSAGE;
-import static org.springframework.messaging.simp.SimpMessageType.SUBSCRIBE;
 
 /**
  * websocket的配置类
@@ -22,22 +18,18 @@ import static org.springframework.messaging.simp.SimpMessageType.SUBSCRIBE;
  */
 @Configuration
 public class CustomWebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfigurer {
-
     @Override
-    protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
-        messages
-                .nullDestMatcher().authenticated()
-                .simpSubscribeDestMatchers("/websocket/{openid}/{toOpenid}").permitAll()
-                .simpDestMatchers("/app/**").hasRole("USER")
-                .simpSubscribeDestMatchers("/user/**", "/topic/friends/*").hasRole("USER")
-                .simpTypeMatchers(MESSAGE, SUBSCRIBE).denyAll()
-                .anyMessage().denyAll();
-
+    public void configureMessageBroker(final MessageBrokerRegistry config) {
+        // These are endpoints the client can subscribes to.
+        config.enableSimpleBroker("/websocket");
+        // Message received with one of those below destinationPrefixes will be automatically router to controllers @MessageMapping
+        config.setApplicationDestinationPrefixes("/websocket");
     }
 
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket").withSockJS();
+    public void registerStompEndpoints(final StompEndpointRegistry registry) {
+        // Handshake endpoint
+        registry.addEndpoint("stomp");
     }
 
     @Bean
