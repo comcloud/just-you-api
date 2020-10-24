@@ -15,11 +15,22 @@ public class TaskClassification implements Serializable {
     /**
      * 类别id
      */
-    private Long id;
+    private Long class_id;
     /**
      * 描述
      */
     private String describe;
+
+    @Override
+    public String toString() {
+        return "TaskClassification{" +
+                "id=" + class_id +
+                ", describe='" + describe + '\'' +
+                ", picture='" + picture + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     /**
      * 配图
      */
@@ -53,11 +64,11 @@ public class TaskClassification implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return class_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.class_id = id;
     }
 
     public String getDescribe() {
