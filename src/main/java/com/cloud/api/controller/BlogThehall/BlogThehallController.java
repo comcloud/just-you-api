@@ -32,6 +32,15 @@ public class BlogThehallController {
         return ResultGenerator.genSuccessResult(new PageInfo<>(blogThehallService.getPushAllBlog()));
     }
 
+    @ResponseBody
+    @GetMapping("/gotoDynamicDetails")
+    public Result gotoDynamicDetails(@RequestParam Long dynamic_id){
+        return ResultGenerator.genSuccessResult(blogThehallService.getDynamicDetails(dynamic_id));
+    }
+
+
+
+
 
 
 }

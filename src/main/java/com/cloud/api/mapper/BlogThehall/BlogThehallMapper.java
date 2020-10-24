@@ -31,6 +31,11 @@ public interface BlogThehallMapper {
      */
     int updatePushBy0();
 
+    /**
+     * 根究 动态ID返回 动态详情
+     * @param dynamic_id
+     * @return
+     */
     List<Dynamic> selectDynamicDetails(Long dynamic_id);
 
 

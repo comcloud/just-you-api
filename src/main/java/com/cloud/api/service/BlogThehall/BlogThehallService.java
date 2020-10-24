@@ -1,4 +1,5 @@
 package com.cloud.api.service.BlogThehall;
+import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.BlogVo;
 import java.util.List;
 public interface BlogThehallService {
@@ -19,4 +20,11 @@ public interface BlogThehallService {
      * @return 取消的个数
      */
     boolean setPushBy0();
+
+    /**
+     * 根究 动态ID返回 动态详情
+     * @param dynamic_id
+     * @return
+     */
+    List<Dynamic> getDynamicDetails(Long dynamic_id);
 }

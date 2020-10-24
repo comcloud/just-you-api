@@ -1,5 +1,6 @@
 package com.cloud.api.service.BlogThehall.Impl;
 
+import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.mapper.BlogThehall.BlogThehallMapper;
 import com.cloud.api.service.BlogThehall.BlogThehallService;
@@ -34,5 +35,10 @@ public class BlogThehallServiceImpl implements BlogThehallService {
     @Override
     public boolean setPushBy0() {
         return true;
+    }
+
+    @Override
+    public List<Dynamic> getDynamicDetails(Long dynamic_id) {
+        return blogThehallMapper.selectDynamicDetails(dynamic_id);
     }
 }
