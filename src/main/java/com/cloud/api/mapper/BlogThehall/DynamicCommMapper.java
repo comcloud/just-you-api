@@ -1,4 +1,5 @@
 package com.cloud.api.mapper.BlogThehall;
+import com.cloud.api.bean.vo.DynamicCommentsVo;
 import com.cloud.api.bean.vo.TaskCommentsVo;
 import com.cloud.api.bean.vo.taskHallVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +13,7 @@ import java.util.List;
  * @date 2020/10/24-10:55
  */
 @Mapper
-public interface TaskCommentsMapper {
+public interface DynamicCommMapper {
     /**
      * 查看子评论个数
      * @return 子评论个数
@@ -30,13 +31,18 @@ public interface TaskCommentsMapper {
      * @param comm_father_id
      * @return
      */
-    List<TaskCommentsVo> selectSonyByFid(Long comm_father_id);
+    List<DynamicCommentsVo> selectSonyByFid(Long comm_father_id);
 
     /**
      *
      * @param dynamic_id
      * @return
      */
-    List<TaskCommentsVo> select1FComm(Long dynamic_id);
+    List<DynamicCommentsVo> select1FComm(Long dynamic_id);
+
+
+    List<DynamicCommentsVo> selectAll(Long dynamic_id);
+
+
 
 }

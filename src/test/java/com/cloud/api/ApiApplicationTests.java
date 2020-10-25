@@ -1,20 +1,30 @@
 package com.cloud.api;
 
+import com.cloud.api.bean.vo.BlogVo;
+import com.cloud.api.mapper.BlogThehall.BlogThehallMapper;
+import com.cloud.api.mapper.BlogThehall.DynamicCommMapper;
+import com.cloud.api.service.BlogThehall.DynamicCommentsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.annotation.security.RunAs;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ApiApplicationTests {
+@Autowired
+    DynamicCommMapper dynamicCom;
+@Autowired
+        DynamicCommMapper a;
+@Autowired
+DynamicCommentsService taskCommentsService;
+@Autowired
+    BlogThehallMapper aa;
 
+@Test
+
+<<<<<<< HEAD
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -23,6 +33,10 @@ class ApiApplicationTests {
         redisTemplate.opsForValue().set("1","2");
         System.out.println(redisTemplate.opsForValue().get("1"));
 
+=======
+    void contextLoads() {
+        System.out.println( );
+>>>>>>> feature/comm
         // Predicate<Integer> predicate = n -> true
         // n 是一个参数传递到 Predicate 接口的 test 方法
         // n 如果存在则 test 方法返回 true
@@ -45,24 +59,20 @@ class ApiApplicationTests {
 
 //        System.out.println("输出大于 3 的所有数字:");
 //        eval(list, n -> n > 3);
-    }
+//        List<TaskCommentsVo> taskCommentsVos = dynamicCom.select1FComm(1L);
+//        System.out.println(taskCommentsVos);
 
-    public static void eval(List<Integer> list, Predicate<Integer> predicate) {
-        for (Integer n : list) {
-            if (predicate.test(n)) {
-                System.out.println(n + " ");
-            }
-        }
-    }
+//        List<TaskCommentsVo> taskCommentsVos1 = dynamicCom.selectSonyByFid(1L);
+//        System.out.println(dynamicCom.seelectFcomm_id(3L));
+//        System.out.println("==================================================");
+//        System.out.println(taskCommentsService.getAllTaskComm(1L));
+//        System.out.println("==================================================");
+//
+//        System.out.println(a.selectAll(1L));
 
-    private static void eval(List<Integer> list, Supplier<Integer> supplier) {
-        list.forEach(one -> {
-            if(one > supplier.get()){
-                System.out.println(one);
-            }
-        });
-    }
-    private static void eval(List<Integer> list, Consumer<Integer> consumer){
-        list.forEach(consumer);
-    }
+    List<BlogVo> blogVos = aa.selectPushAllBlog();
+    System.out.println(blogVos);
+
+}
+
 }

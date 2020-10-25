@@ -1,11 +1,13 @@
 package com.cloud.api.controller.TaskHall;
 
+import com.cloud.api.service.TaskHall.TaskCommService;
 import com.cloud.api.service.TaskHall.TaskHallService;
 import com.cloud.api.util.Result;
 import com.cloud.api.util.ResultGenerator;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ import javax.annotation.security.PermitAll;
 public class TaskHallController {
     @Autowired
     private TaskHallService taskHallService;
+    @Autowired
+    private TaskCommService taskCommService;
 
     /**
      * 任务大厅任务展示
@@ -66,7 +70,7 @@ public class TaskHallController {
     @RequestMapping("/TaskList")
     public Result TaskHallList(Model model,
                                @Parameter(description = "页码，默认是1") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
-        PageHelper.startPage(pageNum, 1);
+        PageHelper.startPage(pageNum, 3);
         return ResultGenerator.genSuccessResult(new PageInfo<>(taskHallService.getTask_HallList()));
     }
 
@@ -104,8 +108,14 @@ public class TaskHallController {
     @GetMapping("/TaskByClass")
     public Result getClassNameAll(@Parameter(description = "页码数，默认是1") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum,
                                   @Parameter(description = "分类id") @RequestParam("class_id") Long class_id) {
-        PageHelper.startPage(pageNum, 10);
+        PageHelper.startPage(pageNum, 3);
         return ResultGenerator.genSuccessResult(new PageInfo(taskHallService.getTaskListByClass(class_id)));
+    }
+    @Operation(summary = "获取任务评论" )
+    @GetMapping("/comm")
+    @ResponseBody
+    public Result comm(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long task_id){
+        return ResultGenerator.genSuccessResult(taskCommService.getAllTaskComm(task_id));
     }
 
 }
