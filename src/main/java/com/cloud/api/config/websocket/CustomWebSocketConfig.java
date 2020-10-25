@@ -34,16 +34,17 @@ public class CustomWebSocketConfig extends AbstractSecurityWebSocketMessageBroke
                 .simpDestMatchers("/app/**").hasRole("USER")
                 .simpSubscribeDestMatchers("/user/**", "/topic/friends/*").hasRole("USER")
                 .simpTypeMatchers(MESSAGE, SUBSCRIBE).denyAll();
-//                .anyMessage().denyAll();
 
     }
 
     @Override
     public void configureMessageBroker(final MessageBrokerRegistry config) {
         // These are endpoints the client can subscribes to.
-        config.enableSimpleBroker("/websocket/**");
+        //这个是客户端接收的端点前缀
+        config.enableSimpleBroker("/topic");
         // Message received with one of those below destinationPrefixes will be automatically router to controllers @MessageMapping
-        config.setApplicationDestinationPrefixes("/websocket/**");
+        //客户端向服务器端的端点前缀
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override

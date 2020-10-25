@@ -1,12 +1,5 @@
 {
-  "username": "xiniu",
-  "state": "6",
-  "sort": "1",
-  "projectData": "tes",
-  "charge": "0",
-  "releaseTime": "2020-10-09",
-  "needNumber": "15",
-  "recruitingNumber": "20",
-  "comment": "1",
-  "desc": "tset"
+  "sender": "xxxx",
+  "receiver": "yyyy",
+  "payload": "你好，我是消息"
 }
