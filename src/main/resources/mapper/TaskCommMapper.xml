@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.TaskHall.TaskCommMapper">
+    <resultMap id="Comm" type="com.cloud.api.bean.vo.TaskCommentsVo">
+        <id column="comm_id" property="commId"/>
+        <result column="comm_content" property="commContent"/>
+        <result column="comm_father_id" property="commFatherId"/>
+        <result column="comm_time" property="commTime"/>
+        <result column="open_id" property="openId"/>
+    </resultMap>
+    <select id="selectAll" resultMap="Comm">
+                 select  comm_id,open_id,comm_content,comm_father_id,comm_time,task_id,comm_father_id
+        from  task_comments where comm_delete=0 and task_id=#{task_id}
+    </select>
+</mapper>

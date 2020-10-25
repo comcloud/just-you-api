@@ -47,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/websocket").permitAll()
+                .antMatchers("/dynamic/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()

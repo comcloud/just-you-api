@@ -25,6 +25,7 @@ import javax.swing.text.View;
  */
 @Api(value = "动态的Controller" ,tags = {"动态大厅的操作接口"})
 @Controller
+@RequestMapping("/dynamic")
 public class BlogThehallController {
     @Autowired
     private BlogThehallService blogThehallService;
@@ -40,7 +41,7 @@ public class BlogThehallController {
     @ResponseBody
     @GetMapping("/gotoHomePage")
     public Result gotoHomePage(@ApiParam(name="pageNum",value = "页码 默认值为1",required = true) @RequestParam(defaultValue="1" ,value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,10);
+        PageHelper.startPage(pageNum,3);
         return ResultGenerator.genSuccessResult(new PageInfo<>(blogThehallService.getPushAllBlog()));
     }
     @Operation(summary = "获取动态详情页面信息" )
