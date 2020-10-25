@@ -3,12 +3,8 @@ package com.cloud.api.config.swagger;
 import io.swagger.models.auth.In;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.context.annotation.Bean;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.*;
 import springfox.documentation.oas.annotations.EnableOpenApi;
@@ -18,7 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -50,9 +45,8 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .globalRequestParameters(getGlobalRequestParameters())
-                .globalResponses(HttpMethod.GET, getGlobalResonseMessage())
-                .globalResponses(HttpMethod.POST, getGlobalResonseMessage())
+                .globalResponses(HttpMethod.GET, getGlobalResponseMessage())
+                .globalResponses(HttpMethod.POST, getGlobalResponseMessage())
                 // 支持的通讯协议集合
                 .protocols(newHashSet("https", "http"))
                 // 授权信息设置，必要的header token等认证信息
@@ -65,9 +59,10 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
      * API 页面上半部分展示信息
      */
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(swaggerProperties.getApplicationName() + " Api Doc")
+        return new ApiInfoBuilder().title(swaggerProperties.getApplicationName() + " 小程序后台接口")
                 .description(swaggerProperties.getApplicationDescription())
-                .contact(new Contact("云顶犀软件科技有限责任公司", null, "2230817302@qq.com"))
+                .contact(new Contact("云顶犀软件科技有限责任公司", "https://mrkleo.top/", "2230817302@qq.com"))
+                .licenseUrl("https://www.mit.edu/~amini/LICENSE.md")
                 .version("Application Version: " + swaggerProperties.getApplicationVersion() + ", Spring Boot Version: " + SpringBootVersion.getVersion())
                 .build();
     }
@@ -111,7 +106,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .required(false)
                 .build());
         parameters.add(new RequestParameterBuilder()
-                .name("udid")
+                .name("uuid")
                 .description("设备的唯一id")
                 .required(true)
                 .in(ParameterType.QUERY)
@@ -129,9 +124,14 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         return parameters;
     }
 
-    private List<Response> getGlobalResonseMessage() {
+    private List<Response> getGlobalResponseMessage() {
         List<Response> responseList = new ArrayList<>();
-        responseList.add(new ResponseBuilder().code("404").description("找不到资源").build());
+        responseList.add(new ResponseBuilder()
+                .code("200").description("请求成功")
+                .code("302").description("临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI")
+                .code("404").description("找不到资源")
+                .code("500").description("服务器内部错误")
+                .build());
         return responseList;
     }
 }
