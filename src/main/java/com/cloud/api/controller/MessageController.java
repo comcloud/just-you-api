@@ -46,35 +46,35 @@ public class MessageController {
 
     @Autowired
     private RedisService redisService;
-
-    @Operation(summary = "向指定用户发送消息")
-    @RequestMapping(value = "/sendToUser",method = RequestMethod.POST)
-    public void greeting(@Parameter(description = "存放接收者以及发送的消息json串", example = "{\n" +
-            "  \"sender\": \"xxxx\",\n" +
-            "  \"receiver\": \"yyyy\",\n" +
-            "  \"payload\": \"你好，我是消息\"\n" +
-            "}")
-                         @RequestBody String obj) throws JsonProcessingException {
-        log.info("服务器端向客户端的指定用户发送消息");
-        final JsonNode node = new ObjectMapper().readTree(obj);
-        final String receiver = node.findPath("receiver").toString();
-        final String sender = node.findPath("sender").toString();
-        final String payload = node.findPath("payload").toString();
-        this.webSocketServer = WebSocketServer.webSocketSet.get(receiver);
-        //如果接收者存在，则发送消息
-        if (webSocketServer != null) {
-            this.simpMessagingTemplate.convertAndSendToUser(receiver, "/topic/reply", payload);
-        }
-        //否则将消息存储到redis，等用户上线后主动拉取未读消息
-        else {
-            //存储消息的Redis列表名
-            String listKey = Constants.REDIS_UNREAD_MSG_PREFIX + receiver + ":" + "/topic/reply";
-            log.info(MessageFormat.format("消息接收者{0}还未建立WebSocket连接，{1}发送的消息【{2}】将被存储到Redis的【{3}】列表中", receiver, sender, payload, listKey));
-            //存储消息到Redis中
-            redisService.addToListRight(listKey, ExpireEnum.UNREAD_MSG, payload);
-        }
-
-    }
+//
+//    @Operation(summary = "向指定用户发送消息")
+//    @RequestMapping(value = "/sendToUser",method = RequestMethod.POST)
+//    public void greeting(@Parameter(description = "存放接收者以及发送的消息json串", example = "{\n" +
+//            "  \"sender\": \"xxxx\",\n" +
+//            "  \"receiver\": \"yyyy\",\n" +
+//            "  \"payload\": \"你好，我是消息\"\n" +
+//            "}")
+//                         @RequestBody String obj) throws JsonProcessingException {
+//        log.info("服务器端向客户端的指定用户发送消息");
+//        final JsonNode node = new ObjectMapper().readTree(obj);
+//        final String receiver = node.findPath("receiver").toString();
+//        final String sender = node.findPath("sender").toString();
+//        final String payload = node.findPath("payload").toString();
+//        this.webSocketServer = WebSocketServer.webSocketSet.get(receiver);
+//        //如果接收者存在，则发送消息
+//        if (webSocketServer != null) {
+//            this.simpMessagingTemplate.convertAndSendToUser(receiver, "/topic/reply", payload);
+//        }
+//        //否则将消息存储到redis，等用户上线后主动拉取未读消息
+//        else {
+//            //存储消息的Redis列表名
+//            String listKey = Constants.REDIS_UNREAD_MSG_PREFIX + receiver + ":" + "/topic/reply";
+//            log.info(MessageFormat.format("消息接收者{0}还未建立WebSocket连接，{1}发送的消息【{2}】将被存储到Redis的【{3}】列表中", receiver, sender, payload, listKey));
+//            //存储消息到Redis中
+//            redisService.addToListRight(listKey, ExpireEnum.UNREAD_MSG, payload);
+//        }
+//
+//    }
 
     /**
      * 拉取指定监听路径的未读的WebSocket消息
