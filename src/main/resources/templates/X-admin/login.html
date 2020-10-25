@@ -37,7 +37,7 @@
 
     <form method="post" class="layui-form" th:action="@{/login}">
         <label>
-            <input name="username" placeholder="用户名" type="text" class="layui-input">
+            <input name="username" id="username" placeholder="用户名" type="text" class="layui-input">
         </label>
         <hr class="hr15">
         <label>
@@ -52,7 +52,7 @@
 <!-- 底部结束 -->
 <script>
     var lockReconnect = false;//避免重复连接
-    var wsUrl = "ws://127.0.0.1:8089/justyou/websocket/111/222";
+    var wsUrl = "ws://127.0.0.1:8089/justyou/websocket/api/1";
 
     var websocket;
     var tt;
@@ -78,22 +78,12 @@
             reconnect(wsUrl);
         };
         websocket.onopen = function () {
-            console.log('建立连接');
             //心跳检测重置
             heartCheck.start();
         };
         websocket.onmessage = function (event) {
-            console.log('接收到消息');
-
-            if (event.data !== "123456789") {
-                console.log('收到消息：' + event.data);
-                //弹窗提醒, 播放音乐
-                $('#myModal').modal('show');
-                document.getElementById('notice').play();
-            }
+            console.log(event.data);
             heartCheck.start();
-
-            //拿到任何消息都说明当前连接是正常的
 
         }
     }
@@ -122,21 +112,19 @@
         timeoutObj: null,
         serverTimeoutObj: null,
         start: function () {
-            console.log('start');
             var self = this;
             this.timeoutObj && clearTimeout(this.timeoutObj);
             this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
             this.timeoutObj = setTimeout(function () {
                 //这里发送一个心跳，后端收到后，返回一个心跳消息，
                 //onmessage拿到返回的心跳就说明连接正常
-                console.log('55555');
                 websocket.send("123456789");
-                self.serverTimeoutObj = setTimeout(function () {
-                    console.log(111);
-                    console.log(websocket);
-                    websocket.close();
-                    // createWebSocket();
-                }, self.timeout);
+                // self.serverTimeoutObj = setTimeout(function () {
+                //     console.log(111);
+                //     console.log(websocket);
+                //     websocket.close();
+                //     createWebSocket();
+                // }, self.timeout);
 
             }, this.timeout)
         }
