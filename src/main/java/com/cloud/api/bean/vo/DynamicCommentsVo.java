@@ -1,4 +1,6 @@
 package com.cloud.api.bean.vo;
+import	java.util.ArrayList;
+import	java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,7 @@ public class DynamicCommentsVo {
     /**
      * 评论者用户id
      */
-    private Long openId;
+    private String openId;
     /**
      * 评论内容
      */
@@ -34,13 +36,12 @@ public class DynamicCommentsVo {
      * 任务id
      */
     private Long DynamicId;
-    /**
-     * 0：存在 1：删除
-     */
-    private Integer commDelete;
+
     /**
      * 父评论id
      */
     private Long commFatherId;
+
+    private List<DynamicCommentsVo> sonComm=new ArrayList<> ();
 
 }

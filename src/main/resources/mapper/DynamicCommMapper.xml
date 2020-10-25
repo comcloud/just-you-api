@@ -15,13 +15,17 @@
         select comm_father_id from dynamic_comments where comm_id=#{comm_id}
     </select>
     <select id="selectSonyByFid" resultMap="Comm">
-        select  comm_id,open_id,comm_content,comm_father_id,comm_time
+        select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
         from dynamic_comments where comm_father_id=#{comm_father_id} and comm_delete=0
     </select>
 
     <select id="select1FComm" resultMap="Comm">
-         select  comm_id,open_id,comm_content,comm_father_id,comm_time
-        from dynamic_comments where comm_father_id=null and comm_delete=0 and comm_id=#{comm_id}
+         select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
+        from dynamic_comments where comm_father_id is null and comm_delete=0 and comm_id=#{comm_id}
+    </select>
+    <select id="selectAll" resultMap="Comm">
+                 select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
+        from  dynamic_comments where comm_delete=0 and dynamic_id=#{dynamic_id}
     </select>
 
 </mapper>
