@@ -56,14 +56,35 @@ public class User implements Serializable {
      * 注册时间
      */
     private Date registration_time;
-
+    /*
+    头像url地址
+     */
+    private String userHeadPortrait;
+    /*
+    最近一次登录时间
+     */
+    private Date  lastRegisterTime;
+    /*
+    是否删除
+     */
     private int delete;
 
-    public int getDelete() {
-        return delete;
+    public User() {
     }
 
-    public void setDelete(int delete) {
+    public User(Long userId, String userName, String attention, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete) {
+        this.userId = userId;
+        this.userName = userName;
+        this.attention = attention;
+        this.fans = fans;
+        this.mobile = mobile;
+        this.gender = gender;
+        this.open_id = open_id;
+        this.address = address;
+        this.state = state;
+        this.registration_time = registration_time;
+        this.userHeadPortrait = userHeadPortrait;
+        this.lastRegisterTime = lastRegisterTime;
         this.delete = delete;
     }
 
@@ -151,6 +172,30 @@ public class User implements Serializable {
         this.registration_time = registration_time;
     }
 
+    public String getUserHeadPortrait() {
+        return userHeadPortrait;
+    }
+
+    public void setUserHeadPortrait(String userHeadPortrait) {
+        this.userHeadPortrait = userHeadPortrait;
+    }
+
+    public Date getLastRegisterTime() {
+        return lastRegisterTime;
+    }
+
+    public void setLastRegisterTime(Date lastRegisterTime) {
+        this.lastRegisterTime = lastRegisterTime;
+    }
+
+    public int getDelete() {
+        return delete;
+    }
+
+    public void setDelete(int delete) {
+        this.delete = delete;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -164,6 +209,8 @@ public class User implements Serializable {
                 ", address='" + address + '\'' +
                 ", state=" + state +
                 ", registration_time=" + registration_time +
+                ", userHeadPortrait='" + userHeadPortrait + '\'' +
+                ", lastRegisterTime=" + lastRegisterTime +
                 ", delete=" + delete +
                 '}';
     }
