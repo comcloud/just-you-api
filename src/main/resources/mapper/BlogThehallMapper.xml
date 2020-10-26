@@ -41,12 +41,9 @@
             <result column="dynamic_tag_name" property="dynamicTagName"/>
         </collection>
     </resultMap>
-    <sql id="blog">
-        dynamic_id,dynamic_title,Abstract,dynamic_views,open_id,dynamic_time,like_count
-    </sql>
-    <sql id="DynamicDetails">
-        dynamic_id,dynamic_title,dynamic_content,dynamic_status,dynamic_views,dynamic_comment,dynamic_deleted,dynamic_time,dynamic_update_time,Abstract,like_count,photo_url,photo_id
-    </sql>
+    <update id="dynamic_viewsAdd1">
+        update dynamic set dynamic_views=dynamic_views+1 where dynamic_id=#{dynamic_id}
+    </update>
 
     <select id="selectPushAllBlog" resultMap="BlogVo">
       select

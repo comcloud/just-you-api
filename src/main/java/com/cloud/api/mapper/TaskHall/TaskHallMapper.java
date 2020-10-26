@@ -33,6 +33,10 @@ public interface TaskHallMapper {
      * @return
      */
     List<task_classificationVo> selectClassNameList();
+    /**
+     * 浏览量加+1
+     */
+    int viewsAdd1(Long id);
 }
 
 

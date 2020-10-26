@@ -1,6 +1,7 @@
 package com.cloud.api.service.BlogThehall;
 import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.BlogVo;
+
 import java.util.List;
 public interface BlogThehallService {
     /**

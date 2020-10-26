@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pullUnreadMessage").permitAll()
                 .antMatchers("/websocket").permitAll()
                 .antMatchers("/dynamic/**").permitAll()
+                .antMatchers("/taskSearch/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()

@@ -8,6 +8,35 @@
         <result column="comm_time" property="commTime"/>
         <result column="open_id" property="openId"/>
     </resultMap>
+    <insert id="insertComments">
+        insert into dynamic_comments
+        <set>
+            <if test="dynamicId!=null">
+                dynamic_id=#{dynamicId},
+            </if>
+            <if test="openId!=null">
+                open_id=#{openId},
+            </if>
+            <if test="dynacommFatherIdmicId!=null">
+                comm_father_id=#{dynacommFatherIdmicId},
+            </if>
+            <if test="content!=null">
+                comm_content=#{content}
+            </if>
+        </set>
+    </insert>
+    <update id="giveALike">
+        update dynamic
+        <set>
+            <if test="role==0">
+                like_count=like_count+1
+            </if>
+            <if test="role==1">
+                like_count=like_count-1
+            </if>
+        </set>
+        where dynamic_id=#{dynamic_id}
+    </update>
     <select id="selectSonCount" resultType="java.lang.Integer">
         select count(*) from dynamic_comments where comm_father_id=#{comm_father_id}
     </select>
@@ -25,7 +54,7 @@
     </select>
     <select id="selectAll" resultMap="Comm">
                  select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
-        from  dynamic_comments where comm_delete=0 and dynamic_id=#{dynamic_id}
+        from  dynamic_comments where comm_delete=0  and comm_father_id is not Null and  dynamic_id=#{dynamic_id}
     </select>
 
 </mapper>

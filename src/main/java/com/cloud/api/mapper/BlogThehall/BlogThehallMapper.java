@@ -19,17 +19,17 @@ public interface BlogThehallMapper {
      */
     List<BlogVo> selectPushAllBlog();
 
-    /**
-     * 根据博客Id 推送 文章
-     * @return 推送文章数量
-     */
-    int updatePushBy1();
-
-    /**
-     * 取消文章推送
-     * @return 取消的个数
-     */
-    int updatePushBy0();
+//    /**
+//     * 根据博客Id 推送 文章
+//     * @return 推送文章数量
+//     */
+//    int updatePushBy1();
+//
+//    /**
+//     * 取消文章推送
+//     * @return 取消的个数
+//     */
+//    int updatePushBy0();
 
     /**
      * 根究 动态ID返回 动态详情
@@ -38,5 +38,5 @@ public interface BlogThehallMapper {
      */
     List<Dynamic> selectDynamicDetails(Long dynamic_id);
 
-
+    int  dynamic_viewsAdd1(Long dynamic_id);
 }

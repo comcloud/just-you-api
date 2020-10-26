@@ -36,4 +36,9 @@ public interface DynamicCommentsService {
 
     List<DynamicCommentsVo>  SonAddF(Long comm_id,List<DynamicCommentsVo> tcv);
 
+    boolean giveALike(Long dynamic_id,Long role);
+
+    boolean insertComments( Long dynamic_id,String open_id, Long comm_father_id,String content);
+
+
 }

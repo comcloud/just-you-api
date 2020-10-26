@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 /**
  * @author hds
  * <p>项目名称:
@@ -72,5 +75,24 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
             dynamicCommentsVo.setSonComm(SonAddF(dynamicCommentsVo.getCommId(),tcv));
         }
         return SonComm;
+    }
+
+    @Override
+    public boolean giveALike(Long dynamic_id, Long role) {
+        return dynamicCommMapper.giveALike(dynamic_id,role)>0;
+    }
+
+    @Override
+    public boolean insertComments(Long dynamic_id, String open_id, Long comm_father_id,String content) {
+        Map<String, Object> map = new HashMap<>();
+        if (dynamic_id == null||open_id==null||comm_father_id==null) {
+            throw new NullPointerException("参数不能为空");
+        }else {
+            map.put("dynamicId",dynamic_id);
+            map.put("openId",open_id);
+            map.put("dynacommFatherIdmicId",comm_father_id);
+            map.put("content", content);
+            return dynamicCommMapper.insertComments(map)>0;
+        }
     }
 }

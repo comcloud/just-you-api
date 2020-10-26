@@ -23,6 +23,14 @@ public class Tag implements Serializable {
      */
     private Long tagCount;
 
+    public Tag() {
+    }
+
+    public Tag(Long tagId, String tagName, Long tagCount) {
+        this.tagId = tagId;
+        this.tagName = tagName;
+        this.tagCount = tagCount;
+    }
 
     public Long getTagId() {
         return tagId;
@@ -48,4 +56,12 @@ public class Tag implements Serializable {
         this.tagCount = tagCount;
     }
 
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "tagId=" + tagId +
+                ", tagName='" + tagName + '\'' +
+                ", tagCount=" + tagCount +
+                '}';
+    }
 }

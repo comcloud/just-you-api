@@ -1,9 +1,8 @@
 package com.cloud.api.mapper.BlogThehall;
 import com.cloud.api.bean.vo.DynamicCommentsVo;
-import com.cloud.api.bean.vo.TaskCommentsVo;
-import com.cloud.api.bean.vo.taskHallVo;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hds
@@ -43,6 +42,9 @@ public interface DynamicCommMapper {
 
     List<DynamicCommentsVo> selectAll(Long dynamic_id);
 
+    int giveALike(Long dynamic_id, Long role);
+
+    int insertComments(Map<String,Object> map);
 
 
 }
