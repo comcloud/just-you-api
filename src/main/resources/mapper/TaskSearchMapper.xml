@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cloud.api.mapper.TaskHall.TaskHallMapper">
+<mapper namespace="com.cloud.api.mapper.TaskHall.TaskSearchMapper">
+    <resultMap id="DynamicSearchVo" type="com.cloud.api.bean.vo.TaskSearchVo">
+        <id column="search_id" property="searchId"/>
+        <result column="search_name" property="searchName"/>
+        <result column="search_time" property="searchTime"/>
+    </resultMap>
     <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
@@ -25,31 +30,47 @@
             <result column="tag_name" property="tagName"/>
         </collection>
     </resultMap>
-    <sql id="taskHallVo">
-        `id`,`recruiting_number`,`release_time`,`traffic`,`task_title`
-    </sql>
-    <sql id="task_classification">
-        `class_id`,`describe`,`Picture`,`name`
-    </sql>
-    <update id="viewsAdd1">
-        update  justyou.task set traffic=traffic+1 where id=#{id}
-    </update>
-    <select id="SelectTask_HallList" resultMap="TaskHallMapper">
+
+    <insert id="insertSearch">
+        insert into task_search
+        <set>
+            <if test="searchName!=null">
+                search_name=#{searchName},
+            </if>
+            <if test="searchOpenId!=null">
+                search_open_id=#{searchOpenId}
+            </if>
+        </set>
+    </insert>
+
+    <select id="SelectRecentlySearch" resultMap="DynamicSearchVo">
+    select
+        search_id,search_name,search_time
+    from
+        task_search
+    where     search_open_id=#{open_id}
+    order by  search_time asc
+    </select>
+    <select id="SelectLinkTaskSearchVos" resultMap="TaskHallMapper">
+        <bind name="pattern" value="'%' + content + '%'" />
         select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
+        and (t.task_title like  #{pattern}  or t.task_description like #{pattern} or t.id in (select id from task t,task_classification tc where t.class_id=tc.class_id and tc.name like #{pattern})
+        or t.id in (select t.id from task t,task_set_tag tst,tag tag where t.id=tst.task_id and tst.tag_id=tag.tag_id and  tag.tag_name like #{pattern}))
     </select>
-    <select id="SelectTaskListByClass" resultMap="TaskHallMapper">
+    <resultMap id="Tags" type="com.cloud.api.bean.entity.Tag">
+        <id column="tag_id" property="tagId"/>
+        <result property="tagCount" column="tag_count"/>
+        <result column="tag_name" property="tagName"/>
+    </resultMap>
+    <select id="selectHotTag" resultMap="Tags">
+            select tag_id,tag_name,tag_count from  tag  where tag_state=0 order  by tag_count DESC
+            LIMIT  0,10
+    </select>
+    <select id="SelectLinkTaskByTagId" resultMap="TaskHallMapper">
         select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
-        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0  and start_time &lt; DATE_SUB(now(),interval  60 second) and  t.class_id=#{class_id}
-    </select>
-    <resultMap id="taskClass" type="com.cloud.api.bean.vo.task_classificationVo">
-        <id column="class_id"  property="class_id"/>
-        <result column="name"  property="name"/>
-    </resultMap>
-    <select id="selectClassNameList" resultMap="taskClass">
-        select class_id, `name` from justyou.task_classification  order by sort asc
+        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second) and tag.tag_id=#{tag_id}
     </select>
 </mapper>
-

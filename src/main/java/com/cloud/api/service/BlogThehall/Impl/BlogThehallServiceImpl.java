@@ -1,14 +1,17 @@
 package com.cloud.api.service.BlogThehall.Impl;
 
+import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerOutput;
 import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.mapper.BlogThehall.BlogThehallMapper;
 import com.cloud.api.service.BlogThehall.BlogThehallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @author hds
@@ -36,9 +39,10 @@ public class BlogThehallServiceImpl implements BlogThehallService {
     public boolean setPushBy0() {
         return true;
     }
-
+    @Transactional
     @Override
     public List<Dynamic> getDynamicDetails(Long dynamic_id) {
+        blogThehallMapper.dynamic_viewsAdd1(dynamic_id);
         return blogThehallMapper.selectDynamicDetails(dynamic_id);
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.api.mapper.classificationMapper">
     <resultMap id="TaskClassification" type="com.cloud.api.bean.entity.TaskClassification">
-        <id column="class_id"  property="id"/>
+        <id column="class_id"  property="class_id"/>
         <result column="describe"  property="describe"/>
         <result column="Picture"  property="picture"/>
         <result column="name"  property="name"/>
@@ -22,19 +22,19 @@
                 task_classification.`describe`=#{describe} ,
             </if>
             <if test="describe!=null">
-                task_classification.Picture=#{Picture}
+                task_classification.Picture=#{Picture},
             </if>
             <if test="name!=null">
-                task_classification.`name`=#{name}
+                task_classification.`name`=#{name},
             </if>
             <if test="f_class_id !=null">
-                task_classification.`f_class_id`=#{f_class_id}
+                task_classification.`f_class_id`=#{f_class_id},
             </if>
             <if test="class_state !=null">
-                task_classification.class_state=#{class_state}
+                task_classification.class_state=#{class_state},
             </if>
              <if test=" sort!=null">
-                 task_classification.sort=#{task_classification}
+                 task_classification.sort=#{task_classification},
              </if>
                <if test=" class_count!=null">
                  task_classification.class_count=#{class_count}
@@ -56,19 +56,19 @@
                 task_classification.`describe`=#{describe} ,
             </if>
             <if test="describe!=null">
-                task_classification.`Picture`=#{Picture}
+                task_classification.`Picture`=#{Picture},
             </if>
             <if test="name!=null">
-                task_classification.`name`=#{name}
+                task_classification.`name`=#{name},
             </if>
             <if test="f_class_id !=null">
-                task_classification.`f_class_id`=#{f_class_id}
+                task_classification.`f_class_id`=#{f_class_id},
             </if>
             <if test="class_state !=null">
-                task_classification.`class_state`=#{class_state}
+                task_classification.`class_state`=#{class_state},
             </if>
             <if test=" sort!=null">
-                task_classification.`sort`=#{task_classification}
+                task_classification.`sort`=#{task_classification},
             </if>
             <if test=" class_count!=null">
                 task_classification.class_count=#{class_count}
@@ -114,6 +114,5 @@
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
-
     </update>
 </mapper>

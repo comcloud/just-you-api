@@ -1,9 +1,13 @@
 package com.cloud.api.bean.vo;
+import	java.util.ArrayList;
+import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.entity.TaskClassification;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
+import java.util.List;
+
 /**
  * @author 云顶犀
  * <p>项目名称: 任务大厅查询显示实体类
@@ -31,4 +35,6 @@ public class taskHallVo {
     public Integer traffic;
     //用户
     public userVo user;
+
+    private List<Tag> tags=new ArrayList<> ();
 }

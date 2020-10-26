@@ -22,7 +22,6 @@ import static org.springframework.messaging.simp.SimpMessageType.SUBSCRIBE;
  * @author 成都犀牛
  * @date 2020年10月20日16:06:20
  */
-@Component
 @Configuration
 public class CustomWebSocketConfig extends AbstractSecurityWebSocketMessageBrokerConfigurer {
 
