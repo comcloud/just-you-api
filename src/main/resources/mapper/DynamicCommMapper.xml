@@ -6,7 +6,13 @@
         <result column="comm_content" property="commContent"/>
         <result column="comm_father_id" property="commFatherId"/>
         <result column="comm_time" property="commTime"/>
-        <result column="open_id" property="openId"/>
+        <result column="dynamic_id" property="dynamicId"/>
+        <collection property="user" ofType="com.cloud.api.bean.vo.userVo">
+            <result column="user_id" property="user_id"/>
+            <result column="user_name" property="user_name"/>
+            <result column="open_id" property="open_id"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </collection>
     </resultMap>
     <insert id="insertComments">
         insert into dynamic_comments
@@ -53,8 +59,8 @@
         from dynamic_comments where comm_father_id is null and comm_delete=0 and comm_id=#{comm_id}
     </select>
     <select id="selectAll" resultMap="Comm">
-                 select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
-        from  dynamic_comments where comm_delete=0  and comm_father_id is not Null and  dynamic_id=#{dynamic_id}
+                 select  d.comm_id,d.comm_content,d.comm_father_id,d.comm_time,d.dynamic_id,d.comm_father_id,u.user_name,u.user_head_portrait,u.open_id
+        from  dynamic_comments d ,`user` u where d.open_id=u.open_id and comm_delete=0  and comm_father_id is not Null and  dynamic_id=#{dynamic_id}
     </select>
 
 </mapper>

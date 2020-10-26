@@ -1,6 +1,5 @@
 package com.cloud.api.service;
 import com.cloud.api.bean.entity.User;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,4 +22,5 @@ public interface UserService {
     boolean updateUserStateTo0All(Integer[] ids);
     boolean replyAllUserByUserId(Integer[] ids);
     boolean updateUserDeleteAll(Integer[] ids);
+
 }

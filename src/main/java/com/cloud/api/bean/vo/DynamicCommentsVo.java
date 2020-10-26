@@ -35,7 +35,7 @@ public class DynamicCommentsVo {
     /**
      * 任务id
      */
-    private Long DynamicId;
+    private Long dynamicId;
 
     /**
      * 父评论id
@@ -43,5 +43,7 @@ public class DynamicCommentsVo {
     private Long commFatherId;
 
     private List<DynamicCommentsVo> sonComm=new ArrayList<> ();
+
+    private List<userVo> user= new ArrayList<> ();
 
 }

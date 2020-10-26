@@ -1,5 +1,4 @@
 package com.cloud.api.bean.vo;
-
 /**
  * @author hds
  * <p>项目名称: 用户简单实体类 vo
@@ -11,6 +10,7 @@ public class userVo {
     public Long user_id;
     public String user_name;
     public  String open_id;
+    private String userHeadPortrait;
 
     public Long getUser_id() {
         return user_id;
@@ -36,12 +36,21 @@ public class userVo {
         this.open_id = open_id;
     }
 
+    public String getUserHeadPortrait() {
+        return userHeadPortrait;
+    }
+
+    public void setUserHeadPortrait(String userHeadPortrait) {
+        this.userHeadPortrait = userHeadPortrait;
+    }
+
     @Override
     public String toString() {
         return "userVo{" +
                 "user_id=" + user_id +
                 ", user_name='" + user_name + '\'' +
                 ", open_id='" + open_id + '\'' +
+                ", userHeadPortrait='" + userHeadPortrait + '\'' +
                 '}';
     }
 }

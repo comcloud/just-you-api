@@ -1,6 +1,7 @@
 package com.cloud.api.bean.vo;
 
 import com.cloud.api.bean.entity.DynamicTag;
+import com.cloud.api.bean.entity.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,10 +47,12 @@ public class BlogVo {
     private List<photoVo> photo=new ArrayList<>();
     private  List<DynamicTag> dynamicTags= new ArrayList<>();
 
+    private List<User> user=new ArrayList<> ();
+
     public BlogVo() {
     }
 
-    public BlogVo(Long id, String dynamicTitle, String abstracts, Long dynamicViews, Long likeCount, Date dynamicTime, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags) {
+    public BlogVo(Long id, String dynamicTitle, String abstracts, Long dynamicViews, Long likeCount, Date dynamicTime, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags, List<User> user) {
         this.id = id;
         this.dynamicTitle = dynamicTitle;
         this.abstracts = abstracts;
@@ -59,6 +62,7 @@ public class BlogVo {
         this.openId = openId;
         this.photo = photo;
         this.dynamicTags = dynamicTags;
+        this.user = user;
     }
 
     public Long getId() {
@@ -133,6 +137,14 @@ public class BlogVo {
         this.dynamicTags = dynamicTags;
     }
 
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "BlogVo{" +
@@ -145,6 +157,7 @@ public class BlogVo {
                 ", openId='" + openId + '\'' +
                 ", photo=" + photo +
                 ", dynamicTags=" + dynamicTags +
+                ", user=" + user +
                 '}';
     }
 }

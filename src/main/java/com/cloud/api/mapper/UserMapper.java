@@ -3,6 +3,7 @@ import com.cloud.api.bean.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hds
@@ -99,5 +100,15 @@ public interface UserMapper {
      */
     List<User> searchUserDelByTimeQuantum(String StartingTime,String ByTheTime);
 
-    String  text(String a,String b);
+    /**
+     * 添加用户信息
+     * @return
+     */
+    int insertUser(Map<String,Object> map);
+
+    /**
+     * 更新用户信息
+     * @return
+     */
+    int updateUser(Map<String,Object> map,String openId);
 }
