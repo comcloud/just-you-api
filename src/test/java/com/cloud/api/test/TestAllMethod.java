@@ -5,12 +5,14 @@ import cn.hutool.db.Entity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.models.auth.In;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,8 +50,17 @@ public class TestAllMethod {
 
     @Test
     public void testBuffer() {
-        final StringBuffer buffer = new StringBuffer();
-        System.out.println(buffer.toString());
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(9);
+        list.add(8);
+        list.add(7);
+        list.add(6);
+        list.add(5);
+        list.forEach(l -> {
+            System.out.print(l);
+            System.out.print(",");
+        });
     }
 
     @Test

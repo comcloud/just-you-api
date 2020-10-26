@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author HP
+ */
 public class EventManager {
     Map<String, List<EventListener>> listeners = new HashMap<>();
 
@@ -29,7 +32,7 @@ public class EventManager {
         listeners.get(eventType).remove(listener);
     }
 
-    public void notify(EventType eventType,String content){
+    public <T> void notify(EventType eventType,T content){
         List<EventListener> eventListeners = listeners.get(eventType.getValue());
         eventListeners.forEach(eventListener -> eventListener.update(eventType,content));
 

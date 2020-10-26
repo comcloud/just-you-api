@@ -1,5 +1,8 @@
 package com.cloud.api;
 
+import com.cloud.api.bean.dto.EventType;
+import com.cloud.api.util.observer.Editor;
+import com.cloud.api.util.observer.InformationListener;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import javax.annotation.security.RunAs;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -20,9 +24,6 @@ class ApiApplicationTests {
 
     @Test
     void contextLoads() {
-        redisTemplate.opsForValue().set("1","2");
-        System.out.println(redisTemplate.opsForValue().get("1"));
-
         // Predicate<Integer> predicate = n -> true
         // n 是一个参数传递到 Predicate 接口的 test 方法
         // n 如果存在则 test 方法返回 true
@@ -57,12 +58,13 @@ class ApiApplicationTests {
 
     private static void eval(List<Integer> list, Supplier<Integer> supplier) {
         list.forEach(one -> {
-            if(one > supplier.get()){
+            if (one > supplier.get()) {
                 System.out.println(one);
             }
         });
     }
-    private static void eval(List<Integer> list, Consumer<Integer> consumer){
+
+    private static void eval(List<Integer> list, Consumer<Integer> consumer) {
         list.forEach(consumer);
     }
 }

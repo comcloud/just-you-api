@@ -16,7 +16,18 @@ public enum EventType {
     /**
      * 官方通知
      */
-    OFFICIAL_NOTIFICATION(" official notification");
+    OFFICIAL_NOTIFICATION(" official notification"),
+
+    /**
+     * 消息通知
+     */
+    MESSAGE_NOTIFICATION("message notification"),
+
+    /**
+     * 邮箱通知
+     */
+    EMAIL_NOTIFICATION("email notification");
+
 
     private String value;
 
