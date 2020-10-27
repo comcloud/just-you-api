@@ -7,7 +7,7 @@ package com.cloud.api.bean.vo;
  * <p>描述:
  * @date 2020/10/17-16:22
  */
-public class userVo {
+public class UserVo {
     public Long user_id;
     public String user_name;
     public  String open_id;
@@ -38,7 +38,7 @@ public class userVo {
 
     @Override
     public String toString() {
-        return "userVo{" +
+        return "UserVo{" +
                 "user_id=" + user_id +
                 ", user_name='" + user_name + '\'' +
                 ", open_id='" + open_id + '\'' +

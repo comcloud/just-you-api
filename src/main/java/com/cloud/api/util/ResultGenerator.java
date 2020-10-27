@@ -13,10 +13,11 @@ public class ResultGenerator {
 
     /**
      * 无参数 获取成功结果
+     *
      * @return
      */
-    public static  Result genSuccessResult() {
-         Result result = new  Result();
+    public static Result genSuccessResult() {
+        Result result = new Result();
         result.setResultCode(RESULT_CODE_SUCCESS);
         result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         return result;
@@ -24,11 +25,12 @@ public class ResultGenerator {
 
     /**
      * 返回成功信息
+     *
      * @param message 成功信息
      * @return
      */
-    public static  Result genSuccessResult(String message) {
-         Result result = new  Result();
+    public static Result genSuccessResult(String message) {
+        Result result = new Result();
         result.setResultCode(RESULT_CODE_SUCCESS);
         result.setMessage(message);
         return result;
@@ -36,24 +38,34 @@ public class ResultGenerator {
 
     /**
      * 获取成功结果
+     *
      * @param data 传入对象数据
      * @return
      */
-    public static  Result genSuccessResult(Object data) {
-         Result result = new  Result();
+    public static Result genSuccessResult(Object data) {
+        Result result = new Result();
         result.setResultCode(RESULT_CODE_SUCCESS);
         result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         result.setData(data);
         return result;
     }
 
+    public static Result genSuccessResultInsertData(Object data) {
+        Result<String> result = new Result<>();
+        result.setResultCode(RESULT_CODE_SUCCESS);
+        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        result.setData((String)data);
+        return result;
+    }
+
     /**
      * 生成失败结果
+     *
      * @param message 失败结果
      * @return 失败结果
      */
-    public static  Result genFailResult(String message) {
-         Result result = new  Result();
+    public static Result genFailResult(String message) {
+        Result result = new Result();
         result.setResultCode(RESULT_CODE_SERVER_ERROR);
         if (StringUtils.isEmpty(message)) {
             result.setMessage(DEFAULT_FAIL_MESSAGE);
@@ -65,12 +77,13 @@ public class ResultGenerator {
 
     /**
      * 返回失败结果
-     * @param code 状态码
+     *
+     * @param code    状态码
      * @param message 返回信息
      * @return 结果，有状态码
      */
-    public static  Result genErrorResult(int code, String message) {
-         Result result = new  Result();
+    public static Result genErrorResult(int code, String message) {
+        Result result = new Result();
         result.setResultCode(code);
         result.setMessage(message);
         return result;

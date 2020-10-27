@@ -51,84 +51,84 @@
 
 <!-- 底部结束 -->
 <script>
-    var lockReconnect = false;//避免重复连接
-    var wsUrl = "ws://127.0.0.1:8089/justyou/websocket/api/1";
-
-    var websocket;
-    var tt;
-    createWebSocket();
-
-    function createWebSocket() {
-        try {
-            websocket = new WebSocket(wsUrl);
-            init();
-        } catch (e) {
-            console.log('catch' + e);
-            reconnect(wsUrl);
-        }
-    }
-
-    function init() {
-        websocket.onclose = function () {
-            console.log('链接关闭');
-            reconnect(wsUrl);
-        };
-        websocket.onerror = function () {
-            console.log('发生异常了');
-            reconnect(wsUrl);
-        };
-        websocket.onopen = function () {
-            //心跳检测重置
-            heartCheck.start();
-        };
-        websocket.onmessage = function (event) {
-            console.log(event.data);
-            heartCheck.start();
-
-        }
-    }
-
-    window.onbeforeunload = function () {
-        websocket.close();
-    }
-
-    var lockReconnect = false;//避免重复连接
-    function reconnect(url) {
-        if (lockReconnect) {
-            return;
-        }
-        lockReconnect = true;
-        //没连接上会一直重连，设置延迟避免请求过多
-        tt && clearTimeout(tt);
-        tt = setTimeout(function () {
-            createWebSocket(url);
-            lockReconnect = false;
-        }, 4000);
-    }
-
-    //心跳检测
-    var heartCheck = {
-        timeout: 60000,
-        timeoutObj: null,
-        serverTimeoutObj: null,
-        start: function () {
-            var self = this;
-            this.timeoutObj && clearTimeout(this.timeoutObj);
-            this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
-            this.timeoutObj = setTimeout(function () {
-                //这里发送一个心跳，后端收到后，返回一个心跳消息，
-                //onmessage拿到返回的心跳就说明连接正常
-                websocket.send("123456789");
+    // var lockReconnect = false;//避免重复连接
+    // var wsUrl = "ws://127.0.0.1:8089/justyou/websocket/api/1";
+    //
+    // var websocket;
+    // var tt;
+    // createWebSocket();
+    //
+    // function createWebSocket() {
+    //     try {
+    //         websocket = new WebSocket(wsUrl);
+    //         init();
+    //     } catch (e) {
+    //         console.log('catch' + e);
+    //         reconnect(wsUrl);
+    //     }
+    // }
+    //
+    // function init() {
+    //     websocket.onclose = function () {
+    //         console.log('链接关闭');
+    //         reconnect(wsUrl);
+    //     };
+    //     websocket.onerror = function () {
+    //         console.log('发生异常了');
+    //         reconnect(wsUrl);
+    //     };
+    //     websocket.onopen = function () {
+    //         心跳检测重置
+            // heartCheck.start();
+        // };
+        // websocket.onmessage = function (event) {
+        //     console.log(event.data);
+        //     heartCheck.start();
+        //
+        // }
+    // }
+    //
+    // window.onbeforeunload = function () {
+    //     websocket.close();
+    // }
+    //
+    // var lockReconnect = false;//避免重复连接
+    // function reconnect(url) {
+    //     if (lockReconnect) {
+    //         return;
+    //     }
+    //     lockReconnect = true;
+    //     没连接上会一直重连，设置延迟避免请求过多
+        // tt && clearTimeout(tt);
+        // tt = setTimeout(function () {
+        //     createWebSocket(url);
+        //     lockReconnect = false;
+        // }, 4000);
+    // }
+    //
+    // 心跳检测
+    // var heartCheck = {
+    //     timeout: 60000,
+    //     timeoutObj: null,
+    //     serverTimeoutObj: null,
+    //     start: function () {
+    //         var self = this;
+    //         this.timeoutObj && clearTimeout(this.timeoutObj);
+    //         this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+    //         this.timeoutObj = setTimeout(function () {
+    //             这里发送一个心跳，后端收到后，返回一个心跳消息，
+    //             onmessage拿到返回的心跳就说明连接正常
+                // websocket.send("123456789");
                 // self.serverTimeoutObj = setTimeout(function () {
                 //     console.log(111);
                 //     console.log(websocket);
                 //     websocket.close();
                 //     createWebSocket();
                 // }, self.timeout);
-
-            }, this.timeout)
-        }
-    }
+            //
+            // }, this.timeout)
+        // }
+    // }
 
     //百度统计可去掉
     var _hmt = _hmt || [];

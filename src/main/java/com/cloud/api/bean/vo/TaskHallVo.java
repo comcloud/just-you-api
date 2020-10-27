@@ -1,7 +1,6 @@
 package com.cloud.api.bean.vo;
 import	java.util.ArrayList;
 import com.cloud.api.bean.entity.Tag;
-import com.cloud.api.bean.entity.TaskClassification;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class taskHallVo {
+public class TaskHallVo {
     public Long id;
     //任务分类 一对一
     public TaskClassificationVo taskClassification;
@@ -34,7 +33,7 @@ public class taskHallVo {
     //浏览量
     public Integer traffic;
     //用户
-    public userVo user;
+    public UserVo user;
 
     private List<Tag> tags=new ArrayList<> ();
 }

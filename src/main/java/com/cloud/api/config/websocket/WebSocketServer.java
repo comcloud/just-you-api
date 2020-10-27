@@ -2,19 +2,18 @@ package com.cloud.api.config.websocket;
 
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import cn.hutool.json.JSONUtil;
 import com.cloud.api.bean.dto.Constants;
-import com.cloud.api.bean.dto.ExpireEnum;
 import com.cloud.api.service.RedisService;
-import com.cloud.api.service.impl.RedisServiceImpl;
-import io.swagger.annotations.Api;
+import com.cloud.api.util.SpringUtil;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
-import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -24,15 +23,11 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
 
 /**
  * 每个websocket服务都是一个单独的聊天通道
@@ -74,7 +69,8 @@ public class WebSocketServer {
     /***接收者 */
     private String recipient = "";
 
-    private RedisService redisService = new RedisServiceImpl();
+    @Qualifier(value = "redisService")
+    private RedisService redisService;
 
     /**
      * 连接建立成功调用的方法
@@ -134,12 +130,15 @@ public class WebSocketServer {
             }
         } else {
             //此时将信息暂时存放到redis
-            String listKey = Constants.REDIS_UNREAD_MSG_PREFIX + recipient + ":" + "/topic/reply";
-            log.info(MessageFormat.format("消息接收者{0}还未建立WebSocket连接，{1}发送的消息【{2}】将被存储到Redis的【{3}】列表中", recipient, sender, message, listKey));
+            log.info(MessageFormat.format("消息接收者{0}还未建立WebSocket连接，{1}发送的消息【{2}】将被存储到Redis的【{3}】列表中", recipient, sender, message, this.recipient));
             //存储消息到Redis中
-            redisService.addToListRight(listKey, ExpireEnum.UNREAD_MSG, message);
+            final ObjectNode node = JsonNodeFactory.instance.objectNode();
+            node.put("sender",this.sender);
+            node.put("message",message);
+            node.put("sendTime",LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            final RedisService redisService = (RedisService)SpringUtil.getBean("redisService");
+            redisService.addKey(this.recipient,node.toString());
         }
-
     }
 
     @OnClose

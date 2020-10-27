@@ -40,7 +40,7 @@ public class TaskHallController {
      * resultCode : 200(成功) / 500（失败）
      * message：反应结果字符串
      * data：[
-     * list : [{taskHallVo} ,{taskHallVo}]
+     * list : [{TaskHallVo} ,{TaskHallVo}]
      * pageNum  : 当前页码
      * pageSize : 每页的数量
      * size : 当前页的数量

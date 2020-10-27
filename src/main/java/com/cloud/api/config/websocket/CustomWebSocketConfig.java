@@ -59,10 +59,9 @@ public class CustomWebSocketConfig extends AbstractSecurityWebSocketMessageBroke
 
 
     /**
-     * @return 这个bean注解打包必须注释，否则就会报错
-     * 但是本地调试还是要
+     * @return 这个@Bean注解在本地test时候可以注释掉，否则会因为冲突而报错，但是其他时候上线或者主启动类调试都要打开
      */
-    @Bean
+    @Bean(value = "serverEndpointExporter")
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }

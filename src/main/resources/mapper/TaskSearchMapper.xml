@@ -6,7 +6,7 @@
         <result column="search_name" property="searchName"/>
         <result column="search_time" property="searchTime"/>
     </resultMap>
-    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
+    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.TaskHallVo">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />
@@ -19,7 +19,7 @@
             <result property="describe" column="describe"/>
             <result property="picture" column="picture"/>
         </association>
-        <association property="user" javaType="com.cloud.api.bean.vo.userVo">
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
             <id property="user_id" column="user_id"/>
             <result property="open_id" column="open_id"/>
             <result property="user_name" column="user_name"/>
