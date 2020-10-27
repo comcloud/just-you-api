@@ -43,8 +43,7 @@ public class classificationController {
     @ResponseBody
     @PostMapping("updateSort")
     public Result updateSort(@RequestParam Integer sort, @RequestParam Long class_id){
-        System.out.println(sort);
-        System.out.println(class_id);
+
         if ( classificationService.updateSort(sort+"",class_id)){
             return ResultGenerator.genSuccessResult("修改成功");
         }else {
@@ -87,7 +86,6 @@ public class classificationController {
     @ResponseBody
     @PostMapping("/restoreClass")
     public Result restoreClass(@RequestBody Long class_id){
-        System.out.println("------------------");
         if (classificationService.restoreClassificationByClassId(class_id)){
             return ResultGenerator.genSuccessResult("恢复成功！！");
         }else {

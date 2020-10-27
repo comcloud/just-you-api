@@ -7,12 +7,12 @@
         <result column="comm_father_id" property="commFatherId"/>
         <result column="comm_time" property="commTime"/>
         <result column="dynamic_id" property="dynamicId"/>
-        <collection property="user" ofType="com.cloud.api.bean.vo.userVo">
-            <result column="user_id" property="user_id"/>
-            <result column="user_name" property="user_name"/>
-            <result column="open_id" property="open_id"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
             <result column="user_head_portrait" property="userHeadPortrait"/>
-        </collection>
+        </association>
     </resultMap>
     <insert id="insertComments">
         insert into dynamic_comments
@@ -34,10 +34,10 @@
     <update id="giveALike">
         update dynamic
         <set>
-            <if test="role==0">
+            <if test="role=='add'">
                 like_count=like_count+1
             </if>
-            <if test="role==1">
+            <if test="role=='delete'">
                 like_count=like_count-1
             </if>
         </set>

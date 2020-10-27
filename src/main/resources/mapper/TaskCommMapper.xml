@@ -7,9 +7,15 @@
         <result column="comm_father_id" property="commFatherId"/>
         <result column="comm_time" property="commTime"/>
         <result column="open_id" property="openId"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
     </resultMap>
     <select id="selectAll" resultMap="Comm">
-                 select  comm_id,open_id,comm_content,comm_father_id,comm_time,task_id,comm_father_id
-        from  task_comments where comm_delete=0 and task_id=#{task_id}
+                 select  tc.comm_id,tc.open_id,tc.comm_content,tc.comm_father_id,tc.comm_time,tc.task_id,tc.comm_father_id,u.open_id,u.user_name,u.user_head_portrait
+        from  task_comments tc,`user` u  where tc.open_id=u.open_id and comm_delete=0 and task_id=#{task_id}
     </select>
 </mapper>

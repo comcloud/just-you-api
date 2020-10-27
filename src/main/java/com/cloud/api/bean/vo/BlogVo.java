@@ -47,12 +47,12 @@ public class BlogVo {
     private List<photoVo> photo=new ArrayList<>();
     private  List<DynamicTag> dynamicTags= new ArrayList<>();
 
-    private List<User> user=new ArrayList<> ();
+    private UserVo user;
 
     public BlogVo() {
     }
 
-    public BlogVo(Long id, String dynamicTitle, String abstracts, Long dynamicViews, Long likeCount, Date dynamicTime, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags, List<User> user) {
+    public BlogVo(Long id, String dynamicTitle, String abstracts, Long dynamicViews, Long likeCount, Date dynamicTime, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags, UserVo user) {
         this.id = id;
         this.dynamicTitle = dynamicTitle;
         this.abstracts = abstracts;
@@ -137,11 +137,11 @@ public class BlogVo {
         this.dynamicTags = dynamicTags;
     }
 
-    public List<User> getUser() {
+    public UserVo getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(UserVo user) {
         this.user = user;
     }
 

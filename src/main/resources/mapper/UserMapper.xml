@@ -16,47 +16,7 @@
     <sql id="User_List">
         user_id,user_name,attention,fans,open_id,mobile,gender,address,state,registration_time
     </sql>
-    <insert id="insertUser">
-        insert  into  `user`
-        <set>
-            <if test="nickName!=null">
-                user_name=#{nickName},
-            </if>
-            <if test="openid!=null">
-                open_id=#{openid},
-            </if>
-            <if test="gender!=null">
-                gender=#{gender},
-            </if>
-            <if test="avatarUrl!=null">
-                user_head_portrait=#{avatarUrl},
-            </if>
-            <if test="province!=null">
-                address=#{province}
-            </if>
-        </set>
-    </insert>
-    <update id="updateUser">
-        update  `user`
-        <set>
-            <if test="nickName!=null">
-                user_name=#{nickName},
-            </if>
-            <if test="gender!=null">
-                gender=#{gender},
-            </if>
-            <if test="avatarUrl!=null">
-                user_head_portrait=#{avatarUrl},
-            </if>
-            <if test="province!=null">
-                address=#{province},
-            </if>
-            <if test="1=1">
-                last_register_time=now(),
-            </if>
-            where open_id=#{openId}
-        </set>
-    </update>
+
     <update id="updateUserStateTo0">
         update justyou.user SET state=0 where user_id=#{UserId} and `delete`=0
     </update>

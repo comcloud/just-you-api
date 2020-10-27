@@ -59,9 +59,9 @@ public class BlogThehallController {
     @Operation(summary = "点赞")
     @GetMapping("/giveALike")
     public Result giveALike(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id,
-                            @ApiParam(name="role" ,value = "0 点赞 1 取消点赞") @RequestParam Long role){
-                if (dynamicCommentsService.giveALike(dynamic_id, role)){
-                    if (role==0){
+                            @ApiParam(name="role" ,value = "0 点赞 1 取消点赞") @RequestParam String Rrole){
+                if (dynamicCommentsService.giveALike(dynamic_id, Rrole)){
+                    if (Rrole.equals("add")){
                         return ResultGenerator.genSuccessResult("+1");
                     }else {
                         return ResultGenerator.genSuccessResult("-1");
@@ -78,7 +78,7 @@ public class BlogThehallController {
                            @ApiParam(name = "content",value = "评论内容") @RequestParam String content
                            ){
         if (dynamicCommentsService.insertComments(dynamic_id, open_id, comm_father_id,content)){
-            return ResultGenerator.genFailResult("评论成功！！");
+            return ResultGenerator.genSuccessResult("评论成功！！");
         }else {
             return ResultGenerator.genFailResult("评论失败");
         }

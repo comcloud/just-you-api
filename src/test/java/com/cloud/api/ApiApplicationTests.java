@@ -7,6 +7,7 @@ import com.cloud.api.mapper.BlogThehall.BlogThehallMapper;
 import com.cloud.api.mapper.BlogThehall.DynamicCommMapper;
 import com.cloud.api.mapper.TaskHall.TaskSearchMapper;
 import com.cloud.api.mapper.TaskHall.TaskHallMapper;
+import com.cloud.api.mapper.VXUser.VXUserMapper;
 import com.cloud.api.service.BlogThehall.DynamicCommentsService;
 import com.cloud.api.service.TaskHall.impl.TaskSearchServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,9 @@ DynamicCommentsService taskCommentsService;
     TaskSearchMapper taskSearchServiceImpl;
     @Autowired
     DynamicCommMapper dynamicCommMapper;
+    @Autowired
+    VXUserMapper VXUser;
+
     @Test
     void contextLoads() {
 //        redisTemplate.opsForValue().set("1","2");
@@ -94,7 +98,7 @@ DynamicCommentsService taskCommentsService;
 //        List<TaskSearchVo> taskSearchVos = taskSearchServiceImpl.SelectLinkTaskByTagId(1L);
 //        System.out.println(taskSearchVos
 //        );
-        System.out.println(dynamicCommMapper.selectAll(1L));
+        System.out.println(VXUser.selectFansUser("vx001"));
     }
 
 

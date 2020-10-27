@@ -21,13 +21,7 @@ public class User implements Serializable {
      * 用户名
      */
     private String userName;
-    /**
-     * 关注
-     */
-    private String attention;
-    /**
-     * 粉丝
-     */
+
     private String fans;
     /**
      *电话号码
@@ -72,10 +66,9 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long userId, String userName, String attention, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete) {
+    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete) {
         this.userId = userId;
         this.userName = userName;
-        this.attention = attention;
         this.fans = fans;
         this.mobile = mobile;
         this.gender = gender;
@@ -106,14 +99,6 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getAttention() {
-        return attention;
-    }
-
-    public void setAttention(String attention) {
-        this.attention = attention;
     }
 
     public String getFans() {
@@ -201,7 +186,6 @@ public class User implements Serializable {
         return "User{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", attention='" + attention + '\'' +
                 ", fans='" + fans + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", gender=" + gender +

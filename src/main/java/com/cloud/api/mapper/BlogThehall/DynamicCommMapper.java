@@ -42,7 +42,7 @@ public interface DynamicCommMapper {
 
     List<DynamicCommentsVo> selectAll(Long dynamic_id);
 
-    int giveALike(Long dynamic_id, Long role);
+    int giveALike(Long dynamic_id, String role);
 
     int insertComments(Map<String,Object> map);
 

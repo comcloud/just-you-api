@@ -78,7 +78,7 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     }
 
     @Override
-    public boolean giveALike(Long dynamic_id, Long role) {
+    public boolean giveALike(Long dynamic_id, String role) {
         return dynamicCommMapper.giveALike(dynamic_id,role)>0;
     }
 

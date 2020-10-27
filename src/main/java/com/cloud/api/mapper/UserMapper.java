@@ -99,16 +99,4 @@ public interface UserMapper {
      * @return
      */
     List<User> searchUserDelByTimeQuantum(String StartingTime,String ByTheTime);
-
-    /**
-     * 添加用户信息
-     * @return
-     */
-    int insertUser(Map<String,Object> map);
-
-    /**
-     * 更新用户信息
-     * @return
-     */
-    int updateUser(Map<String,Object> map,String openId);
 }
