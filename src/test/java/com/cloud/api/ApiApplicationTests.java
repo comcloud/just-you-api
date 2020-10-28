@@ -98,7 +98,8 @@ DynamicCommentsService taskCommentsService;
 //        List<TaskSearchVo> taskSearchVos = taskSearchServiceImpl.SelectLinkTaskByTagId(1L);
 //        System.out.println(taskSearchVos
 //        );
-        System.out.println(VXUser.selectFansUser("vx001"));
+//        System.out.println(VXUser.selectFansUser("vx001"));
+        System.out.println(aa.selectLikeCountByDynamicId(2L));
     }
 
 

@@ -1,6 +1,8 @@
 package com.cloud.api.mapper.BlogThehall;
 import com.cloud.api.bean.vo.DynamicCommentsVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,37 +16,42 @@ import java.util.Map;
 @Mapper
 public interface DynamicCommMapper {
     /**
-     * 查看子评论个数
-     * @return 子评论个数
-     */
-    int selectSonCount(Long comm_father_id);
-
-    /**
-     * 获取父评论ID
-     * @return
-     */
-    String seelectFcomm_id(Long comm_id);
-
-    /**
-     *
-     * @param comm_father_id
-     * @return
-     */
-    List<DynamicCommentsVo> selectSonyByFid(Long comm_father_id);
-
-    /**
-     *
+     * 获取全部评论
      * @param dynamic_id
      * @return
      */
-    List<DynamicCommentsVo> select1FComm(Long dynamic_id);
-
-
     List<DynamicCommentsVo> selectAll(Long dynamic_id);
 
-    int giveALike(Long dynamic_id, String role);
+    /**
+     * 点赞
+     * @param openId
+     * @param dynamic_id
+     * @return
+     */
+    int giveALike(@Param("openId") String openId, @Param("dynamicId")Long dynamicId);
 
+    /**
+     * 添加评论
+     * @param map
+     * @return
+     */
     int insertComments(Map<String,Object> map);
 
+    /**
+     * 查看当前用户是否给该动态点赞
+     * @param openId
+     * @param dynamicId
+     * @return
+     */
+    int isGiveALike(@Param("openId") String openId, @Param("dynamicId") Long dynamicId);
 
+    /**
+     * 取消点赞
+     * @param openId
+     * @param dynamicId
+     * @return
+     */
+    int cancelGiveALike(@Param("openId") String openId, @Param("dynamicId") Long dynamicId);
+
+    int deleteComm(Long commId);
 }

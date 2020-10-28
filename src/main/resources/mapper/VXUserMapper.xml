@@ -72,9 +72,18 @@
         from user_attention ua,`user` u where ua.attention_open_id=u.open_id and ua.my_open_id=#{open_id}
         order by ua.attention_time desc
     </select>
-    <select id="selectFansUser" resultType="com.cloud.api.bean.vo.UserAttention">
+    <select id="selectFansUser" resultMap="UserAttentions">
         select  ua.id,ua.attention_time,u.user_name,u.open_id,u.user_head_portrait
         from user_attention ua,`user` u where ua.my_open_id=u.open_id and ua.attention_open_id=#{open_id}
         order by ua.attention_time desc
+    </select>
+    <select id="selectAttentionCount" resultType="java.lang.Integer">
+        select count(*) from user_attention where  my_open_id=#{openId}
+    </select>
+    <select id="selectFansCount" resultType="java.lang.Integer">
+        select count(*) from user_attention where  attention_open_id=#{openId}
+    </select>
+    <select id="SelectISTtentionUser" resultType="java.lang.Integer">
+        select  count(*) from user_attention where my_open_id=#{MyOpenId} and  attention_open_id=#{HeOpenId}
     </select>
 </mapper>

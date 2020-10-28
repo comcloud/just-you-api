@@ -4,6 +4,7 @@ import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.vo.UserAttention;
 import com.cloud.api.bean.vo.UserVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -60,5 +61,18 @@ public interface VXUserMapper {
      * @return
      */
     List<UserAttention> selectFansUser(String open_id);
+
+
+    int selectAttentionCount(String openId);
+
+    int selectFansCount(String openId);
+
+    /**
+     * open_id 为 MyOpenId 的用户是否关注了OPen_id为 HeOpenId的用户
+     * @param MyOpenId this
+     * @param HeOpenId 别人的
+     * @return
+     */
+    int SelectISTtentionUser(@Param("MyOpenId") String MyOpenId, @Param("HeOpenId") String HeOpenId);
 
 }

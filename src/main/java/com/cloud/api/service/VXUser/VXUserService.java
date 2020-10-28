@@ -16,18 +16,21 @@ import java.util.Map;
 public interface VXUserService {
     /**
      * 添加用户信息
+     *
      * @return
      */
-    boolean insertUser(String openid,String nickName,Integer gender,String avatarUrl,String province );
+    boolean insertUser(String openid, String nickName, Integer gender, String avatarUrl, String province);
 
     /**
      * 更新用户信息
+     *
      * @return
      */
     boolean LoginUpdateUser(Object obj);
 
     /**
-     *  点击 关注
+     * 点击 关注
+     *
      * @param MyOpenId 用户的open_id
      * @param HeOpenId 被关注的open_id
      * @return
@@ -36,6 +39,7 @@ public interface VXUserService {
 
     /**
      * 取消关注
+     *
      * @param MyOpenId
      * @param HeOpenId
      * @return
@@ -44,6 +48,7 @@ public interface VXUserService {
 
     /**
      * 获取关注列表
+     *
      * @param open_id 自己的open_id
      * @return 关注用户的信息集合
      */
@@ -51,9 +56,12 @@ public interface VXUserService {
 
     /**
      * 获取粉丝列表
+     *
      * @param open_id 用户 open_id
      * @return
      */
     List<UserAttention> selectFansUser(String open_id);
+
+    Map<String, Integer> attentionCountAll(String openId);
 
 }

@@ -3,11 +3,11 @@ package com.cloud.api.service.VXUser.Impl;
 import com.cloud.api.bean.vo.UserAttention;
 import com.cloud.api.mapper.VXUser.VXUserMapper;
 import com.cloud.api.service.VXUser.VXUserService;
-import io.lettuce.core.ScriptOutputType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -44,7 +44,14 @@ public class VXUserServiceImpl implements VXUserService {
     @Transactional
     @Override
     public boolean attentionUser(String MyOpenId, String HeOpenId) {
-        return vXUserMapper.attentionUser(MyOpenId,HeOpenId)>0;
+        if (vXUserMapper.SelectISTtentionUser(MyOpenId, HeOpenId)>0){
+            try {
+                throw new SQLException("重复操作");
+            } catch (SQLException throwables) {
+                return false;
+            }
+        }
+            return vXUserMapper.attentionUser(MyOpenId,HeOpenId)>0;
     }
     @Transactional
     @Override
@@ -60,6 +67,14 @@ public class VXUserServiceImpl implements VXUserService {
     @Override
     public List<UserAttention> selectFansUser(String open_id) {
         return vXUserMapper.selectFansUser(open_id);
+    }
+
+    @Override
+    public Map<String, Integer> attentionCountAll(String openId) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("AttentionCount",vXUserMapper.selectAttentionCount(openId));
+        map.put("FansCount",vXUserMapper.selectFansCount(openId));
+        return map;
     }
 
 }

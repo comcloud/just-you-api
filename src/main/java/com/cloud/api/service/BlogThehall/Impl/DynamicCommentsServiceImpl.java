@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,17 +23,6 @@ import java.util.Map;
 public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     @Autowired
     private DynamicCommMapper dynamicCommMapper;
-    @Override
-    public boolean ifSon(Long comm_id) {
-        return dynamicCommMapper.selectSonCount(comm_id)>0;
-    }
-
-    @Override
-    public List<DynamicCommentsVo> getSonTaskComm(Long comm_id) {
-        return dynamicCommMapper.selectSonyByFid(comm_id);
-    }
-
-
     @Override
     public List<DynamicCommentsVo> getAllTaskComm(Long dynamic_id) {
         List<DynamicCommentsVo> dynamicCommentsVos = dynamicCommMapper.selectAll(dynamic_id);
@@ -55,10 +45,6 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     }
 
     @Override
-    public List<DynamicCommentsVo> get1FComm(Long dynamic_id) {
-        return dynamicCommMapper.selectAll(dynamic_id);
-    }
-    @Override
     public List<DynamicCommentsVo> SonAddF(Long comm_id,List<DynamicCommentsVo> tcv) {
         List<DynamicCommentsVo> SonComm=new ArrayList<>();
         for (DynamicCommentsVo item : tcv){
@@ -78,8 +64,20 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     }
 
     @Override
-    public boolean giveALike(Long dynamic_id, String role) {
-        return dynamicCommMapper.giveALike(dynamic_id,role)>0;
+    public boolean giveALike(Long dynamicId, String  openId) {
+        if (dynamicCommMapper.isGiveALike(openId, dynamicId)>0){
+            try {
+                throw new SQLException("数据已经存在");
+            } catch (SQLException throwables) {
+                return false;
+            }
+        }
+        return dynamicCommMapper.giveALike(openId,dynamicId)>0;
+    }
+
+    @Override
+    public boolean selectIFAddLike(Long dynamicId, String openId) {
+        return dynamicCommMapper.cancelGiveALike(openId,dynamicId)>0;
     }
 
     @Override
@@ -94,5 +92,10 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
             map.put("content", content);
             return dynamicCommMapper.insertComments(map)>0;
         }
+    }
+
+    @Override
+    public boolean deleteComm(Long commId) {
+        return dynamicCommMapper.deleteComm(commId)>0;
     }
 }

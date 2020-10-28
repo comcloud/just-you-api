@@ -68,6 +68,34 @@ public class Dynamic implements Serializable {
 
     private  List<DynamicTag> dynamicTags= new ArrayList<>();
 
+    private boolean isAttention;
+
+    private boolean ifLike;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public boolean isAttention() {
+        return isAttention;
+    }
+
+    public void setAttention(boolean attention) {
+        isAttention = attention;
+    }
+
+    public boolean isIfLike() {
+        return ifLike;
+    }
+
+    public void setIfLike(boolean ifLike) {
+        this.ifLike = ifLike;
+    }
+
     public Dynamic() {
     }
 

@@ -4,7 +4,6 @@
         <resultMap id="UserMap" type="com.cloud.api.bean.entity.User">
             <id column="user_id" jdbcType="INTEGER" property="userId" />
             <result column="user_name" jdbcType="VARCHAR" property="userName" />
-            <result column="attention" jdbcType="VARCHAR" property="attention" />
             <result column="fans" jdbcType="VARCHAR" property="fans" />
             <result column="mobile" jdbcType="VARCHAR" property="mobile" />
             <result column="open_id" jdbcType="VARCHAR" property="open_id" />

@@ -27,11 +27,11 @@ import java.util.List;
  */
 @Api(value = "VX 用户信息Controller" ,tags = {"用户信息管理接口"})
 @Controller
-@ResponseBody
 @RequestMapping("/user")
 public class VXUserController {
     @Autowired
     private VXUserService VXUserService;
+    @ResponseBody
     @Operation(summary = "当用户授权时存储用户数据信息")
     @GetMapping("/insertUser")
     public Result insertUser(@ApiParam(name = "openid" ,value = "用户OPenID") @RequestParam("openid") String openid,
@@ -45,6 +45,7 @@ public class VXUserController {
             return ResultGenerator.genFailResult("保存失败！！");
         }
     }
+    @ResponseBody
     @Operation(summary = "点击关注")
     @GetMapping("/attentionUser")
     public Result attentionUser(@ApiParam(name="MyOpenId",value = "个人的Open_ID") @RequestParam String MyOpenId,
@@ -52,19 +53,21 @@ public class VXUserController {
         if (VXUserService.attentionUser(MyOpenId, HeOpenId)){
             return ResultGenerator.genSuccessResult("关注+1");
         }else {
-            return ResultGenerator.genFailResult("操作异常");
+            return ResultGenerator.genFailResult("关注失败");
         }
     }
+    @ResponseBody
     @Operation(summary = "点击取消关注")
     @GetMapping("/cancelttentionUser")
     public Result cancelttentionUser(@ApiParam(name="MyOpenId",value = "个人的Open_ID") @RequestParam String MyOpenId,
                                 @ApiParam(name = "HeOpenId",value = "关注对方的ID") @RequestParam String HeOpenId){
         if (VXUserService.cancelttentionUser(MyOpenId, HeOpenId)){
-            return ResultGenerator.genSuccessResult("关注+1");
+            return ResultGenerator.genSuccessResult("已取消");
         }else {
-            return ResultGenerator.genFailResult("操作异常");
+            return ResultGenerator.genFailResult("取消失败");
         }
     }
+    @ResponseBody
     @Operation(summary = "获取关注用户列表")
     @GetMapping("/selectAttentionUser")
     public Result selectAttentionUser(@ApiParam(name="open_id",value = "用户的OPenId") @RequestParam String open_id,
@@ -73,6 +76,7 @@ public class VXUserController {
         List<UserAttention> userAttentions = VXUserService.selectAttentionUser(open_id);
         return ResultGenerator.genSuccessResult(new PageInfo<>(userAttentions));
     }
+    @ResponseBody
     @Operation(summary = "获取粉丝列表")
     @GetMapping("/selectFansUser")
     public Result selectFansUser(@ApiParam(name="open_id",value = "用户的OPenId") @RequestParam String open_id,
@@ -80,5 +84,24 @@ public class VXUserController {
         PageHelper.startPage(pageNum, 10);
         return ResultGenerator.genSuccessResult(new PageInfo<>(VXUserService.selectFansUser(open_id)));
     }
+    @ResponseBody
+    @Operation(summary = "关注数量")
+    @GetMapping("/attentionCount")
+    private Result attentionCountAll(@ApiParam(name="open_id",value = "用户的OPenId") @RequestParam String open_id){
+        return ResultGenerator.genSuccessResult(VXUserService.attentionCountAll(open_id));
+    }
 
+  /*  *//**
+     * 返回
+     * @param MyOpenId
+     * @param HeOpenId
+     * @return boolean 值 t有 f 无
+     *//*
+    @ResponseBody
+    @Operation(summary = "判断用户是否关注了哪个用户")
+    @GetMapping("iSTtentionUser")
+    private Result getISTtentionUser(@ApiParam(name="MyOpenId",value = "用户的OPenId") @RequestParam String MyOpenId,
+                                     @ApiParam(name="HeOpenId",value = "用户的OPenId") @RequestParam String HeOpenId){
+        return ResultGenerator.genSuccessResult(VXUserService.SelectISTtentionUser(MyOpenId, HeOpenId));
+    }*/
 }

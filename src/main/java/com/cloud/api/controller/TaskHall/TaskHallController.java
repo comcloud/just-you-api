@@ -111,7 +111,7 @@ public class TaskHallController {
     @Operation(summary = "获取任务评论" )
     @GetMapping("/comm")
     @ResponseBody
-    public Result comm(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long task_id){
+    public Result comm(@ApiParam(name="task_id" ,value = "任务Id") @RequestParam Long task_id){
         return ResultGenerator.genSuccessResult(taskCommService.getAllTaskComm(task_id));
     }
 

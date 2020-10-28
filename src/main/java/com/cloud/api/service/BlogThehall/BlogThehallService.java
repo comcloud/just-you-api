@@ -8,7 +8,7 @@ public interface BlogThehallService {
      * 查询推送红博客List 结合
      * @return
      */
-    List<BlogVo> getPushAllBlog();
+    List<BlogVo> getPushAllBlog(String openId);
 
     /**
      * 根据博客Id 推送 文章
@@ -27,5 +27,5 @@ public interface BlogThehallService {
      * @param dynamic_id
      * @return
      */
-    List<Dynamic> getDynamicDetails(Long dynamic_id);
+    Dynamic getDynamicDetails(Long dynamic_id,String openId);
 }
