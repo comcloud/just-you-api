@@ -1,5 +1,6 @@
 package com.cloud.api.test;
 
+import cn.hutool.extra.mail.MailUtil;
 import com.cloud.api.bean.vo.photoVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -79,9 +81,8 @@ public class TestAllMethod {
     }
 
     @Test
-    public void testMethod() {
-        int n = 10;
-        System.out.println(getNum(n));
+    public void testEmail() {
+        MailUtil.send("2230817302@qq.com", "测试", "邮件来自Hutool测试", false);
     }
 
     private int getNum(int n) {

@@ -13,7 +13,10 @@ public class Editor {
                 EventType.SUPPORT.getValue(),
                 EventType.COMMENT.getValue(),
                 EventType.OFFICIAL_NOTIFICATION.getValue(),
-                EventType.MESSAGE_NOTIFICATION.getValue()
+                EventType.MESSAGE_NOTIFICATION.getValue(),
+                EventType.EMAIL_NOTIFICATION.getValue(),
+                EventType.FOLLOW.getValue(),
+                EventType.INFORMATION_NOTIFICATION.getValue()
         );
     }
 

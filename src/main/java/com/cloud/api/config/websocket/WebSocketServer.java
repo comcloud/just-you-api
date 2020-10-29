@@ -5,6 +5,7 @@ import cn.hutool.db.Entity;
 import com.cloud.api.bean.dto.Constants;
 import com.cloud.api.service.RedisService;
 import com.cloud.api.util.SpringUtil;
+import com.cloud.api.util.websocket.MessageUtil;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
@@ -51,26 +52,23 @@ public class WebSocketServer {
     /**
      * 关联用户的open id与他对应的websocket对象
      */
-    private static Map<String, Integer> data = new ConcurrentHashMap<>();
+    public static Map<String, Integer> data = new ConcurrentHashMap<>();
 
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */
-    private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<>();
+    public static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<>();
 
     /**
      * 与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
-    private Session session;
+    public Session session;
 
     /*** 接收openid */
-    private String sender = "";
+    public String sender = "";
 
     /***接收者 */
     private String recipient = "";
-
-    @Qualifier(value = "redisService")
-    private RedisService redisService;
 
     /**
      * 连接建立成功调用的方法
@@ -97,9 +95,8 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) throws IOException {
         log.info("收到来自窗口" + sender + "的信息:" + message + "，发送给：" + recipient);
         log.info("当前我是：" + this.sender + ",我对应的集合存储位置是：" + data.get(this.sender));
-        sendMessage(message);
+        MessageUtil.sendMessage(message, recipient, sender);
     }
-
 
     private void sendMessage(String message) throws IOException {
         AtomicReference<WebSocketServer> recipientServer = new AtomicReference<>();
@@ -107,11 +104,10 @@ public class WebSocketServer {
         if (recipientServerLocation != null) {
             webSocketSet.forEach(value -> {
                 //一个websocket对象的sender说明这是属于谁的
-                if(value.sender.equals(this.recipient)){
+                if (value.sender.equals(this.recipient)) {
                     recipientServer.set(value);
                 }
             });
-
             log.info("recipientServer.get().sender = {}", recipientServer.get().sender);
             assert false;
             if (recipientServer.get() != null) {
@@ -133,11 +129,11 @@ public class WebSocketServer {
             log.info(MessageFormat.format("消息接收者{0}还未建立WebSocket连接，{1}发送的消息【{2}】将被存储到Redis的【{3}】列表中", recipient, sender, message, this.recipient));
             //存储消息到Redis中
             final ObjectNode node = JsonNodeFactory.instance.objectNode();
-            node.put("sender",this.sender);
-            node.put("message",message);
-            node.put("sendTime",LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            final RedisService redisService = (RedisService)SpringUtil.getBean("redisService");
-            redisService.addKey(this.recipient,node.toString());
+            node.put("sender", this.sender);
+            node.put("message", message);
+            node.put("sendTime", LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            final RedisService redisService = (RedisService) SpringUtil.getBean("redisService");
+            redisService.addKey(this.recipient, node.toString());
         }
     }
 

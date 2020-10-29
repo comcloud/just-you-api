@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.MessageMapper">
+
+    <select id="selectUserFromOpenid" resultType="com.cloud.api.bean.entity.User">
+        select
+    </select>
+    <select id="selectTaskFromId" resultType="com.cloud.api.bean.entity.Task"></select>
+    <select id="selectDynamicFromId" resultType="com.cloud.api.bean.entity.Dynamic"></select>
+</mapper>
