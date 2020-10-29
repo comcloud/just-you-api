@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.View;
 import java.time.Instant;
+import java.util.stream.Stream;
 
 /**
  * @author hds
@@ -41,14 +42,17 @@ public class BlogThehallController {
      */
     @Operation(summary = "获取动态大厅首页显示列表" )
     @GetMapping("/gotoHomePage")
-    public Result gotoHomePage(@ApiParam(name="pageNum",value = "页码 默认值为1",required = true) @RequestParam(defaultValue="1" ,value = "pageNum") Integer pageNum){
+    public Result gotoHomePage(@ApiParam(name="pageNum",value = "页码 默认值为1",required = true) @RequestParam(defaultValue="1" ,value = "pageNum") Integer pageNum,
+                               @ApiParam(name = "openId",value = "用户ID") @RequestParam String openId
+                               ){
         PageHelper.startPage(pageNum,3);
-        return ResultGenerator.genSuccessResult(new PageInfo<>(blogThehallService.getPushAllBlog()));
+        return ResultGenerator.genSuccessResult(new PageInfo<>(blogThehallService.getPushAllBlog(openId)));
     }
     @Operation(summary = "获取动态详情页面信息" )
     @GetMapping("/gotoDynamicDetails")
-    public Result gotoDynamicDetails(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id){
-        return ResultGenerator.genSuccessResult(blogThehallService.getDynamicDetails(dynamic_id));
+    public Result gotoDynamicDetails(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id,
+                                     @ApiParam(name = "openId",value = "用户ID") @RequestParam String openId){
+        return ResultGenerator.genSuccessResult(blogThehallService.getDynamicDetails(dynamic_id, openId));
     }
     @Operation(summary = "获取动态评论" )
     @GetMapping("/comm")
@@ -58,15 +62,21 @@ public class BlogThehallController {
     @Operation(summary = "点赞")
     @GetMapping("/giveALike")
     public Result giveALike(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id,
-                            @ApiParam(name="role" ,value = "0 点赞 1 取消点赞") @RequestParam Long role){
-                if (dynamicCommentsService.giveALike(dynamic_id, role)){
-                    if (role==0){
+                            @ApiParam(name="openId" ,value = "用户openID") @RequestParam String openId){
+                if (dynamicCommentsService.giveALike(dynamic_id, openId)){
                         return ResultGenerator.genSuccessResult("+1");
-                    }else {
-                        return ResultGenerator.genSuccessResult("-1");
-                    }
                 }else {
-                    return ResultGenerator.genFailResult("出现异常");
+                    return ResultGenerator.genFailResult("点赞失败");
+                }
+    }
+    @Operation(summary = "取消点赞")
+    @GetMapping("/cancelGiveALike")
+    public Result cancelGiveALike(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id,
+                            @ApiParam(name="openId" ,value = "用户openID") @RequestParam String openId){
+                if (dynamicCommentsService.selectIFAddLike(dynamic_id, openId)){
+                        return ResultGenerator.genSuccessResult("-1");
+                }else {
+                    return ResultGenerator.genFailResult("点赞取消失败");
                 }
     }
     @Operation(summary = "用户评论")
@@ -77,15 +87,19 @@ public class BlogThehallController {
                            @ApiParam(name = "content",value = "评论内容") @RequestParam String content
                            ){
         if (dynamicCommentsService.insertComments(dynamic_id, open_id, comm_father_id,content)){
-            return ResultGenerator.genFailResult("评论成功！！");
+            return ResultGenerator.genSuccessResult("评论成功！！");
         }else {
             return ResultGenerator.genFailResult("评论失败");
         }
     }
     @Operation(summary = "删除用户评论")
     @GetMapping("/deleteComm")
-    public Result deleteComm(@ApiParam(name="dynamic_id" ,value = "动态iD") @RequestParam Long dynamic_id){
-           return null;
+    public Result deleteComm(@ApiParam(name="comId" ,value = "评论ID") @RequestParam Long commId){
+            if (dynamicCommentsService.deleteComm(commId)){
+                return ResultGenerator.genSuccessResult("评论已删除");
+            }else {
+                 return ResultGenerator.genFailResult("删除失败比");
+            }
     }
 
 }

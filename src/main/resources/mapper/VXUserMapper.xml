@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.VXUser.VXUserMapper">
+    <insert id="insertUser">
+        insert  into  `user`
+        <set>
+            <if test="nickName!=null">
+                user_name=#{nickName},
+            </if>
+            <if test="openid!=null">
+                open_id=#{openid},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender},
+            </if>
+            <if test="avatarUrl!=null">
+                user_head_portrait=#{avatarUrl},
+            </if>
+            <if test="province!=null">
+                address=#{province}
+            </if>
+        </set>
+    </insert>
+    <insert id="attentionUser">
+        insert into user_attention
+        SET my_open_id=#{MyOpenId},attention_open_id=#{HeOpenId}
+    </insert>
+    <update id="updateUser">
+        update  `user`
+        <set>
+            <if test="nickName!=null">
+                user_name=#{nickName},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender},
+            </if>
+            <if test="avatarUrl!=null">
+                user_head_portrait=#{avatarUrl},
+            </if>
+            <if test="province!=null">
+                address=#{province},
+            </if>
+            <if test="1=1">
+                last_register_time=now(),
+            </if>
+            where open_id=#{openId}
+        </set>
+    </update>
+    <delete id="cancelttentionUser">
+        delete from user_attention
+        <where>
+            <if test="MyOpenId!=null">
+                my_open_id=#{MyOpenId}
+            </if>
+            <if test="HeOpenId!=null">
+                and attention_open_id=#{HeOpenId}
+            </if>
+        </where>
+    </delete>
+    <resultMap id="UserAttentions" type="com.cloud.api.bean.vo.UserAttention">
+        <id property="id" column="id"/>
+        <result property="attentionTime" column="attention_time"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
+    </resultMap>
+    <select id="selectAttentionUser" resultMap="UserAttentions">
+        select  ua.id,ua.attention_time,u.user_name,u.open_id,u.user_head_portrait
+        from user_attention ua,`user` u where ua.attention_open_id=u.open_id and ua.my_open_id=#{open_id}
+        order by ua.attention_time desc
+    </select>
+    <select id="selectFansUser" resultMap="UserAttentions">
+        select  ua.id,ua.attention_time,u.user_name,u.open_id,u.user_head_portrait
+        from user_attention ua,`user` u where ua.my_open_id=u.open_id and ua.attention_open_id=#{open_id}
+        order by ua.attention_time desc
+    </select>
+    <select id="selectAttentionCount" resultType="java.lang.Integer">
+        select count(*) from user_attention where  my_open_id=#{openId}
+    </select>
+    <select id="selectFansCount" resultType="java.lang.Integer">
+        select count(*) from user_attention where  attention_open_id=#{openId}
+    </select>
+    <select id="SelectISTtentionUser" resultType="java.lang.Integer">
+        select  count(*) from user_attention where my_open_id=#{MyOpenId} and  attention_open_id=#{HeOpenId}
+    </select>
+</mapper>

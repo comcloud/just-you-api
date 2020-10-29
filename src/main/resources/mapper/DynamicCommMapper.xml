@@ -6,7 +6,13 @@
         <result column="comm_content" property="commContent"/>
         <result column="comm_father_id" property="commFatherId"/>
         <result column="comm_time" property="commTime"/>
-        <result column="open_id" property="openId"/>
+        <result column="dynamic_id" property="dynamicId"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
     </resultMap>
     <insert id="insertComments">
         insert into dynamic_comments
@@ -25,36 +31,25 @@
             </if>
         </set>
     </insert>
-    <update id="giveALike">
-        update dynamic
-        <set>
-            <if test="role==0">
-                like_count=like_count+1
-            </if>
-            <if test="role==1">
-                like_count=like_count-1
-            </if>
-        </set>
-        where dynamic_id=#{dynamic_id}
+
+    <insert id="giveALike">
+        insert into dynamic_like
+            SET give_open_id=#{openId} ,give_dynamic_id=#{dynamicId}
+    </insert>
+
+    <delete id="cancelGiveALike">
+     delete   from dynamic_like where  give_open_id=#{openId} and give_dynamic_id=#{dynamicId}
+    </delete>
+    <update id="deleteComm">
+        update task_comments SET comm_delete=1 where comm_id=#{commId}
     </update>
-    <select id="selectSonCount" resultType="java.lang.Integer">
-        select count(*) from dynamic_comments where comm_father_id=#{comm_father_id}
-    </select>
-    <select id="seelectFcomm_id" resultType="java.lang.String">
-        select comm_father_id from dynamic_comments where comm_id=#{comm_id}
-    </select>
-    <select id="selectSonyByFid" resultMap="Comm">
-        select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
-        from dynamic_comments where comm_father_id=#{comm_father_id} and comm_delete=0
-    </select>
 
-    <select id="select1FComm" resultMap="Comm">
-         select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
-        from dynamic_comments where comm_father_id is null and comm_delete=0 and comm_id=#{comm_id}
-    </select>
     <select id="selectAll" resultMap="Comm">
-                 select  comm_id,open_id,comm_content,comm_father_id,comm_time,dynamic_id,comm_father_id
-        from  dynamic_comments where comm_delete=0  and comm_father_id is not Null and  dynamic_id=#{dynamic_id}
+                 select  d.comm_id,d.comm_content,d.comm_father_id,d.comm_time,d.dynamic_id,d.comm_father_id,u.user_name,u.user_head_portrait,u.open_id
+        from  dynamic_comments d ,`user` u where d.open_id=u.open_id and comm_delete=0  and comm_father_id is not Null and  dynamic_id=#{dynamic_id}
     </select>
 
+    <select id="isGiveALike" resultType="java.lang.Integer">
+        select  count(*) from dynamic_like where  give_open_id=#{openId} and give_dynamic_id=#{dynamicId}
+    </select>
 </mapper>

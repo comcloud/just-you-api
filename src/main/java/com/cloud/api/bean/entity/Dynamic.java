@@ -1,5 +1,6 @@
 package com.cloud.api.bean.entity;
 
+import com.cloud.api.bean.vo.UserVo;
 import com.cloud.api.bean.vo.photoVo;
 import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.security.core.parameters.P;
@@ -58,14 +59,47 @@ public class Dynamic implements Serializable {
     private String dAbstract;
 
     private Long likeCount;
-
+    
     private String openId;
+
+    private UserVo user;
 
     private List<photoVo> photo=new ArrayList<>();
 
     private  List<DynamicTag> dynamicTags= new ArrayList<>();
 
-    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, Date dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags) {
+    private boolean isAttention;
+
+    private boolean ifLike;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public boolean isAttention() {
+        return isAttention;
+    }
+
+    public void setAttention(boolean attention) {
+        isAttention = attention;
+    }
+
+    public boolean isIfLike() {
+        return ifLike;
+    }
+
+    public void setIfLike(boolean ifLike) {
+        this.ifLike = ifLike;
+    }
+
+    public Dynamic() {
+    }
+
+    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, Date dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, String openId, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags) {
         this.dynamicId = dynamicId;
         this.dynamicTitle = dynamicTitle;
         this.dynamicContent = dynamicContent;
@@ -78,11 +112,9 @@ public class Dynamic implements Serializable {
         this.dAbstract = dAbstract;
         this.likeCount = likeCount;
         this.openId = openId;
+        this.user = user;
         this.photo = photo;
         this.dynamicTags = dynamicTags;
-    }
-
-    public Dynamic() {
     }
 
     public static long getSerialVersionUID() {
@@ -177,12 +209,20 @@ public class Dynamic implements Serializable {
         this.likeCount = likeCount;
     }
 
-    public String getOpenId() {
+    public String getopenId() {
         return openId;
     }
 
-    public void setOpenId(String openId) {
+    public void setopenId(String openId) {
         this.openId = openId;
+    }
+
+    public UserVo getUser() {
+        return user;
+    }
+
+    public void setUser(UserVo user) {
+        this.user = user;
     }
 
     public List<photoVo> getPhoto() {
@@ -216,6 +256,7 @@ public class Dynamic implements Serializable {
                 ", dAbstract='" + dAbstract + '\'' +
                 ", likeCount=" + likeCount +
                 ", openId='" + openId + '\'' +
+                ", user=" + user +
                 ", photo=" + photo +
                 ", dynamicTags=" + dynamicTags +
                 '}';

@@ -1,16 +1,12 @@
 package com.cloud.api.test;
 
-import cn.hutool.extra.mail.MailUtil;
-import com.cloud.api.bean.vo.photoVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;

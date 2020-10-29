@@ -19,24 +19,44 @@ public interface BlogThehallMapper {
      */
     List<BlogVo> selectPushAllBlog();
 
-//    /**
-//     * 根据博客Id 推送 文章
-//     * @return 推送文章数量
-//     */
-//    int updatePushBy1();
-//
-//    /**
-//     * 取消文章推送
-//     * @return 取消的个数
-//     */
-//    int updatePushBy0();
+
+    Dynamic selectDynamicDetails(Long dynamic_id);
+
 
     /**
-     * 根究 动态ID返回 动态详情
-     * @param dynamic_id
+     * 浏览量增加
+     * @param dynamicId
      * @return
      */
-    List<Dynamic> selectDynamicDetails(Long dynamic_id);
+    int dynamicViewsAdd1(Long dynamicId);
+    /**
+     * @param openId
+     * @param dynamicId
+     * @return
+     */
+    int  dynamicAddLike(String openId,Long dynamicId);
+    /**
+     * 用户给动态点赞
+     * @param openId 用户Id
+     * @param dynamicId 动态Id
+     * @return 》0 点赞成功
+     */
+    int dynamicCancelAddLike(String openId, Long dynamicId);
 
-    int  dynamic_viewsAdd1(Long dynamic_id);
+    /**
+     * 根据任务Id获取任务点赞数量
+     * @param dynamicId 任务Id
+     * @return 任务点赞数量
+     */
+    Long selectLikeCountByDynamicId( Long dynamicId);
+
+    /**
+     * 判断用是否给该任务点赞
+     * @param openId
+     * @param dynamicId
+     * @return
+     */
+    int selectIFAddLike(String openId, Long dynamicId);
+
+
 }

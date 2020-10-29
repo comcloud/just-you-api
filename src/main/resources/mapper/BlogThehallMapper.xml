@@ -10,6 +10,12 @@
         <result column="like_count" property="likeCount"/>
         <result column="dynamic_time" property="dynamicTime"/>
         <result column="open_id" property="openId"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
         <collection property="photo" ofType="com.cloud.api.bean.vo.photoVo">
             <result column="photo_id" property="id"/>
             <result column="photo_url" property="photoUrl"/>
@@ -18,6 +24,7 @@
             <result column="dynamic_tag_id" property="dynamicTagId"/>
             <result column="dynamic_tag_name" property="dynamicTagName"/>
         </collection>
+
     </resultMap>
     <resultMap id="DynamicDetails" type="com.cloud.api.bean.entity.Dynamic">
         <id column="dynamic_id" property="dynamicId"/>
@@ -31,7 +38,13 @@
         <result column="dynamic_update_time" property="dynamicUpdateTime"/>
         <result column="Abstract" property="dAbstract"/>
         <result column="like_count" property="likeCount"/>
-        <result column="open_id" property="openId"/>
+<!--        注意放置的先后顺序-->
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
         <collection property="photo" ofType="com.cloud.api.bean.vo.photoVo">
             <result column="photo_id" property="id"/>
             <result column="photo_url" property="photoUrl"/>
@@ -40,23 +53,35 @@
             <result column="dynamic_tag_id" property="dynamicTagId"/>
             <result column="dynamic_tag_name" property="dynamicTagName"/>
         </collection>
-    </resultMap>
-    <update id="dynamic_viewsAdd1">
-        update dynamic set dynamic_views=dynamic_views+1 where dynamic_id=#{dynamic_id}
+     </resultMap>
+    <insert id="dynamicAddLike">
+        insert into dynamic_like set give_open_id=#{openId} , give_dynamic_id=#{dynameId}
+    </insert>
+    <update id="dynamicViewsAdd1">
+        update dynamic SET dynamic_views=dynamic_views+1 where dynamic_id=#{dynamicId}
     </update>
+    <delete id="dynamicCancelAddLike">
+        delete from dynamic_like when  give_open_id=#{openId} and give_dynamic_id=#{dynameId}
+    </delete>
 
     <select id="selectPushAllBlog" resultMap="BlogVo">
       select
-      d.dynamic_id,d.dynamic_title,d.Abstract,d.dynamic_views,d.open_id,d.dynamic_time,d.like_count,p.photo_url,p.photo_id,dt.dynamic_tag_id,dt.dynamic_tag_name
-      from  dynamic d,  dynamic_set_photo dsp , photo p, dynamic_tag dt, dynamic_set_tag dst
-         where p.photo_id=dsp.photo_id and d.dynamic_id=dsp.dynamic_id and dynamic_deleted=0 and push=1
+      d.dynamic_id,d.dynamic_title,d.Abstract,d.dynamic_views,d.open_id,d.dynamic_time,d.like_count,p.photo_url,p.photo_id,dt.dynamic_tag_id,dt.dynamic_tag_name,u.user_name,u.user_head_portrait
+      from  dynamic d,  dynamic_set_photo dsp , photo p, dynamic_tag dt, dynamic_set_tag dst , `user` u
+         where p.photo_id=dsp.photo_id and d.dynamic_id=dsp.dynamic_id and u.open_id=d.open_id and dynamic_deleted=0 and push=1
     </select>
     <select id="selectDynamicDetails" resultMap="DynamicDetails">
                 select
                d.dynamic_id,d.dynamic_title,d.dynamic_content,d.dynamic_status,d.dynamic_views,d.dynamic_comment,d.dynamic_deleted,d.dynamic_time,d.dynamic_update_time,d.Abstract,d.like_count,p.photo_url,p.photo_id,
-                dt.dynamic_tag_id,dt.dynamic_tag_name,d.open_id
-         from dynamic d,  dynamic_set_photo dsp , photo p, dynamic_tag dt, dynamic_set_tag dst
-         where p.photo_id=dsp.photo_id and d.dynamic_id=dsp.dynamic_id
+                dt.dynamic_tag_id,dt.dynamic_tag_name,d.open_id,u.user_name,u.user_head_portrait
+         from dynamic d,  dynamic_set_photo dsp , photo p, dynamic_tag dt, dynamic_set_tag dst,`user` u
+         where p.photo_id=dsp.photo_id and d.dynamic_id=dsp.dynamic_id and u.open_id=d.open_id
          and  dst.dynamic_id=dt.dynamic_tag_id and dst.dynamic_id=d.dynamic_id and d.dynamic_id=#{dynamic_id}
+    </select>
+    <select id="selectLikeCountByDynamicId" resultType="java.lang.Long">
+        select count(*) from dynamic_like where give_dynamic_id=#{dynamicId}
+    </select>
+    <select id="selectIFAddLike" resultType="java.lang.Integer">
+        select count(*) from dynamic_like where  give_open_id=#{openId} and give_dynamic_id=#{dynamicId}
     </select>
 </mapper>

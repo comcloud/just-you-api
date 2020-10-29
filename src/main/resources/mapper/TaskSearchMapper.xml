@@ -20,9 +20,13 @@
             <result property="picture" column="picture"/>
         </association>
         <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
-            <id property="user_id" column="user_id"/>
-            <result property="open_id" column="open_id"/>
-            <result property="user_name" column="user_name"/>
+            <id property="userId" column="user_id"/>
+            <result property="openId" column="open_id"/>
+            <result property="userName" column="user_name"/>
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
         </association>
         <collection property="tags" ofType="com.cloud.api.bean.entity.Tag">
             <id column="tag_id" property="tagId"/>
@@ -53,7 +57,7 @@
     </select>
     <select id="SelectLinkTaskSearchVos" resultMap="TaskHallMapper">
         <bind name="pattern" value="'%' + content + '%'" />
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.user_head_portrait
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
         and (t.task_title like  #{pattern}  or t.task_description like #{pattern} or t.id in (select id from task t,task_classification tc where t.class_id=tc.class_id and tc.name like #{pattern})
@@ -69,7 +73,7 @@
             LIMIT  0,10
     </select>
     <select id="SelectLinkTaskByTagId" resultMap="TaskHallMapper">
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.user_head_portrait
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second) and tag.tag_id=#{tag_id}
     </select>

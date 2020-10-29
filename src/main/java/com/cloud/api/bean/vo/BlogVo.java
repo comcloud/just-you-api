@@ -1,6 +1,7 @@
 package com.cloud.api.bean.vo;
 
 import com.cloud.api.bean.entity.DynamicTag;
+import com.cloud.api.bean.entity.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,22 +44,25 @@ public class BlogVo {
      */
     private String openId;
 
+
     private List<photoVo> photo=new ArrayList<>();
     private  List<DynamicTag> dynamicTags= new ArrayList<>();
+
+    private UserVo user;
+
+    private boolean isAttention;
+
+    private boolean ifLike;
 
     public BlogVo() {
     }
 
-    public BlogVo(Long id, String dynamicTitle, String abstracts, Long dynamicViews, Long likeCount, Date dynamicTime, String openId, List<photoVo> photo, List<DynamicTag> dynamicTags) {
-        this.id = id;
-        this.dynamicTitle = dynamicTitle;
-        this.abstracts = abstracts;
-        this.dynamicViews = dynamicViews;
-        this.likeCount = likeCount;
-        this.dynamicTime = dynamicTime;
-        this.openId = openId;
-        this.photo = photo;
-        this.dynamicTags = dynamicTags;
+    public boolean isAttention() {
+        return isAttention;
+    }
+
+    public void setAttention(boolean attention) {
+        isAttention = attention;
     }
 
     public Long getId() {
@@ -133,18 +137,19 @@ public class BlogVo {
         this.dynamicTags = dynamicTags;
     }
 
-    @Override
-    public String toString() {
-        return "BlogVo{" +
-                "id=" + id +
-                ", dynamicTitle='" + dynamicTitle + '\'' +
-                ", abstracts='" + abstracts + '\'' +
-                ", dynamicViews=" + dynamicViews +
-                ", likeCount=" + likeCount +
-                ", dynamicTime=" + dynamicTime +
-                ", openId='" + openId + '\'' +
-                ", photo=" + photo +
-                ", dynamicTags=" + dynamicTags +
-                '}';
+    public UserVo getUser() {
+        return user;
+    }
+
+    public void setUser(UserVo user) {
+        this.user = user;
+    }
+
+    public boolean isIfLike() {
+        return ifLike;
+    }
+
+    public void setIfLike(boolean ifLike) {
+        this.ifLike = ifLike;
     }
 }
