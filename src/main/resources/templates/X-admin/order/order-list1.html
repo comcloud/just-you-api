@@ -142,7 +142,7 @@
                         <tr th:each="modelObject:${orderObject}">
                             <td>
                                 <input type="checkbox" name="" lay-skin="primary"></td>
-                            <td th:text="${modelObject.firstValue.taskOrderId}" id="taskId"
+                            <td th:text="${modelObject.firstValue.taskOrderId}" id="id"
                                 th:value="${modelObject.firstValue.taskOrderId}">2017009171822298053
                             </td>
                             <td th:text="${modelObject.lastValue.lastValue.firstValue}">老王:18925139194</td>
@@ -290,7 +290,7 @@ function member_stop(obj, id) {
 function member_del(obj, id) {
     layer.confirm('确认要删除吗？',
         function (index) {
-            var value = $(obj).parent().parent().children('#taskId').attr('value');
+            var value = $(obj).parent().parent().children('#id').attr('value');
             //发异步删除数据
             $.ajax({
                 async: false,
@@ -322,7 +322,7 @@ function delAll(argument) {
     let count = 0;
     tableData.each(function (index, item) {
         if (item.checked) {
-            deleteList[count] = $(item).parent().parent().children('#taskId').attr('value');
+            deleteList[count] = $(item).parent().parent().children('#id').attr('value');
             count++
         }
     });

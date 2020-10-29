@@ -34,33 +34,6 @@ public class IndexController {
 
     }
 
-    /**
-     * 验证管理员登录
-     *
-     * @param loginInfo 管理员登录信息
-     * @return 验证信息
-     * @throws JsonProcessingException
-     */
-    @ResponseBody
-    @RequestMapping(value = "/loginCheck", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public String loginCheck(@RequestBody String loginInfo,
-                             HttpServletRequest request) throws IOException {
-        String decode = URLDecoder.decode(loginInfo, "utf-8");
-        JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("{")));
-        ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
-        String email = node.findPath("email").toString().replace("\"", "");
-        String password = node.findPath("password").toString().replace("\"", "");
-        boolean result = indexService.checkAdmin(email, password);
-        if (result) {
-            request.getSession().setAttribute("admin", new Admin(0, email, password,"","",null,true,1));
-        } else {
-            request.getSession().removeAttribute("admin");
-        }
-        objectNode.put("success", result);
-        return objectNode.toPrettyString();
-    }
-
-
     @RequestMapping(value = "/login/error")
     public void loginError(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");

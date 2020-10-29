@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * <p>描述:
  * @date 2020/10/26-11:08
  */
-@Api(tags = "任务搜索类接口")
+@Api(value = "动态的Controller" ,tags = {"任务搜索类接口"})
 @Controller
 @RequestMapping("/taskSearch")
 @ResponseBody

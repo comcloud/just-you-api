@@ -1,5 +1,5 @@
 package com.cloud.api.service.TaskHall;
-import com.cloud.api.bean.vo.taskHallVo;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import java.util.List;
 
@@ -11,8 +11,8 @@ import java.util.List;
  * @date 2020/10/18-13:24
  */
 public interface TaskHallService {
-    List<taskHallVo> getTask_HallList();
-    List<taskHallVo> getTaskListByClass(Long class_id);
+    List<TaskHallVo> getTask_HallList();
+    List<TaskHallVo> getTaskListByClass(Long class_id);
     void  classTaskList();
     List<task_classificationVo> getAllClassName();
 }

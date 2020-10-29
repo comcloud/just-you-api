@@ -1,6 +1,9 @@
 package com.cloud.api.bean.vo;
 import	java.util.ArrayList;
 import com.cloud.api.bean.entity.Tag;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  * <p>描述:
  * @date 2020/10/17-16:04
  */
-public class taskHallVo {
+public class TaskHallVo {
     public Long id;
     //任务分类 一对一
     public TaskClassificationVo taskClassification;
@@ -32,10 +35,11 @@ public class taskHallVo {
 
     private List<Tag> tags=new ArrayList<> ();
 
-    public taskHallVo() {
+
+    public TaskHallVo() {
     }
 
-    public taskHallVo(Long id, TaskClassificationVo taskClassification, Long recruiting_number, String task_description, String task_title, Date release_time, Integer traffic, UserVo user, List<Tag> tags) {
+    public TaskHallVo(Long id, TaskClassificationVo taskClassification, Long recruiting_number, String task_description, String task_title, Date release_time, Integer traffic, UserVo user, List<Tag> tags) {
         this.id = id;
         this.taskClassification = taskClassification;
         this.recruiting_number = recruiting_number;
@@ -46,6 +50,7 @@ public class taskHallVo {
         this.user = user;
         this.tags = tags;
     }
+
 
     public Long getId() {
         return id;

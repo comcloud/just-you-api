@@ -11,15 +11,17 @@ public class UserVo {
     public String userName;
     public  String openId;
     private String userHeadPortrait;
+    private Integer gender;
 
     public UserVo() {
     }
 
-    public UserVo(Long userId, String userName, String openId, String userHeadPortrait) {
-        this.userId = userId;
-        this.userName = userName;
-        this.openId = openId;
-        this.userHeadPortrait = userHeadPortrait;
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public Long getUserId() {
@@ -54,13 +56,4 @@ public class UserVo {
         this.userHeadPortrait = userHeadPortrait;
     }
 
-    @Override
-    public String toString() {
-        return "UserVo{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", openId='" + openId + '\'' +
-                ", userHeadPortrait='" + userHeadPortrait + '\'' +
-                '}';
-    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.api.mapper.TaskHall.TaskHallMapper">
-    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
+    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.TaskHallVo">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />
@@ -15,6 +15,9 @@
             <result property="picture" column="picture"/>
         </association>
         <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <id property="userId" column="user_id"/>
+            <result property="openId" column="open_id"/>
+            <result property="userName" column="user_name"/>
             <result column="user_id" property="userId"/>
             <result column="user_name" property="userName"/>
             <result column="open_id" property="openId"/>

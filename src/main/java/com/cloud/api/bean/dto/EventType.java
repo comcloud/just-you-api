@@ -6,17 +6,37 @@ package com.cloud.api.bean.dto;
 
 public enum EventType {
     /**
-     * 点赞
+     * 任务点赞
      */
     SUPPORT("support"),
     /**
-     * 评论
+     * 任务评论
      */
     COMMENT("comment"),
     /**
      * 官方通知
      */
-    OFFICIAL_NOTIFICATION(" official notification");
+    OFFICIAL_NOTIFICATION(" official notification"),
+
+    /**
+     * 关注
+     */
+    FOLLOW("follow"),
+    /**
+     * 消息通知
+     */
+    MESSAGE_NOTIFICATION("message notification"),
+
+    /**
+     * 如果发布的任务有人参与，则这时候会有邮箱通知
+     */
+    EMAIL_NOTIFICATION("email notification"),
+
+    /**
+     * 消息推送
+     */
+    INFORMATION_NOTIFICATION("information notification");
+
 
     private String value;
 
