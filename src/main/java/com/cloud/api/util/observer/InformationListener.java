@@ -79,7 +79,7 @@ public class InformationListener implements EventListener {
                 }
                 break;
             case EMAIL_NOTIFICATION:
-                String info = "你的任务已经有人报名参与，快去看看吧";
+                String info = "你的任务有人报名参与，快去看看吧";
                 MailUtil.send(user.getEmail(), "任务参与通知", info, false);
                 break;
             case FOLLOW:

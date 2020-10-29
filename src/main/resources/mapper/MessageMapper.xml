@@ -3,8 +3,16 @@
 <mapper namespace="com.cloud.api.mapper.MessageMapper">
 
     <select id="selectUserFromOpenid" resultType="com.cloud.api.bean.entity.User">
-        select
+        select user_name,user_head_portrait,email
+        from user
+        where open_id = #{openid}
     </select>
-    <select id="selectTaskFromId" resultType="com.cloud.api.bean.entity.Task"></select>
-    <select id="selectDynamicFromId" resultType="com.cloud.api.bean.entity.Dynamic"></select>
+    <select id="selectTaskFromId" resultType="com.cloud.api.bean.entity.Task">
+        select id,task_title
+        from task
+        where id = #{taskId}
+    </select>
+    <select id="selectDynamicFromId" resultType="com.cloud.api.bean.entity.Dynamic">
+        select dynamic_id , dynamic_title from dynamic where dynamic_id = #{dynamicId}
+    </select>
 </mapper>

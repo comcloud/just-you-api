@@ -79,11 +79,11 @@ public class TestAllMethod {
         System.out.println(between.toHours() / 24.0);
 
     }
-
-    @Test
-    public void testEmail() {
-        MailUtil.send("2230817302@qq.com", "测试", "邮件来自Hutool测试", false);
-    }
+//
+//    @Test
+//    public void testEmail() {
+//        MailUtil.send("2230817302@qq.com", "测试", "邮件来自Hutool测试", false);
+//    }
 
     private int getNum(int n) {
         if (n == 1) {
