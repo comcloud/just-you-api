@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/websocket").permitAll()
                 .antMatchers("/dynamic/**").permitAll()
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/taskRelease/**").permitAll()
                 .antMatchers("/taskSearch/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")

@@ -24,15 +24,20 @@ public class TaskClassificationVo {
      * 名称
      */
     private String name;
+    /*
+    使用量
+     */
+    private  Integer classCount;
 
     public TaskClassificationVo() {
     }
 
-    public TaskClassificationVo(Long id, String describe, String picture, String name) {
-        this.id = id;
-        this.describe = describe;
-        this.picture = picture;
-        this.name = name;
+    public Integer getClassCount() {
+        return classCount;
+    }
+
+    public void setClassCount(Integer classCount) {
+        this.classCount = classCount;
     }
 
     public Long getId() {

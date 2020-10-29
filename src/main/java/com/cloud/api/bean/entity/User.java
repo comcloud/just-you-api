@@ -62,11 +62,27 @@ public class User implements Serializable {
     是否删除
      */
     private int delete;
+    /*
+    出生年月日
+     */
+    private Date UserBirthdayTime;
+    /*
+    学号
+     */
+    private String studentId;
+    /*
+    email
+     */
+    private String email;
+    /*
+    个性签名
+     */
+    private String individuality;
 
     public User() {
     }
 
-    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete) {
+    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete, Date userBirthdayTime, String studentId, String email, String individuality) {
         this.userId = userId;
         this.userName = userName;
         this.fans = fans;
@@ -79,6 +95,10 @@ public class User implements Serializable {
         this.userHeadPortrait = userHeadPortrait;
         this.lastRegisterTime = lastRegisterTime;
         this.delete = delete;
+        UserBirthdayTime = userBirthdayTime;
+        this.studentId = studentId;
+        this.email = email;
+        individuality = individuality;
     }
 
     public static long getSerialVersionUID() {
@@ -181,6 +201,38 @@ public class User implements Serializable {
         this.delete = delete;
     }
 
+    public Date getUserBirthdayTime() {
+        return UserBirthdayTime;
+    }
+
+    public void setUserBirthdayTime(Date userBirthdayTime) {
+        UserBirthdayTime = userBirthdayTime;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getindividuality() {
+        return individuality;
+    }
+
+    public void setindividuality(String individuality) {
+        individuality = individuality;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -196,6 +248,10 @@ public class User implements Serializable {
                 ", userHeadPortrait='" + userHeadPortrait + '\'' +
                 ", lastRegisterTime=" + lastRegisterTime +
                 ", delete=" + delete +
+                ", UserBirthdayTime=" + UserBirthdayTime +
+                ", studentId='" + studentId + '\'' +
+                ", email='" + email + '\'' +
+                ", individuality='" + individuality + '\'' +
                 '}';
     }
 }

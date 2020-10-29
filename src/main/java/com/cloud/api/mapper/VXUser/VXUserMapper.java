@@ -1,8 +1,11 @@
 package com.cloud.api.mapper.VXUser;
 
+import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.User;
+import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.bean.vo.UserAttention;
 import com.cloud.api.bean.vo.UserVo;
+import com.cloud.api.bean.vo.taskHallVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,6 +35,13 @@ public interface VXUserMapper {
      */
     int updateUser(Map<String, Object> map, String openId);
 
+    /**
+     * 修改用户信息
+     * @param map 用户信息结合
+     * @param openId 用户id
+     * @return 》0 修改成功
+     */
+    int updateUserData(Map<String,Object> map,String openId);
     /**
      *  点击 关注
      * @param MyOpenId 用户的open_id
@@ -75,4 +85,25 @@ public interface VXUserMapper {
      */
     int SelectISTtentionUser(@Param("MyOpenId") String MyOpenId, @Param("HeOpenId") String HeOpenId);
 
+    /**
+     * 获取用户个人资料
+     * @param openId 用户的openID
+     * @return
+     */
+    User selectUsrInformation(String openId);
+
+    /**
+     * 获取自己发布的动态
+     * @param openId 自己的用户openId
+     * @return
+     */
+    List<BlogVo> selectMyDynamicAll(String openId);
+
+    /**
+     * 我发布的任务
+     * @param openId 我的opeenId
+     * @param start 0 ：代表已发布 没结束的 1 代表过去的的
+     * @return
+     */
+    List<taskHallVo>  selectMyTaskAll(String openId,Integer start);
 }

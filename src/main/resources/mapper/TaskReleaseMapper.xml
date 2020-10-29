@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.TaskHall.TaskReleaseMapper">
+    <resultMap id="TaskClassificationVo" type="com.cloud.api.bean.vo.TaskClassificationVo">
+        <id property="id" column="class_id"/>
+        <result property="name" column="name"/>
+        <result property="describe" column="describe"/>
+        <result property="picture" column="picture"/>
+        <result property="classCount" column="class_count"/>
+    </resultMap>
+    <select id="selectTaskClassificationAll" resultMap="TaskClassificationVo">
+        select `class_id`,`name`,`describe`,`picture`,class_count from task_classification where `delete`=0 and class_state=0
+        order by sort asc
+    </select>
+
+</mapper>

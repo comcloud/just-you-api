@@ -1,7 +1,11 @@
 package com.cloud.api.service.VXUser;
 
+import com.cloud.api.bean.entity.User;
+import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.bean.vo.UserAttention;
+import com.cloud.api.bean.vo.taskHallVo;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -63,5 +67,14 @@ public interface VXUserService {
     List<UserAttention> selectFansUser(String open_id);
 
     Map<String, Integer> attentionCountAll(String openId);
+
+    int updateUserData(User user,String openId);
+
+    User selectUsrInformation(String openId);
+
+    List<BlogVo> getMyDynamicAll(String openId);
+
+   Map<String,List<taskHallVo>> getMyTaskAll(String openId);
+
 
 }
