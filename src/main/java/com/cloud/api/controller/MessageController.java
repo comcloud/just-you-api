@@ -58,7 +58,6 @@ public class MessageController {
                               @Parameter(description = "操作的类型,1：任务，2：动态") @RequestParam(value = "type") Integer type) {
         final MessageVo messageVo = new MessageVo(messageType, sender, recipient, id, type);
         messageService.pushMessage(messageVo);
-
     }
 
 }
