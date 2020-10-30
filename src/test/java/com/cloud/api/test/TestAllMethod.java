@@ -81,6 +81,12 @@ public class TestAllMethod {
 //        MailUtil.send("2230817302@qq.com", "测试", "邮件来自Hutool测试", false);
 //    }
 
+    @Test
+    public void testMethod() {
+        int n = 10;
+        System.out.println(getNum(n));
+    }
+
     private int getNum(int n) {
         if (n == 1) {
             return 0;
