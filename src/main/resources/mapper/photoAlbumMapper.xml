@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.VXUser.photoAlbumMapper">
+    <resultMap id="PhotoalbumVo" type="com.cloud.api.bean.vo.PhotoalbumVo">
+        <id column="photoAlbum_id" property="photoalbumId"/>
+        <result column="photoAlbum_name" property="photoalbumName"/>
+        <result column="photoAlbum_describe" property="photoalbumDescribe"/>
+        <result column="photoAlbum_time" property="photoalbumTime"/>
+        <result column="photoAlbum_stemPan" property="photoAlbumStemPan"/>
+    </resultMap>
+    <insert id="insertPhotoalbum">
+        insert into  photoalbum
+        <set>
+            <if test="photoalbumName!=null">
+                photoAlbum_name=#{photoalbumName},
+            </if>
+            <if test="photoalbumDescribe!=null">
+                photoAlbum_describe=#{photoalbumDescribe}
+            </if>
+            <if test="photoAlbumStemPan!=null">
+                photoAlbum_stemPan=#{photoAlbumStemPan}
+            </if>
+            <if test="photoalbumPermissions!=null">
+                photoAlbum_permissions=#{photoalbumPermissions}
+            </if>
+              <if test="openId!=null">
+                  photoAlbum_open_id=#{openId}
+            </if>
+        </set>
+    </insert>
+
+    <update id="deletePhoto">
+        update  photo
+        <set>
+            <if test="function=='delete'">
+                 photo_delete=1
+            </if>
+            <if test="function=='restore'">
+                 photo_delete=0
+            </if>
+            <if test="function=='thoroughly'">
+                 photo_delete=2
+            </if>
+        </set>
+        where photo_id=#{photoId}
+    </update>
+    <update id="updatePhotoalbum">
+        update photoalbum
+        <set>
+            <if test="photoalbumName!=null">
+                photoAlbum_name=#{photoalbumName},
+            </if>
+            <if test="photoalbumDescribe!=null">
+                photoAlbum_describe=#{photoalbumDescribe}
+            </if>
+            <if test="photoAlbumStemPan!=null">
+                photoAlbum_stemPan=#{photoAlbumStemPan}
+            </if>
+            <if test="photoalbumPermissions!=null">
+                photoAlbum_permissions=#{photoalbumPermissions}
+            </if>
+        </set>
+        where photoAlbum_id=#{photoAlbumId}
+    </update>
+    <update id="deletephotoAlbum">
+        update photoAlbum_id set photoAlbum_delete=1 where photoAlbum_id=#{photoAlbumId}
+    </update>
+
+
+    <select id="selectUserPhotoAlbumAll" resultMap="PhotoalbumVo">
+        select photoAlbum_id,photoAlbum_name,photoAlbum_permissions,photoAlbum_describe,photoAlbum_time,photoAlbum_stemPan
+        from photoalbum
+        <where>
+            photoAlbum_open_id=#{YouOpenId} and photoAlbum_delete=0
+            <if test="permissions==55">
+                and 1=1
+            </if>
+            <if test="permissions==0">
+                and photoAlbum_permissions=0
+            </if>
+            <if test="permissions==2">
+                and photoAlbum_permissions=2
+            </if>
+            <if test="permissions==3">
+                and photoAlbum_permissions=3
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="Photoalbum" type="com.cloud.api.bean.entity.Photoalbum">
+        <id column="photoAlbum_id" property="photoalbumId"/>
+        <result column="photoAlbum_name" property="photoalbumName"/>
+        <result column="photoAlbum_describe" property="photoalbumDescribe"/>
+        <result column="photoAlbum_time" property="photoalbumTime"/>
+        <result column="photoAlbum_stemPan" property="photoAlbumStemPan"/>
+    </resultMap>
+    <select id="selectUserPhotoByPhotoAlbumID" resultMap="Photoalbum">
+        select pb.photoAlbum_id,pb.photoAlbum_name,pb.photoAlbum_permissions,pb.photoAlbum_describe,pb.photoAlbum_time,pb.photoAlbum_stemPan
+        from photoalbum pb
+        where  pb.photoAlbum_id=#{photoAlbumId}
+    </select>
+
+
+    <resultMap id="photoVos" type="com.cloud.api.bean.vo.photoVo">
+        <result column="photo_id" property="id"/>
+        <result column="photo_url" property="photoUrl"/>
+    </resultMap>
+    <select id="selectPhotoByphotoAlbumId" resultMap="photoVos">
+        select  p.photo_id ,p.photo_url,p.photo_time from  photo p where photoaalbum_id=#{photoAlbumId} and p.photo_delete=0
+    </select>
+</mapper>

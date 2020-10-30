@@ -2,6 +2,8 @@ package com.cloud.api.mapper.BlogThehall;
 import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.BlogVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public interface BlogThehallMapper {
     List<BlogVo> selectPushAllBlog();
 
 
-    Dynamic selectDynamicDetails(Long dynamic_id);
+    Dynamic selectDynamicDetails(@Param("dynamic_id") Long dynamic_id);
 
 
     /**
@@ -28,27 +30,27 @@ public interface BlogThehallMapper {
      * @param dynamicId
      * @return
      */
-    int dynamicViewsAdd1(Long dynamicId);
+    int dynamicViewsAdd1(@Param("dynamicId") Long dynamicId);
     /**
      * @param openId
      * @param dynamicId
      * @return
      */
-    int  dynamicAddLike(String openId,Long dynamicId);
+    int  dynamicAddLike(@Param("openId")String openId,@Param("dynamicId") Long dynamicId);
     /**
      * 用户给动态点赞
      * @param openId 用户Id
      * @param dynamicId 动态Id
      * @return 》0 点赞成功
      */
-    int dynamicCancelAddLike(String openId, Long dynamicId);
+    int dynamicCancelAddLike(@Param("openId")String openId,@Param("dynamicId") Long dynamicId);
 
     /**
      * 根据任务Id获取任务点赞数量
      * @param dynamicId 任务Id
      * @return 任务点赞数量
      */
-    Long selectLikeCountByDynamicId( Long dynamicId);
+    Long selectLikeCountByDynamicId(@Param("dynamicId")Long dynamicId);
 
     /**
      * 判断用是否给该任务点赞
@@ -56,7 +58,7 @@ public interface BlogThehallMapper {
      * @param dynamicId
      * @return
      */
-    int selectIFAddLike(String openId, Long dynamicId);
+    int selectIFAddLike(@Param("openId")String openId,@Param("dynamicId") Long dynamicId);
 
 
 }

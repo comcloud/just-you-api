@@ -1,7 +1,13 @@
 package com.cloud.api.bean.entity;
+import	java.util.HashMap;
+import	java.util.ArrayList;
+
+import com.cloud.api.bean.vo.photoVo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * (Photoalbum)实体类
@@ -39,10 +45,21 @@ public class Photoalbum implements Serializable {
     /**
      * 0:存在 ：1：删除
      */
-    private String photoalbumDelete;
+    private Integer photoalbumDelete;
 
-    private Long photoalbumUserId;
+    private String openId;
+    /*
+  首图
+   */
+    private String photoAlbumStemPan;
 
+
+
+    private Map<String,List<photoVo>> photoVos=new HashMap<> ();
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Long getPhotoalbumId() {
         return photoalbumId;
@@ -84,20 +101,35 @@ public class Photoalbum implements Serializable {
         this.photoalbumTime = photoalbumTime;
     }
 
-    public String getPhotoalbumDelete() {
+    public Integer getPhotoalbumDelete() {
         return photoalbumDelete;
     }
 
-    public void setPhotoalbumDelete(String photoalbumDelete) {
+    public void setPhotoalbumDelete(Integer photoalbumDelete) {
         this.photoalbumDelete = photoalbumDelete;
     }
 
-    public Long getPhotoalbumUserId() {
-        return photoalbumUserId;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setPhotoalbumUserId(Long photoalbumUserId) {
-        this.photoalbumUserId = photoalbumUserId;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
+    public String getPhotoAlbumStemPan() {
+        return photoAlbumStemPan;
+    }
+
+    public void setPhotoAlbumStemPan(String photoAlbumStemPan) {
+        this.photoAlbumStemPan = photoAlbumStemPan;
+    }
+
+    public Map<String, List<photoVo>> getPhotoVos() {
+        return photoVos;
+    }
+
+    public void setPhotoVos(Map<String, List<photoVo>> photoVos) {
+        this.photoVos = photoVos;
+    }
 }

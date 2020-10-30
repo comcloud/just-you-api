@@ -1,5 +1,7 @@
 package com.cloud.api.bean.vo;
 
+import java.util.Date;
+
 /**
  * @author hds
  * <p>项目名称:
@@ -10,6 +12,7 @@ package com.cloud.api.bean.vo;
 public class photoVo {
     private Long id;
     private String photoUrl;
+    private Date photoTime;
 
     public photoVo() {
     }
@@ -17,6 +20,22 @@ public class photoVo {
     public photoVo(Long photoId, String photoUrl) {
         this.id = photoId;
         this.photoUrl = photoUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getPhotoTime() {
+        return photoTime;
+    }
+
+    public void setPhotoTime(Date photoTime) {
+        this.photoTime = photoTime;
     }
 
     public Long getPhotoId() {

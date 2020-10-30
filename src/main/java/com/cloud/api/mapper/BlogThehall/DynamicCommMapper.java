@@ -20,7 +20,7 @@ public interface DynamicCommMapper {
      * @param dynamic_id
      * @return
      */
-    List<DynamicCommentsVo> selectAll(Long dynamic_id);
+    List<DynamicCommentsVo> selectAll(@Param("dynamic_id") Long dynamic_id);
 
     /**
      * 点赞
@@ -53,5 +53,5 @@ public interface DynamicCommMapper {
      */
     int cancelGiveALike(@Param("openId") String openId, @Param("dynamicId") Long dynamicId);
 
-    int deleteComm(Long commId);
+    int deleteComm(@Param("commId") Long commId);
 }

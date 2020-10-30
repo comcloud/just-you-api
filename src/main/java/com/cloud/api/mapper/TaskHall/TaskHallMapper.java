@@ -3,6 +3,7 @@ package com.cloud.api.mapper.TaskHall;
 import com.cloud.api.bean.vo.taskHallVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface TaskHallMapper {
      * 根据Class_Id 获取任务集合
      * @return
      */
-    List<taskHallVo> SelectTaskListByClass(Long class_id);
+    List<taskHallVo> SelectTaskListByClass(@Param("class_id") Long class_id);
 
     /**
      * 获取全部类名
@@ -36,7 +37,7 @@ public interface TaskHallMapper {
     /**
      * 浏览量加+1
      */
-    int viewsAdd1(Long id);
+    int viewsAdd1(@Param("id") Long id);
 }
 
 
