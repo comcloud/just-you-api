@@ -79,11 +79,16 @@ public class User implements Serializable {
 
     private Date registration_time;
 
+    /*
+    出生年月日
+     */
+    private Date UserBirthdayTime;
+
 
     public User() {
     }
 
-    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete) {
+    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete, Date userBirthdayTime, String studentId, String email, String individuality) {
         this.userId = userId;
         this.userName = userName;
         this.fans = fans;
@@ -96,6 +101,10 @@ public class User implements Serializable {
         this.userHeadPortrait = userHeadPortrait;
         this.lastRegisterTime = lastRegisterTime;
         this.delete = delete;
+        UserBirthdayTime = userBirthdayTime;
+        this.studentId = studentId;
+        this.email = email;
+        individuality = individuality;
     }
 
 
@@ -189,6 +198,22 @@ public class User implements Serializable {
         this.delete = delete;
     }
 
+    public Date getUserBirthdayTime() {
+        return UserBirthdayTime;
+    }
+
+    public void setUserBirthdayTime(Date userBirthdayTime) {
+        UserBirthdayTime = userBirthdayTime;
+    }
+
+    public String getindividuality() {
+        return individuality;
+    }
+
+    public void setindividuality(String individuality) {
+        individuality = individuality;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -210,6 +235,11 @@ public class User implements Serializable {
                 ", individuality='" + individuality + '\'' +
                 ", open_id='" + open_id + '\'' +
                 ", registration_time=" + registration_time +
+                ", delete=" + delete +
+                ", UserBirthdayTime=" + UserBirthdayTime +
+                ", studentId='" + studentId + '\'' +
+                ", email='" + email + '\'' +
+                ", individuality='" + individuality + '\'' +
                 '}';
     }
 

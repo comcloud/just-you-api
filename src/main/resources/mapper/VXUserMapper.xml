@@ -46,6 +46,38 @@
             where open_id=#{openId}
         </set>
     </update>
+
+    <update id="updateUserData">
+        update  `user`
+        <set>
+            <if test="nickName!=null">
+                user_name=#{nickName},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender},
+            </if>
+            <if test="province!=null">
+                address=#{address},
+            </if>
+            <if test="userBirthday!=null">
+                user_birthday=#{userBirthday},
+            </if>
+            <if test="email">
+                email=#{email},
+            </if>
+            <if test="Individuality!=null">
+                Individuality=#{Individuality},
+            </if>
+            <if test="mobile!=null">
+                mobile=#{mobile},
+            </if>
+            <if test="studentId!=null">
+                mobile=#{studentId},
+            </if>
+        </set>
+        where open_id=#{openId}
+    </update>
+
     <delete id="cancelttentionUser">
         delete from user_attention
         <where>
@@ -85,5 +117,91 @@
     </select>
     <select id="SelectISTtentionUser" resultType="java.lang.Integer">
         select  count(*) from user_attention where my_open_id=#{MyOpenId} and  attention_open_id=#{HeOpenId}
+    </select>
+    <resultMap id="user" type="com.cloud.api.bean.entity.User">
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="gender"  property="gender" />
+        <result column="user_birthday"  property="userHeadPortrait" />
+        <result column="Student_id"  property="studentId" />
+        <result column="email"  property="email" />
+        <result column="Individuality"  property="individuality" />
+    </resultMap>
+    <select id="selectUsrInformation" resultMap="user">
+        select user_name,mobile,address,gender,user_birthday,Student_id,email,Individuality
+        from `user` where open_id=#{#openId}
+    </select>
+
+    <resultMap id="BlogVo" type="com.cloud.api.bean.vo.BlogVo">
+        <id column="dynamic_id" property="id"/>
+        <result column="dynamic_title" property="dynamicTitle"/>
+        <result column="dynamic_content" property="dynamicTitle"/>
+        <result column="Abstract" property="abstracts"/>
+        <result column="dynamic_views" property="dynamicViews"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="dynamic_time" property="dynamicTime"/>
+        <result column="open_id" property="openId"/>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
+        <collection property="photo" ofType="com.cloud.api.bean.vo.photoVo">
+            <result column="photo_id" property="id"/>
+            <result column="photo_url" property="photoUrl"/>
+        </collection>
+        <collection property="dynamicTags" ofType="com.cloud.api.bean.entity.DynamicTag">
+            <result column="dynamic_tag_id" property="dynamicTagId"/>
+            <result column="dynamic_tag_name" property="dynamicTagName"/>
+        </collection>
+
+    </resultMap>
+    <select id="selectMyDynamicAll" resultMap="BlogVo">
+           select
+      d.dynamic_id,d.dynamic_title,d.Abstract,d.dynamic_views,d.open_id,d.dynamic_time,d.like_count,p.photo_url,p.photo_id,dt.dynamic_tag_id,dt.dynamic_tag_name,u.user_name,u.user_head_portrait
+      from  dynamic d,  dynamic_set_photo dsp , photo p, dynamic_tag dt, dynamic_set_tag dst , `user` u
+         where p.photo_id=dsp.photo_id and d.dynamic_id=dsp.dynamic_id and u.open_id=d.open_id and d.dynamic_deleted=0 and d.open_id=#{openId}
+        order by d.dynamic_time asc
+    </select>
+
+    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
+        <result column="task_title" jdbcType="VARCHAR" property="task_title" />
+        <result column="task_description" jdbcType="VARCHAR" property="task_description" />
+        <result column="release_time" jdbcType="DATE" property="release_time" />
+        <result column="traffic" jdbcType="BIGINT" property="traffic" />
+        <association property="taskClassification" javaType="com.cloud.api.bean.vo.TaskClassificationVo">
+            <id property="id" column="class_id"/>
+            <result property="name" column="name"/>
+            <result property="describe" column="describe"/>
+            <result property="picture" column="picture"/>
+        </association>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
+        <collection property="tags" ofType="com.cloud.api.bean.entity.Tag">
+            <id column="tag_id" property="tagId"/>
+            <result property="tagCount" column="tag_count"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectMyTaskAll" resultMap="TaskHallMapper">
+          select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name , u.user_head_portrait
+        from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
+        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and u.open_id=#{openId}
+        <if test="start==0">
+            and t.state=0
+        </if>
+        <if test="start==1">
+            and t.state=1
+        </if>
+        order by t.release_time asc
     </select>
 </mapper>

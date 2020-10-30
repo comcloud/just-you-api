@@ -1,6 +1,9 @@
 package com.cloud.api.service.VXUser.Impl;
 
+import com.cloud.api.bean.entity.User;
+import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.bean.vo.UserAttention;
+import com.cloud.api.bean.vo.taskHallVo;
 import com.cloud.api.mapper.VXUser.VXUserMapper;
 import com.cloud.api.service.VXUser.VXUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +77,47 @@ public class VXUserServiceImpl implements VXUserService {
         Map<String, Integer> map = new HashMap<>();
         map.put("AttentionCount",vXUserMapper.selectAttentionCount(openId));
         map.put("FansCount",vXUserMapper.selectFansCount(openId));
+        return map;
+    }
+
+    @Override
+    public int updateUserData(User user,String openId) {
+        Map<String, Object> map = new HashMap<>();
+        if(!user.getUserName().isEmpty()){
+            map.put("nickName",user.getUserName());
+        }
+        map.put("gender",user.getUserName());
+        if(!user.getAddress().isEmpty()){
+            map.put("address",user.getAddress());
+        }if(user.getUserBirthdayTime()!=null){
+            map.put("userBirthday",user.getUserBirthdayTime());
+        }if(!user.getEmail().isEmpty()){
+            map.put("email",user.getEmail());
+        }if(!user.getUserName().isEmpty()){
+            map.put("nickName",user.getUserName());
+        }if (!user.getMobile().isEmpty()){
+            map.put("mobile", user.getMobile());
+        }if (user.getStudentId().isEmpty()){
+            map.put("studentId", user.getMobile());
+        }
+        return vXUserMapper.updateUserData(map,openId);
+    }
+
+    @Override
+    public User selectUsrInformation(String openId) {
+        return vXUserMapper.selectUsrInformation(openId);
+    }
+
+    @Override
+    public List<BlogVo> getMyDynamicAll(String openId) {
+        return vXUserMapper.selectMyDynamicAll(openId);
+    }
+
+    @Override
+    public  Map<String,List<taskHallVo>> getMyTaskAll(String openId) {
+        Map<String,List<taskHallVo>> map = new HashMap<>();
+        map.put("is",vXUserMapper.selectMyTaskAll(openId, 0));
+        map.put("past",vXUserMapper.selectMyTaskAll(openId, 1));
         return map;
     }
 
