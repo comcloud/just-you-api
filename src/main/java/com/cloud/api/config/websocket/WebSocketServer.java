@@ -104,7 +104,7 @@ public class WebSocketServer {
         if (recipientServerLocation != null) {
             webSocketSet.forEach(value -> {
                 //一个websocket对象的sender说明这是属于谁的
-                if (value.sender.equals(this.recipient)) {
+                if(value.sender.equals(this.recipient)){
                     recipientServer.set(value);
                 }
             });
