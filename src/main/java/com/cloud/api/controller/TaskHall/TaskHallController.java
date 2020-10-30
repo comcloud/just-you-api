@@ -71,17 +71,6 @@ public class TaskHallController {
         return ResultGenerator.genSuccessResult(new PageInfo<>(taskHallService.getTask_HallList()));
     }
 
-    /**
-     * 下拉刷新
-     *
-     * @return
-     */
-    @Operation(summary = "下拉刷新")
-    @GetMapping("/pullToRefresh")
-    public String pullToRefresh() {
-        taskHallService.classTaskList();
-        return "redirect:/taskHall/TaskList";
-    }
 
     /**
      * 返回分类集合
