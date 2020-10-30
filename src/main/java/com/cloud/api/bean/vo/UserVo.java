@@ -1,4 +1,5 @@
 package com.cloud.api.bean.vo;
+
 /**
  * @author hds
  * <p>项目名称: 用户简单实体类 vo
@@ -7,53 +8,40 @@ package com.cloud.api.bean.vo;
  * @date 2020/10/17-16:22
  */
 public class UserVo {
-    public Long userId;
-    public String userName;
-    public  String openId;
-    private String userHeadPortrait;
-    private Integer gender;
+    public Long user_id;
+    public String user_name;
+    public  String open_id;
 
-    public UserVo() {
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public Integer getGender() {
-        return gender;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public Long getUserId() {
-        return userId;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getOpen_id() {
+        return open_id;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setOpen_id(String open_id) {
+        this.open_id = open_id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    @Override
+    public String toString() {
+        return "UserVo{" +
+                "user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
+                ", open_id='" + open_id + '\'' +
+                '}';
     }
-
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
-
-    public String getUserHeadPortrait() {
-        return userHeadPortrait;
-    }
-
-    public void setUserHeadPortrait(String userHeadPortrait) {
-        this.userHeadPortrait = userHeadPortrait;
-    }
-
 }

@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/message/**").permitAll()
                 .antMatchers("/websocket").permitAll()
                 .antMatchers("/dynamic/**").permitAll()
+                .antMatchers("/publish/**").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/taskSearch/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()

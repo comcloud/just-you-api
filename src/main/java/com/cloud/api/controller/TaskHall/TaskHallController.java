@@ -64,7 +64,7 @@ public class TaskHallController {
      */
     @ResponseBody
     @Operation(summary = "获取任务大厅数据")
-    @RequestMapping("/TaskList")
+    @RequestMapping(value = "/TaskList",method = RequestMethod.GET)
     public Result TaskHallList(Model model,
                                @Parameter(description = "页码，默认是1") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
         PageHelper.startPage(pageNum, 3);

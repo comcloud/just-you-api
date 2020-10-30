@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +51,7 @@ public class MessageController {
     }
 
     @Operation(summary = "操作消息推送，当用户触发这个类型的事件时候就会执行对应的功能")
-    @RequestMapping(value = "/messagePush")
+    @RequestMapping(value = "/messagePush",method = RequestMethod.GET)
     public void messagePush(@Parameter(description = "消息类型，定义为1：点赞，2：评论，3：任务参加通知，4：关注事件,5：官方通知") @RequestParam(value = "messageType") Integer messageType,
                               @Parameter(description = "执行者Open id") @RequestParam(value = "sender") String sender,
                               @Parameter(description = "被执行者open id，也就是说被点赞的人或者被评论的对象等") @RequestParam(value = "recipient") String recipient,

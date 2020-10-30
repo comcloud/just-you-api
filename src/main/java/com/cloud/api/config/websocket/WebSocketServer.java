@@ -2,15 +2,12 @@ package com.cloud.api.config.websocket;
 
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import com.cloud.api.bean.dto.Constants;
 import com.cloud.api.service.RedisService;
 import com.cloud.api.util.SpringUtil;
 import com.cloud.api.util.websocket.MessageUtil;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -25,7 +22,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicReference;
@@ -104,7 +100,7 @@ public class WebSocketServer {
         if (recipientServerLocation != null) {
             webSocketSet.forEach(value -> {
                 //一个websocket对象的sender说明这是属于谁的
-                if (value.sender.equals(this.recipient)) {
+                if(value.sender.equals(this.recipient)){
                     recipientServer.set(value);
                 }
             });
