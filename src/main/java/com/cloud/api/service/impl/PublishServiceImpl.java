@@ -1,5 +1,6 @@
 package com.cloud.api.service.impl;
 
+import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskSetTag;
 import com.cloud.api.mapper.PublishMapper;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 成都犀牛
@@ -53,5 +57,13 @@ public class PublishServiceImpl implements PublishService {
         long taskId = publishMapper.insertTask(task);
         taskSetTag.setTaskId(taskId);
         publishMapper.insertTaskSetTag(taskSetTag);
+    }
+
+    @Override
+    public Map<Integer, String> getAllTag() {
+        List<Tag> tagList = publishMapper.selectAllTag();
+        Map<Integer,String> map = new HashMap<>();
+        tagList.forEach(tag -> map.put(tag.getTagId(),tag.getTagName()));
+        return map;
     }
 }

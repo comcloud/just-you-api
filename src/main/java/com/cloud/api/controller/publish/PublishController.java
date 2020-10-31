@@ -1,5 +1,6 @@
 package com.cloud.api.controller.publish;
 
+import cn.hutool.json.JSONUtil;
 import com.cloud.api.service.PublishService;
 import com.cloud.api.util.Result;
 import com.cloud.api.util.ResultGenerator;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 成都犀牛
@@ -55,6 +59,15 @@ public class PublishController {
             "}\n", description = "存储保存的发布任务信息") @RequestBody String requestBody) {
         publishService.saveReleaseInfo(requestBody);
         return ResultGenerator.genSuccessResult();
+    }
+
+    @Operation(summary = "获取所有标签，标签的样例是：标签主键对应标签名的键值对")
+    @ResponseBody
+    @RequestMapping(value = "/getTag",method = RequestMethod.POST)
+    public Result getTag(){
+        Map<Integer,String> tags = publishService.getAllTag();
+        return ResultGenerator.genSuccessResultInsertData(JSONUtil.parseFromMap(tags).toString());
+
     }
 
 }

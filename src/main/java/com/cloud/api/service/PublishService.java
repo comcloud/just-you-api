@@ -1,5 +1,7 @@
 package com.cloud.api.service;
 
+import java.util.Map;
+
 /**
  * @author 成都犀牛
  * @version version 1.0
@@ -8,4 +10,7 @@ package com.cloud.api.service;
 public interface PublishService {
 
     void saveReleaseInfo(String info);
+
+    Map<Integer, String> getAllTag();
+
 }

@@ -27,4 +27,7 @@
         from user
         where open_id = #{openId}
     </select>
+    <select id="selectAllTag" resultType="com.cloud.api.bean.entity.Tag">
+        select tag_id,tag_name from tag;
+    </select>
 </mapper>

@@ -13,7 +13,7 @@ public class Tag implements Serializable {
     /**
      * 标id
      */
-    private Long tagId;
+    private Integer tagId;
     /**
      * 标签名
      */
@@ -26,17 +26,17 @@ public class Tag implements Serializable {
     public Tag() {
     }
 
-    public Tag(Long tagId, String tagName, Long tagCount) {
+    public Tag(Integer tagId, String tagName, Long tagCount) {
         this.tagId = tagId;
         this.tagName = tagName;
         this.tagCount = tagCount;
     }
 
-    public Long getTagId() {
+    public Integer getTagId() {
         return tagId;
     }
 
-    public void setTagId(Long tagId) {
+    public void setTagId(Integer tagId) {
         this.tagId = tagId;
     }
 

@@ -103,9 +103,5 @@ public interface VXUserMapper {
      * @param start 0 ：代表已发布 没结束的 1 代表过去的的
      * @return
      */
-<<<<<<< HEAD
-    List<TaskHallVo>  selectMyTaskAll(String openId, Integer start);
-=======
-    List<taskHallVo>  selectMyTaskAll(@Param("openId") String openId,@Param("start") Integer start);
->>>>>>> bc15239ebde89a3a9a9a92b1d88f2cf1b96969db
+    List<TaskHallVo>  selectMyTaskAll(@Param("openId") String openId,@Param("start") Integer start);
 }

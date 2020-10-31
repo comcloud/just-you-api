@@ -1,9 +1,12 @@
 package com.cloud.api.mapper;
 
+import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskSetTag;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author 成都犀牛
@@ -22,4 +25,7 @@ public interface PublishMapper {
     long insertTask(@Param("task") Task task);
 
     void insertTaskSetTag(@Param("taskSetTag") TaskSetTag taskSetTag);
+
+    List<Tag> selectAllTag();
+
 }
