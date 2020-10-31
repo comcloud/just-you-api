@@ -7,6 +7,7 @@ import com.cloud.api.util.SpringUtil;
 import com.cloud.api.util.websocket.MessageUtil;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -37,6 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @Component
 @EnableWebSocket
 @EnableWebSocketMessageBroker
+@Api(value = "/websocket/openid/toOpenid",tags = "websocket服务端")
 @ServerEndpoint(value = "/websocket/{openid}/{toOpenid}")
 public class WebSocketServer {
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,7 @@ import java.util.zip.DeflaterOutputStream;
  * @date 2020/10/6-19:51
  */
 @Controller
+@ApiIgnore
 @RequestMapping(value = "/members")
 public class membersController {
     @Autowired

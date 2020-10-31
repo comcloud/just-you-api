@@ -1,11 +1,9 @@
 package com.cloud.api.mapper.VXUser;
 
-import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.vo.BlogVo;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.UserAttention;
-import com.cloud.api.bean.vo.UserVo;
-import com.cloud.api.bean.vo.taskHallVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -105,5 +103,5 @@ public interface VXUserMapper {
      * @param start 0 ：代表已发布 没结束的 1 代表过去的的
      * @return
      */
-    List<taskHallVo>  selectMyTaskAll(String openId,Integer start);
+    List<TaskHallVo>  selectMyTaskAll(String openId, Integer start);
 }

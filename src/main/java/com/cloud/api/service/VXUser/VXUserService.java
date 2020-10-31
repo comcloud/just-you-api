@@ -2,10 +2,9 @@ package com.cloud.api.service.VXUser;
 
 import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.vo.BlogVo;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.UserAttention;
-import com.cloud.api.bean.vo.taskHallVo;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +73,7 @@ public interface VXUserService {
 
     List<BlogVo> getMyDynamicAll(String openId);
 
-   Map<String,List<taskHallVo>> getMyTaskAll(String openId);
+   Map<String,List<TaskHallVo>> getMyTaskAll(String openId);
 
 
 }

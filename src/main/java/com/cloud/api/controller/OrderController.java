@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -31,6 +32,7 @@ import java.util.List;
  * 报名人数、订单开发周期
  * ModelUtil<Order,ModelUtil<Task,ModelUtil<String,ModelUtil<String,String>>>>
  */
+@ApiIgnore
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
