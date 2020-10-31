@@ -2,6 +2,7 @@ package com.cloud.api.mapper.TaskHall;
 import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.vo.TaskSearchVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -19,14 +20,14 @@ public interface TaskSearchMapper {
      * 查询用户最近搜索记录
      * @return
      */
-    List<TaskSearchVo> SelectRecentlySearch(String open_id);
+    List<TaskSearchVo> SelectRecentlySearch(@Param("open_id") String open_id);
 
     /**
      * 搜索栏对任务进搜索
      * @param content 搜索内容
      * @return 结果
      */
-    List<TaskSearchVo> SelectLinkTaskSearchVos(String content);
+    List<TaskSearchVo> SelectLinkTaskSearchVos(@Param("content") String content);
 
     /**
      *获取热门标签
@@ -34,7 +35,7 @@ public interface TaskSearchMapper {
      */
     List<Tag> selectHotTag();
 
-    List<TaskSearchVo> SelectLinkTaskByTagId(Long tag_id);
+    List<TaskSearchVo> SelectLinkTaskByTagId(@Param("tag_id") Long tag_id);
 
     int insertSearch(Map<String,Object> map);
 }

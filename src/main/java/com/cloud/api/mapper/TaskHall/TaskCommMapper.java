@@ -3,6 +3,7 @@ package com.cloud.api.mapper.TaskHall;
 import com.cloud.api.bean.vo.DynamicCommentsVo;
 import com.cloud.api.bean.vo.TaskCommentsVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ import java.util.List;
  */
 @Mapper
 public interface TaskCommMapper {
-    List<TaskCommentsVo> selectAll(Long task_id);
+    List<TaskCommentsVo> selectAll(@Param("task_id") Long task_id);
 }

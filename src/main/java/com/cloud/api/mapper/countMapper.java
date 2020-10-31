@@ -1,6 +1,7 @@
 package com.cloud.api.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public interface countMapper {
      * @param id 0: 查询现在存在的 1：查询全部 包括已过时的
      * @return countMapper
      */
-    int SelecttaskCount(int id);
+    int SelecttaskCount(@Param("id") int id);
 
     /**
      * 查看用户数量
@@ -43,6 +44,6 @@ public interface countMapper {
      * @param date 时间
      * @return
      */
-    int selectCountUserTime(Date date);
+    int selectCountUserTime(@Param("date") Date date);
 
 }

@@ -31,7 +31,7 @@ public interface VXUserMapper {
      *
      * @return
      */
-    int updateUser(Map<String, Object> map, String openId);
+    int updateUser(Map<String, Object> map, @Param("openId") String openId);
 
     /**
      * 修改用户信息
@@ -39,14 +39,14 @@ public interface VXUserMapper {
      * @param openId 用户id
      * @return 》0 修改成功
      */
-    int updateUserData(Map<String,Object> map,String openId);
+    int updateUserData(Map<String,Object> map,@Param("openId") String openId);
     /**
      *  点击 关注
      * @param MyOpenId 用户的open_id
      * @param HeOpenId 被关注的open_id
      * @return
      */
-    int attentionUser(String MyOpenId, String HeOpenId);
+    int attentionUser(@Param("MyOpenId") String MyOpenId, @Param("HeOpenId") String HeOpenId);
 
     /**
      * 取消关注
@@ -54,26 +54,26 @@ public interface VXUserMapper {
      * @param HeOpenId
      * @return
      */
-    int cancelttentionUser(String MyOpenId, String HeOpenId);
+    int cancelttentionUser(@Param("MyOpenId") String MyOpenId, @Param("HeOpenId") String HeOpenId);
 
     /**
      * 获取关注列表
      * @param open_id 自己的open_id
      * @return 关注用户的信息集合
      */
-    List<UserAttention> selectAttentionUser(String open_id);
+    List<UserAttention> selectAttentionUser(@Param("open_id") String open_id);
 
     /**
      *
      * @param open_id 用户 open_id
      * @return
      */
-    List<UserAttention> selectFansUser(String open_id);
+    List<UserAttention> selectFansUser(@Param("open_id") String open_id);
 
 
-    int selectAttentionCount(String openId);
+    int selectAttentionCount(@Param("openId") String openId);
 
-    int selectFansCount(String openId);
+    int selectFansCount(@Param("openId") String openId);
 
     /**
      * open_id 为 MyOpenId 的用户是否关注了OPen_id为 HeOpenId的用户
@@ -88,14 +88,14 @@ public interface VXUserMapper {
      * @param openId 用户的openID
      * @return
      */
-    User selectUsrInformation(String openId);
+    User selectUsrInformation(@Param("openId") String openId);
 
     /**
      * 获取自己发布的动态
      * @param openId 自己的用户openId
      * @return
      */
-    List<BlogVo> selectMyDynamicAll(String openId);
+    List<BlogVo> selectMyDynamicAll(@Param("openId") String openId);
 
     /**
      * 我发布的任务
@@ -103,5 +103,9 @@ public interface VXUserMapper {
      * @param start 0 ：代表已发布 没结束的 1 代表过去的的
      * @return
      */
+<<<<<<< HEAD
     List<TaskHallVo>  selectMyTaskAll(String openId, Integer start);
+=======
+    List<taskHallVo>  selectMyTaskAll(@Param("openId") String openId,@Param("start") Integer start);
+>>>>>>> bc15239ebde89a3a9a9a92b1d88f2cf1b96969db
 }

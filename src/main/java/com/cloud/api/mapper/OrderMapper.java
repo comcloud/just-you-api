@@ -20,15 +20,15 @@ public interface OrderMapper {
 
     List<TaskOrder> selectOrderData();
 
-    Integer selectNumberFromTaskId(Long id);
+    Integer selectNumberFromTaskId(@Param("id") Long id);
 
     String selectOpenIdFromUserId(@Param("orderUserId") Long orderUserId);
 
     Long selectTaskIdFromOpenId(@Param("openId") String openId);
 
-    Task selectTaskIdFromId(Long taskId);
+    Task selectTaskIdFromId(@Param("taskId") Long taskId);
 
-    boolean deleteTaskOrderById(Integer id);
+    boolean deleteTaskOrderById(@Param("id") Integer id);
 
-    List<TaskOrder> selectOrderDataBySearch(OrderSearchObject orderSearchObject);
+    List<TaskOrder> selectOrderDataBySearch(@Param("orderSearchObject") OrderSearchObject orderSearchObject);
 }

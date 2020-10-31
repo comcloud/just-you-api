@@ -128,4 +128,19 @@ public class TaskHallVo {
         this.tags = tags;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "TaskHallVo{" +
+                "id=" + id +
+                ", taskClassification=" + taskClassification +
+                ", recruiting_number=" + recruiting_number +
+                ", task_description='" + task_description + '\'' +
+                ", task_title='" + task_title + '\'' +
+                ", release_time=" + release_time +
+                ", traffic=" + traffic +
+                ", user=" + user +
+                ", tags=" + tags +
+                '}';
+    }
 }
