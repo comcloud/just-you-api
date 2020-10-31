@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.util.List;
 /**
  * @author hds
@@ -19,6 +21,7 @@ import java.util.List;
  * @date 2020/10/19-19:11
  */
 @Controller
+@ApiIgnore
 @RequestMapping("/cate")
 public class classificationController {
     @Autowired

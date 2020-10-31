@@ -1,10 +1,9 @@
 package com.cloud.api.mapper.TaskHall;
 
-import com.cloud.api.bean.vo.taskHallVo;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -21,13 +20,13 @@ public interface TaskHallMapper {
      * 对全部数据进行查询任务列表 开始任务前一个小时的
      * @return
      */
-    List<taskHallVo> SelectTask_HallList();
+    List<TaskHallVo> SelectTask_HallList();
 
     /**
      * 根据Class_Id 获取任务集合
      * @return
      */
-    List<taskHallVo> SelectTaskListByClass(@Param("class_id") Long class_id);
+    List<TaskHallVo> SelectTaskListByClass(@Param("class_id") Long class_id);
 
     /**
      * 获取全部类名

@@ -23,7 +23,7 @@
     <select id="selectTaskIdFromId" resultType="com.cloud.api.bean.entity.Task">
         select  id,start_time,end_time,money
         from task
-        where id = #{taskId}
+        where id = #{id}
     </select>
     <select id="selectOrderDataBySearch" resultType="com.cloud.api.bean.entity.TaskOrder">
         select *

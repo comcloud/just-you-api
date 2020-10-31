@@ -72,6 +72,56 @@ public class Task implements Serializable {
      */
     private double money;
 
+    /**
+     * 任务标题
+     */
+    private String taskTitle;
+
+    /**
+     * 任务浏览量
+     */
+    private int traffic;
+
+    public Task() {
+    }
+
+    public Task(Long id, Long classId, String data, Integer state, Integer charge, LocalDateTime releaseTime, Long userId, Integer needNumber, Integer recruitingNumber, Integer taskComment, LocalDateTime startTime, LocalDateTime endTime, String taskDescription, double money, String taskTitle, int traffic) {
+        this.id = id;
+        this.classId = classId;
+        this.data = data;
+        this.state = state;
+        this.charge = charge;
+        this.releaseTime = releaseTime;
+        this.userId = userId;
+        this.needNumber = needNumber;
+        this.recruitingNumber = recruitingNumber;
+        this.taskComment = taskComment;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.taskDescription = taskDescription;
+        this.money = money;
+        this.taskTitle = taskTitle;
+        this.traffic = traffic;
+    }
+
+    public String getTaskTitle() {
+        return taskTitle;
+    }
+
+    public Task setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
+        return this;
+    }
+
+    public int getTraffic() {
+        return traffic;
+    }
+
+    public Task setTraffic(int traffic) {
+        this.traffic = traffic;
+        return this;
+    }
+
     public String getTaskDescription() {
         return taskDescription;
     }
@@ -200,5 +250,27 @@ public class Task implements Serializable {
     public Task setTaskComment(Integer taskComment) {
         this.taskComment = taskComment;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", classId=" + classId +
+                ", data='" + data + '\'' +
+                ", state=" + state +
+                ", charge=" + charge +
+                ", releaseTime=" + releaseTime +
+                ", userId=" + userId +
+                ", needNumber=" + needNumber +
+                ", recruitingNumber=" + recruitingNumber +
+                ", taskComment=" + taskComment +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", money=" + money +
+                ", taskTitle='" + taskTitle + '\'' +
+                ", traffic=" + traffic +
+                '}';
     }
 }

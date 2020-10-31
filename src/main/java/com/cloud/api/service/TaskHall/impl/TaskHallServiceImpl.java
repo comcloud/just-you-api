@@ -1,5 +1,5 @@
 package com.cloud.api.service.TaskHall.impl;
-import com.cloud.api.bean.vo.taskHallVo;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import com.cloud.api.mapper.TaskHall.TaskHallMapper;
 import com.cloud.api.service.TaskHall.TaskHallService;
@@ -18,19 +18,19 @@ import java.util.List;
  */
 @Service
 public class TaskHallServiceImpl implements TaskHallService {
-    private List<taskHallVo> lists=new ArrayList<>();
+    private List<TaskHallVo> lists=new ArrayList<>();
     @Autowired
     TaskHallMapper TaskHallMapper;
     @Override
-    public List<taskHallVo> getTask_HallList() {
+    public List<TaskHallVo> getTask_HallList() {
         lists.addAll(TaskHallMapper.SelectTask_HallList());
         Collections.shuffle(lists);
         return  lists;
     }
 
     @Override
-    public List<taskHallVo> getTaskListByClass(Long class_id) {
-        List<taskHallVo> list = TaskHallMapper.SelectTaskListByClass(class_id);
+    public List<TaskHallVo> getTaskListByClass(Long class_id) {
+        List<TaskHallVo> list = TaskHallMapper.SelectTaskListByClass(class_id);
         Collections.shuffle(list);
         return list;
     }

@@ -166,7 +166,7 @@
         order by d.dynamic_time asc
     </select>
 
-    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.taskHallVo">
+    <resultMap id="TaskHallMapper" type="com.cloud.api.bean.vo.TaskHallVo">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />

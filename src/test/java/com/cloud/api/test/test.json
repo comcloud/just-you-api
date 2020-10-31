@@ -1,5 +1,17 @@
 {
-  "sender": "xxxx",
-  "receiver": "yyyy",
-  "payload": "你好，我是消息"
+  "class_id": "",
+  "open_id": "",
+  "charge": "",
+   "need_number": "",
+  "recruiting_number": "",
+  "task_comment": "",
+  "task_description": "",
+  "start_time": "",
+  "end_time": "",
+  "money": "",
+  "task_title": "",
+  "tag": {
+
+  },
+  "data": ""
 }

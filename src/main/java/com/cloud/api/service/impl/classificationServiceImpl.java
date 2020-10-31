@@ -20,7 +20,6 @@ import java.util.List;
 public class classificationServiceImpl implements classificationService {
     @Autowired
     private classificationMapper classificationMapper;
-    private  List<TaskClassification> son=new ArrayList<>();
     @Override
     public List<TaskClassification> getAllfTaskClassification() {
         //查询说有父节点 只有两成结构

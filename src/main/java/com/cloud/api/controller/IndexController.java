@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.net.URLDecoder;
  * @author HP
  */
 @Controller
+@ApiIgnore
 public class IndexController {
 
     @Autowired
@@ -33,33 +36,6 @@ public class IndexController {
         return "X-admin/index";
 
     }
-
-    /**
-     * 验证管理员登录
-     *
-     * @param loginInfo 管理员登录信息
-     * @return 验证信息
-     * @throws JsonProcessingException
-     */
-    @ResponseBody
-    @RequestMapping(value = "/loginCheck", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public String loginCheck(@RequestBody String loginInfo,
-                             HttpServletRequest request) throws IOException {
-        String decode = URLDecoder.decode(loginInfo, "utf-8");
-        JsonNode node = new ObjectMapper().readTree(decode.substring(decode.indexOf("{")));
-        ObjectNode objectNode = JsonNodeFactory.instance.objectNode();
-        String email = node.findPath("email").toString().replace("\"", "");
-        String password = node.findPath("password").toString().replace("\"", "");
-        boolean result = indexService.checkAdmin(email, password);
-        if (result) {
-            request.getSession().setAttribute("admin", new Admin(0, email, password,"","",null,true,1));
-        } else {
-            request.getSession().removeAttribute("admin");
-        }
-        objectNode.put("success", result);
-        return objectNode.toPrettyString();
-    }
-
 
     @RequestMapping(value = "/login/error")
     public void loginError(HttpServletRequest request, HttpServletResponse response) {

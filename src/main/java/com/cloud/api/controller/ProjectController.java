@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @RequestMapping(value = "/project")
 @Controller
+@ApiIgnore
 public class ProjectController {
 
     @Autowired

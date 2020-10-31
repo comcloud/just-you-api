@@ -1,18 +1,17 @@
 package com.cloud.api.bean.entity;
 
-
-
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * (User)实体类
  *
  * @author makejava
- * @since 2020-10-03 18:12:22
+ * @since 2020-10-29 10:28:18
  */
 public class User implements Serializable {
-    private static final long serialVersionUID = 575879234856926430L;
+    private static final long serialVersionUID = -60636443549169271L;
     /**
      * 用户id
      */
@@ -21,63 +20,70 @@ public class User implements Serializable {
      * 用户名
      */
     private String userName;
+    /**
+     * 微信用户的open_id
+     */
+    private String openId;
+    /**
+     * 电话号码
+     */
+    private String mobile;
 
     private String fans;
     /**
-     *电话号码
+     * 0 ： 女 1：男
      */
-    private String mobile;
-    /**
-     * 性别  0 女 1 男
-     */
-    private int gender;
-
-    /**
-     * open id
-     */
-    private  String open_id;
+    private Integer gender;
     /**
      * 地址
      */
     private String address;
-
     /**
-     * 状态 1启用 0停用
+     * 1 :启用 2： 停用
      */
-    private int state;
-
+    private Integer state;
     /**
-     * 注册时间
+     * 用户注册时间
      */
-    private Date registration_time;
-    /*
-    头像url地址
+    private Date registrationTime;
+    /**
+     * 0：存在 1 ： 缓存 2彻底删除
+     */
+    private Integer delete;
+    /**
+     * 头像url地址
      */
     private String userHeadPortrait;
-    /*
-    最近一次登录时间
+    /**
+     * 最近一次登录时间
      */
-    private Date  lastRegisterTime;
-    /*
-    是否删除
+    private Date lastRegisterTime;
+    /**
+     * 用户生日
      */
-    private int delete;
+    private LocalDateTime userBirthday;
+    /**
+     * 学号
+     */
+    private String studentId;
+    /**
+     * email
+     */
+    private String email;
+    /**
+     * 个性签名
+     */
+    private String individuality;
+
+    private String open_id;
+
+    private Date registration_time;
+
     /*
     出生年月日
      */
     private Date UserBirthdayTime;
-    /*
-    学号
-     */
-    private String studentId;
-    /*
-    email
-     */
-    private String email;
-    /*
-    个性签名
-     */
-    private String individuality;
+
 
     public User() {
     }
@@ -101,9 +107,6 @@ public class User implements Serializable {
         individuality = individuality;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Long getUserId() {
         return userId;
@@ -121,12 +124,15 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
+    public String getOpenId() {
+        return openId;
+    }
     public String getFans() {
         return fans;
     }
 
-    public void setFans(String fans) {
-        this.fans = fans;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getMobile() {
@@ -137,20 +143,12 @@ public class User implements Serializable {
         this.mobile = mobile;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
-    }
-
-    public String getOpen_id() {
-        return open_id;
-    }
-
-    public void setOpen_id(String open_id) {
-        this.open_id = open_id;
     }
 
     public String getAddress() {
@@ -161,22 +159,25 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public int getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
-    public Date getRegistration_time() {
-        return registration_time;
+    public Date getRegistrationTime() {
+        return registrationTime;
     }
 
-    public void setRegistration_time(Date registration_time) {
-        this.registration_time = registration_time;
+    public void setRegistrationTime(Date registrationTime) {
+        this.registrationTime = registrationTime;
     }
 
+    public Integer getDelete() {
+        return delete;
+    }
     public String getUserHeadPortrait() {
         return userHeadPortrait;
     }
@@ -193,10 +194,6 @@ public class User implements Serializable {
         this.lastRegisterTime = lastRegisterTime;
     }
 
-    public int getDelete() {
-        return delete;
-    }
-
     public void setDelete(int delete) {
         this.delete = delete;
     }
@@ -207,6 +204,83 @@ public class User implements Serializable {
 
     public void setUserBirthdayTime(Date userBirthdayTime) {
         UserBirthdayTime = userBirthdayTime;
+    }
+
+    public String getindividuality() {
+        return individuality;
+    }
+
+    public void setindividuality(String individuality) {
+        individuality = individuality;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", openId='" + openId + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", fans='" + fans + '\'' +
+                ", gender=" + gender +
+                ", address='" + address + '\'' +
+                ", state=" + state +
+                ", registrationTime=" + registrationTime +
+                ", delete=" + delete +
+                ", userHeadPortrait='" + userHeadPortrait + '\'' +
+                ", lastRegisterTime=" + lastRegisterTime +
+                ", userBirthday=" + userBirthday +
+                ", studentId='" + studentId + '\'' +
+                ", email='" + email + '\'' +
+                ", individuality='" + individuality + '\'' +
+                ", open_id='" + open_id + '\'' +
+                ", registration_time=" + registration_time +
+                ", delete=" + delete +
+                ", UserBirthdayTime=" + UserBirthdayTime +
+                ", studentId='" + studentId + '\'' +
+                ", email='" + email + '\'' +
+                ", individuality='" + individuality + '\'' +
+                '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public User setFans(String fans) {
+        this.fans = fans;
+        return this;
+    }
+
+    public String getOpen_id() {
+        return open_id;
+    }
+
+    public User setOpen_id(String open_id) {
+        this.open_id = open_id;
+        return this;
+    }
+
+    public Date getRegistration_time() {
+        return registration_time;
+    }
+
+    public User setRegistration_time(Date registration_time) {
+        this.registration_time = registration_time;
+        return this;
+    }
+
+    public void setDelete(Integer delete) {
+        this.delete = delete;
+    }
+
+
+    public LocalDateTime getUserBirthday() {
+        return userBirthday;
+    }
+
+    public void setUserBirthday(LocalDateTime userBirthday) {
+        this.userBirthday = userBirthday;
     }
 
     public String getStudentId() {
@@ -225,33 +299,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getindividuality() {
+    public String getIndividuality() {
         return individuality;
     }
 
-    public void setindividuality(String individuality) {
-        individuality = individuality;
+    public void setIndividuality(String individuality) {
+        this.individuality = individuality;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", fans='" + fans + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", gender=" + gender +
-                ", open_id='" + open_id + '\'' +
-                ", address='" + address + '\'' +
-                ", state=" + state +
-                ", registration_time=" + registration_time +
-                ", userHeadPortrait='" + userHeadPortrait + '\'' +
-                ", lastRegisterTime=" + lastRegisterTime +
-                ", delete=" + delete +
-                ", UserBirthdayTime=" + UserBirthdayTime +
-                ", studentId='" + studentId + '\'' +
-                ", email='" + email + '\'' +
-                ", individuality='" + individuality + '\'' +
-                '}';
-    }
 }

@@ -114,7 +114,7 @@
                         <tbody id="tbody">
                         <tr th:each="model : ${modelObject}">
                             <td><input type="checkbox" id="content" name="content" lay-skin="primary"></td>
-                            <td id="taskId" th:text="${model.firstValue.id}" th:value="${model.firstValue.id}">
+                            <td id="id" th:text="${model.firstValue.id}" th:value="${model.firstValue.id}">
                                 2017009171822298053
                             </td>
                             <td th:text="${model.lastValue.firstValue}">老王:18925139194</td>
@@ -135,7 +135,7 @@
                             <td th:text="${model.firstValue.taskDescription}">2017-08-17 18:22</td>
                             <td class="td-manage">
                                 <a title="查看任务内容" id="lookId"
-                                   onclick="xadmin.open('查看任务内容','/justyou/project/project_view?id='+$(this).parent().parent().children('#taskId').attr('value'))"
+                                   onclick="xadmin.open('查看任务内容','/justyou/project/project_view?id='+$(this).parent().parent().children('#id').attr('value'))"
                                    href="javascript:;">
                                     <i class="layui-icon">&#xe63c;</i></a>
                                 <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
@@ -282,7 +282,7 @@
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？',
             function (index) {
-                var value = $(obj).parent().parent().children('#taskId').attr('value');
+                var value = $(obj).parent().parent().children('#id').attr('value');
                 //发异步删除数据
                 $.ajax({
                     async: false,
@@ -314,7 +314,7 @@
         let count = 0;
         tableData.each(function (index, item) {
             if (item.checked) {
-                deleteList[count] = $(item).parent().parent().children('#taskId').attr('value');
+                deleteList[count] = $(item).parent().parent().children('#id').attr('value');
                 count++
             }
         });

@@ -40,7 +40,7 @@ public class TaskHallController {
      * resultCode : 200(成功) / 500（失败）
      * message：反应结果字符串
      * data：[
-     * list : [{taskHallVo} ,{taskHallVo}]
+     * list : [{TaskHallVo} ,{TaskHallVo}]
      * pageNum  : 当前页码
      * pageSize : 每页的数量
      * size : 当前页的数量
@@ -64,7 +64,7 @@ public class TaskHallController {
      */
     @ResponseBody
     @Operation(summary = "获取任务大厅数据")
-    @RequestMapping("/TaskList")
+    @RequestMapping(value = "/TaskList",method = RequestMethod.GET)
     public Result TaskHallList(Model model,
                                @Parameter(description = "页码，默认是1") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
         PageHelper.startPage(pageNum, 3);

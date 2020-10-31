@@ -27,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             // -- swagger ui
             "/swagger-ui.html",
+            "/doc.html",
+            "/document.html",
             "/swagger-ui/*",
             "/swagger-resources/**",
             "/v2/api-docs",
@@ -46,10 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/sendToUser").permitAll()
-                .antMatchers("/pullUnreadMessage").permitAll()
+                .antMatchers("/message/**").permitAll()
                 .antMatchers("/websocket").permitAll()
                 .antMatchers("/dynamic/**").permitAll()
+                .antMatchers("/publish/**").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/taskRelease/**").permitAll()
                 .antMatchers("/taskSearch/**").permitAll()

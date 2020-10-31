@@ -72,7 +72,7 @@ swagger:
   application-name: ${spring.application.name}
   application-version: 1.0
   application-description: 云顶犀小程序后台管理接口
-  try-host: http://localhost:${server.port}
+  try-host: http://localhost/justyou/admin
 springfox:
   documentation:
     swagger-ui:

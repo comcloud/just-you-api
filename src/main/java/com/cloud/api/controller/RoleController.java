@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -19,6 +20,7 @@ import java.net.URLDecoder;
  * @date 2020/10/19 23:14
  */
 @Controller
+@ApiIgnore
 @RequestMapping(value = "/role")
 public class RoleController {
 
