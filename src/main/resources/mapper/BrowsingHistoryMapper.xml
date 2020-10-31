@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.api.mapper.VXUser.BrowsingHistoryMapper">
+
+    <insert id="insertBrowsingHistory">
+        insert into user_browsing_history
+        <set>
+            <if test="browsingHistoryClass==0">
+                browsing_history_class=0,browsing_history_openId=#{browsingHistoryOpenId},browsing_history_User_id=#{openID}
+            </if>
+            <if test="browsingHistoryClass==1">
+                browsing_history_class=1,browsing_history_openId=#{browsingHistoryOpenId},browsing_history_task_id=#{taskId}
+            </if>
+        </set>
+    </insert>
+    <resultMap id="UserBrowsingHistoryVoU" type="com.cloud.api.bean.vo.UserBrowsingHistoryVo">
+        <id column="browsing_history_id"  property="browsingHistoryId"/>
+        <result column="browsing_history_time" property="browsingHistoryTime"/>
+        <association property="t" javaType="com.cloud.api.bean.vo.UserVo">
+            <result column="user_id" property="userId"/>
+            <result column="user_name" property="userName"/>
+            <result column="open_id" property="openId"/>
+            <result column="user_head_portrait" property="userHeadPortrait"/>
+        </association>
+    </resultMap>
+    <select id="selectUserBrowsingHistoryVoByUser" resultMap="UserBrowsingHistoryVoU">
+        select ubh.browsing_history_id,ubh.browsing_history_class,ubh.browsing_history_time,u.user_id,u.user_name,u.open_id,u.user_head_portrait
+        from user_browsing_history ubh , user u
+        where  ubh.browsing_history_User_id=u.open_id and browsing_history_openId=#{browsingHistoryOpenId} and browsing_history_class=0 and browsing_history_deleect=0
+    </select>
+    <resultMap id="UserBrowsingHistoryVoT" type="com.cloud.api.bean.vo.UserBrowsingHistoryVo">
+        <id column="browsing_history_id"  property="browsingHistoryId"/>
+        <result column="browsing_history_time" property="browsingHistoryTime"/>
+        <association property="t" javaType="com.cloud.api.bean.vo.UserBrowsingHistoryTaskVo">
+            <result column="id" property="id"/>
+            <result column="class_id" property="classId"/>
+            <result column="user_id" property="userId"/>
+            <result column="task_description" property="task_description"/>
+            <result column="state" property="state"/>
+        </association>
+    </resultMap>
+    <select id="selectUserBrowsingHistoryVoByTask" resultMap="UserBrowsingHistoryVoT">
+        select ubh.browsing_history_id,ubh.browsing_history_class,ubh.browsing_history_time,t.id,t.class_id,t.user_id,t.task_description,t.state
+        from user_browsing_history ubh , task t
+        where  ubh.browsing_history_task_id=t.id and browsing_history_openId=#{browsingHistoryOpenId} and ubh.browsing_history_class=1 and ubh.browsing_history_deleect=0
+    </select>
+    <resultMap id="UserVo" type="com.cloud.api.bean.vo.UserVo">
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="gender" property="gender"/>
+        <result column="open_id" property="openId"/>
+        <result column="user_head_portrait" property="userHeadPortrait"/>
+    </resultMap>
+    <select id="selectUserVoByuseerId" resultMap="UserVo">
+        select user_id,user_name,open_id,user_head_portrait from `user` where user_id=#{userId}
+    </select>
+    <resultMap id="taskClassification" type="com.cloud.api.bean.vo.TaskClassificationVo">
+        <id property="id" column="class_id"/>
+        <result property="name" column="name"/>
+        <result property="describe" column="describe"/>
+        <result property="picture" column="Picture"/>
+    </resultMap>
+    <select id="seleectTaskClassificationByclassId" resultMap="taskClassification">
+        select class_id,`name`,`describe`,Picture from  task_classification where class_id=#{classId}
+    </select>
+</mapper>
+

@@ -31,7 +31,9 @@ public class TaskHallVo {
     //用户
     public UserVo user;
 
-    private List<Tag> tags = new ArrayList<>();
+
+
+    private List<Tag> tags=new ArrayList<> ();
 
     public TaskHallVo() {
     }
