@@ -1,4 +1,4 @@
-package com.cloud.api.config;
+package com.cloud.api.config.web;
 
 import com.cloud.api.controller.ErrorController;
 import org.springframework.context.annotation.Configuration;

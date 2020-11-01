@@ -1,5 +1,8 @@
 package com.cloud.api.service;
 
+import com.cloud.api.bean.entity.Tag;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +14,6 @@ public interface PublishService {
 
     void saveReleaseInfo(String info);
 
-    Map<Integer, String> getAllTag();
+    List<Tag> getAllTag();
 
 }

@@ -1,6 +1,8 @@
 package com.cloud.api.service.TaskHall;
+
 import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.task_classificationVo;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,11 @@ import java.util.List;
  */
 public interface TaskHallService {
     List<TaskHallVo> getTask_HallList();
+
     List<TaskHallVo> getTaskListByClass(Long class_id);
-    void  classTaskList();
+
+    @Deprecated
+    void classTaskList();
+
     List<task_classificationVo> getAllClassName();
 }

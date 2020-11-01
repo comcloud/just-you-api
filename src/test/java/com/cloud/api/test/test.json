@@ -1,17 +1,22 @@
 {
-  "class_id": "",
-  "open_id": "",
-  "charge": "",
-   "need_number": "",
-  "recruiting_number": "",
+  "class_id": "2",
+  "open_id": "ohNiv4nVNsdHsSHQK6A1kFtWVjX8",
+  "charge": 0,
+  "need_number": "不限人数",
+  "recruiting_number": 3,
   "task_comment": "",
   "task_description": "",
-  "start_time": "",
+  "start_time": "2020-11-01 18:53",
   "end_time": "",
   "money": "",
-  "task_title": "",
-  "tag": {
-
-  },
-  "data": ""
+  "task_title": "123",
+  "tag": "单身",
+  "data": {
+    "base64": [
+      {
+        "url": "http://tmp/wx45847f8c326518ee.o6zAJsxez7Pyh7z2qoLiByIbGHlE.45kQc1El1jJy200bbc02fca218ea2b58ea9d0242b7aa.jpg"
+      }
+    ],
+    "address": ""
+  }
 }

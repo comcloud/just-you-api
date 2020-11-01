@@ -14,11 +14,8 @@
     <insert id="insertTaskSetTag">
         insert into
         task_set_tag
-        <set>
-            <if test="taskSetTag.taskId != null">
-                task_id = #{taskSetTag.taskId}
-            </if>
-        </set>
+        value (task_id = #{taskSetTag.taskId},tag_id=#{taskSetTag.tagId})
+
     </insert>
 
 

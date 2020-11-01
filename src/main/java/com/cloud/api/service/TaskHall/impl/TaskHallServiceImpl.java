@@ -18,14 +18,11 @@ import java.util.List;
  */
 @Service
 public class TaskHallServiceImpl implements TaskHallService {
-    private List<TaskHallVo> lists=new ArrayList<>();
     @Autowired
     TaskHallMapper TaskHallMapper;
     @Override
     public List<TaskHallVo> getTask_HallList() {
-        lists.addAll(TaskHallMapper.SelectTask_HallList());
-        Collections.shuffle(lists);
-        return  lists;
+        return  TaskHallMapper.SelectTask_HallList();
     }
 
     @Override
@@ -37,7 +34,6 @@ public class TaskHallServiceImpl implements TaskHallService {
 
     @Override
     public void classTaskList() {
-        lists.clear();
     }
 
     @Override

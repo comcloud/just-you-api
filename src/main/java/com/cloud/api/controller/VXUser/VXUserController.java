@@ -97,7 +97,7 @@ public class VXUserController {
 
     @ResponseBody
     @Operation(summary = "修改用户信息")
-    @RequestMapping("/updateUserData")
+    @RequestMapping(value = "/updateUserData",method = RequestMethod.POST)
     public Result updateUserData(@ApiParam(name = "user", value = "用户信对象") @RequestBody User user, @ApiParam(name = "openId", value = "用户的openId") String openId) {
         if (VXUserService.updateUserData(user, openId) > 0) {
             return ResultGenerator.genSuccessResult("修改成功!!");

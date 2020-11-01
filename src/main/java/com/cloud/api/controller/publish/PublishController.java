@@ -1,22 +1,18 @@
 package com.cloud.api.controller.publish;
 
-import cn.hutool.json.JSONUtil;
 import com.cloud.api.service.PublishService;
 import com.cloud.api.util.Result;
 import com.cloud.api.util.ResultGenerator;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author 成都犀牛
@@ -65,9 +61,7 @@ public class PublishController {
     @ResponseBody
     @RequestMapping(value = "/getTag",method = RequestMethod.POST)
     public Result getTag(){
-        Map<Integer,String> tags = publishService.getAllTag();
-        return ResultGenerator.genSuccessResultInsertData(JSONUtil.parseFromMap(tags).toString());
-
+        return ResultGenerator.genSuccessResult(new PageInfo<>(publishService.getAllTag()));
     }
 
 }
