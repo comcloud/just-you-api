@@ -56,4 +56,14 @@ public class UserVo {
         this.userHeadPortrait = userHeadPortrait;
     }
 
+    @Override
+    public String toString() {
+        return "UserVo{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", openId='" + openId + '\'' +
+                ", userHeadPortrait='" + userHeadPortrait + '\'' +
+                ", gender=" + gender +
+                '}';
+    }
 }

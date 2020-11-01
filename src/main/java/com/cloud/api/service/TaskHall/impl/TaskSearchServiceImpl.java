@@ -26,14 +26,14 @@ public class TaskSearchServiceImpl implements TaskSearchService {
         HashMap<String, Date> stringDateHashMap = new HashMap<>();
 
         for (TaskSearchVo taskSearchVo : taskSearchVos) {
-            if (stringDateHashMap.isEmpty()) {
+            if (stringDateHashMap.isEmpty()){
                 stringDateHashMap.put(taskSearchVo.getSearchName(), taskSearchVo.getSearchTime());
             }
             if (stringDateHashMap.containsKey(taskSearchVo.getSearchName())) {
                 if (taskSearchVo.getSearchTime().getTime() > stringDateHashMap.get(taskSearchVo.getSearchName()).getTime()) {
                     stringDateHashMap.put(taskSearchVo.getSearchName(), taskSearchVo.getSearchTime());
                 }
-            } else {
+            }else {
                 stringDateHashMap.put(taskSearchVo.getSearchName(), taskSearchVo.getSearchTime());
             }
         }
