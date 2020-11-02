@@ -1,10 +1,13 @@
 package com.cloud.api.service.TaskHall.impl;
 import com.cloud.api.bean.vo.TaskHallVo;
+import com.cloud.api.bean.vo.TaskVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import com.cloud.api.mapper.TaskHall.TaskHallMapper;
 import com.cloud.api.service.TaskHall.TaskHallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,5 +52,11 @@ public class TaskHallServiceImpl implements TaskHallService {
         //按照class_id 排序
         Collections.sort(task_classificationVos,(o1,o2)-> (int) (o1.getClass_id()-o2.getClass_id()));
         return task_classificationVos;
+    }
+@Transactional
+    @Override
+    public TaskVo getTaskDetails(Long TaskId) {
+        TaskHallMapper.viewsAdd1(TaskId);
+        return TaskHallMapper.selectTaskDetails(TaskId);
     }
 }

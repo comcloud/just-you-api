@@ -1,5 +1,6 @@
 package com.cloud.api.controller.TaskHall;
 
+import com.cloud.api.bean.vo.TaskVo;
 import com.cloud.api.service.TaskHall.TaskCommService;
 import com.cloud.api.service.TaskHall.TaskHallService;
 import com.cloud.api.util.Result;
@@ -13,6 +14,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author hds
@@ -101,6 +105,12 @@ public class TaskHallController {
     @ResponseBody
     public Result comm(@ApiParam(name = "task_id", value = "任务Id") @RequestParam Long task_id) {
         return ResultGenerator.genSuccessResult(taskCommService.getAllTaskComm(task_id));
+    }
+    @ResponseBody
+    @Operation(summary="获取全部任务分类")
+    @GetMapping("/getTaskDetails")
+    public Result getTaskDetails(@Parameter(description = "任务ID") @RequestParam Long TaskId) {
+        return ResultGenerator.genSuccessResult(taskHallService.getTaskDetails(TaskId));
     }
 
 }

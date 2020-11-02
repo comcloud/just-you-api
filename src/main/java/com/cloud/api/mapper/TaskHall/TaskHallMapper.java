@@ -1,6 +1,8 @@
 package com.cloud.api.mapper.TaskHall;
 
+import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.vo.TaskHallVo;
+import com.cloud.api.bean.vo.TaskVo;
 import com.cloud.api.bean.vo.task_classificationVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -37,6 +39,8 @@ public interface TaskHallMapper {
      * 浏览量加+1
      */
     int viewsAdd1(@Param("id") Long id);
+
+    TaskVo selectTaskDetails(@Param("TaskId") Long TaskId);
 }
 
 

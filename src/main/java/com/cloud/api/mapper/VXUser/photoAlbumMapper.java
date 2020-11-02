@@ -67,5 +67,4 @@ public interface photoAlbumMapper {
      */
     int deletephotoAlbum(@Param("photoAlbumId") Long photoAlbumId);
 
-
 }

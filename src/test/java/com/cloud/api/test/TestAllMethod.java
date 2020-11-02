@@ -99,6 +99,5 @@ public class TestAllMethod {
     }
     @Test
     public void testGetRgb(){
-        System.out.println(ExtractColorUtil.getImagePixel("C:\\Users\\HP\\Desktop\\QQ图片20201102195346.jpg"));
     }
 }

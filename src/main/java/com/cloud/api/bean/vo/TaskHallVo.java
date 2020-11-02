@@ -31,7 +31,15 @@ public class TaskHallVo {
     //用户
     public UserVo user;
 
+    public String getTaskFirstFigure() {
+        return taskFirstFigure;
+    }
 
+    public void setTaskFirstFigure(String taskFirstFigure) {
+        this.taskFirstFigure = taskFirstFigure;
+    }
+
+    private String taskFirstFigure;
 
     private List<Tag> tags=new ArrayList<> ();
 

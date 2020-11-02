@@ -1,4 +1,5 @@
 package com.cloud.api.controller.TaskHall;
+import com.cloud.api.service.TaskHall.TaskHallService;
 import com.cloud.api.service.TaskHall.TaskReleaseService;
 import com.cloud.api.util.Result;
 import com.cloud.api.util.ResultGenerator;
@@ -27,12 +28,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TaskReleaseController {
     @Autowired
     private  TaskReleaseService taskReleaseService;
+
     @Operation(summary="获取全部任务分类")
     @GetMapping("/getTaskClassificationAll")
     public Result getTaskClassificationAll(@Parameter(description = "1为显示页面,2 为更多") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         PageHelper.startPage(pageNum, 7);
         return ResultGenerator.genSuccessResult(new PageInfo<>(taskReleaseService.getTaskClassificationAll()));
-
     }
 
 }
