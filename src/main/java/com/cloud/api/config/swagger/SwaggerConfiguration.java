@@ -15,10 +15,12 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * @author 成都犀牛
  * @version version 1.0
+ * @since 13
  * @date 2020/10/23 10:38
  */
 @EnableOpenApi
@@ -30,6 +32,11 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         this.swaggerProperties = swaggerProperties;
     }
 
+
+    /**
+     * @since 11
+     * @return
+     */
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30).pathMapping("/")
@@ -43,6 +50,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 // 选择哪些接口作为swagger的doc发布
                 .select()
                 .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.cloud.api.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .globalResponses(HttpMethod.GET, getGlobalResponseMessage())

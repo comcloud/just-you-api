@@ -1,5 +1,8 @@
 package com.cloud.api.service.impl;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.http.HttpUtil;
 import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.entity.Task;
@@ -9,16 +12,17 @@ import com.cloud.api.service.PublishService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author 成都犀牛
@@ -46,6 +50,20 @@ public class PublishServiceImpl implements PublishService {
         final String money = node.findPath("money").toString().replace("\"", "");
         final String startTime = node.findPath("start_time").toString().replace("\"", "");
         final String endTime = node.findPath("end_time").toString().replace("\"", "");
+        final JsonNode base64 = node.findPath("data").findPath("base64");
+        final ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
+        AtomicInteger count = new AtomicInteger();
+        if (base64.isArray()) {
+            base64.forEach(b->{
+                final String url = b.findPath("url").toString();
+                final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/";
+                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))+"_"+UUID.randomUUID().toString()+".jpg";
+                Base64.decodeToFile(url.replace("\"",""),new File(path+"/"+fileName));
+                dataObject.put("url"+count.get(),"https://mrkleo.top/justyou/static/upload-image/"+fileName);
+                count.getAndIncrement();
+            });
+        }
+
         final String[] s = startTime.split(" ");
         final String[] split = endTime.split(" ");
         final String openId = node.findPath("open_id").toString().replace("\"", "");
@@ -53,7 +71,7 @@ public class PublishServiceImpl implements PublishService {
                 .setTaskDescription(node.findPath("task_description").toString().replace("\"", ""))
                 .setRecruitingNumber(Integer.parseInt(recruitingNumber.contains("不限") ? "-1" : recruitingNumber))
                 .setNeedNumber(Integer.parseInt(needNumber.contains("不限") ? "-1" : needNumber))
-                .setData(node.findPath("data").toString().replace("\"", ""))
+                .setData(dataObject.toString())
                 .setClassId(Long.parseLong(node.findPath("class_id").toString().replace("\"", "")))
                 .setCharge(Integer.parseInt(node.findPath("charge").toString().replace("\"", "")))
                 .setMoney(Double.parseDouble("".equals(money) ? 0 + "" : money))

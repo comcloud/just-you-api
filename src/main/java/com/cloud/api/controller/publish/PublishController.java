@@ -63,6 +63,7 @@ public class PublishController {
 
 
     @Operation(summary = "获取用户的open id")
+    @ResponseBody
     @RequestMapping(value = "/getKey",method = RequestMethod.GET)
     public String openid(@Parameter(description = "随机的js code",required = true) @RequestParam(value = "js_code") String jsCode){
         return publishService.getKey(jsCode);
