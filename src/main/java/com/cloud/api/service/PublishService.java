@@ -16,4 +16,5 @@ public interface PublishService {
 
     List<Tag> getAllTag();
 
+    String getKey(String jsCode);
 }

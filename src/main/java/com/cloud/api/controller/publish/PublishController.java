@@ -9,10 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 成都犀牛
@@ -64,4 +61,10 @@ public class PublishController {
         return ResultGenerator.genSuccessResult(new PageInfo<>(publishService.getAllTag()));
     }
 
+
+    @Operation(summary = "获取用户的open id")
+    @RequestMapping(value = "/getKey",method = RequestMethod.GET)
+    public String openid(@Parameter(description = "随机的js code",required = true) @RequestParam(value = "js_code") String jsCode){
+        return publishService.getKey(jsCode);
+    }
 }

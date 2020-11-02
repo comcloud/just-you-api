@@ -1,5 +1,6 @@
 package com.cloud.api.test;
 
+import com.cloud.api.util.algorithm.ExtractColorUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -95,5 +96,9 @@ public class TestAllMethod {
         } else {
             return getNum(n - 1) + getNum(n - 2);
         }
+    }
+    @Test
+    public void testGetRgb(){
+        System.out.println(ExtractColorUtil.getImagePixel("C:\\Users\\HP\\Desktop\\QQ图片20201102195346.jpg"));
     }
 }

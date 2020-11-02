@@ -1,5 +1,6 @@
 package com.cloud.api.service.impl;
 
+import cn.hutool.http.HttpUtil;
 import com.cloud.api.bean.entity.Tag;
 import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskSetTag;
@@ -87,5 +88,13 @@ public class PublishServiceImpl implements PublishService {
         //        Map<Integer, String> map = new HashMap<>();
 //        tagList.forEach(tag -> map.put(tag.getTagId(), tag.getTagName()));
         return publishMapper.selectAllTag();
+    }
+    @Override
+    public String getKey(String jsCode) {
+        String baseUrl = "https://api.weixin.qq.com/sns/jscode2session" + "?js_code=" + jsCode;
+        String appid = "wx45847f8c326518ee";
+        String secret = "2f93f9e0028618cb7adfb001325b3515";
+        String grantType = "authorization_code";
+        return HttpUtil.get(baseUrl + "&appid=" + appid + "&secret=" + secret + "&grant_type=" + grantType);
     }
 }

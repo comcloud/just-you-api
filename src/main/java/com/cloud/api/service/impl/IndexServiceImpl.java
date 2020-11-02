@@ -1,5 +1,6 @@
 package com.cloud.api.service.impl;
 
+import cn.hutool.http.HttpUtil;
 import com.cloud.api.mapper.IndexMapper;
 import com.cloud.api.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,4 +17,6 @@ public class IndexServiceImpl implements IndexService {
     public boolean checkAdmin(String name, String password) {
         return indexMapper.selectAdmin(name,password);
     }
+
+
 }
