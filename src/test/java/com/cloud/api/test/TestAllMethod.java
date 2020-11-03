@@ -15,6 +15,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class TestAllMethod {
     @Autowired
@@ -99,6 +100,12 @@ public class TestAllMethod {
     }
     @Test
     public void testGetRgb(){
-        System.out.println(ExtractColorUtil.getImagePixel("C:\\Users\\HP\\Desktop\\QQ图片20201102195346.jpg"));
+        System.out.println(ExtractColorUtil.getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath()+"/upload-image/1.jpg"));
+    }
+
+    @Test
+    public void testGetMainRgb() throws Exception {
+        System.out.println(ExtractColorUtil.getMainRgbByFilePath(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/1.jpg"));
+        System.out.println(ExtractColorUtil.getMainRgbByUrl("https://s1.ax1x.com/2020/11/03/BsuvNj.png"));
     }
 }

@@ -54,12 +54,12 @@ public class PublishServiceImpl implements PublishService {
         final ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
         AtomicInteger count = new AtomicInteger();
         if (base64.isArray()) {
-            base64.forEach(b->{
+            base64.forEach(b -> {
                 final String url = b.findPath("url").toString();
                 final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/";
-                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))+"_"+UUID.randomUUID().toString()+".jpg";
-                Base64.decodeToFile(url.replace("\"",""),new File(path+"/"+fileName));
-                dataObject.put("url"+count.get(),"https://mrkleo.top/justyou/static/upload-image/"+fileName);
+                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + "_" + UUID.randomUUID().toString() + ".jpg";
+                Base64.decodeToFile(url.replace("\"", ""), new File(path + "/" + fileName));
+                dataObject.put("url_" + count.get(), "https://mrkleo.top/justyou/static/upload-image/" + fileName);
                 count.getAndIncrement();
             });
         }
@@ -91,7 +91,7 @@ public class PublishServiceImpl implements PublishService {
                 taskSetTag.setTagId(jsonNode.asLong());
                 publishMapper.insertTaskSetTag(taskSetTag);
             }
-        } else if(!"".equals(tag.toString().trim())){
+        } else if (!"".equals(tag.toString().trim())) {
             //如何只是传递一个字符串过来记录tag值
             TaskSetTag taskSetTag = new TaskSetTag();
             taskSetTag.setTaskId(taskId);
@@ -107,6 +107,7 @@ public class PublishServiceImpl implements PublishService {
 //        tagList.forEach(tag -> map.put(tag.getTagId(), tag.getTagName()));
         return publishMapper.selectAllTag();
     }
+
     @Override
     public String getKey(String jsCode) {
         String baseUrl = "https://api.weixin.qq.com/sns/jscode2session" + "?js_code=" + jsCode;

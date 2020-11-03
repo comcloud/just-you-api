@@ -48,15 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/message/**").permitAll()
                 .antMatchers("/websocket").permitAll()
+                .antMatchers("/message/**").permitAll()
                 .antMatchers("/dynamic/**").permitAll()
                 .antMatchers("/publish/**").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/taskRelease/**").permitAll()
                 .antMatchers("/taskSearch/**").permitAll()
+                //接口文档，暂时可以访问
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/static/**").permitAll()
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()
                 .anyRequest().authenticated()
                 .and()
