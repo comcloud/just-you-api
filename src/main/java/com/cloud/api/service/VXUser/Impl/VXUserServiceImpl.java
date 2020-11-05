@@ -1,15 +1,19 @@
 package com.cloud.api.service.VXUser.Impl;
 
+import cn.hutool.core.io.FileUtil;
 import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.UserAttention;
 import com.cloud.api.mapper.VXUser.VXUserMapper;
 import com.cloud.api.service.VXUser.VXUserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -23,7 +27,7 @@ import java.util.*;
 @Service
 public class VXUserServiceImpl implements VXUserService {
     @Autowired
-    private VXUserMapper vXUserMapper;
+    private VXUserMapper userMapper;
     @Override
     public boolean insertUser(String openid,String nickName,Integer gender,String avatarUrl,String province ) {
         HashMap<String, Object> map = new HashMap<>();
@@ -37,7 +41,7 @@ public class VXUserServiceImpl implements VXUserService {
             map.put("province",province);
 
         }
-        return vXUserMapper.insertUser(map)>0;
+        return userMapper.insertUser(map)>0;
     }
 
     @Override
@@ -47,36 +51,36 @@ public class VXUserServiceImpl implements VXUserService {
     @Transactional
     @Override
     public boolean attentionUser(String MyOpenId, String HeOpenId) {
-        if (vXUserMapper.SelectISTtentionUser(MyOpenId, HeOpenId)>0){
+        if (userMapper.SelectISTtentionUser(MyOpenId, HeOpenId)>0){
             try {
                 throw new SQLException("重复操作");
             } catch (SQLException throwables) {
                 return false;
             }
         }
-            return vXUserMapper.attentionUser(MyOpenId,HeOpenId)>0;
+            return userMapper.attentionUser(MyOpenId,HeOpenId)>0;
     }
     @Transactional
     @Override
     public boolean cancelttentionUser(String MyOpenId, String HeOpenId) {
-        return vXUserMapper.cancelttentionUser(MyOpenId, HeOpenId)>0;
+        return userMapper.cancelttentionUser(MyOpenId, HeOpenId)>0;
     }
 
     @Override
     public List<UserAttention> selectAttentionUser(String open_id) {
-        return vXUserMapper.selectAttentionUser(open_id);
+        return userMapper.selectAttentionUser(open_id);
     }
 
     @Override
     public List<UserAttention> selectFansUser(String open_id) {
-        return vXUserMapper.selectFansUser(open_id);
+        return userMapper.selectFansUser(open_id);
     }
 
     @Override
     public Map<String, Integer> attentionCountAll(String openId) {
         Map<String, Integer> map = new HashMap<>();
-        map.put("AttentionCount",vXUserMapper.selectAttentionCount(openId));
-        map.put("FansCount",vXUserMapper.selectFansCount(openId));
+        map.put("AttentionCount", userMapper.selectAttentionCount(openId));
+        map.put("FansCount", userMapper.selectFansCount(openId));
         return map;
     }
 
@@ -100,25 +104,57 @@ public class VXUserServiceImpl implements VXUserService {
         }if (user.getStudentId().isEmpty()){
             map.put("studentId", user.getMobile());
         }
-        return vXUserMapper.updateUserData(map,openId);
+        return userMapper.updateUserData(map,openId);
     }
 
     @Override
     public User selectUsrInformation(String openId) {
-        return vXUserMapper.selectUsrInformation(openId);
+        return userMapper.selectUsrInformation(openId);
     }
 
     @Override
     public List<BlogVo> getMyDynamicAll(String openId) {
-        return vXUserMapper.selectMyDynamicAll(openId);
+        return userMapper.selectMyDynamicAll(openId);
     }
 
     @Override
     public  Map<String,List<TaskHallVo>> getMyTaskAll(String openId) {
         Map<String,List<TaskHallVo>> map = new HashMap<>();
-        map.put("is",vXUserMapper.selectMyTaskAll(openId, 0));
-        map.put("past",vXUserMapper.selectMyTaskAll(openId, 1));
+        map.put("is", userMapper.selectMyTaskAll(openId, 0));
+        map.put("past", userMapper.selectMyTaskAll(openId, 1));
         return map;
+    }
+
+    /**
+     * 这个地方只是获取已经分析过的用户图片数据，存储到静态文件目录的mood.json文件
+     * @param openId 用户的Openid
+     * @return
+     */
+    @Override
+    public String getAnalyzePicture(String openId) {
+        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_picture_mood.json"), "utf-8");
+        try {
+            return new ObjectMapper().readTree(content).findPath(openId).toString();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * 分析用户发布动态的文本内容，与分析图片分离开以便以后开发
+     * @param openId 用户给open id
+     * @return
+     */
+    @Override
+    public String getAnalyzeText(String openId) {
+        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_text.mood.json"), "utf-8");
+        try {
+            return new ObjectMapper().readTree(content).findPath(openId).toString();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
 }

@@ -144,6 +144,12 @@
             <artifactId>knife4j-spring-ui</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <!-- quartz -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

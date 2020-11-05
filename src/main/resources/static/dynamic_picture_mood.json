@@ -1,0 +1,20 @@
+{
+
+  "openid": {
+    "result": [
+      {
+        "color": "WHITE",
+        "mood": "开心",
+        "number": 10,
+        "percentage": "15%"
+      },
+      {
+        "color": "RED",
+        "mood": "开心",
+        "number": 20,
+        "percentage": "35%"
+      }
+    ],
+    "currentLocation": 4
+  }
+}

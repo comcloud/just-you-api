@@ -51,22 +51,26 @@ public class PublishServiceImpl implements PublishService {
         final String startTime = node.findPath("start_time").toString().replace("\"", "");
         final String endTime = node.findPath("end_time").toString().replace("\"", "");
         final JsonNode base64 = node.findPath("data").findPath("base64");
+
         final ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
+        final ObjectNode urlNode = dataObject.putObject("url");
         AtomicInteger count = new AtomicInteger();
+        final String openId = node.findPath("open_id").toString().replace("\"", "");
         if (base64.isArray()) {
-            base64.forEach(b -> {
-                final String url = b.findPath("url").toString();
+            for (JsonNode url : base64) {
                 final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/";
-                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + "_" + UUID.randomUUID().toString() + ".jpg";
-                Base64.decodeToFile(url.replace("\"", ""), new File(path + "/" + fileName));
-                dataObject.put("url_" + count.get(), "https://mrkleo.top/justyou/static/upload-image/" + fileName);
+                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + "_" + openId + ".jpg";
+                File file = new File(path.substring(1) , fileName);
+                final String replace = url.toString().replace(" ", "+").replace("\"", "");
+                Base64.decodeToFile(replace, file);
+                urlNode.put("url_" + count.get(), "https://mrkleo.top/justyou/static/upload-image/" + fileName);
                 count.getAndIncrement();
-            });
+            }
         }
+        dataObject.put("data", node.findPath("data").toString());
 
         final String[] s = startTime.split(" ");
         final String[] split = endTime.split(" ");
-        final String openId = node.findPath("open_id").toString().replace("\"", "");
         task.setUserId(publishMapper.selectUserIdFromOpenId(openId))
                 .setTaskDescription(node.findPath("task_description").toString().replace("\"", ""))
                 .setRecruitingNumber(Integer.parseInt(recruitingNumber.contains("不限") ? "-1" : recruitingNumber))

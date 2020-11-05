@@ -1,0 +1,12 @@
+{
+  "openid": {
+    "result": [
+      {
+        "positive": 10,
+        "negative": 23,
+        "neutral": 324
+      }
+    ],
+    "currentLocation": 4
+  }
+}

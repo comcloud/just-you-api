@@ -1,4 +1,7 @@
 package com.cloud.api.mapper;
+import com.cloud.api.bean.entity.Dynamic;
+import com.cloud.api.bean.entity.Photo;
+import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -101,4 +104,15 @@ public interface UserMapper {
      * @return
      */
     List<User> searchUserDelByTimeQuantum(@Param("StartingTime") String StartingTime,@Param("ByTheTime") String ByTheTime);
+
+    /**
+     * @return 获取所有用户部分信息
+     */
+    List<User> selectAllUserInfo();
+
+    List<Task> selectAllTask(@Param("userId") Long userId);
+
+    List<Photo> selectAllPhoto(@Param("openId") String openId);
+
+    List<Dynamic> selectDynamicFromOpenId(@Param("openId") String openId);
 }

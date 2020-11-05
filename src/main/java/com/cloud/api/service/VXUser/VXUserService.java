@@ -67,13 +67,15 @@ public interface VXUserService {
 
     Map<String, Integer> attentionCountAll(String openId);
 
-    int updateUserData(User user,String openId);
+    int updateUserData(User user, String openId);
 
     User selectUsrInformation(String openId);
 
     List<BlogVo> getMyDynamicAll(String openId);
 
-   Map<String,List<TaskHallVo>> getMyTaskAll(String openId);
+    Map<String, List<TaskHallVo>> getMyTaskAll(String openId);
 
+    String getAnalyzePicture(String openId);
 
+    String getAnalyzeText(String openId);
 }
