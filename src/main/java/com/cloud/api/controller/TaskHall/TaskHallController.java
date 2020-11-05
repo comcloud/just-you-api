@@ -1,6 +1,5 @@
 package com.cloud.api.controller.TaskHall;
 
-import com.cloud.api.bean.vo.TaskVo;
 import com.cloud.api.service.TaskHall.TaskCommService;
 import com.cloud.api.service.TaskHall.TaskHallService;
 import com.cloud.api.util.Result;
@@ -15,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * @author hds
