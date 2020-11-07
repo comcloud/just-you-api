@@ -13,7 +13,8 @@ mybatis:
   type-aliases-package: com.cloud.api.mapper
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    开启执行sql日志打印
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   datasource:
     #druid基本属性

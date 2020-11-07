@@ -1,5 +1,6 @@
 package com.cloud.api.service;
 
+import com.baidu.aip.nlp.AipNlp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
@@ -18,11 +19,11 @@ public class AuthService {
     /**
      * API Key
      */
-    private static final String CLIENT_ID = "5YuaLc5mgGloAURIcj5khWnN";
+    private static final String CLIENT_ID = "g1hCUDG7YqBK22nug5FFKydy";
     /**
      * secret key
      */
-    private static final String CLIENT_SECRET = "BnfQUaf3KQhpGFQVeiKkxsFiFTAFwESm";
+    private static final String CLIENT_SECRET = "L5113jbmpmcFHmSX9GW8G2sNdGLDHluK";
     /**
      * 获取权限token
      * @return 返回示例：
@@ -33,6 +34,17 @@ public class AuthService {
      */
     public static String getAuth() {
         return getAuth(CLIENT_ID, CLIENT_SECRET);
+    }
+
+    /**
+     * @return 获取nlp客户端
+     */
+    public static AipNlp configNlpClient(){
+        String appId = "22913860";
+        final AipNlp aipNlp = new AipNlp(appId, CLIENT_ID, CLIENT_SECRET);
+        aipNlp.setConnectionTimeoutInMillis(2000);
+        aipNlp.setSocketTimeoutInMillis(60000);
+        return aipNlp;
     }
 
     /**

@@ -97,7 +97,7 @@ public class VXUserController {
 
     @ResponseBody
     @Operation(summary = "修改用户信息")
-    @RequestMapping(value = "/updateUserData",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserData", method = RequestMethod.POST)
     public Result updateUserData(@ApiParam(name = "user", value = "用户信对象") @RequestBody User user, @ApiParam(name = "openId", value = "用户的openId") String openId) {
         if (userService.updateUserData(user, openId) > 0) {
             return ResultGenerator.genSuccessResult("修改成功!!");
@@ -130,16 +130,16 @@ public class VXUserController {
 
     @ResponseBody
     @Operation(summary = "获取用户发布动态的图片的分析结果数据")
-    @RequestMapping(value = "/analyzePicture",method = RequestMethod.GET)
-    public Result analyzePicture(@RequestParam(value = "openId") String openId){
-        return ResultGenerator.genSuccessResult(userService.getAnalyzePicture(openId));
+    @RequestMapping(value = "/analyzePicture", method = RequestMethod.GET)
+    public Result analyzePicture(@RequestParam(value = "openId") String openId) {
+        return ResultGenerator.genSuccessResultInsertData(userService.getAnalyzePicture(openId));
     }
 
     @ResponseBody
     @Operation(summary = "获取用户发布动态的文本的分析结果数据")
-    @RequestMapping(value = "/analyzeText",method = RequestMethod.GET)
-    public Result analyzeText(@RequestParam(value = "openId") String openId){
-        return ResultGenerator.genSuccessResult(userService.getAnalyzeText(openId));
+    @RequestMapping(value = "/analyzeText", method = RequestMethod.GET)
+    public Result analyzeText(@RequestParam(value = "openId") String openId) {
+        return ResultGenerator.genSuccessResultInsertData(userService.getAnalyzeText(openId));
     }
 
 }

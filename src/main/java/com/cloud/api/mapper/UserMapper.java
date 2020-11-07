@@ -6,6 +6,7 @@ import com.cloud.api.bean.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -115,4 +116,6 @@ public interface UserMapper {
     List<Photo> selectAllPhoto(@Param("openId") String openId);
 
     List<Dynamic> selectDynamicFromOpenId(@Param("openId") String openId);
+
+    List<Dynamic> selectDynamicFromTime(@Param("openId") String openId,@Param("currentTime") String currentTime, @Param("previousTime") String previousTime);
 }

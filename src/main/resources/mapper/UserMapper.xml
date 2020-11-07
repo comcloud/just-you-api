@@ -130,9 +130,14 @@
                         in (select dynamic_id from dynamic where open_id = #{openId}))
     </select>
     <select id="selectDynamicFromOpenId" resultType="com.cloud.api.bean.entity.Dynamic">
-        select dynamic_content
+        select dynamic_content,dynamic_time
         from dynamic
         where open_id = #{openId}
+    </select>
+    <select id="selectDynamicFromTime" resultType="com.cloud.api.bean.entity.Dynamic">
+        select dynamic_content
+        from dynamic
+        where open_id = #{openId} and dynamic_time between  Date(#{previousTime}) and Date(#{currentTime})
     </select>
 
 

@@ -21,11 +21,17 @@ import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 /**
+ * 需求：不断的往前推一周，然后返回正负结果数据
+ * <p>
  * 分析用户图片然后保存文件到静态目录
  * 需要获取到每一个用户他发布的图片
  * 注释的内容都是处理任务的代码
@@ -74,11 +80,11 @@ public class AnalyzeUserData extends QuartzJobBean {
             final ObjectNode resultNode = JsonNodeFactory.instance.objectNode();
             final long sum = data.entrySet().stream().collect(Collectors.summarizingInt(Map.Entry::getValue)).getSum();
             data.forEach((key, value) -> {
-                resultNode.put("color", key.getColor());
+                resultNode.put("color", Arrays.toString(key.getRgb()));
                 resultNode.put("mood", key.getValue());
                 resultNode.put("number", value);
                 resultNode.put("percentage", value * 1.0 / sum + "%");
-                result.add(resultNode.toString());
+                result.add(resultNode);
             });
             //以便于下次重新构建字符串
             data.clear();
@@ -86,10 +92,11 @@ public class AnalyzeUserData extends QuartzJobBean {
             openIdNode.put("currentLocation", photos.size());
         });
         final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
-        new File(path, "dynamic_picture_mood.json").deleteOnExit();
-        new File(path, "dynamic_text_mood.json").deleteOnExit();
+        System.out.println("path = " + path);
+//        new File(path, "dynamic_picture_mood.json").delete();
+//        new File(path, "dynamic_text_mood.json").delete();
         FileUtil.writeString(node.toPrettyString(), new File(path, "dynamic_picture_mood.json"), "utf-8");
-        FileUtil.writeString(analysisText(users), new File(path, "dynamic_text_mood.json"), "utf-8");
+//        FileUtil.writeString(analysisText(users), new File(path, "dynamic_text_mood.json"), "utf-8");
     }
 
     /**
@@ -113,6 +120,7 @@ public class AnalyzeUserData extends QuartzJobBean {
 
     /**
      * 需要继续添加的内容就是每次从数据库获取内容时候都是先获取上次获取到的位置然后沿着这个位置向下查到最后
+     * 分析的结果就是会不断往前推7天然后获取数据
      *
      * @param users 分析的用户列表
      * @return 分析的结果json串
@@ -123,38 +131,52 @@ public class AnalyzeUserData extends QuartzJobBean {
         users.forEach(user -> {
             //一个用户open id的对象
             final ObjectNode openIdNode = node.putObject(user.getOpenId());
-            Map<String, Integer> data = new HashMap<>();
-            List<Dynamic> dynamics = userMapper.selectDynamicFromOpenId(user.getOpenId());
-            dynamics.forEach(dynamic -> {
-                final String dynamicContent = (String) dynamic.getDynamicContent();
-                try {
-                    final JsonNode tree = mapper.readTree(ApiUtil.getEmotionalTendency(dynamicContent)).findPath("items");
-                    if (tree.isArray()) {
-                        //遍历百度返给的数据，包括分析结果是否积极
-                        for (JsonNode obj : tree) {
-                            final int sentiment = Integer.parseInt(obj.findPath("sentiment").toString());
-                            switch (sentiment) {
-                                case 0:
-                                    data.put("negative", data.containsKey("negative") ? data.get("negative") + 1 : 1);
-                                    break;
-                                case 1:
-                                    data.put("neutral", data.containsKey("neutral") ? data.get("neutral") + 1 : 1);
-                                    break;
-                                case 2:
-                                    data.put("positive", data.containsKey("positive") ? data.get("positive") + 1 : 1);
-                                    break;
-                                default:
+            //这个是存储结果的数组，其中放的是一个用户的每个时间段的结果
+            final ArrayNode contentNode = openIdNode.putArray("result");
+            /**需要不断的获取动态内容*/
+            //这个当前时间是相对于上一次的时间
+            LocalDateTime currentTime = LocalDateTime.now(ZoneId.systemDefault());
+            for (int index = 1; index <= 8; index++) {
+                final LocalDateTime previousTime = currentTime.minus(7, ChronoUnit.DAYS);
+                //存储这个时期状况
+                final ObjectNode arrayData = JsonNodeFactory.instance.objectNode();
+                arrayData.put("mood", 0);
+                arrayData.put("negative", 0);
+                arrayData.put("neutral", 0);
+                arrayData.put("positive", 0);
+                arrayData.put("period", previousTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "~" + currentTime.format(DateTimeFormatter.ofPattern("yyy-MM-dd")));
+                List<Dynamic> dynamics = userMapper.selectDynamicFromTime(user.getOpenId(), currentTime.toString(), previousTime.toString());
+                dynamics.forEach(dynamic -> {
+                    final String dynamicContent = (String) dynamic.getDynamicContent();
+                    try {
+                        final JsonNode tree = mapper.readTree(ApiUtil.getEmotionalTendency(dynamicContent)).findPath("items");
+                        if (tree.isArray()) {
+                            //遍历百度返给的数据，包括分析结果是否积极
+                            for (JsonNode obj : tree) {
+                                final int sentiment = Integer.parseInt(obj.findPath("sentiment").toString());
+                                switch (sentiment) {
+                                    case 0:
+                                        arrayData.put("negative", Integer.parseInt(arrayData.findPath("negative").toString()) + 1);
+                                        arrayData.put("mood", Integer.parseInt(arrayData.findPath("mood").toString()) - 1);
+                                        break;
+                                    case 1:
+                                        arrayData.put("neutral", Integer.parseInt(arrayData.findPath("neutral").toString()) + 1);
+                                        break;
+                                    case 2:
+                                        arrayData.put("positive", Integer.parseInt(arrayData.findPath("positive").toString()) + 1);
+                                        arrayData.put("mood", Integer.parseInt(arrayData.findPath("mood").toString()) + 1);
+                                        break;
+                                    default:
+                                }
                             }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            });
-            openIdNode.put("result", JSONUtil.parseFromMap(data).toString());
-            openIdNode.put("currentLocation", dynamics.size());
+                });
+                currentTime = previousTime;
+                contentNode.add(arrayData);
+            }
         });
         return node.toPrettyString();
     }

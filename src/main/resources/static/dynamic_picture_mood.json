@@ -1,20 +1,45 @@
 {
-
-  "openid": {
-    "result": [
-      {
-        "color": "WHITE",
-        "mood": "开心",
-        "number": 10,
-        "percentage": "15%"
-      },
-      {
-        "color": "RED",
-        "mood": "开心",
-        "number": 20,
-        "percentage": "35%"
-      }
-    ],
-    "currentLocation": 4
+  "vx001" : {
+    "result" : [ {
+      "color" : "[128, 128, 128]",
+      "mood" : "平静、稳重、朴素",
+      "number" : 1,
+      "percentage" : "0.3333333333333333%"
+    }, {
+      "color" : "[128, 128, 128]",
+      "mood" : "平静、稳重、朴素",
+      "number" : 1,
+      "percentage" : "0.3333333333333333%"
+    }, {
+      "color" : "[128, 128, 128]",
+      "mood" : "平静、稳重、朴素",
+      "number" : 1,
+      "percentage" : "0.3333333333333333%"
+    } ],
+    "currentLocation" : 3
+  },
+  "vx0012" : {
+    "result" : [ ],
+    "currentLocation" : 0
+  },
+  "vx002" : {
+    "result" : [ ],
+    "currentLocation" : 0
+  },
+  "vx003" : {
+    "result" : [ ],
+    "currentLocation" : 0
+  },
+  "vx004" : {
+    "result" : [ ],
+    "currentLocation" : 0
+  },
+  "vx005" : {
+    "result" : [ ],
+    "currentLocation" : 0
+  },
+  "vx006" : {
+    "result" : [ ],
+    "currentLocation" : 0
   }
 }

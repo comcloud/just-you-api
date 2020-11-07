@@ -148,7 +148,7 @@ public class VXUserServiceImpl implements VXUserService {
      */
     @Override
     public String getAnalyzeText(String openId) {
-        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_text.mood.json"), "utf-8");
+        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_text_mood.json"), "utf-8");
         try {
             return new ObjectMapper().readTree(content).findPath(openId).toString();
         } catch (JsonProcessingException e) {

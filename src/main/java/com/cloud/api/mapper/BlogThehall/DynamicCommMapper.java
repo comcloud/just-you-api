@@ -1,4 +1,5 @@
 package com.cloud.api.mapper.BlogThehall;
+import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.vo.DynamicCommentsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

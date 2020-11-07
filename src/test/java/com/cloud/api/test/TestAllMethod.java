@@ -1,12 +1,12 @@
 package com.cloud.api.test;
 
-import cn.hutool.core.io.FileUtil;
-import com.cloud.api.bean.image.ColorMood;
 import com.cloud.api.util.algorithm.ExtractColorUtil;
-import com.cloud.api.util.algorithm.ExtractMoodUtil;
+import com.cloud.api.util.http.ApiUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,9 +16,12 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 public class TestAllMethod {
     @Autowired
@@ -101,9 +104,10 @@ public class TestAllMethod {
             return getNum(n - 1) + getNum(n - 2);
         }
     }
+
     @Test
-    public void testGetRgb(){
-        System.out.println(ExtractColorUtil.getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath()+"/upload-image/1.jpg"));
+    public void testGetRgb() {
+        System.out.println(ExtractColorUtil.getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/1.jpg"));
     }
 
     @Test
@@ -163,10 +167,42 @@ public class TestAllMethod {
 ////        data.forEach((k,v) -> System.out.println(k + "," + v));
 //
 //    }
-
     @Test
-    public void testDelFile(){
+    public void testDelFile() {
         System.out.println(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath());
         new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "test.json").deleteOnExit();
+    }
+
+    @Test
+    public void testGetEmotionalTendency() throws Exception {
+//        final String emotionalTendency = ApiUtil.getEmotionalTendency("最喜欢你了");
+//        System.out.println(emotionalTendency);
+    }
+
+    @Test
+    public void genStr() {
+        String s = "INSERT INTO justyou.dynamic (dynamic_title, dynamic_content, dynamic_status, dynamic_views, dynamic_comment, dynamic_deleted, dynamic_time, dynamic_update_time, Abstract, like_count, open_id, push) VALUES ('789', '傻叉', 0, 1, 0, 0, '2020-9-23 13:58:07', '2020-10-23 13:58:07', '夏天的第一杯奶茶', 1136, 'vx001', 1);";
+        for (int i = 0; i < 30; i++) {
+            System.out.println(s.replace("23", Integer.parseInt("30") - i + ""));
+        }
+    }
+
+    @Test
+    public void computeTime() {
+        final LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
+        for (int i = 1; i <= 8; i++) {
+            final LocalDateTime minus = now.minus(7 * i, ChronoUnit.DAYS);
+            System.out.println(minus.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        }
+
+    }
+    @Test
+    public void testArray(){
+        final ObjectNode node = JsonNodeFactory.instance.objectNode();
+        node.put("positive",10);
+        System.out.println(node.toPrettyString());
+        node.put("positive",node.findPath("positive").asInt() + 1);
+        System.out.println(node.toPrettyString());
+        System.out.println(node.findPath("asd").asInt());
     }
 }
