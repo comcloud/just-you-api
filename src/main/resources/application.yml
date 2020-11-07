@@ -1,19 +1,20 @@
 server:
-  port: 8089
+  port: 443
   max-http-header-size: 52428800
   servlet:
     context-path: /justyou
-#  ssl:
-#    key-store: 4637519_www.mrkleo.top.pfx
-#    key-store-password: t17NhCxA
-#    keyStoreType: PKCS12
+  ssl:
+    key-store: 4637519_www.mrkleo.top.pfx
+    key-store-password: t17NhCxA
+    keyStoreType: PKCS12
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.cloud.api.mapper
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    开启执行sql日志打印
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   datasource:
     #druid基本属性
