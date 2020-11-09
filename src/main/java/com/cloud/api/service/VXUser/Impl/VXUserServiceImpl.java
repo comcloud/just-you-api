@@ -134,7 +134,7 @@ public class VXUserServiceImpl implements VXUserService {
     @Override
     public JsonNode getAnalyzePicture(String openId) {
         final String staticPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
-        final String content = FileUtil.readString(new File(staticPath.substring(staticPath.indexOf("/")), "dynamic_picture_mood.json"), "utf-8");
+        final String content = FileUtil.readString(new File(staticPath, "dynamic_picture_mood.json"), "utf-8");
         try {
             return new ObjectMapper().readTree(content).findPath(openId);
         } catch (JsonProcessingException e) {
@@ -151,7 +151,7 @@ public class VXUserServiceImpl implements VXUserService {
     @Override
     public JsonNode getAnalyzeText(String openId) {
         final String staticPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
-        final String content = FileUtil.readString(new File(staticPath.substring(staticPath.indexOf("/")), "dynamic_text_mood.json"), "utf-8");
+        final String content = FileUtil.readString(new File(staticPath, "dynamic_text_mood.json"), "utf-8");
         try {
             final JsonNode path = new ObjectMapper().readTree(content).findPath(openId);
             System.out.println("path = " + path);

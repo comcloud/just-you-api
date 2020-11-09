@@ -9,11 +9,13 @@ import com.cloud.api.bean.entity.Task;
 import com.cloud.api.bean.entity.TaskSetTag;
 import com.cloud.api.mapper.PublishMapper;
 import com.cloud.api.service.PublishService;
+import com.cloud.api.util.algorithm.ExtractImageUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +52,8 @@ public class PublishServiceImpl implements PublishService {
         final String money = node.findPath("money").toString().replace("\"", "");
         final String startTime = node.findPath("start_time").toString().replace("\"", "");
         final String endTime = node.findPath("end_time").toString().replace("\"", "");
-        final JsonNode base64 = node.findPath("data").findPath("base64");
+        final JsonNode data = node.findPath("data");
+        final JsonNode base64 = data.findPath("base64");
 
         final ObjectNode dataObject = JsonNodeFactory.instance.objectNode();
         final ObjectNode urlNode = dataObject.putObject("url");
@@ -59,15 +62,18 @@ public class PublishServiceImpl implements PublishService {
         if (base64.isArray()) {
             for (JsonNode url : base64) {
                 final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/";
-                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")) + "_" + openId + ".jpg";
-                File file = new File(path.substring(1) , fileName);
+                String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + "_" + openId + ".jpg";
+                File file = new File(path.substring(1), fileName);
                 final String replace = url.toString().replace(" ", "+").replace("\"", "");
-                Base64.decodeToFile(replace, file);
+                ExtractImageUtil.decoderBase64ToFile(replace, file);
                 urlNode.put("url_" + count.get(), "https://mrkleo.top/justyou/static/upload-image/" + fileName);
                 count.getAndIncrement();
             }
         }
-        dataObject.put("data", node.findPath("data").toString());
+        //删除base64键
+        final JSONObject jsonObject = new JSONObject(data.toString());
+        jsonObject.remove("base64");
+        dataObject.put("data", jsonObject.toString());
 
         final String[] s = startTime.split(" ");
         final String[] split = endTime.split(" ");
