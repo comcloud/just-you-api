@@ -48,8 +48,6 @@ public class TestAllMethod {
         final Iterator<String> stringIterator = node.fieldNames();
         while (stringIterator.hasNext()) {
             System.out.println(stringIterator.next());
-
-
         }
     }
 
