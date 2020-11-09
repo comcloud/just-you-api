@@ -43,8 +43,8 @@
             <if test="1=1">
                 last_register_time=now(),
             </if>
-            where open_id=#{openId}
         </set>
+        where open_id=#{openId}
     </update>
 
     <update id="updateUserData">
@@ -72,7 +72,7 @@
                 mobile=#{mobile},
             </if>
             <if test="studentId!=null">
-                mobile=#{studentId},
+                studentId=#{studentId},
             </if>
         </set>
         where open_id=#{openId}
@@ -130,7 +130,7 @@
     </resultMap>
     <select id="selectUsrInformation" resultMap="user">
         select user_name,mobile,address,gender,user_birthday,Student_id,email,Individuality
-        from `user` where open_id=#{#openId}
+        from `user` where open_id=#{openId}
     </select>
 
     <resultMap id="BlogVo" type="com.cloud.api.bean.vo.BlogVo">

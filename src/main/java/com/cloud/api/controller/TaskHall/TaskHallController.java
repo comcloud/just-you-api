@@ -1,5 +1,6 @@
 package com.cloud.api.controller.TaskHall;
 
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.service.TaskHall.TaskCommService;
 import com.cloud.api.service.TaskHall.TaskHallService;
 import com.cloud.api.util.Result;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -69,7 +71,11 @@ public class TaskHallController {
     @RequestMapping(value = "/TaskList", method = RequestMethod.GET)
     public Result taskHallList(@Parameter(description = "页码，默认是1") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
         PageHelper.startPage(pageNum, 3);
-        return ResultGenerator.genSuccessResult(new PageInfo<>(taskHallService.getTask_HallList()));
+        List<TaskHallVo> task_hallList = taskHallService.getTask_HallList();
+        System.out.println("8888888888888888888888888888888888888888888888888888888");
+        System.out.println(task_hallList);
+        System.out.println("8888888888888888888888888888888888888888888888888888888");
+        return ResultGenerator.genSuccessResult(new PageInfo<>(task_hallList));
     }
 
 

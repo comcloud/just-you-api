@@ -75,7 +75,6 @@ public class User implements Serializable {
      */
     private String individuality;
 
-    private String open_id;
 
     private Date registration_time;
 
@@ -84,29 +83,12 @@ public class User implements Serializable {
      */
     private Date UserBirthdayTime;
 
-
     public User() {
     }
 
-    public User(Long userId, String userName, String fans, String mobile, int gender, String open_id, String address, int state, Date registration_time, String userHeadPortrait, Date lastRegisterTime, int delete, Date userBirthdayTime, String studentId, String email, String individuality) {
-        this.userId = userId;
-        this.userName = userName;
-        this.fans = fans;
-        this.mobile = mobile;
-        this.gender = gender;
-        this.open_id = open_id;
-        this.address = address;
-        this.state = state;
-        this.registration_time = registration_time;
-        this.userHeadPortrait = userHeadPortrait;
-        this.lastRegisterTime = lastRegisterTime;
-        this.delete = delete;
-        UserBirthdayTime = userBirthdayTime;
-        this.studentId = studentId;
-        this.email = email;
-        individuality = individuality;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
-
 
     public Long getUserId() {
         return userId;
@@ -127,9 +109,6 @@ public class User implements Serializable {
     public String getOpenId() {
         return openId;
     }
-    public String getFans() {
-        return fans;
-    }
 
     public void setOpenId(String openId) {
         this.openId = openId;
@@ -141,6 +120,14 @@ public class User implements Serializable {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getFans() {
+        return fans;
+    }
+
+    public void setFans(String fans) {
+        this.fans = fans;
     }
 
     public Integer getGender() {
@@ -178,6 +165,11 @@ public class User implements Serializable {
     public Integer getDelete() {
         return delete;
     }
+
+    public void setDelete(Integer delete) {
+        this.delete = delete;
+    }
+
     public String getUserHeadPortrait() {
         return userHeadPortrait;
     }
@@ -193,87 +185,6 @@ public class User implements Serializable {
     public void setLastRegisterTime(Date lastRegisterTime) {
         this.lastRegisterTime = lastRegisterTime;
     }
-
-    public void setDelete(int delete) {
-        this.delete = delete;
-    }
-
-    public Date getUserBirthdayTime() {
-        return UserBirthdayTime;
-    }
-
-    public void setUserBirthdayTime(Date userBirthdayTime) {
-        UserBirthdayTime = userBirthdayTime;
-    }
-
-    public String getindividuality() {
-        return individuality;
-    }
-
-    public void setindividuality(String individuality) {
-        individuality = individuality;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", openId='" + openId + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", fans='" + fans + '\'' +
-                ", gender=" + gender +
-                ", address='" + address + '\'' +
-                ", state=" + state +
-                ", registrationTime=" + registrationTime +
-                ", delete=" + delete +
-                ", userHeadPortrait='" + userHeadPortrait + '\'' +
-                ", lastRegisterTime=" + lastRegisterTime +
-                ", userBirthday=" + userBirthday +
-                ", studentId='" + studentId + '\'' +
-                ", email='" + email + '\'' +
-                ", individuality='" + individuality + '\'' +
-                ", open_id='" + open_id + '\'' +
-                ", registration_time=" + registration_time +
-                ", delete=" + delete +
-                ", UserBirthdayTime=" + UserBirthdayTime +
-                ", studentId='" + studentId + '\'' +
-                ", email='" + email + '\'' +
-                ", individuality='" + individuality + '\'' +
-                '}';
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public User setFans(String fans) {
-        this.fans = fans;
-        return this;
-    }
-
-    public String getOpen_id() {
-        return open_id;
-    }
-
-    public User setOpen_id(String open_id) {
-        this.open_id = open_id;
-        return this;
-    }
-
-    public Date getRegistration_time() {
-        return registration_time;
-    }
-
-    public User setRegistration_time(Date registration_time) {
-        this.registration_time = registration_time;
-        return this;
-    }
-
-    public void setDelete(Integer delete) {
-        this.delete = delete;
-    }
-
 
     public LocalDateTime getUserBirthday() {
         return userBirthday;
@@ -307,4 +218,19 @@ public class User implements Serializable {
         this.individuality = individuality;
     }
 
+    public Date getRegistration_time() {
+        return registration_time;
+    }
+
+    public void setRegistration_time(Date registration_time) {
+        this.registration_time = registration_time;
+    }
+
+    public Date getUserBirthdayTime() {
+        return UserBirthdayTime;
+    }
+
+    public void setUserBirthdayTime(Date userBirthdayTime) {
+        UserBirthdayTime = userBirthdayTime;
+    }
 }

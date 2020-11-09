@@ -1,5 +1,6 @@
 package com.cloud.api.service.TaskHall;
 import com.cloud.api.bean.entity.Tag;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.TaskSearchVo;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,7 @@ import java.util.Set;
  */
 public interface TaskSearchService {
     Set<String> getRecentlySearch(String open_id);
-    List<TaskSearchVo> setLinkTaskSearchVos(String content);
+    List<TaskHallVo> setLinkTaskSearchVos(String content);
     List<Tag> selectHotTag();
     List<TaskSearchVo> getLinkTaskByTagId(Long tag_id);
     @Transactional

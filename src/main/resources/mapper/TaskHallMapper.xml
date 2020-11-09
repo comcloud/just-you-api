@@ -5,7 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />
-        <result column="task_first_figure" jdbcType="VARCHAR" property="taskFirstFigure" />
+        <result column="data" jdbcType="VARCHAR" property="data" />
         <result column="task_description" jdbcType="VARCHAR" property="task_description" />
         <result column="release_time" jdbcType="DATE" property="release_time" />
         <result column="traffic" jdbcType="BIGINT" property="traffic" />
@@ -38,12 +38,12 @@
         update  justyou.task set traffic=traffic+1 where id=#{id}
     </update>
     <select id="SelectTask_HallList" resultMap="TaskHallMapper">
-        select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name , u.user_head_portrait,u.gender
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name , u.user_head_portrait,u.gender
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
     </select>
     <select id="SelectTaskListByClass" resultMap="TaskHallMapper">
-        select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait
+        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0  and start_time &lt; DATE_SUB(now(),interval  60 second) and  t.class_id=#{class_id}
     </select>
@@ -89,10 +89,13 @@
     </resultMap>
 
     <select id="selectTaskDetails" resultMap="TaskVo">
-          select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait,
+          select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait,
         t.data,t.charge,t.end_time,t.money,t.need_number,t.recruiting_number,t.release_time,t.start_time,t.state,t.task_comment,t.task_description,t.task_title,t.traffic
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and t.id=#{TaskId}
+    </select>
+    <select id="selectData" resultType="java.lang.String">
+        select `data` from task where id=#{TaskId}
     </select>
 </mapper>
 

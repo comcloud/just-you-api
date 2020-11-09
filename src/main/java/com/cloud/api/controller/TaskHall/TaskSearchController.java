@@ -46,7 +46,7 @@ public class TaskSearchController {
         return ResultGenerator.genSuccessResult(taskSearchService.getLinkTaskByTagId(tag_id));
     }
 
-    @Operation(summary = "动态搜索 占时还是没有做出来")
+    @Operation(summary = "任务搜索 占时还是没有做出来")
     @RequestMapping(value = "/SearchDynamicAll", method = RequestMethod.GET)
     public Result SearchDynamicAll(@Parameter(description = "搜索框输入的内容") @RequestParam String content,
                                    @Parameter(description = "open_id") @RequestParam String open_id,

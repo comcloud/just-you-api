@@ -1,8 +1,13 @@
 package com.cloud.api.service.TaskHall.impl;
 import com.cloud.api.bean.entity.Tag;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.TaskSearchVo;
+import com.cloud.api.mapper.TaskHall.TaskHallMapper;
 import com.cloud.api.mapper.TaskHall.TaskSearchMapper;
 import com.cloud.api.service.TaskHall.TaskSearchService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +25,8 @@ import java.util.*;
 public class TaskSearchServiceImpl implements TaskSearchService {
     @Autowired
     private TaskSearchMapper taskSearchMapper;
+    @Autowired
+    private TaskHallServiceImpl TaskHallServiceImpl;
     @Override
     public Set<String> getRecentlySearch(String open_id) {
         List<TaskSearchVo> taskSearchVos = taskSearchMapper.SelectRecentlySearch(open_id);
@@ -42,10 +49,9 @@ public class TaskSearchServiceImpl implements TaskSearchService {
     }
 
     @Override
-    public List<TaskSearchVo> setLinkTaskSearchVos(String content) {
-        List<TaskSearchVo> taskSearchVos = taskSearchMapper.SelectLinkTaskSearchVos(content);
-        Collections.shuffle(taskSearchVos);
-        return taskSearchVos;
+    public List<TaskHallVo> setLinkTaskSearchVos(String content) {
+        List<TaskHallVo> taskSearchVos = taskSearchMapper.SelectLinkTaskSearchVos(content);
+        return TaskHallServiceImpl.getTaskHallVos(taskSearchVos);
     }
 
     @Override
@@ -56,7 +62,6 @@ public class TaskSearchServiceImpl implements TaskSearchService {
     @Override
     public List<TaskSearchVo> getLinkTaskByTagId(Long tag_id) {
         List<TaskSearchVo> taskSearchVos = taskSearchMapper.SelectLinkTaskByTagId(tag_id);
-        Collections.shuffle(taskSearchVos);
         return taskSearchVos;
     }
     @Transactional
