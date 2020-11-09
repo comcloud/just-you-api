@@ -7,6 +7,7 @@ import org.springframework.security.core.parameters.P;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +51,7 @@ public class Dynamic implements Serializable {
     /**
      * 发布时间
      */
-    private Date dynamicTime;
+    private LocalDateTime dynamicTime;
     /**
      * 修改时间
      */
@@ -92,7 +93,7 @@ public class Dynamic implements Serializable {
     public Dynamic() {
     }
 
-    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, Date dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount,  UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags) {
+    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, LocalDateTime dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags, boolean isAttention, boolean ifLike) {
         this.dynamicId = dynamicId;
         this.dynamicTitle = dynamicTitle;
         this.dynamicContent = dynamicContent;
@@ -107,6 +108,8 @@ public class Dynamic implements Serializable {
         this.user = user;
         this.photo = photo;
         this.dynamicTags = dynamicTags;
+        this.isAttention = isAttention;
+        this.ifLike = ifLike;
     }
 
     public static long getSerialVersionUID() {
@@ -169,11 +172,11 @@ public class Dynamic implements Serializable {
         this.dynamicDeleted = dynamicDeleted;
     }
 
-    public Date getDynamicTime() {
+    public LocalDateTime getDynamicTime() {
         return dynamicTime;
     }
 
-    public void setDynamicTime(Date dynamicTime) {
+    public void setDynamicTime(LocalDateTime dynamicTime) {
         this.dynamicTime = dynamicTime;
     }
 
@@ -200,8 +203,6 @@ public class Dynamic implements Serializable {
     public void setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
     }
-
-
 
     public UserVo getUser() {
         return user;
@@ -244,6 +245,8 @@ public class Dynamic implements Serializable {
                 ", user=" + user +
                 ", photo=" + photo +
                 ", dynamicTags=" + dynamicTags +
+                ", isAttention=" + isAttention +
+                ", ifLike=" + ifLike +
                 '}';
     }
 }

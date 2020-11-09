@@ -144,10 +144,32 @@
             <artifactId>knife4j-spring-ui</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <!-- quartz -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <!--        百度nlp依赖-->
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.10.0</version>
+        </dependency>
     </dependencies>
 
     <build>
+<!--        这部分是让每次打包时候不打包test文件类-->
+        <defaultGoal>compile</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -163,6 +185,7 @@
                 <configuration>
                     <mainClass>com.cloud.api.ApiApplication</mainClass>
                     <layout>ZIP</layout>
+<!--                    这个让每次打包出来不会将依赖的Jar也导入项目jar包-->
                     <includes>
                         <include>
                             <groupId>nothing</groupId>
