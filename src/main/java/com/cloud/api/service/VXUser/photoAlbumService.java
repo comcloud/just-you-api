@@ -22,4 +22,5 @@ public interface photoAlbumService {
     boolean updatePhotoalbum(Photoalbum parent);
     boolean deletephotoAlbum(Long photoAlbumId);
 
+
 }

@@ -100,6 +100,7 @@ public class TestAllMethod {
     }
     @Test
     public void testGetRgb(){
+<<<<<<< HEAD
         System.out.println(ExtractColorUtil.getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath()+"/upload-image/1.jpg"));
     }
 
@@ -107,5 +108,7 @@ public class TestAllMethod {
     public void testGetMainRgb() throws Exception {
         System.out.println(ExtractColorUtil.getMainRgbByFilePath(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/1.jpg"));
         System.out.println(ExtractColorUtil.getMainRgbByUrl("https://s1.ax1x.com/2020/11/03/BsuvNj.png"));
+=======
+>>>>>>> feature/user_functional
     }
 }

@@ -50,7 +50,8 @@ public class BlogThehallServiceImpl implements BlogThehallService {
     public Dynamic getDynamicDetails(Long dynamic_id,String openId) {
         blogThehallMapper.dynamicViewsAdd1(dynamic_id);
         Dynamic dynamics = blogThehallMapper.selectDynamicDetails(dynamic_id);
-        dynamics.setAttention(vxUserMapper.SelectISTtentionUser(openId,dynamics.getOpenId())>0);
+        dynamics.setLikeCount(blogThehallMapper.selectLikeCountByDynamicId(dynamic_id));
+        dynamics.setAttention(vxUserMapper.SelectISTtentionUser(openId,blogThehallMapper.selectOpenIdByDynamicId(dynamic_id))>0);
         dynamics.setIfLike(blogThehallMapper.selectIFAddLike(openId, dynamics.getDynamicId())>0);
         return dynamics;
     }

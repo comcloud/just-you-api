@@ -5,6 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="recruiting_number" jdbcType="BIGINT" property="recruiting_number" />
         <result column="task_title" jdbcType="VARCHAR" property="task_title" />
+        <result column="task_first_figure" jdbcType="VARCHAR" property="taskFirstFigure" />
         <result column="task_description" jdbcType="VARCHAR" property="task_description" />
         <result column="release_time" jdbcType="DATE" property="release_time" />
         <result column="traffic" jdbcType="BIGINT" property="traffic" />
@@ -17,6 +18,8 @@
         <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
             <id property="userId" column="user_id"/>
             <result property="openId" column="open_id"/>
+            <result property="gender" column="gender"/>
+            <result column="user_head_portrait" jdbcType="VARCHAR" property="userHeadPortrait" />
             <result property="userName" column="user_name"/>
         </association>
         <collection property="tags" ofType="com.cloud.api.bean.entity.Tag">
@@ -35,12 +38,12 @@
         update  justyou.task set traffic=traffic+1 where id=#{id}
     </update>
     <select id="SelectTask_HallList" resultMap="TaskHallMapper">
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name , u.user_head_portrait
+        select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name , u.user_head_portrait,u.gender
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and start_time &lt; DATE_SUB(now(),interval  60 second)
     </select>
     <select id="SelectTaskListByClass" resultMap="TaskHallMapper">
-        select t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name
+        select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait
         from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
         where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0  and start_time &lt; DATE_SUB(now(),interval  60 second) and  t.class_id=#{class_id}
     </select>
@@ -50,6 +53,46 @@
     </resultMap>
     <select id="selectClassNameList" resultMap="taskClass">
         select class_id, `name` from justyou.task_classification  order by sort asc
+    </select>
+    <resultMap id="TaskVo" type="com.cloud.api.bean.vo.TaskVo">
+        <result column="data" property="data"/>
+        <result column="charge" property="charge"/>
+        <result column="end_time" property="endTime"/>
+        <result column="money" property="money"/>
+        <result column="need_number" property="needNumber"/>
+        <result column="recruiting_number" property="recruitingNumber"/>
+        <result column="release_time" property="releaseTime"/>
+        <result column="start_time" property="startTime"/>
+        <result column="state" property="state"/>
+        <result column="task_comment" property="taskComment"/>
+        <result column="task_description" property="taskDescription"/>
+        <result column="task_title" property="taskTitle"/>
+        <result column="traffic" property="traffic"/>
+        <association property="taskClassificationVo" javaType="com.cloud.api.bean.vo.TaskClassificationVo">
+            <id property="id" column="class_id"/>
+            <result property="name" column="name"/>
+            <result property="describe" column="describe"/>
+            <result property="picture" column="picture"/>
+        </association>
+        <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
+            <id property="userId" column="user_id"/>
+            <result property="openId" column="open_id"/>
+            <result property="gender" column="gender"/>
+            <result column="user_head_portrait" jdbcType="VARCHAR" property="userHeadPortrait" />
+            <result property="userName" column="user_name"/>
+        </association>
+        <collection property="tags" ofType="com.cloud.api.bean.entity.Tag">
+            <id column="tag_id" property="tagId"/>
+            <result property="tagCount" column="tag_count"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectTaskDetails" resultMap="TaskVo">
+          select t.task_first_figure,t.`id`,t.`recruiting_number`,t.`release_time`,t.`traffic`,t.`task_title`, c.`class_id`,c.`describe`,c.`Picture`,c.`name`,u.user_name,u.user_id,u.open_id,t.task_description,tag.tag_id,tag.tag_name,u.gender,u.user_head_portrait,
+        t.data,t.charge,t.end_time,t.money,t.need_number,t.recruiting_number,t.release_time,t.start_time,t.state,t.task_comment,t.task_description,t.task_title,t.traffic
+        from  justyou.task `t`,justyou.task_classification `c`, `user` u , task_set_tag tst,tag tag
+        where  t.class_id=c.class_id  and  u.user_id=t.user_id and t.id=tst.task_id and tst.tag_id=tag.tag_id  and t.state=0 and t.id=#{TaskId}
     </select>
 </mapper>
 
