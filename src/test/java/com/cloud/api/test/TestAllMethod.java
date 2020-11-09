@@ -200,7 +200,9 @@ public class TestAllMethod {
     }
 
     @Test
-    public void testDouble() throws SchedulerException {
-
+    public void testDouble() throws SchedulerException, JsonProcessingException {
+        String res = "";
+        JsonNode jsonNode = new ObjectMapper().readTree(res).findPath("url");
+        System.out.println(jsonNode.get("url_0"));
     }
 }

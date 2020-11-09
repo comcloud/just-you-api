@@ -111,7 +111,11 @@ public class VXUserController {
     @Operation(summary = "获取用户资料信息")
     @GetMapping("/selectUsrInformation")
     public Result selectUsrInformation(@ApiParam(name = "openId", value = "用户的OPenId") @RequestParam String openId) {
-        return ResultGenerator.genSuccessResult(userService.selectUsrInformation(openId));
+        User user = userService.selectUsrInformation(openId);
+        System.out.println("+++++++++++++++++++++++++++++++++++++");
+        System.out.println(user);
+        System.out.println("======================================");
+        return ResultGenerator.genSuccessResult(user);
     }
 
     @ResponseBody
