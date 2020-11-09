@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -132,14 +133,14 @@ public class VXUserController {
     @Operation(summary = "获取用户发布动态的图片的分析结果数据")
     @RequestMapping(value = "/analyzePicture", method = RequestMethod.GET)
     public Result analyzePicture(@RequestParam(value = "openId") String openId) {
-        return ResultGenerator.genSuccessResultInsertData(userService.getAnalyzePicture(openId));
+        return ResultGenerator.genSuccessResult(userService.getAnalyzePicture(openId));
     }
 
     @ResponseBody
     @Operation(summary = "获取用户发布动态的文本的分析结果数据")
-    @RequestMapping(value = "/analyzeText", method = RequestMethod.GET)
+    @GetMapping(value = "/analyzeText")
+    @ApiResponse()
     public Result analyzeText(@RequestParam(value = "openId") String openId) {
-        return ResultGenerator.genSuccessResultInsertData(userService.getAnalyzeText(openId));
+        return ResultGenerator.genSuccessResult(userService.getAnalyzeText(openId));
     }
-
 }

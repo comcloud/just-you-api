@@ -8,6 +8,7 @@ import com.cloud.api.bean.vo.UserAttention;
 import com.cloud.api.mapper.VXUser.VXUserMapper;
 import com.cloud.api.service.VXUser.VXUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,13 +132,14 @@ public class VXUserServiceImpl implements VXUserService {
      * @return
      */
     @Override
-    public String getAnalyzePicture(String openId) {
-        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_picture_mood.json"), "utf-8");
+    public JsonNode getAnalyzePicture(String openId) {
+        final String staticPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
+        final String content = FileUtil.readString(new File(staticPath.substring(staticPath.indexOf("/")), "dynamic_picture_mood.json"), "utf-8");
         try {
-            return new ObjectMapper().readTree(content).findPath(openId).toString();
+            return new ObjectMapper().readTree(content).findPath(openId);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
@@ -147,13 +149,16 @@ public class VXUserServiceImpl implements VXUserService {
      * @return
      */
     @Override
-    public String getAnalyzeText(String openId) {
-        final String content = FileUtil.readString(new File(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath(), "dynamic_text_mood.json"), "utf-8");
+    public JsonNode getAnalyzeText(String openId) {
+        final String staticPath = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
+        final String content = FileUtil.readString(new File(staticPath.substring(staticPath.indexOf("/")), "dynamic_text_mood.json"), "utf-8");
         try {
-            return new ObjectMapper().readTree(content).findPath(openId).toString();
+            final JsonNode path = new ObjectMapper().readTree(content).findPath(openId);
+            System.out.println("path = " + path);
+            return path;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 

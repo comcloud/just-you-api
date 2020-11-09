@@ -8,6 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -18,23 +22,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class TestAllMethod {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-
-    @Test
-    public void test() throws SQLException {
-        double num1 = (19 / 4 % 3);
-        double num2 = (19.0 / 4.0 % 3.0);
-        System.out.println(num1);
-        System.out.println(num2);
-    }
 
     @Test
     public void testJsonNode() throws JsonProcessingException {
@@ -51,6 +44,7 @@ public class TestAllMethod {
                 "  \"desc\": \"tset\"\n" +
                 "}";
         final JsonNode node = new ObjectMapper().readTree(json);
+        assert node != null;
         final Iterator<String> stringIterator = node.fieldNames();
         while (stringIterator.hasNext()) {
             System.out.println(stringIterator.next());
@@ -196,13 +190,19 @@ public class TestAllMethod {
         }
 
     }
+
     @Test
-    public void testArray(){
+    public void testArray() {
         final ObjectNode node = JsonNodeFactory.instance.objectNode();
-        node.put("positive",10);
+        node.put("positive", 10);
         System.out.println(node.toPrettyString());
-        node.put("positive",node.findPath("positive").asInt() + 1);
+        node.put("positive", node.findPath("positive").asInt() + 1);
         System.out.println(node.toPrettyString());
         System.out.println(node.findPath("asd").asInt());
+    }
+
+    @Test
+    public void testDouble() throws SchedulerException {
+
     }
 }

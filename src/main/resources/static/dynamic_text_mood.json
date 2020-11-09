@@ -1,359 +1,359 @@
 {
   "vx001" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 2,
+      "negative" : 0,
+      "neutral" : 0,
+      "positive" : 4,
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.8
+    }, {
       "negative" : 0,
       "neutral" : 0,
       "positive" : 2,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.18181818181818182
     }, {
-      "mood" : 7,
       "negative" : 0,
       "neutral" : 0,
-      "positive" : 7,
-      "period" : "2020-10-17~2020-10-24"
+      "positive" : 3,
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.5
     }, {
-      "mood" : 2,
       "negative" : 0,
       "neutral" : 0,
-      "positive" : 2,
-      "period" : "2020-10-10~2020-10-17"
+      "positive" : 3,
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.375
     }, {
-      "mood" : 2,
       "negative" : 0,
       "neutral" : 0,
-      "positive" : 2,
-      "period" : "2020-10-03~2020-10-10"
+      "positive" : 0,
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : -2,
       "negative" : 2,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : -0.2857142857142857
     }, {
-      "mood" : -2,
-      "negative" : 2,
+      "negative" : 3,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
-    }, {
-      "mood" : -2,
-      "negative" : 2,
-      "neutral" : 0,
-      "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : -0.42857142857142855
     } ]
   },
   "vx0012" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   },
   "vx002" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   },
   "vx003" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   },
   "vx004" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   },
   "vx005" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   },
   "vx006" : {
     "result" : [ {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-31~2020-11-07"
+      "period" : "2020-11-02~2020-11-09",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-24~2020-10-31"
+      "period" : "2020-10-26~2020-11-02",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-17~2020-10-24"
+      "period" : "2020-10-19~2020-10-26",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-10~2020-10-17"
+      "period" : "2020-10-12~2020-10-19",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-10-03~2020-10-10"
+      "period" : "2020-10-05~2020-10-12",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-26~2020-10-03"
+      "period" : "2020-09-28~2020-10-05",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-19~2020-09-26"
+      "period" : "2020-09-21~2020-09-28",
+      "mood" : 0.0
     }, {
-      "mood" : 0,
       "negative" : 0,
       "neutral" : 0,
       "positive" : 0,
-      "period" : "2020-09-12~2020-09-19"
+      "period" : "2020-09-14~2020-09-21",
+      "mood" : 0.0
     } ]
   }
 }

@@ -1,7 +1,6 @@
 package com.cloud.api.config.quartz;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSONUtil;
 import com.cloud.api.bean.entity.Dynamic;
 import com.cloud.api.bean.entity.Photo;
 import com.cloud.api.bean.entity.User;
@@ -27,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -54,21 +54,8 @@ public class AnalyzeUserData extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         final List<User> users = userMapper.selectAllUserInfo();
         final ObjectNode node = JsonNodeFactory.instance.objectNode();
-//        final ObjectMapper mapper = new ObjectMapper();
         Map<ColorMood, Integer> data = new LinkedHashMap<>();
         users.forEach(user -> {
-            //这里是任务图片处理----------------------------
-//            List<Task> tasks = userMapper.selectAllTask(user.getUserId());
-//            tasks.forEach(task -> {
-//                try {
-//                    final JsonNode urls = mapper.readTree(task.getData()).findPath("url");
-//                    urls.forEach(url -> analysisPicture(url.toString(),data));
-//                } catch (JsonProcessingException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            });
-            //改为动态图片处理------------------------------
             final List<Photo> photos = userMapper.selectAllPhoto(user.getOpenId());
             photos.forEach(photo -> analysisPicture(photo.getPhotoUrl(), data));
 
@@ -88,15 +75,13 @@ public class AnalyzeUserData extends QuartzJobBean {
             });
             //以便于下次重新构建字符串
             data.clear();
-//            openIdNode.put("currentLocation", tasks.size());
             openIdNode.put("currentLocation", photos.size());
         });
         final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
-        System.out.println("path = " + path);
-//        new File(path, "dynamic_picture_mood.json").delete();
-//        new File(path, "dynamic_text_mood.json").delete();
+        new File(path, "dynamic_picture_mood.json").delete();
+        new File(path, "dynamic_text_mood.json").delete();
         FileUtil.writeString(node.toPrettyString(), new File(path, "dynamic_picture_mood.json"), "utf-8");
-//        FileUtil.writeString(analysisText(users), new File(path, "dynamic_text_mood.json"), "utf-8");
+        FileUtil.writeString(analysisText(users), new File(path, "dynamic_text_mood.json"), "utf-8");
     }
 
     /**
@@ -111,7 +96,8 @@ public class AnalyzeUserData extends QuartzJobBean {
             if (!data.containsKey(colorMood)) {
                 data.put(colorMood, 1);
             } else {
-                data.put(colorMood, data.get(colorMood) + 1);
+                final Integer value = data.get(colorMood);
+                data.replace(colorMood,value,value+1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,12 +126,17 @@ public class AnalyzeUserData extends QuartzJobBean {
                 final LocalDateTime previousTime = currentTime.minus(7, ChronoUnit.DAYS);
                 //存储这个时期状况
                 final ObjectNode arrayData = JsonNodeFactory.instance.objectNode();
-                arrayData.put("mood", 0);
-                arrayData.put("negative", 0);
-                arrayData.put("neutral", 0);
-                arrayData.put("positive", 0);
+                String negativeString = "negative";
+                String neutral = "neutral";
+                String positive = "positive";
+                arrayData.put(negativeString, 0);
+                arrayData.put(neutral, 0);
+                arrayData.put(positive, 0);
                 arrayData.put("period", previousTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "~" + currentTime.format(DateTimeFormatter.ofPattern("yyy-MM-dd")));
                 List<Dynamic> dynamics = userMapper.selectDynamicFromTime(user.getOpenId(), currentTime.toString(), previousTime.toString());
+                //存储计算之后的消极与积极之和
+                AtomicInteger moodNumber = new AtomicInteger();
+                AtomicInteger neutralNumber = new AtomicInteger();
                 dynamics.forEach(dynamic -> {
                     final String dynamicContent = (String) dynamic.getDynamicContent();
                     try {
@@ -156,15 +147,16 @@ public class AnalyzeUserData extends QuartzJobBean {
                                 final int sentiment = Integer.parseInt(obj.findPath("sentiment").toString());
                                 switch (sentiment) {
                                     case 0:
-                                        arrayData.put("negative", Integer.parseInt(arrayData.findPath("negative").toString()) + 1);
-                                        arrayData.put("mood", Integer.parseInt(arrayData.findPath("mood").toString()) - 1);
+                                        arrayData.put(negativeString, Integer.parseInt(arrayData.findPath(negativeString).toString()) + 1);
+                                        moodNumber.addAndGet(-1);
                                         break;
                                     case 1:
-                                        arrayData.put("neutral", Integer.parseInt(arrayData.findPath("neutral").toString()) + 1);
+                                        arrayData.put(neutral, Integer.parseInt(arrayData.findPath(neutral).toString()) + 1);
+                                        neutralNumber.getAndIncrement();
                                         break;
                                     case 2:
-                                        arrayData.put("positive", Integer.parseInt(arrayData.findPath("positive").toString()) + 1);
-                                        arrayData.put("mood", Integer.parseInt(arrayData.findPath("mood").toString()) + 1);
+                                        arrayData.put(positive, Integer.parseInt(arrayData.findPath(positive).toString()) + 1);
+                                        moodNumber.addAndGet(1);
                                         break;
                                     default:
                                 }
@@ -174,6 +166,9 @@ public class AnalyzeUserData extends QuartzJobBean {
                         e.printStackTrace();
                     }
                 });
+                //这个时候要把mood值占总共的比例算出来替换mood
+
+                arrayData.put("mood", dynamics.isEmpty() ? 0 : moodNumber.get() * 1.0 / (dynamics.size() - neutralNumber.get()));
                 currentTime = previousTime;
                 contentNode.add(arrayData);
             }

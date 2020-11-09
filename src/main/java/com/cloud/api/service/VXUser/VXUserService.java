@@ -4,6 +4,7 @@ import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.vo.BlogVo;
 import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.UserAttention;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,7 @@ public interface VXUserService {
 
     Map<String, List<TaskHallVo>> getMyTaskAll(String openId);
 
-    String getAnalyzePicture(String openId);
+    JsonNode getAnalyzePicture(String openId);
 
-    String getAnalyzeText(String openId);
+    JsonNode getAnalyzeText(String openId);
 }
