@@ -60,5 +60,6 @@ public interface BlogThehallMapper {
      */
     int selectIFAddLike(@Param("openId")String openId,@Param("dynamicId") Long dynamicId);
 
+     String selectOpenIdByDynamicId(@Param("dynamicId") Long dynamicId);
 
 }

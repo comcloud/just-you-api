@@ -1,7 +1,9 @@
 package com.cloud.api.service.TaskHall;
 
 import com.cloud.api.bean.vo.TaskHallVo;
+import com.cloud.api.bean.vo.TaskVo;
 import com.cloud.api.bean.vo.task_classificationVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +23,5 @@ public interface TaskHallService {
     void classTaskList();
 
     List<task_classificationVo> getAllClassName();
+    TaskVo getTaskDetails(Long TaskId);
 }

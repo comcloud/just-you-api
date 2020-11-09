@@ -84,4 +84,7 @@
     <select id="selectIFAddLike" resultType="java.lang.Integer">
         select count(*) from dynamic_like where  give_open_id=#{openId} and give_dynamic_id=#{dynamicId}
     </select>
+    <select id="selectOpenIdByDynamicId" resultType="java.lang.String">
+        select open_id from dynamic where  dynamic_id=#{dynamicId}
+    </select>
 </mapper>

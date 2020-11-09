@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.cloud.api.test;
 
 import com.cloud.api.util.algorithm.ExtractColorUtil;

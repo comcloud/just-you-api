@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Scanner;
+
+
 /**
  * @author hds
  * <p>项目名称: 小程序 任务大厅
@@ -101,6 +104,12 @@ public class TaskHallController {
     @ResponseBody
     public Result comm(@ApiParam(name = "task_id", value = "任务Id") @RequestParam Long task_id) {
         return ResultGenerator.genSuccessResult(taskCommService.getAllTaskComm(task_id));
+    }
+    @ResponseBody
+    @Operation(summary="获取全部任务分类")
+    @GetMapping("/getTaskDetails")
+    public Result getTaskDetails(@Parameter(description = "任务ID") @RequestParam Long TaskId) {
+        return ResultGenerator.genSuccessResult(taskHallService.getTaskDetails(TaskId));
     }
 
 }

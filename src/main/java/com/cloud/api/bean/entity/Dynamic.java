@@ -61,7 +61,6 @@ public class Dynamic implements Serializable {
 
     private Long likeCount;
     
-    private String openId;
 
     private UserVo user;
 
@@ -73,13 +72,7 @@ public class Dynamic implements Serializable {
 
     private boolean ifLike;
 
-    public String getOpenId() {
-        return openId;
-    }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
-    }
 
     public boolean isAttention() {
         return isAttention;
@@ -100,7 +93,7 @@ public class Dynamic implements Serializable {
     public Dynamic() {
     }
 
-    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, LocalDateTime dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, String openId, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags) {
+    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, LocalDateTime dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags, boolean isAttention, boolean ifLike) {
         this.dynamicId = dynamicId;
         this.dynamicTitle = dynamicTitle;
         this.dynamicContent = dynamicContent;
@@ -112,10 +105,11 @@ public class Dynamic implements Serializable {
         this.dynamicUpdateTime = dynamicUpdateTime;
         this.dAbstract = dAbstract;
         this.likeCount = likeCount;
-        this.openId = openId;
         this.user = user;
         this.photo = photo;
         this.dynamicTags = dynamicTags;
+        this.isAttention = isAttention;
+        this.ifLike = ifLike;
     }
 
     public static long getSerialVersionUID() {
@@ -210,14 +204,6 @@ public class Dynamic implements Serializable {
         this.likeCount = likeCount;
     }
 
-    public String getopenId() {
-        return openId;
-    }
-
-    public void setopenId(String openId) {
-        this.openId = openId;
-    }
-
     public UserVo getUser() {
         return user;
     }
@@ -256,10 +242,11 @@ public class Dynamic implements Serializable {
                 ", dynamicUpdateTime=" + dynamicUpdateTime +
                 ", dAbstract='" + dAbstract + '\'' +
                 ", likeCount=" + likeCount +
-                ", openId='" + openId + '\'' +
                 ", user=" + user +
                 ", photo=" + photo +
                 ", dynamicTags=" + dynamicTags +
+                ", isAttention=" + isAttention +
+                ", ifLike=" + ifLike +
                 '}';
     }
 }
