@@ -1,5 +1,6 @@
 package com.cloud.api.mapper.TaskHall;
 import com.cloud.api.bean.entity.Tag;
+import com.cloud.api.bean.vo.TaskHallVo;
 import com.cloud.api.bean.vo.TaskSearchVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +28,7 @@ public interface TaskSearchMapper {
      * @param content 搜索内容
      * @return 结果
      */
-    List<TaskSearchVo> SelectLinkTaskSearchVos(@Param("content") String content);
+    List<TaskHallVo> SelectLinkTaskSearchVos(@Param("content") String content);
 
     /**
      *获取热门标签
