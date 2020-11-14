@@ -15,6 +15,13 @@ import java.io.FileOutputStream;
 public class ExtractImageUtil {
 
     /**
+     * Utility classes should not have public constructors
+     */
+    private ExtractImageUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    /**
      * @param base64     base64值
      * @param targetPath 图片路径
      */

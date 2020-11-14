@@ -14,6 +14,13 @@ public class ExtractMoodUtil {
 
 
     /**
+     * Utility classes should not have public constructors
+     */
+    private ExtractMoodUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    /**
      * @param rgb 给定的rgb值
      * @return 对应的心情
      */
@@ -35,10 +42,10 @@ public class ExtractMoodUtil {
      * @param arr 数组
      * @return 数组中最小值的下标
      */
-    private static int getMin(int[] arr){
+    private static int getMin(int[] arr) {
         int min = 0;
         for (int i = 1; i < arr.length; i++) {
-            if(arr[i]<arr[min]){
+            if (arr[i] < arr[min]) {
                 min = i;
             }
         }
