@@ -31,11 +31,11 @@ public class Dynamic implements Serializable {
     /**
      * 动态内容
      */
-    private Object dynamicContent;
+    private String dynamicContent;
     /**
      * 0-草稿 1-发布
      */
-    private Object dynamicStatus;
+    private int dynamicStatus;
     /**
      * 阅读量
      */
@@ -43,11 +43,11 @@ public class Dynamic implements Serializable {
     /**
      * 0-允许评论 1-不允许评论
      */
-    private Object dynamicComment;
+    private int dynamicComment;
     /**
      * 是否删除 0=否 1=是
      */
-    private Object dynamicDeleted;
+    private int dynamicDeleted;
     /**
      * 发布时间
      */
@@ -93,7 +93,7 @@ public class Dynamic implements Serializable {
     public Dynamic() {
     }
 
-    public Dynamic(Long dynamicId, String dynamicTitle, Object dynamicContent, Object dynamicStatus, Long dynamicViews, Object dynamicComment, Object dynamicDeleted, LocalDateTime dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags, boolean isAttention, boolean ifLike) {
+    public Dynamic(Long dynamicId, String dynamicTitle, String dynamicContent, int dynamicStatus, Long dynamicViews, int dynamicComment, int dynamicDeleted, LocalDateTime dynamicTime, Date dynamicUpdateTime, String dAbstract, Long likeCount, UserVo user, List<photoVo> photo, List<DynamicTag> dynamicTags, boolean isAttention, boolean ifLike) {
         this.dynamicId = dynamicId;
         this.dynamicTitle = dynamicTitle;
         this.dynamicContent = dynamicContent;
@@ -120,112 +120,126 @@ public class Dynamic implements Serializable {
         return dynamicId;
     }
 
-    public void setDynamicId(Long dynamicId) {
+    public Dynamic setDynamicId(Long dynamicId) {
         this.dynamicId = dynamicId;
+        return this;
     }
 
     public String getDynamicTitle() {
         return dynamicTitle;
     }
 
-    public void setDynamicTitle(String dynamicTitle) {
+    public Dynamic setDynamicTitle(String dynamicTitle) {
         this.dynamicTitle = dynamicTitle;
+        return this;
     }
 
     public Object getDynamicContent() {
         return dynamicContent;
     }
 
-    public void setDynamicContent(Object dynamicContent) {
+    public Dynamic setDynamicContent(String dynamicContent) {
         this.dynamicContent = dynamicContent;
+        return this;
     }
 
-    public Object getDynamicStatus() {
+    public int getDynamicStatus() {
         return dynamicStatus;
     }
 
-    public void setDynamicStatus(Object dynamicStatus) {
+    public Dynamic setDynamicStatus(int dynamicStatus) {
         this.dynamicStatus = dynamicStatus;
+        return this;
     }
 
     public Long getDynamicViews() {
         return dynamicViews;
     }
 
-    public void setDynamicViews(Long dynamicViews) {
+    public Dynamic setDynamicViews(Long dynamicViews) {
         this.dynamicViews = dynamicViews;
+        return this;
     }
 
     public Object getDynamicComment() {
         return dynamicComment;
     }
 
-    public void setDynamicComment(Object dynamicComment) {
+    public Dynamic setDynamicComment(int dynamicComment) {
         this.dynamicComment = dynamicComment;
+        return this;
     }
 
-    public Object getDynamicDeleted() {
+    public int getDynamicDeleted() {
         return dynamicDeleted;
     }
 
-    public void setDynamicDeleted(Object dynamicDeleted) {
+    public Dynamic setDynamicDeleted(int dynamicDeleted) {
         this.dynamicDeleted = dynamicDeleted;
+        return this;
     }
 
     public LocalDateTime getDynamicTime() {
         return dynamicTime;
     }
 
-    public void setDynamicTime(LocalDateTime dynamicTime) {
+    public Dynamic setDynamicTime(LocalDateTime dynamicTime) {
         this.dynamicTime = dynamicTime;
+        return this;
     }
 
     public Date getDynamicUpdateTime() {
         return dynamicUpdateTime;
     }
 
-    public void setDynamicUpdateTime(Date dynamicUpdateTime) {
+    public Dynamic setDynamicUpdateTime(Date dynamicUpdateTime) {
         this.dynamicUpdateTime = dynamicUpdateTime;
+        return this;
     }
 
     public String getdAbstract() {
         return dAbstract;
     }
 
-    public void setdAbstract(String dAbstract) {
+    public Dynamic setdAbstract(String dAbstract) {
         this.dAbstract = dAbstract;
+        return this;
     }
 
     public Long getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(Long likeCount) {
+    public Dynamic setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
+        return this;
     }
 
     public UserVo getUser() {
         return user;
     }
 
-    public void setUser(UserVo user) {
+    public Dynamic setUser(UserVo user) {
         this.user = user;
+        return this;
     }
 
     public List<photoVo> getPhoto() {
         return photo;
     }
 
-    public void setPhoto(List<photoVo> photo) {
+    public Dynamic setPhoto(List<photoVo> photo) {
         this.photo = photo;
+        return this;
     }
 
     public List<DynamicTag> getDynamicTags() {
         return dynamicTags;
     }
 
-    public void setDynamicTags(List<DynamicTag> dynamicTags) {
+    public Dynamic setDynamicTags(List<DynamicTag> dynamicTags) {
         this.dynamicTags = dynamicTags;
+        return this;
     }
 
     @Override

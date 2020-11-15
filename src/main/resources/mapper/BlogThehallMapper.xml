@@ -38,7 +38,7 @@
         <result column="dynamic_update_time" property="dynamicUpdateTime"/>
         <result column="Abstract" property="dAbstract"/>
         <result column="like_count" property="likeCount"/>
-<!--        注意放置的先后顺序-->
+        <!--        注意放置的先后顺序-->
         <association property="user" javaType="com.cloud.api.bean.vo.UserVo">
             <result column="user_id" property="userId"/>
             <result column="user_name" property="userName"/>
@@ -53,9 +53,18 @@
             <result column="dynamic_tag_id" property="dynamicTagId"/>
             <result column="dynamic_tag_name" property="dynamicTagName"/>
         </collection>
-     </resultMap>
+    </resultMap>
     <insert id="dynamicAddLike">
         insert into dynamic_like set give_open_id=#{openId} , give_dynamic_id=#{dynameId}
+    </insert>
+    <insert id="insertDynamic">
+        insert into dynamic
+        value (0,#{dynamic.dynamicTitle},#{dynamic.dynamicContent},1,0,1,0,#{dynamic.dynamicTime},#{dynamic.dynamicUpdateTime},
+        #{dynamic.dAbstract},0,#{dynamic.user.openId},1)
+    </insert>
+    <insert id="insertPhoto">
+            insert into photo
+            value(0,#{photo.photoUrl},0,1,null)
     </insert>
     <update id="dynamicViewsAdd1">
         update dynamic SET dynamic_views=dynamic_views+1 where dynamic_id=#{dynamicId}

@@ -1,5 +1,6 @@
 package com.cloud.api.mapper.BlogThehall;
 import com.cloud.api.bean.entity.Dynamic;
+import com.cloud.api.bean.entity.Photo;
 import com.cloud.api.bean.vo.BlogVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -62,4 +63,7 @@ public interface BlogThehallMapper {
 
      String selectOpenIdByDynamicId(@Param("dynamicId") Long dynamicId);
 
+    void insertDynamic(@Param("dynamic") Dynamic dynamic);
+
+    void insertPhoto(@Param("photo") Photo photos);
 }

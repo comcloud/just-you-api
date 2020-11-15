@@ -111,5 +111,10 @@ public class BlogThehallController {
     }
 
 
-
+    @Operation(summary = "发布动态接口")
+    @PostMapping(value = "/publishDynamic")
+    public Result publishDynamic(@RequestBody String dynamicData){
+        blogThehallService.addDynamic(dynamicData);
+        return ResultGenerator.genSuccessResult();
+    }
 }

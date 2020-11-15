@@ -28,4 +28,10 @@ public interface BlogThehallService {
      * @return
      */
     Dynamic getDynamicDetails(Long dynamic_id,String openId);
+
+    /**
+     * 保存动态
+     * @param dynamicData 动态json数据
+     */
+    void addDynamic(String dynamicData);
 }

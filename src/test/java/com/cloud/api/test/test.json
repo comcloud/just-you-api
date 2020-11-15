@@ -1,62 +1,7 @@
 {
-  "vx006": {
-    "result": [
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-10-31~2020-11-07"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-10-24~2020-10-31"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-10-17~2020-10-24"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-10-10~2020-10-17"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-10-03~2020-10-10"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-09-26~2020-10-03"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-09-19~2020-09-26"
-      },
-      {
-        "mood": 0,
-        "negative": 0,
-        "neutral": 0,
-        "positive": 0,
-        "period": "2020-09-12~2020-09-19"
-      }
-    ]
-  }
+  "content": "",
+  "open_id": "",
+  "photo": [
+    "base64"
+  ]
 }
