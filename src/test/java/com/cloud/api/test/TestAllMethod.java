@@ -20,8 +20,8 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -31,6 +31,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.jar.JarInputStream;
 import java.util.stream.Stream;
 
 public class TestAllMethod {
@@ -108,7 +109,8 @@ public class TestAllMethod {
 
     @Test
     public void testGetRgb() {
-        System.out.println(ExtractColorUtil.getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/1.jpg"));
+        System.out.println(ExtractColorUtil.
+                getImagePixel(Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/1.jpg"));
     }
 
     @Test
@@ -297,5 +299,18 @@ public class TestAllMethod {
             System.out.println(str);
             return;
         }
+    }
+    @Test
+    public void testURL() throws UnsupportedEncodingException {
+        System.out.println(this.getClass().getClassLoader().getResource("static").getPath());
+
+        final String decode = URLDecoder.decode("%b7%c7%d5%fd%d1%a1%ca%b1%bc%e4%a3%a1","utf-8");
+        System.out.println(decode);
+    }
+    @Test
+    public void testJar() throws IOException {
+        final JarInputStream jarInputStream = new JarInputStream(new FileInputStream(new File("D:\\java1016\\just-you-api\\target\\api-0.0.1-SNAPSHOT.jar")));
+        final JarEntry nextJarEntry = jarInputStream.getNextJarEntry();
+
     }
 }

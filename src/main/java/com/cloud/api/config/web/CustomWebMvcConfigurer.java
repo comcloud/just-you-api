@@ -17,8 +17,11 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //和页面有关的静态目录都放在项目的static目录下
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        //上传的图片在D盘下的OTA目录下，访问路径如：http://localhost:8081/OTA/d3cf0281-bb7f-40e0-ab77-406db95ccf2c.jpg
-        //其中OTA表示访问的前缀。"file:D:/OTA/"是文件真实的存储路径
-        registry.addResourceHandler("/home/**").addResourceLocations("file:D:/OTA/");
+        //第一个是访问路径，第二个是访问第一个路径之后找资源文件的位置
+        registry.addResourceHandler("/upload-image/**").addResourceLocations("file:/home/justyou/upload-file/upload-image/");
+        //这个是配置本机测试的
+//        registry.addResourceHandler("/upload-image/**").addResourceLocations("file:C:\\Users\\HP\\Pictures\\Saved Pictures\\");
+
+
     }
 }

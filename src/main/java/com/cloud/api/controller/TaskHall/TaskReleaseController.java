@@ -31,7 +31,7 @@ public class TaskReleaseController {
     @Operation(summary="获取全部任务分类")
     @GetMapping("/getTaskClassificationAll")
     public Result getTaskClassificationAll(@Parameter(description = "1为显示页面,2 为更多") @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum, 7);
+//        PageHelper.startPage(pageNum, 7);
         return ResultGenerator.genSuccessResult(new PageInfo<>(taskReleaseService.getTaskClassificationAll()));
     }
 

@@ -61,12 +61,11 @@ public class PublishServiceImpl implements PublishService {
         final String openId = node.findPath("open_id").toString().replace("\"", "");
         if (base64.isArray()) {
             for (JsonNode url : base64) {
-                final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath() + "/upload-image/";
                 String fileName = LocalDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + "_" + openId + ".jpg";
-                File file = new File(path.substring(1), fileName);
+                File file = new File("/home/justyou/upload-file/upload-image/".substring(1), fileName);
                 final String replace = url.toString().replace(" ", "+").replace("\"", "");
                 ExtractImageUtil.decoderBase64ToFile(replace, file);
-                urlNode.put("url_" + count.get(), "https://mrkleo.top/justyou/static/upload-image/" + fileName);
+                urlNode.put("url_" + count.get(), "https://mrkleo.top/justyou/upload-image/" + fileName);
                 count.getAndIncrement();
             }
         }

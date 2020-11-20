@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -34,14 +36,16 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author HP
  */
+@SuppressWarnings("all")
 @Slf4j
 @Component
 @EnableWebSocket
 @EnableWebSocketMessageBroker
-@Api(value = "/websocket/openid/toOpenid",tags = "websocket服务端")
+@Api(value = "/websocket/openid/toOpenid", tags = "websocket服务端")
 @ServerEndpoint(value = "/websocket/{openid}/{toOpenid}")
 public class WebSocketServer {
 
+    private Logger log = LoggerFactory.getLogger(WebSocketServer.class);
 
     /**
      * 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -93,19 +97,29 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) throws IOException {
         log.info("收到来自窗口" + sender + "的信息:" + message + "，发送给：" + recipient);
         log.info("当前我是：" + this.sender + ",我对应的集合存储位置是：" + data.get(this.sender));
-        MessageUtil.sendMessage(message, recipient, sender);
+        sendMessage(message);
     }
 
     private void sendMessage(String message) throws IOException {
+        System.out.println(this.getClass().getClassLoader().getResourceAsStream("static"));
         AtomicReference<WebSocketServer> recipientServer = new AtomicReference<>();
+        log.info("即将发送消息来自" + this.sender + "，发送给" + this.recipient);
         final Integer recipientServerLocation = data.get(this.recipient);
+        log.info("recipientServerLocation = " + recipientServerLocation);
         if (recipientServerLocation != null) {
-            webSocketSet.forEach(value -> {
+            for (WebSocketServer webSocketServer : webSocketSet) {
                 //一个websocket对象的sender说明这是属于谁的
-                if(value.sender.equals(this.recipient)){
-                    recipientServer.set(value);
+                if (webSocketServer.sender.equals(this.recipient)) {
+                    recipientServer.set(webSocketServer);
+                    break;
                 }
-            });
+            }
+//            webSocketSet.forEach(value -> {
+                //一个websocket对象的sender说明这是属于谁的
+//                if (value.sender.equals(this.recipient)) {
+//                    recipientServer.set(value);
+//                }
+//            });
             log.info("recipientServer.get().sender = {}", recipientServer.get().sender);
             assert false;
             if (recipientServer.get() != null) {

@@ -40,6 +40,7 @@ import java.util.stream.Collectors;
  * @version version 1.0
  * @date 2020/11/3 22:18
  */
+@SuppressWarnings("all")
 public class AnalyzeUserData extends QuartzJobBean {
 
     private UserMapper userMapper = (UserMapper) SpringUtil.getBean("userMapper");
@@ -77,7 +78,7 @@ public class AnalyzeUserData extends QuartzJobBean {
             data.clear();
             openIdNode.put("currentLocation", photos.size());
         });
-        final String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static")).getPath();
+        final String path = "/home/justyou/upload-file/character/";
         new File(path, "dynamic_picture_mood.json").delete();
         new File(path, "dynamic_text_mood.json").delete();
         FileUtil.writeString(node.toPrettyString(), new File(path, "dynamic_picture_mood.json"), "utf-8");
