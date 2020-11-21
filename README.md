@@ -25,3 +25,6 @@ The following guides illustrate how to use some features concretely:
 * [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 * [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
 
+### 更新
+配置了多环境的yml
+压缩时候使用命令`mvn clean install -P prod`

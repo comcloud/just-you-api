@@ -4,7 +4,6 @@ import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import com.cloud.api.service.RedisService;
 import com.cloud.api.util.SpringUtil;
-import com.cloud.api.util.websocket.MessageUtil;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.Api;
@@ -81,7 +80,7 @@ public class WebSocketServer {
                        @PathParam("toOpenid") String toOpenid) {
         this.session = session;
         webSocketSet.add(this);
-        data.put(openid, WebSocketServer.getOnlineCount());
+        data.put(openid, webSocketSet.size());
         addOnlineCount();
         log.info("刚刚执行打开事件，集合内容：" + webSocketSet.toString());
         log.info("sender = {}", sender);
@@ -114,12 +113,6 @@ public class WebSocketServer {
                     break;
                 }
             }
-//            webSocketSet.forEach(value -> {
-                //一个websocket对象的sender说明这是属于谁的
-//                if (value.sender.equals(this.recipient)) {
-//                    recipientServer.set(value);
-//                }
-//            });
             log.info("recipientServer.get().sender = {}", recipientServer.get().sender);
             assert false;
             if (recipientServer.get() != null) {

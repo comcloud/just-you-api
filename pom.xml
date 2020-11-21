@@ -162,11 +162,17 @@
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
+        <!--        yaml依赖-->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.26</version>
+        </dependency>
     </dependencies>
 
 
     <build>
-<!--        这部分是让每次打包时候不打包test文件类-->
+        <!--        这部分是让每次打包时候不打包test文件类-->
         <defaultGoal>compile</defaultGoal>
         <plugins>
             <plugin>
@@ -192,7 +198,7 @@
                 <configuration>
                     <mainClass>com.cloud.api.ApiApplication</mainClass>
                     <layout>ZIP</layout>
-<!--                    这个让每次打包出来不会将依赖的Jar也导入项目jar包-->
+                    <!--                    这个让每次打包出来不会将依赖的Jar也导入项目jar包-->
                     <includes>
                         <include>
                             <groupId>nothing</groupId>
@@ -208,6 +214,42 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            解析@插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <delimiters>@</delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
         </plugins>
+        <!--        如果不配置这个，那么application.yml就无法使用@@读取pom.xml中的值-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <profile>
+            <!--            本地开发环境-->
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <activation>
+                <!--                默认开启这个生产环境配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!--            服务器生产环境-->
+            <id>prod</id>
+            <properties>
+                <profileAcitve>prod</profileAcitve>
+            </properties>
+        </profile>
+    </profiles>
 </project>

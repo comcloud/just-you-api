@@ -1,0 +1,5 @@
+server:
+  port: 8089
+  max-http-header-size: 52428800
+  servlet:
+    context-path: /justyou
