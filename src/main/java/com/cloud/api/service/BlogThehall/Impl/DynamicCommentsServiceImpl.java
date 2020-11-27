@@ -5,6 +5,7 @@ import com.cloud.api.service.BlogThehall.DynamicCommentsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -81,6 +82,7 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean insertComments(Long dynamic_id, String open_id, Long comm_father_id,String content) {
         Map<String, Object> map = new HashMap<>();
         if (dynamic_id == null||open_id==null||comm_father_id==null) {
@@ -95,6 +97,7 @@ public class DynamicCommentsServiceImpl implements DynamicCommentsService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean deleteComm(Long commId) {
         return dynamicCommMapper.deleteComm(commId)>0;
     }

@@ -18,9 +18,7 @@ import java.io.IOException;
  * @author HP
  */
 @ControllerAdvice
-
 public class GlobalExceptionHandler {
-
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 

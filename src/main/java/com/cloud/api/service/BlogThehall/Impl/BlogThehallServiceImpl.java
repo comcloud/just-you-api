@@ -69,6 +69,7 @@ public class BlogThehallServiceImpl implements BlogThehallService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void addDynamic(String dynamicData) {
         Dynamic dynamic = new Dynamic();
         List<Photo> photos = new ArrayList<>();

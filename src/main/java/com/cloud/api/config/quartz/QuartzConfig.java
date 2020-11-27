@@ -1,7 +1,6 @@
 package com.cloud.api.config.quartz;
 
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class QuartzConfig {
     @Bean
     public JobDetail deployJob() {
-        return JobBuilder.newJob(AnalyzeUserData.class).withIdentity("analyze").storeDurably().build();
+        return JobBuilder.newJob(CronJob.class).withIdentity("analyze").storeDurably().build();
     }
 
 //    @Bean

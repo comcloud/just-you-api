@@ -1,6 +1,8 @@
 package com.cloud.api.config.web;
 
+import com.cloud.api.controller.ErrorController;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -25,4 +27,9 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
         registry.addResourceHandler("/upload-image/**").addResourceLocations("file:/home/justyou/upload-file/upload-image/");
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new ErrorController())
+                .addPathPatterns("/**");
+    }
 }

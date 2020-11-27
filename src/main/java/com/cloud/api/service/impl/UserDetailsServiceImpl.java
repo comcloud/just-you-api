@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author HP
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -43,18 +46,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         Authentication authentication;
+        String role = "ROLE_ADMIN";
         if (name.contains("犀牛")) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-            authentication = new UsernamePasswordAuthenticationToken(this.getClass().getName(), "ROLE_ADMIN", authorities);
+            authorities.add(new SimpleGrantedAuthority(role));
+            authentication = new UsernamePasswordAuthenticationToken(this.getClass().getName(), role, authorities);
         } else {
             authorities.add(new SimpleGrantedAuthority("ROLE_NORMAL"));
-            authentication = new UsernamePasswordAuthenticationToken(this.getClass().getName(), "ROLE_ADMIN", authorities);
+            authentication = new UsernamePasswordAuthenticationToken(this.getClass().getName(), role, authorities);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         try {
             return new User(admin.getAdminName(), passwordEncoder.encode(admin.getAdminPassword()), authorities);
-        }catch (Exception e){
-            logger.warn("请求登录用户名与密码出错{}",e.getMessage().substring(0,e.getMessage().indexOf("at")));
+        } catch (Exception e) {
+            logger.warn("请求登录用户名与密码出错{}", e.getMessage().substring(0, e.getMessage().indexOf("at")));
             return null;
         }
     }

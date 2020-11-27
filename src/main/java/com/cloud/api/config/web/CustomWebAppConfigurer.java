@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CustomWebAppConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new ErrorController()).addPathPatterns("/**");
-        super.addInterceptors(registry);
+//        registry.addInterceptor(new ErrorController()).addPathPatterns("/**");
+//        super.addInterceptors(registry);
     }
 }

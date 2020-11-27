@@ -1,4 +1,4 @@
-package com.cloud.api.config.quartz;
+package com.cloud.api.util.algorithm;
 
 import cn.hutool.core.io.FileUtil;
 import com.cloud.api.bean.entity.Dynamic;
@@ -7,52 +7,42 @@ import com.cloud.api.bean.entity.User;
 import com.cloud.api.bean.image.ColorMood;
 import com.cloud.api.mapper.UserMapper;
 import com.cloud.api.util.SpringUtil;
-import com.cloud.api.util.algorithm.ExtractColorUtil;
-import com.cloud.api.util.algorithm.ExtractMoodUtil;
 import com.cloud.api.util.http.ApiUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.scheduling.annotation.Async;
 
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * 需求：不断的往前推一周，然后返回正负结果数据
- * <p>
- * 分析用户图片然后保存文件到静态目录
- * 需要获取到每一个用户他发布的图片
- * 注释的内容都是处理任务的代码
- *
  * @author 成都犀牛
  * @version version 1.0
- * @date 2020/11/3 22:18
+ * @date 2020/11/22 14:44
  */
 @SuppressWarnings("all")
-public class AnalyzeUserData extends QuartzJobBean {
+public class AnalyzeUserData {
+    private static UserMapper userMapper = (UserMapper) SpringUtil.getBean("userMapper");
 
-    private UserMapper userMapper = (UserMapper) SpringUtil.getBean("userMapper");
+    private AnalyzeUserData(){
+        throw new IllegalStateException("工具类，不可创建对象");
+    }
 
-    /**
-     * 重新分析然后写出json文件
-     *
-     * @param jobExecutionContext
-     * @throws JobExecutionException
-     */
-    @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    @Async
+    public static void analyze(){
         final List<User> users = userMapper.selectAllUserInfo();
         final ObjectNode node = JsonNodeFactory.instance.objectNode();
         Map<ColorMood, Integer> data = new LinkedHashMap<>();
@@ -91,7 +81,7 @@ public class AnalyzeUserData extends QuartzJobBean {
      * @param url  图片地址
      * @param data 存放结果的位置
      */
-    private void analysisPicture(String url, Map<ColorMood, Integer> data) {
+    private static void analysisPicture(String url, Map<ColorMood, Integer> data) {
         try {
             ColorMood colorMood = ExtractMoodUtil.extractMoodFromRgb(ExtractColorUtil.getMainRgbByUrl(url.trim().replace("\"", "")));
             if (!data.containsKey(colorMood)) {
@@ -112,7 +102,7 @@ public class AnalyzeUserData extends QuartzJobBean {
      * @param users 分析的用户列表
      * @return 分析的结果json串
      */
-    private String analysisText(List<User> users) {
+    private static String analysisText(List<User> users) {
         final ObjectNode node = JsonNodeFactory.instance.objectNode();
         final ObjectMapper mapper = new ObjectMapper();
         users.forEach(user -> {
@@ -191,6 +181,4 @@ public class AnalyzeUserData extends QuartzJobBean {
         });
         return flag.get();
     }
-
 }
-

@@ -1,7 +1,6 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 /**
@@ -38,9 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 请求配置
-     *
+     * 这里拦截哪怕是允许所有人访问，但是依旧是需要走spring security的认证路线的
      * @param http 请求http
-     * @throws Exception
+     * @throws Exception 异常
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -85,15 +83,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 认证配置
-     *
-     * @param auth
-     * @throws Exception
+     * 认证配置，也就是存储着如何进行认证，可以选择在内存中或者数据库认证
+     * @param auth 认证建造器
+     * @throws Exception 异常
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
     }
+
+    /**
+     * 这个方法主要用来不拦截样式等静态文件，这个不拦截实际上是一种忽视，也就是不走spring security的认证路线而是直接放行
+     * @param web web安全
+     */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
