@@ -316,4 +316,11 @@ public class TestAllMethod {
         final JarEntry nextJarEntry = jarInputStream.getNextJarEntry();
 
     }
+    @Test
+    public void fileTest(){
+        final File file = new File("E:\\test\\test1\\test3");
+        if(!file.exists() && !file.isDirectory()){
+            file.mkdirs();
+        }
+    }
 }

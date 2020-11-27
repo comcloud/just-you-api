@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/x-admin/js/**","/x-admin/css/**","/x-admin/images/*","/x-admin/fonts/**","/x-admin/**/*.png","/x-admin/**/*.jpg").permitAll()
+                //图床接口
+                .antMatchers("/upload/**").permitAll()
                 //访问资源路径
                 .antMatchers("/upload-image/**").permitAll()
                 .anyRequest().authenticated()
