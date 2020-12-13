@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>云顶犀科技官方网站</title>
+    <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
+    <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+    <!-- 核心团队 -->
+    <link rel="stylesheet" th:href="@{/official-website/css/about.css}">
+    <style>
+        .box-content{
+            display: none;
+        }
+        .showThis{
+            display: block;
+        }
+        .shadowBox{
+            box-shadow: 10px 10px 20px rgba(0,0,0,.2);
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<div class="bl-header container-fluid">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+            <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/list}">条款</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a th:href="@{/about}">关于</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 联系我们按钮 -->
+            <div class="top-contact">
+                <button type="button" class="btn btn-outline-light ">
+                    联系我们
+                </button>
+                <div class="showPic">
+                    <img th:src="@{/official-website/img/erweima.jpg}" alt="二维码">
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- 中心内容 -->
+<div class="container bl-container">
+    <div class="row">
+        <!-- 左边栏 -->
+        <div class="col-md-3 col-sm-12">
+            <div class="bl-cloumn-nav">
+                <a class="bl-cloumn-nav-item nav-link active" href="#">关于我们</a>
+                <a class="bl-cloumn-nav-item nav-link" href="#">核心团队</a>
+                <a class="bl-cloumn-nav-item nav-link" href="#">联系我们</a>
+            </div>
+        </div>
+
+        <!-- 对应右边部分 -->
+        <div class="col-md-9 col-sm-12 rightAll">
+            <!-- 关于我们 -->
+            <div class="box-content showThis">
+                <h2 class="bl-title-left">关于我们</h2>
+                <div class="bl-artical">
+                    <p>一路走来，我们团队都经历了不少困难，但是每一次的困难都会被我们迎刃而解，因为我们坚信：</p>
+                    <h3>坚韧、敏捷、强大、沉稳</h3>
+                    <p>会让我们逐渐的走向成功，因为我们满怀着热情，用尽全部的气力，不为自己留下退路！</p>
+                    <p>犀牛精神是我们企业的核心文化，我们带着热情与信念，用坚韧巩固地基、用敏捷完成任务、用沉稳面对困难、用强大诠释自我</p>
+                    <p>云顶犀科技致力于为企业或个人提供更加优质的软件技术服务，以创新创造为核心理念，打造具有高水平的品牌形象，用技术为用户实现软件需求，用行动做好售后服务，不辜负每一位客户对我们的期待与信赖，感谢每一位用户，感谢每一次信赖</p>
+
+                </div>
+            </div>
+
+            <!-- 核心团队 -->
+            <div class="box-content">
+                <h2 class="bl-title-left">核心团队</h2>
+                <div class="outbox">
+
+                    <div class="innerbox">
+                        <div class="up">
+                            <!-- 左上部分 -->
+                            <div class="title">
+                                <div class="tit">后端工程师</div>
+                                <div class="tag">spring</div>
+                            </div>
+                            <!-- 右上部分 -->
+                            <div class="nameAndpic">
+                                <div class="name">Brains</div>
+                                <div class="pic">
+                                    <img th:src="@{/official-website/img/sao.jpg}" alt="sao">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <p>团队领导人，Java后台负责人，精通Java、JavaScript、Spring、SpringBoot、Vue，熟悉SpringBoot源码，能够熟练的使用Dom对浏览器进行脚本操作</p>
+                        </div>
+                    </div>
+            
+                    <div class="innerbox">
+                        <div class="up">
+                            <!-- 左上部分 -->
+                            <div class="title">
+                                <div class="tit">前端工程师</div>
+                                <div class="tag">Vue</div>
+                            </div>
+                            <!-- 右上部分 -->
+                            <div class="nameAndpic">
+                                <div class="name">Leo</div>
+                                <div class="pic">
+                                    <img th:src="@{/official-website/img/leo.jpg}" alt="leo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <p>前端负责人，精通HTML、CSS、JS、JQuery、Vue，具有完备的小程序开发能力</p>
+                        </div>
+                    </div>
+            
+                    <div class="innerbox">
+                        <div class="up">
+                            <!-- 左上部分 -->
+                            <div class="title">
+                                <div class="tit">后端工程师</div>
+                                <div class="tag">Linux</div>
+                            </div>
+                            <!-- 右上部分 -->
+                            <div class="nameAndpic">
+                                <div class="name">Sheng</div>
+                                <div class="pic">
+                                    <img th:src="@{/official-website/img/Sheng.jpg}" alt="sheng">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <p>Java后端核心工程师，多次参与大型项目开发，熟练掌握Linux、SpringBoot、SpringCloud以及Mysql，对数据库优化颇有研究</p>
+                        </div>
+                    </div>
+            
+                    <div class="innerbox">
+                        <div class="up">
+                            <!-- 左上部分 -->
+                            <div class="title">
+                                <div class="tit">前端工程师</div>
+                                <div class="tag">小程序</div>
+                            </div>
+                            <!-- 右上部分 -->
+                            <div class="nameAndpic">
+                                <div class="name">Heniry</div>
+                                <div class="pic">
+                                    <img th:src="@{/official-website/img/kangkang.jpg}" alt="kang">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <p>前端负责人，精通JS、CSS、JQuery、Vue，具备独立开发网站与小程序的能力，对组件化、模块化的开发有深入的探究</p>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <!-- 联系我们 -->
+            <div class="box-content">
+                <h2 class="bl-title-left">联系我们</h2>
+                <div class="bl-artical">
+                    
+                    <div class="lx-outbox">
+                        <div class="ls-innerbox">
+                            <!-- 左边部分 -->
+                            <div class="ls-rg">
+                                <div>电话：18200181462</div>
+                                <div>微信：YI13523327374</div>
+                                <div>QQ：2230817302</div>
+                                <div>邮箱：2230817302@qq.com</div>
+                            </div>
+
+                            <!-- 右边部分 -->
+                            <div class="ls-le">
+                                <img th:src="@{/official-website/img/erweima.jpg}" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- 脚注 -->
+<div class="bl-footer container-fluid">
+    <div class="container">
+        <ul class="bl-footer-list">
+            <li class="bl-footer-item">
+                <a href="#">帮助</a>
+            </li>
+            <li class="bl-footer-item">
+                <a href="#">隐私</a>
+            </li>
+            <li class="bl-footer-item">
+                <a href="#">条款</a>
+            </li>
+        </ul>
+        <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
+    </div>
+</div>
+<!-- js -->
+<script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+<script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+
+<!-- 自定义js -->
+<script>
+    
+    $(function(){
+        // 设置全局变量记录点击对象
+        var count;
+        // 点击对应 .nav-link 为其添加类active
+        $('.nav-link').click(function(){
+            $(this).addClass('active').siblings('.nav-link').removeClass('active');
+            // 获取当前jquery对象索引
+            var index = $(this).index();
+            // 存储对应索引
+            count = index;
+            // 为对应jquery对象添加showThis类
+            $('.rightAll>div').eq(index).addClass('showThis').siblings('div').removeClass('showThis');
+
+        });
+
+        // 核心团队设置鼠标移入事件
+        $('.innerbox').mouseenter(function(){
+            $(this).addClass('shadowBox');
+        });
+
+        // 核心团队设置鼠标移入事件
+        $('.innerbox').mouseleave(function(){
+            $(this).removeClass('shadowBox');
+        });
+
+
+        // 鼠标移入
+        $('.btn-outline-light').mouseenter(function(){
+            // 判断是否处在联系我们页面
+            if(count != 2){
+                $('.showPic').stop(true,false).slideDown();
+            }
+        });
+
+        // 鼠标移出
+        $('.btn-outline-light').mouseleave(function(){
+            $('.showPic').stop(true,false).slideUp();
+        });
+        
+
+
+        // 核心团队
+        $('.innerbox').click(function(){
+            location = "/justyou/about2";
+        });
+
+    });
+
+</script>
+</body>
+</html>

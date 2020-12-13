@@ -1,22 +1,15 @@
 package com.cloud.api.controller;
-import com.cloud.api.bean.entity.Admin;
-import com.cloud.api.service.IndexService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLDecoder;
 /**
  * @author HP
  */
@@ -24,12 +17,9 @@ import java.net.URLDecoder;
 @ApiIgnore
 public class IndexController {
 
-    @Autowired
-    private IndexService indexService;
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
-    public String admin(HttpServletRequest request) {
+    public String admin() {
         return "X-admin/index";
 
     }
@@ -55,7 +45,7 @@ public class IndexController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @RequestMapping(value = {"/", "index"})
+    @RequestMapping(value = {"/admin"})
     public String index() {
         return "X-admin/index";
     }
@@ -68,13 +58,32 @@ public class IndexController {
 
     /**
      * 登出操作
-     * @param request
-     * @return
+     * @param request 用来获取session
+     * @return 返回登录界面
      */
     @RequestMapping(value = "logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("admin");
         return "X-admin/login";
     }
+
+
+    @RequestMapping(value ={"/" ,"/index"})
+    public String goToOfficialWeb(){
+        return "official-website/bl-first-index";
+    }
+    @RequestMapping(value = "/list")
+    public String goToList(){
+        return "official-website/bl-aritical-list";
+    }
+    @RequestMapping(value = "/about")
+    public String goAbout1(){
+        return "official-website/bl-about";
+    }
+    @RequestMapping(value = "/about2")
+    public String goToAbout2(){
+        return "official-website/bl-about2";
+    }
+
 }
 

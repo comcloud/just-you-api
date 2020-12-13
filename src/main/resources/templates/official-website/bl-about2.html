@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>云顶犀科技官方网站</title>
+    <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
+    <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+</head>
+<body>
+<!-- 顶部栏 -->
+<div class="bl-header container-fluid">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+            <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/list}">条款</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a th:href="@{/about}">关于</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 联系我们按钮 -->
+            <div class="top-contact">
+                <button type="button" class="btn btn-outline-light ">
+                    联系我们
+                </button>
+                <div class="showPic">
+                    <img th:src="@{/official-website/img/erweima.jpg}" alt="二维码">
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</div>
+<!-- 内容 -->
+<div class="container bl-container">
+    <h2 class="bl-title-center">我们的团队</h2>
+    <div class="bl-artical">
+        <!-- 轮播图 -->
+        <div class="banner" >
+            <div class="img-wrap">
+                <ul>
+                    <li class="item" style="display: block">
+                        <a href="#"><img th:src="@{/official-website/img/team1.jpg}" alt="" class="lunbo"></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img th:src="@{/official-website/img/team2.jpg}" alt="" class="lunbo"></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img th:src="@{/official-website/img/team3.jpg}" alt="" class="lunbo"></a>
+                    </li>
+                    <li class="item">
+                        <a href="#"><img th:src="@{/official-website/img/team5.jpg}" alt="" class="lunbo"></a>
+                    </li>
+               </ul>
+           </div>
+       </div>
+
+       <!-- 介绍 -->
+       <div class="introduce">
+            <p>我们是一群热爱技术，热爱生活，愿意用汗水谱写青春的后浪；只要团结一心，勇于拼搏，为了心中的执念而努力着，我们相信没有任何困难可以阻止我们迈向阳光的步伐</p>
+            <p>每一次微小的尝试都凝聚着力量，汇集在某一处便成为你勇敢的源泉。Fighting！</p>
+            <p>单个的人是软弱无力的，就像漂流的鲁滨逊一样，只有同别人在一起，他才可以完成许多事业。我们团队的每一位成员都具有自己独有的冲劲，我们怀揣着坚韧，领有着敏捷，拥有着沉稳，，诠释着强大，而这些精神正是组成我们犀牛文化的核心</p>
+       </div>
+       
+
+    </div>
+</div>
+
+<!-- 脚注 -->
+<div class="bl-footer container-fluid">
+    <div class="container">
+        <ul class="bl-footer-list">
+            <li class="bl-footer-item">
+                <a href="#">帮助</a>
+            </li>
+            <li class="bl-footer-item">
+                <a href="#">隐私</a>
+            </li>
+            <li class="bl-footer-item">
+                <a href="#">条款</a>
+            </li>
+        </ul>
+        <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
+    </div>
+</div>
+
+<script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+<script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+
+    $(function(){
+        var index2 = 0;/*初始化一个变量 指向下彪*/
+        //点击点
+        $(".tab-btn .btn").click(function () {
+            index2 = $(this).index();//获取点击该元素下彪
+            $(this).addClass("active").siblings().removeClass("active");
+            $(".item").eq(index2).fadeIn().siblings().fadeOut();
+        });
+        //点击切换效果
+        $(".lr-tab .right").click(function () {
+            index2 ++;
+            if (index2 >4){ index2 = 0;}
+            $(".item").eq(index2).fadeIn().siblings().fadeOut();
+            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
+
+        });
+        $(".lr-tab .left").click(function () {
+            index2 --;
+            if(index2 < 0){index2 = 4;}
+            $(".item").eq(index2).fadeIn().siblings().fadeOut();
+            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
+
+        });
+        var time2 = setInterval(function () {
+            index2 ++;
+            if (index2 >4){ index2 = 0;}
+            $(".item").eq(index2).fadeIn().siblings().fadeOut();
+            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
+
+        },4000); //定时器 重复
+
+        // 鼠标移入
+        $('.btn-outline-light').mouseenter(function(){
+            $('.showPic').stop(true,false).slideDown();
+        });
+
+        // 鼠标移出
+        $('.btn-outline-light').mouseleave(function(){
+            $('.showPic').stop(true,false).slideUp();
+        });
+
+    });
+    
+</script>
+</body>
+</html>

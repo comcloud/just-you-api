@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>云顶犀科技官方网站</title>
+
+    <!-- 样式css -->
+    <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
+
+    <!-- 我们的优势中圆圈的图 -->
+    <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+    <!-- 动画效果css -->
+    <link th:href="@{/official-website/aos/dist/aos.css}" rel="stylesheet">
+    
+    <style>
+        .boxShadowShow{
+            box-shadow: 0 10px 40px 0 rgb(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部栏 -->
+    <div class="bl-header container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+                <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/list}">条款</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a th:href="@{/about}">关于</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 联系我们按钮 -->
+                <div class="top-contact">
+                    <button type="button" class="btn btn-outline-light ">
+                        联系我们
+                    </button>
+                    <div class="showPic">
+                        <img th:src="@{/official-website/img/erweima.jpg}" alt="二维码">
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <!-- 标语 -->
+    <div class="bl-bgclor container-fluid">
+        <div class="bl-banner container">
+            <p>坚韧，敏捷，强大，沉稳。</p>
+            <div class="jpress-img" data-aos="fade-up"><img th:src="@{/official-website/img/technology4.jpg}" /></div>
+        </div>
+    </div>
+
+    <!-- 我们的优势 -->
+    <!-- <div class="container bl-card">
+        <h3 class="bl-card-title">我们的优势</h3>
+        <div class=" card-group bl-card-body">
+            <div class="card card-body-item">
+                <div class="item-icon">
+                    <i class="fa fa-paper-plane-o fa-4x align-middle" aria-hidden="true"></i>
+                </div>
+                <div class="card-body item-body item-body">
+                    <h3 class="card-title">轻</h3>
+                    <p class="card-text"><small class="text-muted">轻到只有8张数据表，却能实现WordPress的几乎所有功能</small></p>
+                </div>
+            </div>
+
+            <div class="card card-body-item">
+                <div class="item-icon">
+                    <i class="fa fa-heart-o fa-4x align-middle" aria-hidden="true"></i>
+                </div>
+                <div class="card-body item-body item-body">
+                    <h3 class="card-title">快</h3>
+                    <p class="card-text"><small class="text-muted">无论多么复杂的页面，JPress响应几乎在10毫秒内</small></p>
+                </div>
+            </div>
+
+            <div class="card card-body-item">
+                <div class="item-icon">
+                    <i class="fa fa-dribbble fa-4x align-middle" aria-hidden="true"></i>
+                </div>
+                <div class="card-body item-body item-body">
+                    <h3 class="card-title">灵活</h3>
+                    <p class="card-text"><small class="text-muted">JPress提出的“模板即模型”的概念，几乎可以用来做任何类型的网站。</small></p>
+                </div>
+            </div>
+
+            <div class="card card-body-item">
+                <div class="item-icon">
+                    <i class="fa fa-hand-rock-o fa-4x align-middle" aria-hidden="true"></i>
+                </div>
+                <div class="card-body item-body item-body">
+                    <h3 class="card-title">国产</h3>
+                    <p class="card-text"><small class="text-muted">JPress天生融合了微信公众号，更符合国人需求。</small></p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- 服务介绍 -->
+    <div class="container bl-card">
+        <h3 class="bl-card-title">服务介绍</h3>
+        <div class="row product-box-body">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-image" data-aos="zoom-in">
+                <img class="card-img-left" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1786244288,2376893068&fm=26&gp=0.jpg" alt="Card image cap" />
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-content" data-aos="fade-left">
+                <h3 class="card-title">网站制作</h3>
+                <!-- <p>功能轻、产品轻、代码轻</p> -->
+                <p>专业的UI设计、强大的前后端团队、我们以Vue作为前端主流开发框架，基于SpringBoot框架搭建Java后台，主流体系只为给您带来最优质的服务。
+                </p>
+            </div>
+        </div>
+
+        <div class="row product-box-body bl-active">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-content" data-aos="fade-left" data-aos-offset="100">
+                <h3 class="card-title">小程序开发</h3>
+                <!-- <p>我们非常重视代码质量和运行效率</p> -->
+                <p>规范化的ES6开发，合理且快速的数据传输，细致的完成每一次对接，解决不同客户在项目上需求，是我们一生的追求
+                </p>
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-image" data-aos="zoom-in" data-aos-offset="100">
+                <img class="card-img-left" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=914405810,2589276015&fm=26&gp=0.jpg" alt="Card image cap" />
+            </div>
+        </div>
+
+        <div class="row product-box-body">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-image" data-aos="zoom-in">
+                <img class="card-img-left" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1162146597,1120668268&fm=26&gp=0.jpg" alt="Card image cap" />
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-content" data-aos="fade-left">
+                <h3 class="card-title">APP</h3>
+                <!-- <p>描述</p> -->
+                <p>囊括：B2C，B2B，O2O等APP开发  专业量身定制 个性化的模块 用实力赢得您的信赖</p>
+            </div>
+        </div>
+
+        <div class="row product-box-body bl-active">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-content" data-aos="fade-left">
+                <h3 class="card-title">视觉设计</h3>
+                <!-- <p class="card-text">我们非常重视文档</p> -->
+                <p class="card-text">Logo设计、页面设计、页面优化</p>
+
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-image" data-aos="zoom-in">
+                <img class="card-img-left" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3285651868,876714194&fm=26&gp=0.jpg" alt="Card image cap" />
+
+            </div>
+        </div>
+
+        <div class="row product-box-body">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-image" data-aos="zoom-in">
+                <img class="card-img-left" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2334335033,772056051&fm=26&gp=0.jpg" alt="Card image cap" />
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-content" data-aos="fade-left">
+                <h3 class="card-title">二次开发</h3>
+                <!-- <p>给你第二次</p> -->
+                <p>对代码进行重构、规范开发、修复Bug、解决漏洞</p>
+            </div>
+        </div>
+
+        <div class="row product-box-body bl-active">
+            <div class="col-md-6 col-sm-12 product-box-left product-box-content" data-aos="fade-left">
+                <h3 class="card-title">后期维护</h3>
+                <!-- <p class="card-text"></p> -->
+                <p class="card-text">后台管理、技术支持、产品维护、代码修复，集中改善后期维护的复杂性</p>
+            </div>
+            <div class="col-md-6 col-sm-12 product-box-right product-box-image" data-aos="zoom-in">
+                <img class="card-img-left" th:src="@{/official-website/img/houqiweihu.jpg}" alt="Card image cap" />
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 解决方案 -->
+    <div class="container">
+        <h3 class="bl-card-title">解决方案</h3>
+        <div class="card-deck text-center" data-aos="fade-left">
+            <div class="card">
+                <div class="card-img-top"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1755281619,2367977098&fm=26&gp=0.jpg" alt=""></div>
+                <div class="card-body">
+                    <h3 class="card-title">在线教育</h3>
+                    <p class="card-text"><small class="text-muted">教育类软件</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-top"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1471314768,139441569&fm=26&gp=0.jpg" alt=""></div>
+                <div class="card-body">
+                    <h3 class="card-title">移动电商</h3>
+                    <p class="card-text"><small class="text-muted">电商平台</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-top"><img th:src="@{/official-website/img/wechat.jpg}" alt=""></div>
+                <div class="card-body">
+                    <h3 class="card-title">微信定制</h3>
+                    <p class="card-text"><small class="text-muted">小程序开发</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-top"><img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1421763435,1066763244&fm=26&gp=0.jpg" alt=""></div>
+                <div class="card-body">
+                    <h3 class="card-title">企业网站</h3>
+                    <p class="card-text"><small class="text-muted">企业网站定制</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用户说 -->
+    <div class="container">
+        <h3 class="bl-card-title">企业文化</h3>
+        <div class="card-deck" data-aos="fade-right">
+            <div class="card">
+                <!-- <div class="card-body">
+                    "这是我在创业过程中用过最好的产品，没有之一。其提供的模块化和微信插件、方便我们团队进行快速的开发"
+                </div> -->
+                <div class="card-body">
+                    <h3 class="card-title">坚韧</h3>
+                    <p class="card-text"><small class="text-muted">lei</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <!-- <div class="card-body">
+                    "JPress源码的提供了良好的中文注释、同时代码极度简单、方便我们小白学习和使用，我也得到了快速的成长。"
+                </div> -->
+                <div class="card-body">
+                    <h3 class="card-title">敏捷</h3>
+                    <p class="card-text"><small class="text-muted">zhuang</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <!-- <div class="card-body">
+                    "刚开始接触JPress的时候，我其实是在找WordPress的代替版本，终于遇见了JPress和认识了海哥"
+                </div> -->
+                <div class="card-body">
+                    <h3 class="card-title">强大</h3>
+                    <p class="card-text"><small class="text-muted">sheng</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <!-- <div class="card-body">
+                    "JPress可以用来和微信公众号做链接，方便了粉丝和网站进行互动，近期也开始运营小程序，到时候还离不开JPress"
+                </div> -->
+                <div class="card-body">
+                    <h3 class="card-title">沉稳</h3>
+                    <p class="card-text"><small class="text-muted">kang</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 脚注 -->
+    <div class="bl-footer container-fluid">
+        <div class="container">
+            <ul class="bl-footer-list">
+                <li class="bl-footer-item">
+                    <a href="#">帮助</a>
+                </li>
+                <li class="bl-footer-item">
+                    <a href="#">隐私</a>
+                </li>
+                <li class="bl-footer-item">
+                    <a href="/list">条款</a>
+                </li>
+            </ul>
+            <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
+        </div>
+    </div>
+
+    <!-- 发布需求 -->
+    <!-- <a href="mailto:sample@fly63.com?subject=test&cc=sample@hotmail.com&subject=我是主题&body=你大爷">send mail</a> -->
+
+
+<script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+<script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/official-website/aos/dist/aos.js}"></script>
+
+<script>
+    $(function(){
+        // 鼠标移入
+        $('.btn-outline-light').mouseenter(function(){
+            $('.showPic').stop(true,false).slideDown();
+        });
+
+        // 鼠标移出
+        $('.btn-outline-light').mouseleave(function(){
+            $('.showPic').stop(true,false).slideUp();
+        });
+
+        // 鼠标移入
+        $('.card').mouseenter(function(){
+            $(this).addClass('boxShadowShow');
+        });
+
+        // 鼠标移出
+        $('.card').mouseleave(function(){
+            $(this).removeClass('boxShadowShow');
+        });
+    });
+</script>
+<script>
+    AOS. init();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+/* 关于我们 */
+.outbox{
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+}
+.outbox .innerbox{
+    display: flex;
+    flex-direction: column;
+    width: 630px;
+    height: 180px;
+    padding: 30px 30px 30px 30px;
+    /* background: rgb(240, 240, 240); */
+    background: rgb(247, 247, 247);
+    margin-bottom: 20px;
+}
+.outbox .innerbox .up{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.outbox .innerbox .up .title{
+    display: flex;
+    justify-content: space-between;
+    /* box-sizing: border-box; */
+}
+.outbox .innerbox .up .title .tag{
+    margin-left: 15px;
+    font-size: 10px;
+    background-color: #009688 !important;
+    color: #fff;
+    /* padding-top: 5px; */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0 3px 2px 3px;
+}
+.outbox .innerbox .up .title .tit{
+    color: #000;
+    font-size: 20px;
+}
+.outbox .innerbox .up .nameAndpic{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.outbox .innerbox .up .nameAndpic .pic{
+    padding-left: 8px;
+    width: 42px;
+    height: 32px;
+}
+.outbox .innerbox .up .nameAndpic .pic img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+.outbox .innerbox .down p{
+    height: 48px;
+    color: #999;
+    /* line-height: 24px; */
+    font-size: 14px;
+    /* overflow: hidden; */
+    padding-top: 30px;
+
+}
+
+
+/* 联系我们 */
+.lx-outbox .ls-innerbox{
+    display: flex;
+    justify-content: space-between;
+}
+.lx-outbox .ls-innerbox .ls-rg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 25px;
+    font-weight: bold;
+    color: rosybrown;
+
+}
+.lx-outbox .ls-innerbox .ls-le{
+    width: 200px;
+    height: 260px;
+}
+
+.lx-outbox .ls-innerbox .ls-le img{
+    width: 100%;
+    height: 100%;
+}

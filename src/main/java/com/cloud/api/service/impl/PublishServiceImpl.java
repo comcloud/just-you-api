@@ -121,7 +121,7 @@ public class PublishServiceImpl implements PublishService {
     public String getKey(String jsCode) {
         String baseUrl = "https://api.weixin.qq.com/sns/jscode2session" + "?js_code=" + jsCode;
         String appid = "wx45847f8c326518ee";
-        String secret = "2f93f9e0028618cb7adfb001325b3515";
+        String secret = "wx45847f8c326518ee";
         String grantType = "authorization_code";
         return HttpUtil.get(baseUrl + "&appid=" + appid + "&secret=" + secret + "&grant_type=" + grantType);
     }

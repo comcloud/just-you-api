@@ -1,7 +1,9 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +20,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     private UserDetailsService userDetailsService = new UserDetailsServiceImpl();
 
@@ -62,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/upload/**").permitAll()
                 //访问资源路径
                 .antMatchers("/upload-image/**").permitAll()
+                //官方访问
+                .antMatchers("/","/index","/list","/about","/about2").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -91,7 +98,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(new CustomPasswordEncoder());
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new CustomPasswordEncoder());
     }
 
     /**
@@ -102,7 +111,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/x-admin/js/**","/x-admin/css/**",
-                    "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**")
+                    "/x-admin/images/**","/x-admin/fonts/**","/x-admin/lib/**"
+                ,"/official-website/**")
                 .antMatchers("/taskHall/**")
                 .antMatchers("/websocket/**");
     }
