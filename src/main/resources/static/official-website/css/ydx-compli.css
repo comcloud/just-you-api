@@ -1,0 +1,38 @@
+/* *******************移动电商方案 */
+.showBoxShadow-shop{
+    box-shadow: 10px 10px 20px #99b7f7;
+}
+
+
+/* *******************视频解决方案 */
+.ydx-compli-vedio{
+    background: rgb(245,245,245);
+    padding-bottom: 65px;
+}
+.showBoxShadow-vedio{
+    box-shadow: 0 0 60px #888888;
+    transform: scale(1.1);
+}
+
+/* *******************软件趋势化 */
+.echart-pic{
+    padding-top: 40px;
+}
+
+/* *******************技术支持 */
+.ydx-compli-tech-outbox{
+    padding-bottom: 80px;
+}
+.ydx-compli-tech .tech-tit{
+    padding-top: 18px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.ydx-compli-tech .tech-desc{
+    padding-top: 8px;
+    font-size: 16px;
+}
+.animate-techo{
+    transform: translateY(-20%);
+}
+

@@ -1,9 +1,7 @@
 package com.cloud.api.config.security;
 
 import com.cloud.api.service.impl.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     private UserDetailsService userDetailsService = new UserDetailsServiceImpl();
 
@@ -68,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //访问资源路径
                 .antMatchers("/upload-image/**").permitAll()
                 //官方访问
-                .antMatchers("/","/index","/list","/about","/about2").permitAll()
+                .antMatchers("/","/index","/list","/about","/about2","/coop","/compli","/foundation").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

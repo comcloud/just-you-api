@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 响应式 viewport meta 标签 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>设计方案</title>
+    <!-- 企业图标 -->
+    <link rel="icon" href="https://s3.ax1x.com/2020/12/12/rZKdRe.png">
+    <!-- 动画效果css -->
+    <link th:href="@{/official-website/aos/dist/aos.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/official-website/bootstrap/css/bootstrap.css}">
+    <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/official-website/css/ydx-compli.css}">
+
+</head>
+
+<body>
+    <!-- --------------------------顶部栏----------------------------- -->
+    <div class="bl-header container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+                <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a th:href="@{/}">首页展示<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a th:href="@{/compli}">设计方案</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/coop}">合作开发</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{list}">条款服务</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{about}">关于我们</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 联系我们按钮 -->
+                <div class="top-contact">
+                    <button type="button" class="btn btn-outline-light ">
+                        联系我们
+                    </button>
+                    <div class="showPic">
+                        <img src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="二维码">
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <!-- -------------------------移动电商---------------------------- -->
+    <div class="container">
+        <!-- 标题 -->
+        <h2 class="text-center mt-5">移动电商解决方案</h2>
+        <p class="text-center text-muted mt-3">根据不同需求，为您量身打造个性化电商平台</p>
+
+        <div class="row mt-5" data-aos="zoom-out">
+            <div data-aos="fade-right" class="shop-card card mb-3 col-lg-6 mr-3 ml-2" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="https://s3.ax1x.com/2020/12/10/rFlQkF.png" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">O2O新零售平台</h5>
+                            <p class="card-text">为零售企业提供创新型线上化经营管理方案，实地化运转线上商城和线下门店</p>
+                            <p class="card-text"><small class="text-muted">O2O new retail platform</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-right" class="shop-card card mb-3 col-lg-6 mr-3 ml-2" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4 mt-5">
+                        <img src="https://s3.ax1x.com/2020/12/10/rFl8p9.png" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">B2B/S2B平台</h5>
+                            <p class="card-text">S2B产业电商平台，搭建电商化销售商城，提高批发分销速度</p>
+                            <p class="card-text"><small class="text-muted">B2B / S2B platform</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" class="shop-card card mb-3 col-lg-6 mr-3 ml-2" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4 mt-1">
+                        <img src="https://s3.ax1x.com/2020/12/10/rFllY4.png" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">S2B2C供应链零售平台</h5>
+                            <p class="card-text">整合行业供应资源，为经销商、供应商、零售商带来供应区块链方案</p>
+                            <p class="card-text"><small class="text-muted">S2B2C supply chain retail platform</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" class="shop-card card mb-3 col-lg-6 mr-3 ml-2" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4 mt-4">
+                        <img src="https://s3.ax1x.com/2020/12/10/rFl1fJ.png" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">B2C/BBC电商平台</h5>
+                            <p class="card-text">支持商家形成自营化商城，打造类淘宝/京东模式的多商户入驻的电商平台</p>
+                            <p class="card-text"><small class="text-muted">B2C / BBC e-commerce platform</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- -------------------------视频直播---------------------------- -->
+    <div class="ydx-compli-vedio">
+        <div class="container">
+            <!-- 标题 -->
+            <h2 class="text-center mt-5 pt-5">视频直播解决方案</h2>
+            <p class="text-center text-muted mt-3">以最优的方式为您提供视频直播类软件服务</p>
+
+            <div class="row mt-5" data-aos="zoom-in">
+                <div class="row row-cols-1 row-cols-md-3">
+
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="vedio-card card h-100">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFdELQ.png" class="card-img-top h-75" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">短视频平台</h5>
+                                <p class="card-text">利用短视频信息平台强大的用户沉浸式体验，提高用户留存能力。通过短视频and电商，短视频and分销等方式带动商业价值，实现流量变现
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="vedio-card card h-100">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFdZZj.png" class="card-img-top h-75" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">在线教育</h5>
+                                <p class="card-text">将传统课堂、书本等知识通过短视频的形式展现，短视频的展现能力更强，且更能激起用户的学习兴趣，避免枯燥的长视频知识展现形式</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="vedio-card card h-100">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFdAsg.png" class="card-img-top h-75" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">直播带货</h5>
+                                <p class="card-text">通过直播系统自带的橱窗性,可以帮助用户快速获取电商产品信息。更多元化的互动方式进一步促进了消费者的购买欲望。提高直播转化率</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-3 mb-4">
+                        <div class="vedio-card card h-100">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFdeds.png" class="card-img-top h-75" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">直播社交</h5>
+                                <p class="card-text">通过直播的形式实现社交，避开传统社交方式，添加语音互动，弹幕互动，同城直播，私聊互动等功能，打造多元化的社交需求，满足用户体验</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- -------------------------软件需求显示---------------------------- -->
+    <div class="container">
+        <!-- 标题 -->
+        <h2 class="text-center mt-5 pt-5">软件需求趋势化</h2>
+        <p class="text-center text-muted mt-3">随着科技的进步，信息化时代的今天，软件的需求正在逐步扩大</p>
+
+        <div class="echart-pic row">
+            <!-- ECharts 的 DOM -->
+            <div class='d-md-block d-none col-lg-7 col-11' id="compli-fir-chart" style="height:400px;"></div>
+            <div class="col-lg-5">
+                <h4 class="text-right">软件服务正在趋势化，您跟上了吗？</h4>
+                <h6 class="text-right mt-4">协伴时代发展，随同科技进步，时代在悄然的进步，生活在不断的变化，越来越多的行业都在朝着软件化发展</h6>
+            </div>
+        </div>
+
+        <div class="echart-pic row">
+            <!-- ECharts DOM -->
+            <div class='col-lg-7 col-11' id="compli-sec-chart" style="height:400px;"></div>
+            <div class="d-lg-block d-none col-5">
+                <h4 class="text-right">软件普及化</h4>
+                <h6 class="text-right mt-4">不论是现在的京东还是淘宝，亦或是兴起的得物与百词斩，不可否认未来是属于科技的</h6>
+            </div>
+        </div>
+
+    
+    </div>
+    
+    <!-- -------------------------技术支持---------------------------- -->
+    <div class="ydx-compli-tech-outbox">
+        <div class="container">
+            <!-- 标题 -->
+            <h2 class="text-center mt-4 pt-5">强大的技术支持</h2>
+            <p class="text-center text-muted mt-3">云顶犀科技能够为用户提供更加优质、更加安全的软件系统</p>
+
+            <div class="row text-center">
+                <div data-aos="fade-left" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rF26iD.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            安全防护
+                        </div>
+                        <div class="tech-desc">
+                            通过MD5加密实现安全防护措施性加密，为企业提供更加优质的系统保障
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFc41A.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            私有化部署
+                        </div>
+                        <div class="tech-desc">
+                            云顶犀管理系统支持私有化部署，强大可靠的架构能够有效提升系统体验
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFcTnP.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            一站式服务
+                        </div>
+                        <div class="tech-desc">
+                            全平台覆盖，为企业级客户提供一站式解决方式。多端生态化服务，可实现企业间的互通与合作
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-right" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFc70f.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            数据监控
+                        </div>
+                        <div class="tech-desc">
+                            通过优质数据源与高端性能化监控软件，实现对数据的监管与掌控
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-right" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFcIXt.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            多端登录
+                        </div>
+                        <div class="tech-desc">
+                            跨端化数据同步，摆脱传统化的坐台办公，实现移动、高效、方便的办公方案
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-right" class="col-lg-4 col-sm-6 mt-5">
+                    <div class="ydx-compli-tech">
+                        <div class="tech-img">
+                            <img src="https://s3.ax1x.com/2020/12/10/rFcRte.png" alt="">
+                        </div>
+                        <div class="tech-tit">
+                            数据分析
+                        </div>
+                        <div class="tech-desc">
+                            严密的数据处理算法，能够分析处理大量烦杂性数据，甄选有效信息
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ---------------------------巨幕------------------------------ -->
+    <div class="ydx-jumb-outbox">
+        <div class="jumbotron" data-aos="zoom-out">
+            <h1 class="display-4">LEARN MORE</h1>
+            <p class="lead">云顶犀科技致力于为企业或个人提供更加优质的软件技术服务，以创新创造为核心理念，打造具有高水平的品牌形象，用技术为用户实现软件需求</p>
+            <hr class="my-4">
+            <p>Cloud top rhino technology is committed to providing enterprises or individuals with better software
+                technology services. With innovation and creation as the core concept, it creates a high-level brand image
+                and realizes software requirements for users with technology</p>
+            <a class="btn btn-primary btn-lg" th:href="@{/about}" role="button">了解更多</a>
+        </div>
+    </div>
+
+
+    <!-- ------------------------------脚注---------------------------- -->
+    <div class="bl-footer container-fluid">
+        <!-- PC端 -->
+        <div class="container d-sm-block d-none" style="padding-bottom: 30px;padding-top: 20px;">
+            <!-- PC端 -->
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="bl-first-index.html">
+                        <h5>官网入口</h5>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>网站首页</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>条款约定</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>服务政策</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>关于我们</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-compli.html">
+                        <h5>设计方案</h5>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>移动电商</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>视频直播</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>在线教育</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>微信定制</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-coop.html">
+                        <h5>合作开发</h5>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>万物互联</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>人工智能</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>软件设计</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>大数据分析</h6>
+                    </a>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- 手机端 -->
+        <div class="container d-block d-sm-none" style="padding-bottom: 50px;padding-top: 20px;">
+
+            <!-- 手机端 -->
+            <div class="row">
+                <!-- 电话与二维码 -->
+                <div class="phonewitherwei">
+                    <!-- 电话 -->
+                    <div class="row" style="padding-left: 20px;margin-top: -10px;">
+                        <h1>182-0018-1462</h1>
+                    </div>
+                    <div class="row mt-3 mb-3" style="padding-left: 20px;">
+                        <h5>24小时售前咨询</h5>
+                    </div>
+                    <!-- 二维码 -->
+                    <div class="row no-gutters">
+                        <img class="col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="">
+                        <img class="offset-2 col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEdCgP.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 底部 -->
+        <div class="container">
+            <ul class="bl-footer-list">
+                <li class="bl-footer-item">
+                    <a href="#">帮助</a>
+                </li>
+                <!-- 发布需求 -->
+                <li class="bl-footer-item">
+                    <a href="mailto:sample@fly63.com?subject=test&cc=sample@hotmail.com&subject=发布需求&body=2315831906@qq.com">发送邮件</a>
+                </li>
+                <li class="bl-footer-item">
+                    <a href="#">隐私</a>
+                </li>
+            </ul>
+            <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
+        </div>
+    </div>
+
+
+    <script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+    <script th:src="@{/official-website/bootstrap/js/bootstrap.js}"></script>
+    <script th:src="@{/official-website/aos/dist/aos.js}"></script>
+    <script th:src="@{/official-website/js/echarts.js}"></script>
+    <script th:src="@{/official-website/js/compli.js}"></script>
+
+    <script>
+        AOS. init();
+    </script>
+
+</body>
+
+</html>

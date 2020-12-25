@@ -1,0 +1,124 @@
+/******************************** 标语 - start *****************************/
+.ydx-index-by .by-fir{
+    color: #ffffff;
+    font-size:30px;
+    padding-top:120px;
+    padding-bottom: 100px;
+    background: #24262F;
+}
+.ydx-index-by .by-Sec{
+    color: #ffffff;
+    font-size:20px;
+    padding-top:23px;
+    padding-bottom:17px;
+    background: #24262F;
+}
+.ydx-index-by .del-bor{
+    padding-left: 0;
+    padding-right: 0;
+}
+/******************************** 标语 - end *****************************/
+
+
+
+
+/******************************** 轮播图 - start *****************************/
+.ydx-ind-lb .carousel-item{
+    background: no-repeat center center;
+    background-size: cover;
+}
+.ydx-ind-lb .carousel-item img{
+    width: 100%;
+    height: 100%;
+}
+@media screen and (min-width: 900px){
+    .ydx-ind-lb .carousel-item{
+        height: 610px;
+    }
+}
+
+@media screen and (max-width: 430px){
+    .ydx-ind-lb .carousel-item{
+        height: 210px;
+    }
+}
+
+/******************************** 轮播图 - end *****************************/
+
+
+
+
+/******************************** 一款软件的诞生 - start *****************************/
+.ydx-index-softbir{
+    margin: 50px 0 20px;
+}
+.ydx-index-sofbir-size{
+    width: 80px;
+    height: 80px;
+}
+/* 动画 */
+.animate-tobig{
+    transform: scale(1.2);
+    z-index: 999;
+}
+.animate-toback{
+    transform: scale(1);
+}
+
+/******************************** 一款软件的诞生 - end *****************************/
+
+
+
+
+/******************************** 解决方案 - start *****************************/
+.ydx-index-method{
+    margin: 50px 0 20px;
+}
+.ydx-fa-outbox{
+    width: 100%;
+    position: relative;
+}
+.ydx-fa-outbox img{
+    width: 100%;
+    height: 230px;
+    /* background: no-repeat center center; */
+    /* background-size: cover; */
+}
+.ydx-fa-outbox .fa-tit{
+    padding: 20px 0 15px;
+}
+.ydx-fa-innerbox-qy,.ydx-fa-innerbox-edu,.ydx-fa-innerbox-shop,.ydx-fa-innerbox-wc{
+    height: 230px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 30px;
+
+}
+.ydx-fa-desc-cn{
+    font-size: 20px;
+    padding-bottom: 25px;
+}
+.ydx-fa-desc-eng{
+    font-size: 20px;
+    opacity: 0.7;
+    padding-top: 3px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.ydx-fa-line{
+    width: 170px;
+    height: 3px;
+    background: #ffffff;
+}
+/******************************** 解决方案 - end *****************************/
+
+
+
+/******************************** 脚注 - end *****************************/
+
+/******************************** 脚注 - start *****************************/
+

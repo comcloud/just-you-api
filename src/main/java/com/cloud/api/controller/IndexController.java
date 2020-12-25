@@ -21,7 +21,6 @@ public class IndexController {
     @RequestMapping(value = "/admin", method = {RequestMethod.POST, RequestMethod.GET})
     public String admin() {
         return "X-admin/index";
-
     }
 
     @RequestMapping(value = "/login/error")
@@ -75,6 +74,20 @@ public class IndexController {
     @RequestMapping(value = "/list")
     public String goToList(){
         return "official-website/bl-aritical-list";
+    }
+
+    //前往设计方案
+    @RequestMapping(value = "/compli")
+    public String goCompli(){
+        return "official-website/ydx-compli";
+    }
+    @RequestMapping(value = "/coop")
+    public String goToCoop(){
+        return "official-website/ydx-coop";
+    }
+    @RequestMapping(value = "/foundation")
+    public String goToFoundation(){
+        return "official-website/dev-foundation";
     }
     @RequestMapping(value = "/about")
     public String goAbout1(){

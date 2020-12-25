@@ -1,242 +1,318 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>云顶犀科技官方网站</title>
-    <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- 企业图标 -->
+    <link rel="icon" href="https://s3.ax1x.com/2020/12/12/rZKdRe.png">
+    
+    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" th:href="@{/official-website/bootstrap/css/bootstrap.css}">
     <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
     <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
 </head>
+
 <body>
 
-<!-- 顶部栏 -->
-<div class="bl-header container-fluid">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
-            <a class="nav-prand" th:href="@{/}">YunDingXi</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a th:href="@{/list}">条款</a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/about}">关于</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- 联系我们按钮 -->
-            <div class="top-contact">
-                <button type="button" class="btn btn-outline-light ">
-                    联系我们
+    <!-- --------------------------顶部栏----------------------------- -->
+    <div class="bl-header container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+                <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="showPic">
-                    <img th:src="@{/official-website/img/erweima.jpg}" alt="二维码">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a th:href="@{/}">首页展示<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/compli}">设计方案</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/coop}">合作开发</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a th:href="@{list}">条款服务</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{about}">关于我们</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 联系我们按钮 -->
+                <div class="top-contact">
+                    <button type="button" class="btn btn-outline-light ">
+                        联系我们
+                    </button>
+                    <div class="showPic">
+                        <img src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="二维码">
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <!-- ----------------------------条款------------------------ -->
+    <div class="container">
+
+        <div class="tk-outbox">
+            <div class="tk-innerbox">
+                <!-- 标题 -->
+                <div class="tk-title">
+                    <h1>合规与诚信</h1>
+                </div>
+
+                <!-- 正文 -->
+                <div class="row mr-3 ml-3">
+                    <div class="tk-content">
+                        <h3>云顶犀科技公司合规高层承诺</h3>
+                        <p>坚持诚信经营、恪守商业道德、遵守所有适用的法律法规是云顶犀科技管理层一直秉持的核心理念；云顶犀科技长期致力于通过资源的持续投入建立符合业界最佳实践的合规管理体系，并坚持将合规管理端到端地落实到业务活动及流程中；云顶犀科技重视并持续营造诚信文化，要求每一位员工遵守商业行为准则。
+                        </p>
+                        <h3>云顶犀科技公司的合规管理</h3>
+
+                        <div class="tk-lis">
+                            <li>首席合规官统一管理公司合规并向董事会汇报；在各业务部门设置合规官并成立合规组织，负责本领域的合规管理。</li>
+                            <li>根据适用的法律法规并结合业务场景，识别与评估风险，设定合规目标，制定相应管控措施并落实到业务活动及流程中，实现对各个业务环节运作的合规管理与监督。同时，通过检查与审计检验合规管理体系的有效性，并通过回溯与改进实现合规管理体系持续优化。
+                            </li>
+                            <li>重视并持续提升员工的合规意识及能力，通过培训、宣传、考核、问责等方式，使员工充分了解公司和个人的合规遵从义务和责任，确保合规遵从融入到每一位员工的行为习惯中。</li>
+                            <li>与客户、合作伙伴及各国政府监管机构等利益相关方展开积极、开放的交流与合作，沟通华为的合规理念与实践，持续增强彼此的理解与互信。</li>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- ---------------------------多领域的合规建设 -------------------------->
+    <div class="js-outbox">
+        <div class="js-innerbox">
+            <!-- 标题 -->
+            <div class="js-title">
+                <h2 class="text-center">多领域的合规建设</h2>
+            </div>
+
+            <div class="container">
+                <!-- 内容 -->
+                <div class="row js-con">
+                    <!-- 单部分 -->
+                    <div class="col-xl-4 col-lg-6 js-single-part mt-4">
+                        <a href="#">
+                            <div class="up-img">
+                                <img src="https://s3.ax1x.com/2020/12/11/rEGW0s.jpg" alt="第一张">
+                            </div>
+
+                            <div class="down-words">
+                                <div class="down-box">
+                                    <h4>反商业贿赂</h4>
+                                    <p>云顶犀科技坚持诚信经营，恪守商业道德，遵守业务所在地所有适用并涉及到的反商业贿赂法律法规，坚决打击贿赂行为</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 js-single-part mt-4">
+                        <a href="#">
+                            <div class="up-img">
+                                <img src="https://s3.ax1x.com/2020/12/11/rEGRmj.jpg" alt="第一张">
+                            </div>
+
+                            <div class="down-words">
+                                <div class="down-box">
+                                    <h4>交易合规</h4>
+                                    <p>云顶犀科技长期致力于遵从业务所在国所有适用的法律法规。</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 js-single-part mt-4">
+                        <a href="#">
+                            <div class="up-img">
+                                <img src="https://s3.ax1x.com/2020/12/11/rEG4kq.jpg" alt="第一张">
+                            </div>
+
+                            <div class="down-words">
+                                <div class="down-box">
+                                    <h4>金融合规</h4>
+                                    <p>云顶犀切实履行自身的法律义务与社会责任，在采购、销售和资金流程中嵌入关键控制点，并持续优化IT系统，实现对各业务领域事前、事中和事后的金融合规管控。</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 js-single-part mt-4">
+                        <a href="#">
+                            <div class="up-img">
+                                <img src="https://s3.ax1x.com/2020/12/11/rEGf7n.jpg" alt="第一张">
+                            </div>
+
+                            <div class="down-words">
+                                <div class="down-box">
+                                    <h4>系统安全</h4>
+                                    <p>构筑我们产品的系统安全，打造品牌是云顶犀科技的重要发展战略之—。为了用户使用我们的产品放心，我们会不定时的对产品进行维护升级，尽力做到全方位的监控与管理。</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 js-single-part mt-4">
+                        <a href="">
+                            <div class="up-img">
+                                <img src="https://s3.ax1x.com/2020/12/11/rEG5t0.jpg" alt="第一张">
+                            </div>
+
+                            <div class="down-words">
+                                <div class="down-box">
+                                    <h4>商业秘密保护</h4>
+                                    <p>持续创新是云顶犀科技的信念来源，是我们发展的一条必不可少的道路，云顶犀科技坚信尊重和保护知识产权是创新的基本要素。</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
             </div>
 
-        </nav>
-    </div>
-</div>
-
-<!-- 条款 -->
-<div class="tk-outbox">
-    <div class="tk-innerbox">
-        <!-- 标题 -->
-        <div class="tk-title">
-            <h1>合规与诚信</h1>
         </div>
+    </div>
 
-        <!-- 正文 -->
-        <div class="tk-content">
-            <h3>云顶犀科技公司合规高层承诺</h3>
-            <p>坚持诚信经营、恪守商业道德、遵守所有适用的法律法规是云顶犀科技管理层一直秉持的核心理念；云顶犀科技长期致力于通过资源的持续投入建立符合业界最佳实践的合规管理体系，并坚持将合规管理端到端地落实到业务活动及流程中；云顶犀科技重视并持续营造诚信文化，要求每一位员工遵守商业行为准则。</p>
-            <h3>云顶犀科技公司的合规管理</h3>
-
-            <div class="tk-lis">
-                <li>首席合规官统一管理公司合规并向董事会汇报；在各业务部门设置合规官并成立合规组织，负责本领域的合规管理。</li>
-                <li>根据适用的法律法规并结合业务场景，识别与评估风险，设定合规目标，制定相应管控措施并落实到业务活动及流程中，实现对各个业务环节运作的合规管理与监督。同时，通过检查与审计检验合规管理体系的有效性，并通过回溯与改进实现合规管理体系持续优化。</li>
-                <li>重视并持续提升员工的合规意识及能力，通过培训、宣传、考核、问责等方式，使员工充分了解公司和个人的合规遵从义务和责任，确保合规遵从融入到每一位员工的行为习惯中。</li>
-                <li>与客户、合作伙伴及各国政府监管机构等利益相关方展开积极、开放的交流与合作，沟通华为的合规理念与实践，持续增强彼此的理解与互信。</li>
+    <!-- ------------------------------举报渠道----------------------------- -->
+    <div class="jb-out">
+        <div class="jb-inner">
+            
+            <div class="container">
+                <!-- 图 -->
+                <div id="jubao_img" class="jb-pic" 
+                data-sm-img="https://s3.ax1x.com/2020/12/12/rZtz9I.jpg"
+                data-big-img="https://s3.ax1x.com/2020/12/12/rZVYaF.jpg">
+                    <img src="https://s3.ax1x.com/2020/12/12/rZVYaF.jpg" alt="举报图">
+                </div>
             </div>
+
+        </div>
+    </div>
+
+
+    <!-- ------------------------------脚注---------------------------- -->
+    <div class="bl-footer container-fluid">
+        <!-- PC端 -->
+        <div class="container d-sm-block d-none" style="padding-bottom: 30px;padding-top: 20px;">
+            <!-- PC端 -->
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="bl-first-index.html">
+                        <h5>官网入口</h5>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>网站首页</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>条款约定</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>服务政策</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>关于我们</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-compli.html">
+                        <h5>设计方案</h5>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>移动电商</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>视频直播</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>在线教育</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>微信定制</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-coop.html">
+                        <h5>合作开发</h5>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>万物互联</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>人工智能</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>软件设计</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>大数据分析</h6>
+                    </a>
+                </div>
+                
+            </div>
+            
         </div>
         
-    </div>
-</div>
+        <!-- 手机端 -->
+        <div class="container d-block d-sm-none" style="padding-bottom: 50px;padding-top: 20px;">
 
-<!-- 多领域的合规建设 -->
-<div class="js-outbox">
-    <div class="js-innerbox">
-        <!-- 标题 -->
-        <div class="js-title">
-            <h2>多领域的合规建设</h2>
-        </div>
-
-        <!-- 内容 -->
-        <div class="js-con">
-
-            <!-- 单部分 -->
-            <div class="js-single-part">
-                <a href="#">
-                    <div class="up-img">
-                        <img th:src="@{/official-website/img/fandui.jpg}" alt="第一张">
+            <!-- 手机端 -->
+            <div class="row">
+                <!-- 电话与二维码 -->
+                <div class="phonewitherwei">
+                    <!-- 电话 -->
+                    <div class="row" style="padding-left: 20px;margin-top: -10px;">
+                        <h1>182-0018-1462</h1>
                     </div>
-
-                    <div class="down-words">
-                        <div class="down-box">
-                            <h4>反商业贿赂</h4>
-                            <p>云顶犀科技坚持诚信经营，恪守商业道德，遵守业务所在地所有适用并涉及到的反商业贿赂法律法规，坚决反对贿赂行为。</p>
-                        </div>
+                    <div class="row mt-3 mb-3" style="padding-left: 20px;">
+                        <h5>24小时售前咨询</h5>
                     </div>
-                </a>
-            </div>
-
-            <div class="js-single-part">
-                <a href="#">
-                    <div class="up-img">
-                        <img th:src="@{/official-website/img/maoyi.jpg}" alt="第一张">
+                    <!-- 二维码 -->
+                    <div class="row no-gutters">
+                        <img class="col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="">
+                        <img class="offset-2 col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEdCgP.png" alt="">
                     </div>
+                </div>
 
-                    <div class="down-words">
-                        <div class="down-box">
-                            <h4>交易合规</h4>
-                            <p>云顶犀科技长期致力于遵从业务所在地区的法律法规。</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="js-single-part">
-                <a href="#">
-                    <div class="up-img">
-                        <img th:src="@{/official-website/img/jinrong.jpg}" alt="第一张">
-                    </div>
-
-                    <div class="down-words">
-                        <div class="down-box">
-                            <h4>金融合规</h4>
-                            <p>云顶犀切实履行自身的法律义务与社会责任，在采购、销售和资金流程中嵌入关键控制点，并持续优化IT系统，实现对各业务领域事前、事中和事后的金融合规管控。</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="js-single-part">
-                <a href="#">
-                    <div class="up-img">
-                        <img th:src="@{/official-website/img/wangluo.jpg}" alt="第一张">
-                    </div>
-
-                    <div class="down-words">
-                        <div class="down-box">
-                            <h4>系统安全</h4>
-                            <p>构筑我们产品的系统安全，打造品牌是云顶犀科技的重要发展战略之一。为了用户使用我们的产品放心，我们会不定时的对产品进行维护升级，尽力做到全方位的监控与管理</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="js-single-part">
-                <a href="">
-                    <div class="up-img">
-                        <img th:src="@{/official-website/img/hezuo1.jpg}" alt="第一张">
-                    </div>
-
-                    <div class="down-words">
-                        <div class="down-box">
-                            <h4>商业秘密保护</h4>
-                            <p>持续创新是云顶犀科技的信念来源，是我们发展的一条必不可少的道路，云顶犀科技坚信尊重和保护知识产权是创新的基本要素。</p>
-                        </div>
-                    </div>
-                </a>
             </div>
 
         </div>
 
-    </div>
-</div>
-
-<!-- 举报渠道 -->
-<div class="jb-out">
-    <div class="jb-inner">
-        <!-- 图 -->
-        <div class="jb-pic">
-            <img th:src="@{/official-website/img/jubao.jpg}" alt="举报图">
+        <!-- 底部 -->
+        <div class="container">
+            <ul class="bl-footer-list">
+                <li class="bl-footer-item">
+                    <a href="#">帮助</a>
+                </li>
+                <!-- 发布需求 -->
+                <li class="bl-footer-item">
+                    <a href="mailto:sample@fly63.com?subject=test&cc=sample@hotmail.com&subject=发布需求&body=2315831906@qq.com">发送邮件</a>
+                </li>
+                <li class="bl-footer-item">
+                    <a href="#">隐私</a>
+                </li>
+            </ul>
+            <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
         </div>
-
     </div>
-</div>
 
-
-<!-- 脚注 -->
-<div class="bl-footer container-fluid">
-    <div class="container">
-        <ul class="bl-footer-list">
-            <li class="bl-footer-item">
-                <a href="#">帮助</a>
-            </li>
-            <li class="bl-footer-item">
-                <a href="#">隐私</a>
-            </li>
-            <li class="bl-footer-item">
-                <a href="#">条款</a>
-            </li>
-        </ul>
-        <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
-    </div>
-</div>
-
-<script th:src="@{/official-website/jquery/jquery.min.js}"></script>
-<script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
-
-<script>
-    $(function(){
-        // 鼠标移入
-        $('.btn-outline-light').mouseenter(function(){
-            $('.showPic').stop(true,false).slideDown();
-        });
-
-        // 鼠标移出
-        $('.btn-outline-light').mouseleave(function(){
-            $('.showPic').stop(true,false).slideUp();
-        });
-
-
-        /* 
-            多领域的合规建设
-         */
-        $('.js-single-part').mouseenter(function(){
-            $(this).find('img').css({
-                animationName: 'beBig',
-                animationDuration: '.8s',
-                animationFillMode: 'forwards',
-            });
-            $(this).find('.down-box').css({
-                background: '#F2F2F2',
-            });
-        });
-
-        $('.js-single-part').mouseleave(function(){
-            $(this).find('img').css({
-                animationName: 'beSmall',
-                animationDuration: '.8s',
-                animationFillMode: 'forwards',
-            });
-            $(this).find('.down-box').css({
-                background: '#F8F8F8',
-            });
-        });
-
-        
-    });
-</script>
+    <script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+    <script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/official-website/js/tiaokuan.js}"></script>
 
 </body>
+
 </html>

@@ -1,0 +1,150 @@
+/* 各类图标 */
+.ydx-coop-outbox{
+    padding-top: 60px;
+}
+.tobeWhite{
+    animation-name: toWhite;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.tobeBlack{
+    animation-name: toBlack;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes toWhite{
+    0%{
+        background: black;
+    }
+    100%{
+        background: #ffffff;
+    }
+}
+@keyframes toBlack{
+    0%{
+        background: #ffffff;
+    }
+    100%{
+        background: black;
+    }
+}
+
+#ydx-coop-tit{
+    color: #0E84FF;
+}
+#ydx-coop-tit p{
+    color: #C7E2FF;
+}
+/* 手环 */
+.animate-watch{
+    animation-name: watch-jump;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.animate-watch-down{
+    animation-name: watch-down;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes watch-jump{
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-20%);
+    }
+}
+@keyframes watch-down{
+    0%{
+        transform: translateY(-20%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+/* 机顶盒 */
+.animate-jidinghe{
+    animation-name: jidinghe-move;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.animate-jidinghe-back{
+    animation-name: jidinghe-back;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes jidinghe-move{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(70%);
+    }
+}
+@keyframes jidinghe-back{
+    0%{
+        transform: translateX(70%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+/* 区块链 */
+.animate-qukuailian{
+    animation-name: qukuailian-rotate;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+.animate-qukuailian-back{
+    animation-name: qukuailian-back;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes qukuailian-rotate{
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+@keyframes qukuailian-back{
+    0%{
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(0);
+
+    }
+}
+
+/* 第二部分 */
+.ydx-coop-twopar-tit{
+    padding-top: 90px;
+    padding-bottom: 20px;
+}
+.img-words{
+    color: #ffffff;
+    padding-top: 20px;
+    font-size: 17px;
+}
+.mainpart{
+    padding-bottom: 100px;
+}
+
+
+/* 复写脚注 */
+.bl-footer-recover{
+    padding:2.5rem;
+    background-color: rgb(36,38,47);
+}
+.bl-footer-recover h4,.bl-footer-recover h1,.bl-footer-recover h6,.bl-footer-recover h5,.bl-footer-recover a,.bl-footer-recover .copyright{
+    color:#fff;
+}
+.bl-footer-recover .copyright{
+    text-align: center;
+}
+.bl-footer-recover .bl-footer-list{
+    text-align: center;
+    padding:0;
+}

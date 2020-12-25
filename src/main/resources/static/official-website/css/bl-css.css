@@ -270,16 +270,17 @@
 /*index advantage*/
 .bl-card{
     padding:0;
+    /* padding-top: 100px; */
 }
 
 .bl-title{
-    margin:2rem 0 1rem 0;
+    margin:3rem 0 13rem 0;
     border-left:2px solid #0050B3;
     padding:0 0 0 1rem;
     color:#333;
 }
 .bl-card-title{
-    margin:6rem 0 2rem 0;
+    margin:2rem 0 2rem 0;
     text-align: center;
     font-size:30px;
 }
@@ -379,7 +380,7 @@
 }
 @media(min-width: 992px) {
     .bl-card{
-        padding:6rem 0 0 0;
+        padding:4rem 0 0 0;
     }
     .bl-banner{
         margin-bottom:14rem;
@@ -402,7 +403,13 @@
         margin-bottom: 19rem;
     }
 }
-/*footer*/
+/***********************************footer***********************************/
+.footer-tit{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
 .bl-footer{
     padding:2.5rem;
     margin:2.5rem 0 0 0;
@@ -410,7 +417,7 @@
     background-color: rgb(36,38,47);
 
 }
-.bl-footer a,.bl-footer .copyright{
+.bl-footer h4,.bl-footer h1,.bl-footer h6,.bl-footer h5,.bl-footer a,.bl-footer .copyright{
     color:#fff;
 }
 .bl-footer .copyright{
@@ -495,9 +502,9 @@ a.nav-prand:hover{
 .bl-title-left{
     padding:2.5rem 0 30px 0;
 }
-.bl-container{
+/* .bl-container{
     min-height: 100vh;
-}
+} */
 @media (max-width: 768px) {
     .bl-cloumn-nav{
         border:none;
@@ -513,7 +520,7 @@ a.nav-prand:hover{
         border-bottom-left-radius: 0!important;
     }
 }
-/*artical*/
+/***************************************artical************************************/
 .bl-artical-title{
     margin:3rem 0 0 0;
 }
@@ -537,7 +544,7 @@ a.nav-prand:hover{
     font-size:1rem;
 }
 .bl-artical{
-    padding:2.5rem 0 2.5rem 0;
+    padding:1rem 0 2.5rem 0;
 }
 .bl-artical blockquote{
     padding:1rem 1rem 1rem 2rem;
@@ -588,7 +595,7 @@ a.nav-prand:hover{
     height: 100%;
 }
 
-/* 轮播图 */
+/* ************************（我们的团队）轮播图 ***************************** */
 .banner{
     position: relative;/*相对定位 给绝对定位位置参考*/
     width: 100%;
@@ -610,8 +617,12 @@ ul{
 }
 .lunbo{
     width: 100%;
-    height: 400px;
-    padding: 0 100px;
+    height: 280px;
+    border-radius: 90%;
+}
+.lunbo-pc{
+    width: 100%;
+    height: 350px;
     border-radius: 90%;
 }
 /*圆形按钮属性设定*/
@@ -622,7 +633,6 @@ ul{
     width: 120px;
     height: 30px;
     top: 270px;
- 
 }
 .tab-btn .btn{
     float: left;
@@ -633,24 +643,16 @@ ul{
     margin-left: 10px;
     border-radius: 50%;
  }
-/*圆形按钮触碰事件*/
-.tab-btn .btn:hover{
-    background: #e4e4e4;
-    border-color:#7f7f7f;
-}
-.tab-btn .active{
-    background: #e4e4e4;
-    border-color:#7f7f7f;
-}
+
 
 /* 团队介绍语句 */
 .introduce{
-    margin:430px 100px 0;
+    margin: 20px 10px 0;
 }
 
 
 
-/* 条款 */
+/* *************************************条款********************** */
 .tk-outbox .tk-innerbox{
 }
 .tk-outbox .tk-innerbox .tk-title h1{
@@ -660,7 +662,6 @@ ul{
 }
 .tk-outbox .tk-innerbox .tk-content{
     width: 900px;
-    height: 580px;
     margin: 0 auto;
 }
 .tk-outbox .tk-innerbox .tk-content h3{
@@ -674,13 +675,13 @@ ul{
 }
 
 
-/* 多领域的合规建设 */
+/* *****************************多领域的合规建设************************ */
 .js-outbox .js-innerbox .js-title h2{
-    text-align: center;
     font-weight: bold;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     position: relative;
     padding-bottom: 15px;
+    margin-top: 40px;
 }
 .js-outbox .js-innerbox .js-title h2::after{
     content: '';
@@ -698,19 +699,17 @@ ul{
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    width: 1299px;
-    height: 964px;
 }
 .js-outbox .js-innerbox .js-con .js-single-part{
-    width: 403px;
     height: 442px;
-    margin: 0 15px;
+    width: 100%;
 }
 .js-outbox .js-innerbox .js-con .js-single-part a{
     text-decoration: none;
+    width: 100%;
 }
 .js-outbox .js-innerbox .js-con .js-single-part .up-img{
-    width: 403px;
+    width: 100%;
     height: 252px;
     overflow: hidden;
 }
@@ -719,7 +718,7 @@ ul{
     height: 100%;
 }
 .js-outbox .js-innerbox .js-con .js-single-part .down-words{
-    width: 403px;
+    width: 100%;
     height: 190px;
 }
 .js-outbox .js-innerbox .js-con .js-single-part .down-words .down-box{
@@ -760,11 +759,11 @@ ul{
     }
 }
 
-/* 举报渠道 */
+/* ********************************举报渠道***************************** */
 .jb-out .jb-inner .jb-pic{
-    width: 1271px;
+    /* width: 1271px; */
     height: 372px;
-    margin: 20px auto 100px;
+    margin: 70px auto 100px;
 }
 .jb-out .jb-inner .jb-pic img{
     width: 100%;

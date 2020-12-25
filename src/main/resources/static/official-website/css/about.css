@@ -1,4 +1,4 @@
-/* 关于我们 */
+/* ****************************关于我们*****************************8 */
 .outbox{
     display: flex;
     /* flex-wrap: wrap; */
@@ -62,28 +62,15 @@
     padding-top: 30px;
 
 }
-
-
-/* 联系我们 */
-.lx-outbox .ls-innerbox{
-    display: flex;
-    justify-content: space-between;
-}
-.lx-outbox .ls-innerbox .ls-rg{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 25px;
-    font-weight: bold;
-    color: rosybrown;
-
-}
-.lx-outbox .ls-innerbox .ls-le{
-    width: 200px;
-    height: 260px;
+.box-content {
+    display: none;
 }
 
-.lx-outbox .ls-innerbox .ls-le img{
-    width: 100%;
-    height: 100%;
+.showThis {
+    display: block;
 }
+
+.shadowBox {
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, .2);
+}
+

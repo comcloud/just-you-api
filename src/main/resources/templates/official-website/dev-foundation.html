@@ -1,0 +1,124 @@
+<!-- 单独的功能开发 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>云顶犀科技官方网站</title>
+    <!-- 样式css -->
+    <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
+    <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+    <!-- 核心团队 -->
+    <link rel="stylesheet" th:href="@{/official-website/css/about.css}">
+
+    <style>
+        .pic {
+            border-radius: 50%;
+            border: 2px solid #999999;
+        }
+        .pic img {
+            width: 40px;
+            height: 40px;
+            padding-bottom: 3px;
+        }
+        .content{
+            display: flex;
+            background: violet;
+            width: 100px;
+            height: 50px;
+        }
+        .outbox{
+            position: relative;
+        }
+        .outbox .content{
+            position: absolute;
+            /* transform: translateX(-130%) translateY(-30%); */
+            left: 100px;
+            top: -10px;
+            
+        }
+        .part{
+            margin-right: 10px;
+            background: yellowgreen;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .clickAnimate-big{
+            transform: scale(1.2);
+        }
+        .clickAnimate-back{
+            transform: scale(1);
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="test" style="position: fixed;bottom: 100px;right: 40px;">
+
+        <div class="outbox">
+            <div class="pic">
+                <img src="./img/五角星.png" alt="">
+            </div>
+        
+            <div class="content">
+                <div class="part totop">回到顶部> </div>
+                <div class="part tofuther">回到未来> </div>
+                <div class="part tobottom">回到底部> </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- js -->
+    <script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+    <script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+
+    <script>
+
+        $(function(){
+            let count = 1;
+            $('.pic').on({
+                'click': function(){
+                    if(count == 1){
+                        $('.content').animate({
+                            left: -160,
+                            top: -10,
+                        },500,'swing',function(){
+                            count = 0;
+                        })
+                    }else{
+                        $('.content').animate({
+                            left: 100,
+                            top: -10,
+                        },500,'swing',function(){
+                            count = 1;
+                        })
+                    }
+                },
+                'mousedown': function () { 
+                    let $pic = $('.pic');
+                    $pic.removeClass('clickAnimate-big clickAnimate-back').addClass('clickAnimate-big');
+                },
+                'mouseup': function () { 
+                    let $pic = $('.pic');
+                    $pic.removeClass('clickAnimate-big clickAnimate-back').addClass('clickAnimate-back');
+                }
+            });
+
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

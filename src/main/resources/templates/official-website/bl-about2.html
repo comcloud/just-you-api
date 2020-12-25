@@ -1,150 +1,233 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" class="x-admin-sm">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>云顶犀科技官方网站</title>
+
+    <!-- 添加响应式视图标签 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>核心团队</title>
+    <!-- 企业图标 -->
+    <link rel="icon" href="https://s3.ax1x.com/2020/12/12/rZKdRe.png">
+    
     <link th:href="@{/official-website/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/official-website/css/bl-css.css}" rel="stylesheet">
     <link th:href="@{/official-website/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/official-website/css/aboutTeam.css}">
 </head>
+
 <body>
-<!-- 顶部栏 -->
-<div class="bl-header container-fluid">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
-            <a class="nav-prand" th:href="@{/}">YunDingXi</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a th:href="@{/}">首页 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/list}">条款</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a th:href="@{/about}">关于</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- 联系我们按钮 -->
-            <div class="top-contact">
-                <button type="button" class="btn btn-outline-light ">
-                    联系我们
+    <!-- --------------------------顶部栏----------------------------- -->
+    <div class="bl-header container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bl-nav">
+                <a class="nav-prand" th:href="@{/}">YunDingXi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="showPic">
-                    <img th:src="@{/official-website/img/erweima.jpg}" alt="二维码">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a th:href="@{/}">首页展示<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/compli}">设计方案</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/coop}">合作开发</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{list}">条款服务</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a th:href="@{about}">关于我们</a>
+                        </li>
+                    </ul>
                 </div>
+                <!-- 联系我们按钮 -->
+                <div class="top-contact">
+                    <button type="button" class="btn btn-outline-light ">
+                        联系我们
+                    </button>
+                    <div class="showPic">
+                        <img src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="二维码">
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <!-- ------------------------------内容 ------------------------------------>
+    <!---------- ---------标题 ------------------------>
+    <h2 class="bl-title-center">核心团队</h2>
+    <!-- ----------我们的团队轮播照片--------------- -->
+    <div class="container">
+
+        <div class="row">
+            <div id="carouselteamlunbo" class="carousel slide w-100 carousel-fade " data-ride="carousel">
+
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselteamlunbo" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselteamlunbo" data-slide-to="1"></li>
+                    <li data-target="#carouselteamlunbo" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://s3.ax1x.com/2020/12/12/rZKaGD.jpg" class="d-block w-100 ydx-team-lb" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>核心成员</h5>
+                            <p>We unite to make the future with technology</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="https://s3.ax1x.com/2020/12/12/rZKDsA.png" class="d-block w-100 ydx-team-lb" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>代码测试</h5>
+                            <p>There are always many difficulties in life, but don't be afraid of them</p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="https://s3.ax1x.com/2020/12/12/rZKwxH.jpg" class="d-block w-100 ydx-team-lb" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>团队协作开发</h5>
+                            <p>Light up the future with enthusiasm and achieve the world with passion</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- -----------------介绍 ------------------------>
+    <div class="container">
+        <div class="bl-artical">
+            <div class="introduce">
+                <p>我们是一群热爱技术，热爱生活，愿意用汗水谱写青春的后浪；只要团结一心，勇于拼搏，为了心中的执念而努力着，我们相信没有任何困难可以阻止我们迈向阳光的步伐</p>
+                <p>每一次微小的尝试都凝聚着力量，汇集在某一处便成为你勇敢的源泉。Fighting！</p>
+                <p>单个的人是软弱无力的，就像漂流的鲁滨逊一样，只有同别人在一起，他才可以完成许多事业。我们团队的每一位成员都具有自己独有的冲劲，我们怀揣着坚韧，领有着敏捷，拥有着沉稳，，诠释着强大，而这些精神正是组成我们犀牛文化的核心
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------脚注---------------------------- -->
+    <div class="bl-footer container-fluid">
+        <!-- PC端 -->
+        <div class="container d-sm-block d-none" style="padding-bottom: 30px;padding-top: 20px;">
+            <!-- PC端 -->
+            <div class="row">
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="bl-first-index.html">
+                        <h5>官网入口</h5>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>网站首页</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>条款约定</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>服务政策</h6>
+                    </a>
+                    <a href="bl-first-index.html">
+                        <h6>关于我们</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-compli.html">
+                        <h5>设计方案</h5>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>移动电商</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>视频直播</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>在线教育</h6>
+                    </a>
+                    <a href="ydx-compli.html">
+                        <h6>微信定制</h6>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4 footer-tit">
+                    <a href="ydx-coop.html">
+                        <h5>合作开发</h5>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>万物互联</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>人工智能</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>软件设计</h6>
+                    </a>
+                    <a href="ydx-coop.html">
+                        <h6>大数据分析</h6>
+                    </a>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- 手机端 -->
+        <div class="container d-block d-sm-none" style="padding-bottom: 50px;padding-top: 20px;">
+
+            <!-- 手机端 -->
+            <div class="row">
+                <!-- 电话与二维码 -->
+                <div class="phonewitherwei">
+                    <!-- 电话 -->
+                    <div class="row" style="padding-left: 20px;margin-top: -10px;">
+                        <h1>182-0018-1462</h1>
+                    </div>
+                    <div class="row mt-3 mb-3" style="padding-left: 20px;">
+                        <h5>24小时售前咨询</h5>
+                    </div>
+                    <!-- 二维码 -->
+                    <div class="row no-gutters">
+                        <img class="col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEJq8f.jpg" alt="">
+                        <img class="offset-2 col-5 img-fluid" src="https://s3.ax1x.com/2020/12/11/rEdCgP.png" alt="">
+                    </div>
+                </div>
+
             </div>
 
-        </nav>
+        </div>
+
+        <!-- 底部 -->
+        <div class="container">
+            <ul class="bl-footer-list">
+                <li class="bl-footer-item">
+                    <a href="#">帮助</a>
+                </li>
+                <!-- 发布需求 -->
+                <li class="bl-footer-item">
+                    <a href="mailto:sample@fly63.com?subject=test&cc=sample@hotmail.com&subject=发布需求&body=2315831906@qq.com">发送邮件</a>
+                </li>
+                <li class="bl-footer-item">
+                    <a href="#">隐私</a>
+                </li>
+            </ul>
+            <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
+        </div>
     </div>
-</div>
-<!-- 内容 -->
-<div class="container bl-container">
-    <h2 class="bl-title-center">我们的团队</h2>
-    <div class="bl-artical">
-        <!-- 轮播图 -->
-        <div class="banner" >
-            <div class="img-wrap">
-                <ul>
-                    <li class="item" style="display: block">
-                        <a href="#"><img th:src="@{/official-website/img/team1.jpg}" alt="" class="lunbo"></a>
-                    </li>
-                    <li class="item">
-                        <a href="#"><img th:src="@{/official-website/img/team2.jpg}" alt="" class="lunbo"></a>
-                    </li>
-                    <li class="item">
-                        <a href="#"><img th:src="@{/official-website/img/team3.jpg}" alt="" class="lunbo"></a>
-                    </li>
-                    <li class="item">
-                        <a href="#"><img th:src="@{/official-website/img/team5.jpg}" alt="" class="lunbo"></a>
-                    </li>
-               </ul>
-           </div>
-       </div>
 
-       <!-- 介绍 -->
-       <div class="introduce">
-            <p>我们是一群热爱技术，热爱生活，愿意用汗水谱写青春的后浪；只要团结一心，勇于拼搏，为了心中的执念而努力着，我们相信没有任何困难可以阻止我们迈向阳光的步伐</p>
-            <p>每一次微小的尝试都凝聚着力量，汇集在某一处便成为你勇敢的源泉。Fighting！</p>
-            <p>单个的人是软弱无力的，就像漂流的鲁滨逊一样，只有同别人在一起，他才可以完成许多事业。我们团队的每一位成员都具有自己独有的冲劲，我们怀揣着坚韧，领有着敏捷，拥有着沉稳，，诠释着强大，而这些精神正是组成我们犀牛文化的核心</p>
-       </div>
-       
+    <script th:src="@{/official-website/jquery/jquery.min.js}"></script>
+    <script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/official-website/js/about2.js}"></script>
 
-    </div>
-</div>
-
-<!-- 脚注 -->
-<div class="bl-footer container-fluid">
-    <div class="container">
-        <ul class="bl-footer-list">
-            <li class="bl-footer-item">
-                <a href="#">帮助</a>
-            </li>
-            <li class="bl-footer-item">
-                <a href="#">隐私</a>
-            </li>
-            <li class="bl-footer-item">
-                <a href="#">条款</a>
-            </li>
-        </ul>
-        <div class="copyright">Cloud Top Rhinoceros @ 2020 云顶犀科技设计出品</div>
-    </div>
-</div>
-
-<script th:src="@{/official-website/jquery/jquery.min.js}"></script>
-<script th:src="@{/official-website/bootstrap/js/bootstrap.min.js}"></script>
-
-<script>
-
-    $(function(){
-        var index2 = 0;/*初始化一个变量 指向下彪*/
-        //点击点
-        $(".tab-btn .btn").click(function () {
-            index2 = $(this).index();//获取点击该元素下彪
-            $(this).addClass("active").siblings().removeClass("active");
-            $(".item").eq(index2).fadeIn().siblings().fadeOut();
-        });
-        //点击切换效果
-        $(".lr-tab .right").click(function () {
-            index2 ++;
-            if (index2 >4){ index2 = 0;}
-            $(".item").eq(index2).fadeIn().siblings().fadeOut();
-            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
-
-        });
-        $(".lr-tab .left").click(function () {
-            index2 --;
-            if(index2 < 0){index2 = 4;}
-            $(".item").eq(index2).fadeIn().siblings().fadeOut();
-            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
-
-        });
-        var time2 = setInterval(function () {
-            index2 ++;
-            if (index2 >4){ index2 = 0;}
-            $(".item").eq(index2).fadeIn().siblings().fadeOut();
-            $(".tab-btn .btn").eq(index2).addClass("active").siblings().removeClass("active");
-
-        },4000); //定时器 重复
-
-        // 鼠标移入
-        $('.btn-outline-light').mouseenter(function(){
-            $('.showPic').stop(true,false).slideDown();
-        });
-
-        // 鼠标移出
-        $('.btn-outline-light').mouseleave(function(){
-            $('.showPic').stop(true,false).slideUp();
-        });
-
-    });
-    
-</script>
 </body>
+
 </html>
